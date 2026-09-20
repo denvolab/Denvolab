@@ -1,0 +1,273 @@
+/* -----------------------------------------------------------------------------
+ * COLOR LIBRARY — a 1:1 mirror of the Figma file's two color variable
+ * collections ("01 · Color Primitives" and "02 · Color Semantic"), pulled
+ * directly via the Figma Plugin API (figma.variables.getLocalVariableCollectionsAsync),
+ * not hand-picked or approximated. Every color variable that exists in the
+ * design file exists here.
+ *
+ * Three layers:
+ *
+ *   1. PRIMITIVES (bare names, e.g. --brand-600) — the raw ramps. Nothing
+ *      outside this file should ever reference a primitive directly.
+ *
+ *   2. SEMANTIC (--color-<figma-name>, e.g. --color-text-primary) — the exact
+ *      "02 · Color Semantic" collection, Light and Dark modes both included.
+ *      Each one aliases a primitive, exactly as it does in Figma. Light is
+ *      the default (`:root`); Dark lives under `:root[data-theme="dark"]` —
+ *      not used anywhere in the app yet (the site has one fixed dark-leaning
+ *      look, not a toggle), but wired up correctly for whenever a theme
+ *      switch (e.g. an admin panel) needs it: set `data-theme="dark"` on
+ *      `<html>` and every semantic token repaints automatically.
+ *
+ *   3. APP ALIASES (--color-primary, --color-foreground, etc.) — short,
+ *      ergonomic names the actual components use in Tailwind classes
+ *      (`bg-primary`, `text-foreground`). Each one points at a semantic
+ *      token (layer 2) so it inherits light/dark switching for free; the two
+ *      that don't correspond to a generic semantic token (the specific dark
+ *      section backgrounds this homepage design uses) point straight at a
+ *      primitive, clearly marked below.
+ *
+ * THIS is what makes the library "component based": change what a token
+ * points to, once, here — every place that uses the Tailwind class it
+ * generates updates everywhere, nothing else in the codebase changes.
+ *
+ * Component-specific color tokens (Button, Input — Figma's
+ * "06 · Component Tokens" collection) live in `component-tokens.css`, one
+ * layer up from here, since they alias INTO this file rather than being part
+ * of the core palette.
+ * -------------------------------------------------------------------------- */
+
+:root {
+  /* ===========================================================================
+   * 1. PRIMITIVES — raw ramps. Internal only; do not use in components/JSX.
+   *    Exactly Figma's "01 · Color Primitives" collection (63 variables).
+   * ======================================================================== */
+
+  /* Brand (lime/yellow-green) — 12-step ramp */
+  --brand-25: #fefefa;
+  --brand-50: #fcfdf1;
+  --brand-100: #f9fbdf;
+  --brand-200: #f3f7c0;
+  --brand-300: #eef4a2;
+  --brand-400: #e7ef79;
+  --brand-500: #e3ec61;
+  --brand-600: #dfe94c; /* <- the lime accent seen everywhere in the design */
+  --brand-700: #9ca335;
+  --brand-800: #6f7428;
+  --brand-900: #4d501c;
+  --brand-950: #323414;
+
+  /* Secondary (dark navy) — 12-step ramp */
+  --secondary-25: #f8f8f9;
+  --secondary-50: #e7e9ea;
+  --secondary-100: #d0d2d5;
+  --secondary-200: #adb1b6;
+  --secondary-300: #8a9098;
+  --secondary-400: #69707a;
+  --secondary-500: #4c5662;
+  --secondary-600: #353f4d;
+  --secondary-700: #24303e;
+  --secondary-800: #192434;
+  --secondary-900: #142030; /* <- the deep navy seen in the design */
+  --secondary-950: #0d151f;
+
+  /* Gray (blue-tinted "slate", not neutral) — 12-step ramp */
+  --gray-25: #fbfcfd;
+  --gray-50: #f4f6f8;
+  --gray-100: #e8ecf0;
+  --gray-200: #d3dbe3;
+  --gray-300: #b4c0cc;
+  --gray-400: #8d9baa;
+  --gray-500: #6b7a89;
+  --gray-600: #52616f;
+  --gray-700: #3e4c59;
+  --gray-800: #29333d;
+  --gray-900: #1a2128;
+  --gray-950: #0d1216;
+
+  /* Status ramps — 6 steps each (50/100/300/500/700/900) */
+  --success-50: #ecfdf3;
+  --success-100: #dcfae6;
+  --success-300: #75e0a7;
+  --success-500: #17b26a;
+  --success-700: #067647;
+  --success-900: #074d31;
+
+  --warning-50: #fffaeb;
+  --warning-100: #fef0c7;
+  --warning-300: #fec84b;
+  --warning-500: #f79009;
+  --warning-700: #b54708;
+  --warning-900: #7a2e0e;
+
+  --error-50: #fef3f2;
+  --error-100: #fee4e2;
+  --error-300: #fda29b;
+  --error-500: #f04438;
+  --error-700: #b42318;
+  --error-900: #7a271a;
+
+  --info-50: #eff8ff;
+  --info-100: #d1e9ff;
+  --info-300: #84caff;
+  --info-500: #2e90fa;
+  --info-700: #175cd3;
+  --info-900: #194185;
+
+  /* Base — the 3 fixed, mode-independent colors every ramp bottoms out to */
+  --base-white: #ffffff;
+  --base-black: #000000;
+  --base-transparent: transparent;
+
+  /* ===========================================================================
+   * 2. SEMANTIC — Light mode (default). Exactly Figma's "02 · Color
+   *    Semantic" collection, Light variant (46 variables). Dark overrides
+   *    are further down, under `:root[data-theme="dark"]`.
+   * ======================================================================== */
+
+  --color-background-primary: var(--base-white);
+  --color-background-secondary: var(--gray-50);
+  --color-background-inverse: var(--gray-950);
+
+  --color-surface-primary: var(--base-white);
+  --color-surface-secondary: var(--gray-100);
+  --color-surface-brand: var(--brand-50);
+  --color-surface-brand-2: var(--brand-950);
+  --color-surface-success: var(--success-50);
+  --color-surface-warning: var(--warning-50);
+  --color-surface-error: var(--error-50);
+  --color-surface-info: var(--info-50);
+  --color-surface-pressed: var(--gray-200);
+
+  --color-text-primary: var(--gray-950);
+  --color-text-secondary: var(--gray-600);
+  --color-text-tertiary: var(--gray-500);
+  --color-text-disabled: var(--gray-300);
+  --color-text-inverse: var(--base-white);
+  --color-text-on-brand: var(--secondary-950);
+  --color-text-on-secondary: var(--base-white);
+  --color-text-success: var(--success-700);
+  --color-text-warning: var(--warning-700);
+  --color-text-error: var(--error-700);
+  --color-text-info: var(--info-700);
+
+  --color-border-primary: var(--gray-200);
+  --color-border-secondary: var(--gray-100);
+  --color-border-focus: var(--brand-600);
+  --color-border-success: var(--success-300);
+  --color-border-warning: var(--warning-300);
+  --color-border-error: var(--error-300);
+  --color-border-info: var(--info-300);
+
+  --color-icon-primary: var(--gray-900);
+  --color-icon-brand: var(--brand-600);
+  --color-icon-secondary: var(--gray-800);
+  --color-icon-disabled: var(--gray-300);
+
+  --color-brand-default: var(--brand-600);
+  --color-brand-hover: var(--brand-700);
+  --color-brand-pressed: var(--brand-800);
+  --color-brand-subtle: var(--brand-50);
+
+  --color-secondary-default: var(--secondary-700);
+  --color-secondary-hover: var(--secondary-600);
+  --color-secondary-pressed: var(--secondary-500);
+  --color-secondary-subtle: var(--secondary-50);
+
+  --color-success-default: var(--success-500);
+  --color-warning-default: var(--warning-500);
+  --color-error-default: var(--error-500);
+  --color-info-default: var(--info-500);
+
+  /* ===========================================================================
+   * 3. APP ALIASES — short names the app's components actually use in
+   *    Tailwind classes. Each points at a layer-2 semantic token (so it
+   *    follows light/dark automatically), except the two page-specific dark
+   *    section backgrounds noted below, which point straight at a primitive.
+   * ======================================================================== */
+
+  --color-primary: var(--color-brand-default); /* "the primary color" — the lime accent */
+  --color-primary-hover: var(--color-brand-hover);
+  --color-primary-pressed: var(--color-brand-pressed);
+  --color-brand: var(--color-brand-default); /* alias, same value */
+  --color-brand-ink: var(--color-text-on-brand); /* text/icons on top of bg-primary */
+
+  --color-secondary: var(--color-secondary-default); /* the navy action color (buttons) */
+  --color-on-secondary: var(--color-text-on-secondary);
+
+  --color-foreground: var(--color-text-primary); /* "the text color" — main body/heading text */
+  --color-foreground-muted: var(--color-text-secondary);
+  --color-foreground-subtle: var(--color-text-tertiary);
+  --color-foreground-disabled: var(--color-text-disabled);
+  --color-foreground-inverse: var(--color-text-inverse); /* text on dark sections */
+
+  --color-background: var(--color-background-primary);
+  --color-background-subtle: var(--color-background-secondary);
+  --color-surface: var(--color-surface-secondary); /* light gray section bg ("what we create" only — portfolio-grid sits on plain --color-background, confirmed by reading the Home Page frame's own fill) */
+  --color-surface-dark: var(--gray-900); /* dark section bg (header, hero, footer) — a fixed design choice for this homepage, not theme-dependent, so it aliases the primitive directly rather than a Light/Dark-switching token */
+  --color-surface-dark-deep: var(--secondary-900); /* alternate dark section bg (AI-orbit only — confirmed via Rectangle 17's fill; partner-logos sits on plain --color-background, not this, despite the two often being designed together) — same reasoning as surface-dark */
+  --color-surface-accent: var(--color-surface-brand-2); /* olive CTA section bg (contact) */
+
+  --color-border: var(--color-border-primary);
+  --color-border-subtle: var(--color-border-secondary);
+
+  --color-success: var(--color-success-default);
+  --color-success-bg: var(--color-surface-success);
+  --color-success-text: var(--color-text-success);
+  --color-warning: var(--color-warning-default);
+  --color-warning-bg: var(--color-surface-warning);
+  --color-warning-text: var(--color-text-warning);
+  --color-error: var(--color-error-default);
+  --color-error-bg: var(--color-surface-error);
+  --color-error-text: var(--color-text-error);
+  --color-info: var(--color-info-default);
+  --color-info-bg: var(--color-surface-info);
+  --color-info-text: var(--color-text-info);
+}
+
+/* ===============================================================================
+ * 2b. SEMANTIC — Dark mode overrides. Exactly Figma's "02 · Color Semantic"
+ *     collection, Dark variant. Not activated anywhere in the app today (see
+ *     note at the top of this file) — set `data-theme="dark"` on <html> to
+ *     enable it. Only variables whose value actually changes between modes
+ *     are listed; anything omitted here is the same in both modes.
+ * ============================================================================ */
+:root[data-theme="dark"] {
+  --color-background-primary: var(--gray-950);
+  --color-background-secondary: var(--gray-900);
+  --color-background-inverse: var(--base-white);
+
+  --color-surface-primary: var(--gray-900);
+  --color-surface-secondary: var(--gray-800);
+  --color-surface-brand: var(--brand-950);
+  --color-surface-pressed: var(--gray-700);
+
+  --color-text-primary: var(--base-white);
+  --color-text-secondary: var(--gray-300);
+  --color-text-disabled: var(--gray-600);
+  --color-text-inverse: var(--gray-950);
+  --color-text-success: var(--success-300);
+  --color-text-warning: var(--warning-300);
+  --color-text-error: var(--error-300);
+  --color-text-info: var(--info-300);
+
+  --color-surface-success: var(--success-900);
+  --color-surface-warning: var(--warning-900);
+  --color-surface-error: var(--error-900);
+  --color-surface-info: var(--info-900);
+
+  --color-border-primary: var(--gray-700);
+  --color-border-secondary: var(--gray-800);
+  --color-border-focus: var(--brand-500);
+  --color-border-success: var(--success-700);
+  --color-border-warning: var(--warning-700);
+  --color-border-error: var(--error-700);
+  --color-border-info: var(--info-700);
+
+  --color-icon-primary: var(--base-white);
+  --color-icon-brand: var(--base-white);
+  --color-icon-secondary: var(--gray-400);
+  --color-icon-disabled: var(--gray-600);
+
+  --color-secondary-subtle: var(--secondary-900);
+}

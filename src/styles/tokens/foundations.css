@@ -1,0 +1,50 @@
+/* -----------------------------------------------------------------------------
+ * FOUNDATIONS — the Spacing, Radius, and Border Width primitive scales from
+ * Figma's "03 · Spacing", "04 · Radius", and "05 · Border Width" variable
+ * collections. Pulled directly from the file, same as colors.css.
+ *
+ * These exist ONLY to back `component-tokens.css` (e.g. `button/radius`
+ * aliases `radius/md`, `input/border-width` aliases `border-width/default`)
+ * — they are intentionally NOT wired into Tailwind's `@theme` in
+ * `app/globals.css`, so they don't redefine Tailwind's own default spacing
+ * or radius scale (`p-4`, `rounded-lg`, etc. keep behaving exactly as
+ * Tailwind normally would, everywhere in the app that isn't a Button/Input).
+ * If a full Spacing/Radius library (mirroring the Color/Font libraries) is
+ * ever wanted, it should get its own README section — this file is scoped
+ * to "whatever the component tokens need," not a general-purpose replacement
+ * for Tailwind's spacing scale.
+ * -------------------------------------------------------------------------- */
+
+:root {
+  /* Spacing (14 steps) */
+  --space-none: 0px;
+  --space-2xs: 2px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 20px;
+  --space-2xl: 24px;
+  --space-3xl: 32px;
+  --space-4xl: 40px;
+  --space-5xl: 48px;
+  --space-6xl: 64px;
+  --space-7xl: 80px;
+  --space-8xl: 96px;
+
+  /* Radius (8 steps) */
+  --radius-none: 0px;
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 999px;
+
+  /* Border width (4 steps) */
+  --border-width-none: 0px;
+  --border-width-default: 1px;
+  --border-width-thick: 2px;
+  --border-width-heavy: 4px;
+}

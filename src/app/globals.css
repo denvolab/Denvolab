@@ -1,0 +1,352 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+ * Design tokens. The actual values live in the Color library and Font
+ * library — see src/styles/tokens/README.md for what each file is and why
+ * they're split out. This file only WIRES those tokens into Tailwind, via
+ * `@theme inline`: every custom property re-declared below becomes a real
+ * Tailwind utility class (bg-*, text-*, border-*, font-*).
+ *
+ * "inline" (rather than a plain `@theme`) keeps each token as a `var(...)`
+ * reference instead of Tailwind inlining its resolved value at build time —
+ * so the CSS custom property stays live, and DevTools / a future admin-panel
+ * theme switcher can still read and override `--color-primary` etc. at
+ * runtime.
+ * ------------------------------------------------------------------------ */
+@import "../styles/tokens/colors.css";
+@import "../styles/tokens/foundations.css";
+@import "../styles/tokens/component-tokens.css";
+@import "../styles/tokens/typography.css";
+
+@theme inline {
+  /* ===========================================================================
+   * COLORS — Color library → Tailwind. See tokens/colors.css for values.
+   * Three layers, all exposed as classes: primitives (bg-brand-600), the full
+   * Figma semantic set (bg-surface-primary), and the short app aliases
+   * (bg-primary) components actually use day to day.
+   * ======================================================================== */
+
+  /* --- 1. Primitives — every ramp step, for the rare one-off need -------- */
+  --color-brand-25: var(--brand-25);
+  --color-brand-50: var(--brand-50);
+  --color-brand-100: var(--brand-100);
+  --color-brand-200: var(--brand-200);
+  --color-brand-300: var(--brand-300);
+  --color-brand-400: var(--brand-400);
+  --color-brand-500: var(--brand-500);
+  --color-brand-600: var(--brand-600);
+  --color-brand-700: var(--brand-700);
+  --color-brand-800: var(--brand-800);
+  --color-brand-900: var(--brand-900);
+  --color-brand-950: var(--brand-950);
+
+  --color-secondary-25: var(--secondary-25);
+  --color-secondary-50: var(--secondary-50);
+  --color-secondary-100: var(--secondary-100);
+  --color-secondary-200: var(--secondary-200);
+  --color-secondary-300: var(--secondary-300);
+  --color-secondary-400: var(--secondary-400);
+  --color-secondary-500: var(--secondary-500);
+  --color-secondary-600: var(--secondary-600);
+  --color-secondary-700: var(--secondary-700);
+  --color-secondary-800: var(--secondary-800);
+  --color-secondary-900: var(--secondary-900);
+  --color-secondary-950: var(--secondary-950);
+
+  --color-gray-25: var(--gray-25);
+  --color-gray-50: var(--gray-50);
+  --color-gray-100: var(--gray-100);
+  --color-gray-200: var(--gray-200);
+  --color-gray-300: var(--gray-300);
+  --color-gray-400: var(--gray-400);
+  --color-gray-500: var(--gray-500);
+  --color-gray-600: var(--gray-600);
+  --color-gray-700: var(--gray-700);
+  --color-gray-800: var(--gray-800);
+  --color-gray-900: var(--gray-900);
+  --color-gray-950: var(--gray-950);
+
+  --color-success-50: var(--success-50);
+  --color-success-100: var(--success-100);
+  --color-success-300: var(--success-300);
+  --color-success-500: var(--success-500);
+  --color-success-700: var(--success-700);
+  --color-success-900: var(--success-900);
+  --color-warning-50: var(--warning-50);
+  --color-warning-100: var(--warning-100);
+  --color-warning-300: var(--warning-300);
+  --color-warning-500: var(--warning-500);
+  --color-warning-700: var(--warning-700);
+  --color-warning-900: var(--warning-900);
+  --color-error-50: var(--error-50);
+  --color-error-100: var(--error-100);
+  --color-error-300: var(--error-300);
+  --color-error-500: var(--error-500);
+  --color-error-700: var(--error-700);
+  --color-error-900: var(--error-900);
+  --color-info-50: var(--info-50);
+  --color-info-100: var(--info-100);
+  --color-info-300: var(--info-300);
+  --color-info-500: var(--info-500);
+  --color-info-700: var(--info-700);
+  --color-info-900: var(--info-900);
+
+  /* --- 2. Semantic — Figma's exact "02 · Color Semantic" names ----------- */
+  --color-background-primary: var(--color-background-primary);
+  --color-background-secondary: var(--color-background-secondary);
+  --color-background-inverse: var(--color-background-inverse);
+
+  --color-surface-primary: var(--color-surface-primary);
+  --color-surface-secondary: var(--color-surface-secondary);
+  --color-surface-brand: var(--color-surface-brand);
+  --color-surface-brand-2: var(--color-surface-brand-2);
+  --color-surface-success: var(--color-surface-success);
+  --color-surface-warning: var(--color-surface-warning);
+  --color-surface-error: var(--color-surface-error);
+  --color-surface-info: var(--color-surface-info);
+  --color-surface-pressed: var(--color-surface-pressed);
+
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-tertiary: var(--color-text-tertiary);
+  --color-text-disabled: var(--color-text-disabled);
+  --color-text-inverse: var(--color-text-inverse);
+  --color-text-on-brand: var(--color-text-on-brand);
+  --color-text-on-secondary: var(--color-text-on-secondary);
+  --color-text-success: var(--color-text-success);
+  --color-text-warning: var(--color-text-warning);
+  --color-text-error: var(--color-text-error);
+  --color-text-info: var(--color-text-info);
+
+  --color-border-primary: var(--color-border-primary);
+  --color-border-secondary: var(--color-border-secondary);
+  --color-border-success: var(--color-border-success);
+  --color-border-warning: var(--color-border-warning);
+  --color-border-error: var(--color-border-error);
+  --color-border-info: var(--color-border-info);
+
+  --color-icon-primary: var(--color-icon-primary);
+  --color-icon-brand: var(--color-icon-brand);
+  --color-icon-secondary: var(--color-icon-secondary);
+  --color-icon-disabled: var(--color-icon-disabled);
+
+  --color-brand-default: var(--color-brand-default);
+  --color-brand-subtle: var(--color-brand-subtle);
+  --color-secondary-default: var(--color-secondary-default);
+  --color-secondary-subtle: var(--color-secondary-subtle);
+  --color-success-default: var(--color-success-default);
+  --color-warning-default: var(--color-warning-default);
+  --color-error-default: var(--color-error-default);
+  --color-info-default: var(--color-info-default);
+
+  /* --- 3. App aliases — what components actually use day to day ---------- */
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-primary-pressed: var(--color-primary-pressed);
+  --color-brand: var(--color-brand);
+  --color-brand-hover: var(--color-brand-hover);
+  --color-brand-pressed: var(--color-brand-pressed);
+  --color-brand-ink: var(--color-brand-ink);
+
+  --color-secondary: var(--color-secondary);
+  --color-secondary-hover: var(--color-secondary-hover);
+  --color-secondary-pressed: var(--color-secondary-pressed);
+  --color-on-secondary: var(--color-on-secondary);
+
+  --color-foreground: var(--color-foreground);
+  --color-foreground-muted: var(--color-foreground-muted);
+  --color-foreground-subtle: var(--color-foreground-subtle);
+  --color-foreground-disabled: var(--color-foreground-disabled);
+  --color-foreground-inverse: var(--color-foreground-inverse);
+
+  --color-background: var(--color-background);
+  --color-background-subtle: var(--color-background-subtle);
+  --color-surface: var(--color-surface);
+  --color-surface-dark: var(--color-surface-dark);
+  --color-surface-dark-deep: var(--color-surface-dark-deep);
+  --color-surface-accent: var(--color-surface-accent);
+
+  --color-border: var(--color-border);
+  --color-border-subtle: var(--color-border-subtle);
+  --color-border-focus: var(--color-border-focus);
+
+  --color-success: var(--color-success);
+  --color-success-bg: var(--color-success-bg);
+  --color-success-text: var(--color-success-text);
+  --color-warning: var(--color-warning);
+  --color-warning-bg: var(--color-warning-bg);
+  --color-warning-text: var(--color-warning-text);
+  --color-error: var(--color-error);
+  --color-error-bg: var(--color-error-bg);
+  --color-error-text: var(--color-error-text);
+  --color-info: var(--color-info);
+  --color-info-bg: var(--color-info-bg);
+  --color-info-text: var(--color-info-text);
+
+  /* ===========================================================================
+   * COMPONENT TOKENS — Button/Input, from component-tokens.css. Only the
+   * COLOR ones are exposed here (radius/spacing/height stay plain CSS vars —
+   * see foundations.css for why).
+   * ======================================================================== */
+  --color-button-primary-bg: var(--button-primary-bg);
+  --color-button-primary-bg-hover: var(--button-primary-bg-hover);
+  --color-button-primary-bg-pressed: var(--button-primary-bg-pressed);
+  --color-button-primary-text: var(--button-primary-text);
+  --color-button-secondary-bg: var(--button-secondary-bg);
+  --color-button-secondary-bg-hover: var(--button-secondary-bg-hover);
+  --color-button-secondary-bg-pressed: var(--button-secondary-bg-pressed);
+  --color-button-secondary-text: var(--button-secondary-text);
+  --color-button-outline-border: var(--button-outline-border);
+  --color-button-outline-text: var(--button-outline-text);
+  --color-button-outline-bg-hover: var(--button-outline-bg-hover);
+  --color-button-outline-bg-pressed: var(--button-outline-bg-pressed);
+  --color-button-ghost-text: var(--button-ghost-text);
+  --color-button-ghost-bg-hover: var(--button-ghost-bg-hover);
+  --color-button-ghost-bg-pressed: var(--button-ghost-bg-pressed);
+
+  --color-input-bg: var(--input-bg);
+  --color-input-bg-disabled: var(--input-bg-disabled);
+  --color-input-border: var(--input-border);
+  --color-input-border-focus: var(--input-border-focus);
+  --color-input-border-error: var(--input-border-error);
+  --color-input-border-disabled: var(--input-border-disabled);
+  --color-input-text: var(--input-text);
+  --color-input-text-placeholder: var(--input-text-placeholder);
+  --color-input-text-disabled: var(--input-text-disabled);
+  --color-input-label: var(--input-label);
+  --color-input-helper-text: var(--input-helper-text);
+  --color-input-helper-text-error: var(--input-helper-text-error);
+
+  /* --- Fonts — Font library → Tailwind. Families first ... */
+  --font-heading: var(--font-heading);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  /* ... then the 15 named text styles. Each becomes ONE Tailwind class that
+     sets font-size + line-height + letter-spacing + font-weight together,
+     e.g. `text-display-2xl`. Pair it with a font-* class for the family —
+     see tokens/typography.css for which family goes with which style. */
+  --text-display-2xl: var(--text-style-display-2xl-size);
+  --text-display-2xl--line-height: var(--text-style-display-2xl-leading);
+  --text-display-2xl--letter-spacing: var(--text-style-display-2xl-tracking);
+  --text-display-2xl--font-weight: var(--text-style-display-2xl-weight);
+
+  --text-display-xl: var(--text-style-display-xl-size);
+  --text-display-xl--line-height: var(--text-style-display-xl-leading);
+  --text-display-xl--letter-spacing: var(--text-style-display-xl-tracking);
+  --text-display-xl--font-weight: var(--text-style-display-xl-weight);
+
+  --text-display-lg: var(--text-style-display-lg-size);
+  --text-display-lg--line-height: var(--text-style-display-lg-leading);
+  --text-display-lg--letter-spacing: var(--text-style-display-lg-tracking);
+  --text-display-lg--font-weight: var(--text-style-display-lg-weight);
+
+  --text-heading-1: var(--text-style-heading-1-size);
+  --text-heading-1--line-height: var(--text-style-heading-1-leading);
+  --text-heading-1--letter-spacing: var(--text-style-heading-1-tracking);
+  --text-heading-1--font-weight: var(--text-style-heading-1-weight);
+
+  --text-heading-2: var(--text-style-heading-2-size);
+  --text-heading-2--line-height: var(--text-style-heading-2-leading);
+  --text-heading-2--letter-spacing: var(--text-style-heading-2-tracking);
+  --text-heading-2--font-weight: var(--text-style-heading-2-weight);
+
+  --text-heading-3: var(--text-style-heading-3-size);
+  --text-heading-3--line-height: var(--text-style-heading-3-leading);
+  --text-heading-3--letter-spacing: var(--text-style-heading-3-tracking);
+  --text-heading-3--font-weight: var(--text-style-heading-3-weight);
+
+  --text-heading-4: var(--text-style-heading-4-size);
+  --text-heading-4--line-height: var(--text-style-heading-4-leading);
+  --text-heading-4--letter-spacing: var(--text-style-heading-4-tracking);
+  --text-heading-4--font-weight: var(--text-style-heading-4-weight);
+
+  --text-heading-5: var(--text-style-heading-5-size);
+  --text-heading-5--line-height: var(--text-style-heading-5-leading);
+  --text-heading-5--letter-spacing: var(--text-style-heading-5-tracking);
+  --text-heading-5--font-weight: var(--text-style-heading-5-weight);
+
+  --text-body-lg: var(--text-style-body-lg-size);
+  --text-body-lg--line-height: var(--text-style-body-lg-leading);
+  --text-body-lg--letter-spacing: var(--text-style-body-lg-tracking);
+  --text-body-lg--font-weight: var(--text-style-body-lg-weight);
+
+  --text-body-md: var(--text-style-body-md-size);
+  --text-body-md--line-height: var(--text-style-body-md-leading);
+  --text-body-md--letter-spacing: var(--text-style-body-md-tracking);
+  --text-body-md--font-weight: var(--text-style-body-md-weight);
+
+  --text-body-sm: var(--text-style-body-sm-size);
+  --text-body-sm--line-height: var(--text-style-body-sm-leading);
+  --text-body-sm--letter-spacing: var(--text-style-body-sm-tracking);
+  --text-body-sm--font-weight: var(--text-style-body-sm-weight);
+
+  --text-label-md: var(--text-style-label-md-size);
+  --text-label-md--line-height: var(--text-style-label-md-leading);
+  --text-label-md--letter-spacing: var(--text-style-label-md-tracking);
+  --text-label-md--font-weight: var(--text-style-label-md-weight);
+
+  --text-label-sm: var(--text-style-label-sm-size);
+  --text-label-sm--line-height: var(--text-style-label-sm-leading);
+  --text-label-sm--letter-spacing: var(--text-style-label-sm-tracking);
+  --text-label-sm--font-weight: var(--text-style-label-sm-weight);
+
+  --text-caption-md: var(--text-style-caption-md-size);
+  --text-caption-md--line-height: var(--text-style-caption-md-leading);
+  --text-caption-md--letter-spacing: var(--text-style-caption-md-tracking);
+  --text-caption-md--font-weight: var(--text-style-caption-md-weight);
+
+  --text-code-md: var(--text-style-code-md-size);
+  --text-code-md--line-height: var(--text-style-code-md-leading);
+  --text-code-md--letter-spacing: var(--text-style-code-md-tracking);
+  --text-code-md--font-weight: var(--text-style-code-md-weight);
+
+  --text-display-wordmark: var(--text-style-display-wordmark-size);
+  --text-display-wordmark--line-height: var(--text-style-display-wordmark-leading);
+  --text-display-wordmark--letter-spacing: var(--text-style-display-wordmark-tracking);
+  --text-display-wordmark--font-weight: var(--text-style-display-wordmark-weight);
+
+  --text-display-jumbo: var(--text-style-display-jumbo-size);
+  --text-display-jumbo--line-height: var(--text-style-display-jumbo-leading);
+  --text-display-jumbo--letter-spacing: var(--text-style-display-jumbo-tracking);
+  --text-display-jumbo--font-weight: var(--text-style-display-jumbo-weight);
+
+  /* --- Marquee — see the @keyframes + reduced-motion override below. Default
+     duration is a judgment call (Figma has no timing spec for it); tune
+     per-strip with an explicit `[animation-duration:Ns]` if one ever needs a
+     different speed. */
+  --animate-marquee-scroll: marquee-scroll 38s linear infinite;
+  --animate-marquee-scroll-reverse: marquee-scroll 38s linear infinite reverse;
+}
+
+body {
+  background: var(--color-surface-dark);
+  color: var(--color-foreground-inverse);
+  font-family: var(--font-sans);
+}
+
+/* ---------------------------------------------------------------------------
+ * Infinite marquee — shared by every scrolling strip on the site (the
+ * homepage's tagline strip and partner-logos strip both duplicate their
+ * content once and loop this). Figma's source only ever shows ONE static
+ * copy of a marquee's content; the loop itself is a code-side concern, not
+ * something exported from the design.
+ * ------------------------------------------------------------------------ */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    /* Exactly -50%: the animated track is always two copies of the content
+       back to back, so this walks exactly one copy's width before the loop
+       point, with no visible seam. */
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-scroll,
+  .animate-marquee-scroll-reverse {
+    animation-play-state: paused;
+  }
+}
