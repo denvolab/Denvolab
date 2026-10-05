@@ -85,15 +85,10 @@ import { useRef, type CSSProperties } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import {
-  CANVAS_BG_GRADIENT,
-  CANVAS_BG_PATH,
   CANVAS_H,
   CANVAS_W,
   FUNNEL_MASK_PATH,
   HUB,
-  HUB_LOGO_PATH,
-  OVERLAY_GRADIENT,
-  OVERLAY_PATH,
 } from "./funnel-art";
 import { FRAME_W, MIN_WINDOW_H } from "./frame";
 import {
@@ -287,16 +282,9 @@ export function AiOrbitHub() {
             WebkitMaskRepeat: "no-repeat",
           }}
         >
-          {/* 1. Rectangle 5432: funnel fill */}
-          <svg viewBox={`0 0 ${CANVAS_W} ${CANVAS_H}`} preserveAspectRatio="none" className="absolute inset-0 h-full w-full">
-            <defs>
-              <linearGradient id="ai-orbit-canvas-bg" x1={CANVAS_W / 2} y1="0" x2={CANVAS_W / 2} y2={CANVAS_BG_GRADIENT.y2} gradientUnits="userSpaceOnUse">
-                <stop stopColor={CANVAS_BG_GRADIENT.from} />
-                <stop offset="1" stopColor={CANVAS_BG_GRADIENT.to} />
-              </linearGradient>
-            </defs>
-            <path d={CANVAS_BG_PATH} fill="url(#ai-orbit-canvas-bg)" />
-          </svg>
+          {/* Exact fill exported from the current Figma section. */}
+          {/* eslint-disable-next-line @next/next/no-img-element -- decorative Figma SVG */}
+          <img src="/images/ai-orbit/workflow-fill.svg" alt="" className="absolute inset-0 h-full w-full" />
 
           {/* 2. Tool badges, server-rendered at their exact Figma positions. */}
           {WORKFLOW_TOOLS.map((tool, index) => (
@@ -329,22 +317,12 @@ export function AiOrbitHub() {
             </div>
           ))}
 
-          {/* 3. Rectangle 5433: top + bottom fade overlay */}
-          <svg viewBox={`0 0 ${CANVAS_W} ${CANVAS_H}`} preserveAspectRatio="none" className="pointer-events-none absolute inset-0 h-full w-full">
-            <defs>
-              <linearGradient id="ai-orbit-overlay" x1={CANVAS_W / 2} y1="0" x2={CANVAS_W / 2} y2={OVERLAY_GRADIENT.y2} gradientUnits="userSpaceOnUse">
-                {OVERLAY_GRADIENT.stops.map((s) => (
-                  <stop key={s.offset} offset={s.offset} stopColor={s.color} stopOpacity={s.opacity} />
-                ))}
-              </linearGradient>
-            </defs>
-            <path d={OVERLAY_PATH} fill="url(#ai-orbit-overlay)" />
-          </svg>
+          {/* Figma fades the mouth into the section background. */}
+          {/* eslint-disable-next-line @next/next/no-img-element -- decorative Figma SVG */}
+          <img src="/images/ai-orbit/workflow-fade.svg" alt="" className="pointer-events-none absolute inset-0 h-full w-full" />
 
-          {/* 4. Central Hub */}
-          <svg
-            viewBox={`0 0 ${HUB.size} ${HUB.size}`}
-            className="absolute"
+          <div
+            className="absolute flex items-center justify-center rounded-full bg-[#24303e]"
             style={{
               left: canvasPct(HUB.x, "x"),
               top: canvasPct(HUB.y, "y"),
@@ -352,9 +330,9 @@ export function AiOrbitHub() {
               height: canvasPct(HUB.size, "y"),
             }}
           >
-            <rect width={HUB.size} height={HUB.size} rx={HUB.size / 2} fill={HUB.fill} />
-            <path d={HUB_LOGO_PATH} fill={HUB.logoFill} />
-          </svg>
+            {/* eslint-disable-next-line @next/next/no-img-element -- exact exported Figma hub mark */}
+            <img src="/images/ai-orbit/workflow-hub-mark.svg" alt="" className="h-[70.5291%] w-[70.5291%]" />
+          </div>
         </div>
       </div>
 

@@ -1,3 +1,4 @@
+import { HeroLines } from "@/components/ui/hero-lines";
 // ---------------------------------------------------------------------------
 // CaseStudyHero: the dark opening band of a case study (Figma "Rectangle 1"
 // #1a2128 behind "Frame 150" + the hero picture, e.g. 727:2344 / 727:2359).
@@ -32,7 +33,7 @@ import type { CaseStudyCoverHeroBlock, CaseStudyHeroBlock } from "@/types/case-s
 
 export function CaseStudyHero({ block }: { block: CaseStudyHeroBlock }) {
   return (
-    <section className="w-full bg-surface-dark">
+    <section className="hero-with-lines w-full bg-surface-dark"><HeroLines/>
       <div
         className="mx-auto flex w-full max-w-[1920px] flex-col gap-12 px-5 pb-16 pt-12 md:px-10 md:pb-20 md:pt-16 xl:flex-row xl:items-start xl:justify-between xl:gap-0 xl:pb-[155px] xl:pt-[101px]"
         style={{ "--cs-hero-offset": pctOf(block.textOffset, 1840) } as CSSProperties}
@@ -82,7 +83,7 @@ export function CaseStudyHero({ block }: { block: CaseStudyHeroBlock }) {
 
 export function CaseStudyCoverHero({ block }: { block: CaseStudyCoverHeroBlock }) {
   return (
-    <section className="w-full bg-black">
+    <section className="hero-with-lines w-full bg-black"><HeroLines/>
       <h1 className="sr-only">{block.title}</h1>
       {/* Phones and tablets get a taller crop (centred on the phone in the
           artwork); from xl the picture keeps its own proportions. */}

@@ -5,7 +5,7 @@
  * a page change. Only when JavaScript runs and the visitor hasn't asked for
  * less motion. Imported from app/globals.css. */
 @media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
-  [data-image-reveal]:not([data-image-reveal="done"]) {
+  [data-image-reveal-ready][data-image-reveal]:not([data-image-reveal="done"]) {
     opacity: 0;
     transform: translate3d(0, 5em, 0);
   }

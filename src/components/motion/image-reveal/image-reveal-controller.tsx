@@ -49,8 +49,11 @@ export function ImageRevealController() {
     const triggers: ScrollTrigger[] = [];
     const tweens: gsap.core.Tween[] = [];
 
-    document.querySelectorAll<HTMLElement>(SELECTOR).forEach((frame) => {
-      if (frame.dataset.imageReveal === "done") return;
+    const registered = new WeakSet<HTMLElement>();
+    const registerFrames = () => document.querySelectorAll<HTMLElement>(SELECTOR).forEach((frame) => {
+      if (frame.dataset.imageReveal === "done" || registered.has(frame)) return;
+      registered.add(frame);
+      frame.dataset.imageRevealReady = "";
       triggers.push(
         ScrollTrigger.create({
           trigger: frame,
@@ -76,6 +79,11 @@ export function ImageRevealController() {
       );
     });
 
+    registerFrames();
+    // App Router can stream sections after this controller mounts.
+    const additions = new MutationObserver(() => { registerFrames(); });
+    additions.observe(document.body, { childList: true, subtree: true });
+
     // Pictures and fonts that load late can move things down the page after
     // the trigger points were measured: re-measure when the page changes
     // height (debounced).
@@ -87,6 +95,7 @@ export function ImageRevealController() {
     observer.observe(document.body);
 
     return () => {
+      additions.disconnect();
       observer.disconnect();
       window.clearTimeout(timer);
       triggers.forEach((trigger) => trigger.kill());

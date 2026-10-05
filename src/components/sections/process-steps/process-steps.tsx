@@ -64,7 +64,7 @@ export async function ProcessSteps({ heading }: { heading?: string } = {}) {
                 // than snapping instantly. Pure CSS (no ScrollTrigger/JS):
                 // sticky already IS scroll-driven. `zIndex` makes the paint
                 // order explicit rather than relying on DOM order alone.
-                className="sticky flex min-h-[320px] w-full items-start gap-4 rounded-[28px] bg-surface-primary p-6 shadow-[0px_18px_18px_rgba(201,201,201,0.17)] md:gap-7 md:p-8 lg:p-12"
+                className="sticky flex min-h-[320px] w-full items-start gap-4 rounded-[28px] bg-surface-primary p-6 shadow-[0px_-2px_24px_0px_rgba(174,174,174,0.02),0px_8px_32px_-4px_rgba(174,174,174,0.04)] md:gap-7 md:p-8 lg:p-12"
                 style={{ top: `${PROCESS_CARD_STICKY_TOP_PX + index * PROCESS_CARD_STACK_OFFSET_PX}px`, zIndex: index + 1 }}
               >
                 <ProcessIcon index={index} />

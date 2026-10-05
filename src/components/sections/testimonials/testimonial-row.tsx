@@ -67,7 +67,7 @@ export function TestimonialRow({
     // silently cropped every card's bottom off when this lived inside
     // testimonials.tsx's old fixed-height row wrapper. See that file's
     // top-of-file comment for the full story.
-    <div className="relative w-full shrink-0 overflow-hidden">
+    <div data-testimonial-row="" className="relative w-full shrink-0 overflow-hidden">
       <div
         className={cn(
           "flex w-max items-center",

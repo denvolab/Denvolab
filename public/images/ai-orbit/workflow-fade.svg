@@ -1,0 +1,10 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="1635" height="680" viewBox="0 0 1635 680" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path id="Workflow Canvas / Shape / 02" d="M0 0H1635L971.94 420.707C963.776 425.887 958.556 434.637 957.877 444.282L949.989 556.326C945.084 625.991 887.139 680 817.301 680C747.628 680 689.76 626.236 684.645 556.751L677.108 454.375C676.437 445.264 671.547 436.989 663.89 432.006L0 0Z" fill="url(#paint0_linear_0_4)"/>
+<defs>
+<linearGradient id="paint0_linear_0_4" x1="817.5" y1="0" x2="817.5" y2="511.5" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0D1216"/>
+<stop offset="0.684561" stop-color="#0D1216" stop-opacity="0"/>
+<stop offset="1" stop-color="#0D1216" stop-opacity="0"/>
+</linearGradient>
+</defs>
+</svg>

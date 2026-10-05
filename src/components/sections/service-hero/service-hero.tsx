@@ -1,3 +1,4 @@
+import { HeroLines } from "@/components/ui/hero-lines";
 // ---------------------------------------------------------------------------
 // ServiceHero: the dark opening section of every service detail page
 // (Figma "Hero / Editorial identity", e.g. node 701:14161). Server Component.
@@ -28,7 +29,7 @@ export function ServiceHero({ block }: { block: ServiceHeroBlock }) {
   const { visual } = block;
 
   return (
-    <section className="w-full bg-gray-900">
+    <section className="hero-with-lines w-full bg-gray-900"><HeroLines/>
       <div className="mx-auto flex w-full max-w-[1920px] flex-col gap-12 px-5 pb-16 pt-16 md:px-10 xl:pb-24 xl:pt-[103px]">
         <div className="flex flex-col gap-12">
           <h1

@@ -1,3 +1,4 @@
+import { HeroLines } from "@/components/ui/hero-lines";
 import Link from "next/link";
 import Image from "next/image";
 import { getHeroContent } from "@/lib/data/homepage";
@@ -9,7 +10,7 @@ export async function Hero() {
   const hero = await getHeroContent();
   const services = [...hero.services, { label: "AI Integration", href: "/services/ai-agent-custom-cms" }];
   return <section className="home-hero" data-figma-node="906:7023">
-    <div className="home-hero-inner">
+    <HeroLines/><div className="home-hero-inner">
       <p className="home-hero-wordmark" aria-hidden="true">{hero.wordmark}</p><Image className="home-hero-tablet-wordmark" src="/images/home/tablet-wordmark.svg" alt="" width={715} height={110} />
       <div className="home-hero-stage">
         <ul className="home-hero-services">{services.map(service => <li key={service.label}><Link href={service.href}>{service.label}</Link></li>)}</ul>

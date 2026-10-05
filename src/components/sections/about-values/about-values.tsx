@@ -35,16 +35,17 @@
 // but the site keeps mono for captions only.
 // ---------------------------------------------------------------------------
 import Image from "next/image";
+import { LoopCarousel } from "@/components/ui/loop-carousel";
 import { getAboutValues } from "@/lib/data/about";
 import { cn } from "@/lib/utils/cn";
 import { AnimatedText } from "@/components/ui/animated-text";
 
 export async function AboutValues() {
   const values = await getAboutValues();
-  const itemCount = values.items.length;
+  
   // Two back-to-back copies of the same six cards = the track the animation
   // slides exactly one copy-width across before looping seamlessly.
-  const track = [...values.items, ...values.items];
+  const track = values.items;
 
   return (
     <section className="bg-background py-16 md:py-24 xl:py-[120px]" data-figma-node="431:6304">
@@ -55,16 +56,15 @@ export async function AboutValues() {
           </AnimatedText>
         </h2>
 
-        <div className="w-full overflow-hidden">
-          <ul className="flex w-max animate-marquee-scroll gap-4 [animation-duration:70s]">
+        <LoopCarousel className="about-values-carousel" label="What we bring to every craft">
+          <ul className="flex w-max gap-4 pr-4">
             {track.map((value, i) => {
-              const isDuplicateCopy = i >= itemCount;
+              
 
               return (
                 <li
                   key={i}
-                  aria-hidden={isDuplicateCopy || undefined}
-                  inert={isDuplicateCopy || undefined}
+                  
                   className="flex w-[min(400px,82vw)] shrink-0 flex-col justify-between gap-8 rounded bg-[#f9f8e4] px-6 py-12 text-center md:h-[660px]"
                 >
                   <p className="font-sans text-label-md uppercase text-foreground">
@@ -93,7 +93,7 @@ export async function AboutValues() {
               );
             })}
           </ul>
-        </div>
+        </LoopCarousel>
       </div>
     </section>
   );
