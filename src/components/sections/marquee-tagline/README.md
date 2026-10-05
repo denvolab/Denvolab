@@ -15,6 +15,21 @@ This didn't need GSAP (no scroll-linking, no easing beyond linear, no interactio
 
 Per the homepage-responsive-tablet-mobile project doc, both the mobile (390px) and tablet (768px) Figma frames replace the 120px infinite marquee with a single static, wrapping line at a normal readable size (`text-label-md`, uppercase, no animation) — the full multi-phrase strip doesn't translate to a narrow viewport. The mobile frame's own line joins two of the five phrases with a middle dot ("CRAFT IS NOT AN ART · WE DO CRAFT"); rather than hardcode which two, this joins every phrase from `lib/data/homepage.ts` the same way, so the line stays correct if the phrase list ever changes.
 
-## Known gap
+## The icon
 
-The repeating icon (Figma node `231:5215`, "icon_vector") has no committed SVG — this was built in a sandbox that couldn't reach Figma's asset-export host (`www.figma.com` was blocked at the network layer), so the icon's actual vector data was never retrievable, and per the design-to-code rules a placeholder is used rather than a hand-drawn guess at what the icon looks like. It renders as a plain brand-tinted circle in the icon's exact 96px slot. To finish this: export the icon from Figma as an SVG, save it at `public/icons/marquee-spark.svg`, and set each item's `iconSrc` in `lib/data/homepage.ts` (`MARQUEE_ITEMS`) to that path — then swap the placeholder `<span>` in `marquee-tagline.tsx` for an `<img>`/`<Image>` using it.
+The repeating icon is the lime asterisk (Figma node `431:6142`, "icon_vector"), saved as `public/icons/marquee-spark.svg` and set as each item's `iconSrc` in `lib/data/homepage.ts` (`MARQUEE_ITEMS`). It was rebuilt from the vector's own path data in Figma. If an item ever has no `iconSrc`, a plain brand-tinted ring holds the 96px slot instead.
+
+## Also used on
+
+The About page (`app/about/page.tsx`) reuses this section unchanged: the "About us" frame's marquee (node `431:6140`) has the same phrases and icon.
+
+## Slower strip and spinning icon (Oct 2026)
+
+The user asked for the asterisk to keep turning like a gear and for this strip to move slower.
+
+- **Spinning icon**: each asterisk has `animate-spark-spin`, one full clockwise turn every 6s, forever (`--animate-spark-spin` and `@keyframes spark-spin` in `app/globals.css`). The shape's centre of mass sits within half a pixel of the middle of its 96px box, so it spins in place without wobbling, and its farthest tip (about 43px from the centre) never leaves the box, so it never touches the text. To change the speed, change the `6s` in `globals.css`.
+- **Slower strip**: this strip now takes 76s per loop instead of the site default 38s, half the old speed (about 83px a second instead of 166, the same at every desktop width since the text is a fixed 120px). It's set on the track itself (`[animation-duration:76s]` in `marquee-tagline.tsx`), so other marquees that share `animate-marquee-scroll` keep their speed. Raise the number to slow it more.
+- **Seam fix**: the loop used to jump 28px every time it restarted. The track is two copies with a 56px gap between items, but there was no gap after the last item, so half the track was half a gap shorter than one copy. `pr-14` adds that last gap; the jump is now 0 (measured).
+- **Reduce motion**: with "Reduce motion" turned on, both the strip and the spinning stop, like before.
+
+Verified with Playwright at 1024 and 1920: 76s loop, 83px a second, 60 degrees a second on the icons, seam jump 0, both paused under reduced motion. No sideways scroll on any page from 360 to 1920. Applies to the About page too, which uses this same section.

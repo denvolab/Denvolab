@@ -205,6 +205,7 @@ const twMerge = extendTailwindMerge({
         "code-md",
         "display-wordmark",
         "display-jumbo",
+        "editorial-hero",
       ],
     },
   },

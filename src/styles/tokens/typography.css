@@ -17,7 +17,7 @@
  * Body×3) scale continuously between a min size (small phones) and the exact
  * max size from Figma (desktop), using CSS clamp() — no jump at any device
  * width, the text is a slightly different size at literally every viewport
- * width in between. The 4 small UI/mono styles (Label×2, Caption, Code) stay
+ * width in between. The 4 small UI styles (Label×2, Caption, Code) stay
  * fixed-size on purpose: shrinking small UI text below its designed size
  * hurts legibility more than fluid scaling helps.
  *
@@ -34,9 +34,20 @@
    * 1. FONT FAMILIES — self-hosted via Fontsource, imported in app/layout.tsx.
    *    Names must match what each package registers in its @font-face rules.
    * ======================================================================== */
-  --font-heading: "Sora Variable", ui-sans-serif, sans-serif; /* stand-in for Mona Sans — see README */
+  --font-heading: "DM Sans Variable", ui-sans-serif, sans-serif; /* headings use DM Sans on purpose (Figma says Mona Sans); kept as its own token so it can be swapped in one place */
   --font-sans: "DM Sans Variable", ui-sans-serif, sans-serif;
-  --font-mono: "DM Mono", ui-monospace, monospace;
+  --font-mono: "DM Mono", ui-monospace, monospace; /* captions ONLY (text-caption-md); everything else is font-sans */
+
+  /* Case study pages (/case-studies/<slug>) only. Their Figma frames use a few
+     more families; the files are imported by app/case-studies/[slug]/page.tsx,
+     so no other page downloads them. SF Pro is Apple's system font and cannot
+     be self-hosted: Apple devices show the real SF Pro, everything else falls
+     back to Inter. */
+  --font-grotesk: "Host Grotesk Variable", ui-sans-serif, sans-serif;
+  --font-inter: "Inter Variable", ui-sans-serif, sans-serif;
+  --font-roboto: "Roboto", ui-sans-serif, sans-serif;
+  --font-frank-ruhl: "Frank Ruhl Libre", ui-serif, serif;
+  --font-sf: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter Variable", ui-sans-serif, sans-serif;
 
   /* ===========================================================================
    * 2. TEXT STYLES — font-size (fluid clamp or fixed), line-height,
@@ -103,9 +114,10 @@
   --text-style-body-sm-tracking: 0em;
   --text-style-body-sm-weight: 400;
 
-  /* --- Label / Caption / Code — fixed size on purpose, pairs with
-         font-mono. Label carries the 2% letter-spacing used for the site's
-         uppercase-style UI text (nav links, buttons, footer labels) -------- */
+  /* --- Label / Caption / Code: fixed size on purpose. Only Caption uses
+         font-mono; Label and Code use font-sans (DM Sans). Label carries the
+         2% letter-spacing used for the site's uppercase-style UI text (nav
+         links, buttons, footer labels) ------------------------------------ */
   --text-style-label-md-size: 0.875rem; /* 14px, fixed */
   --text-style-label-md-leading: 1.25rem; /* 20px */
   --text-style-label-md-tracking: 0.02em;
@@ -132,11 +144,15 @@
          the same way as the 11 fluid styles above (same 390px->1920px
          interpolation, min chosen so the mark doesn't overwhelm small
          screens) so the "never hardcode a font-size" rule still holds. Pairs
-         with font-sans, weight 500 (Medium). ------------------------------ */
-  --text-style-display-wordmark-size: clamp(4rem, -0.7157rem + 19.3464vw, 22.5rem); /* 64px -> 360px */
-  --text-style-display-wordmark-leading: 1; /* "none" in Figma */
-  --text-style-display-wordmark-tracking: -0.04em; /* -14.4px / 360px */
-  --text-style-display-wordmark-weight: 500;
+         with font-sans (weight is part of the style). --------------------- */
+  /* Oct 2026: updated to the current Figma (node 230:4047): DM Sans Black
+     340, 100% line height, -4%. Sized as a pure share of the width (340px
+     at 1920 = 17.7083vw) so the word always spans the same part of the
+     hero; 64px floor, 340px cap (the hero stage stops growing at 1920). */
+  --text-style-display-wordmark-size: clamp(4rem, 17.7083vw, 21.25rem); /* 64px -> 340px */
+  --text-style-display-wordmark-leading: 1; /* 100% in Figma */
+  --text-style-display-wordmark-tracking: -0.04em; /* -13.6px / 340px */
+  --text-style-display-wordmark-weight: 900; /* Black */
 
   /* --- Display/Jumbo — one-off: the "Let's Contact" giant heading on the
          homepage's closing CTA (the only place this appears). Same
@@ -145,4 +161,106 @@
   --text-style-display-jumbo-leading: 1; /* "none" in Figma */
   --text-style-display-jumbo-tracking: 0em;
   --text-style-display-jumbo-weight: 400;
+
+  /* --- Display/Services Hero — one-off: the two-line "Services & Solutions"
+         heading on the Services page hero (node 437:8705, the only place
+         this appears). Same reasoning and interpolation basis as
+         Display/Wordmark and Display/Jumbo above; min chosen to match
+         Display/Wordmark's proportional min-to-max ratio (64/360 ≈ 0.178,
+         applied to this style's 220px max gives a 40px min). Pairs with
+         font-sans, weight 600 (SemiBold). ------------------------------- */
+  --text-style-display-services-hero-size: clamp(2.5rem, -0.3676rem + 11.7647vw, 13.75rem); /* 40px -> 220px */
+  --text-style-display-services-hero-leading: 1; /* "none" in Figma */
+  --text-style-display-services-hero-tracking: -0.04em; /* -8.8px / 220px */
+  --text-style-display-services-hero-weight: 600;
+
+  /* --- Display/Editorial Hero: Figma "V3.1 / Editorial hero" (DM Sans
+         SemiBold 128/132, -5%): the big headline of every service detail
+         page (/services/[slug]) and the "form." / "Aa" specimens in the
+         branding study. Same 390px->1920px interpolation as the styles
+         above; 48px min so a two-line headline still fits a phone.
+         Pairs with font-sans, weight 600. ------------------------------- */
+  --text-style-editorial-hero-size: clamp(3rem, 1.7255rem + 5.2288vw, 8rem); /* 48px -> 128px */
+  --text-style-editorial-hero-leading: 1.03125; /* 132/128 */
+  --text-style-editorial-hero-tracking: -0.05em; /* -6.4px / 128px */
+  --text-style-editorial-hero-weight: 600;
+}
+
+/* -----------------------------------------------------------------------------
+ * DESIGN SYSTEM V3.1: the service detail pages were designed with a newer
+ * version of the Figma design system than the rest of the site. Its
+ * changes apply only inside `.ds-v31` (those pages wrap their content in
+ * it); the rest of the site keeps what it was built and checked with. To
+ * move the whole site to v3.1, copy these values into :root and drop the
+ * class. (The colour change, surface/secondary, is in colors.css.)
+ *
+ * 1. Font cut: DM Sans with its optical-size ("opsz") axis, "DM Sans Opsz"
+ *    (globals.css), so each size can use the cut Figma uses. Measured by
+ *    comparing the ink width of Figma text layers (absoluteRenderBounds)
+ *    with the browser's, style by style, Oct 2026:
+ *      - Editorial hero (128px), Heading H2 and H4: automatic optical size
+ *        (the browser default, opsz = font size, max 40). E.g. "mean
+ *        something." Figma 876.7px, opsz-auto 879.4, fixed-14 cut 959.4.
+ *      - Heading H3: opsz 30 (rule below).
+ *      - Display 2XL / XL / LG: the fixed opsz 14 cut. E.g. "Good
+ *        questions." Figma 433.6px, opsz 14 433.4, auto 393.4.
+ *      - Body sizes: both cuts measure the same.
+ *    The Figma API reports opsz 14 for every style, so these values come
+ *    from the measurements, not from the style definitions.
+ * 2. Tracking: the Display and Heading styles now carry negative
+ *    letter-spacing (values from the Figma Design System page).
+ * -------------------------------------------------------------------------- */
+.ds-v31 {
+  --font-sans: "DM Sans Opsz", ui-sans-serif, sans-serif;
+  --font-heading: "DM Sans Opsz", ui-sans-serif, sans-serif;
+  --text-style-display-2xl-tracking: -0.04em;
+  --text-style-display-xl-tracking: -0.04em;
+  --text-style-display-lg-tracking: -0.035em;
+  --text-style-heading-1-tracking: -0.03em;
+  --text-style-heading-2-tracking: -0.025em;
+  --text-style-heading-3-tracking: -0.02em;
+  --text-style-heading-4-tracking: -0.015em;
+  --text-style-heading-5-tracking: -0.01em;
+  /* The closing "Let’s work. Together" (ContactCta): -6% tracking, and two
+     lines in a 363px box (181.5px per line at 210px, Figma "100%" line
+     height on Mona Sans). The site sets this heading in DM Sans (decision
+     of Sept 21, 2026), so only the box and spacing can match. */
+  --text-style-display-jumbo-tracking: -0.06em;
+  --text-style-display-jumbo-leading: 0.8643;
+}
+
+/* Below xl the closing heading runs at 56-130px, where -6% tracking and the
+   tight two-line box squeeze "Let’s work." together; use -4% and a little
+   more line height there. */
+@media (width < 80rem) {
+  .ds-v31 {
+    --text-style-display-jumbo-tracking: -0.04em;
+    --text-style-display-jumbo-leading: 0.95;
+  }
+}
+
+.ds-v31 :is(.text-display-2xl, .text-display-xl, .text-display-lg) {
+  font-variation-settings: "opsz" 14;
+}
+
+/* Heading H3 (28px) measures closest to opsz 30 in Figma (five samples,
+   e.g. "Brand strategy" 185.1px: opsz 30 185, auto/28 189). */
+.ds-v31 .text-heading-3 {
+  font-variation-settings: "opsz" 30;
+}
+
+/* Case study hero title (/case-studies/<slug>): DM Sans SemiBold 96/100,
+   -4% at 1920, fluid down to 44px on phones. Not a named style in the
+   Figma library, so it lives here as one class. Inside .ds-v31 it keeps the
+   automatic optical size: measured against Figma ("Denvo Hotel" ink 463px;
+   auto 458px, opsz 14 506px), like the editorial hero. */
+.cs-hero-title {
+  font-size: clamp(2.75rem, 1.85rem + 3.688vw, 6rem);
+  line-height: 1.0417;
+  letter-spacing: -0.04em;
+}
+
+/* v3.1 Label styles are DM Mono (Medium 14/20 and 12/16, +2%). */
+.ds-v31 :is(.text-label-md, .text-label-sm) {
+  font-family: var(--font-mono);
 }

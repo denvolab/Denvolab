@@ -47,6 +47,7 @@ export function MobileNav({ links, cta }: MobileNavProps) {
         aria-expanded={isOpen}
         aria-controls="mobile-nav-panel"
         aria-label={isOpen ? "Close menu" : "Open menu"}
+        onKeyDown={(event) => { if (event.key === "Escape") setIsOpen(false); }}
         onClick={() => setIsOpen((open) => !open)}
         className="relative z-10 flex h-10 w-10 flex-col items-center justify-center gap-1.5"
       >
@@ -61,9 +62,11 @@ export function MobileNav({ links, cta }: MobileNavProps) {
       <div
         id="mobile-nav-panel"
         ref={panelRef}
+        inert={!isOpen}
+        onKeyDown={(event) => { if (event.key === "Escape") setIsOpen(false); }}
         className="absolute inset-x-0 top-full h-0 overflow-hidden bg-surface-dark opacity-0"
       >
-        <nav aria-label="Mobile" className="flex flex-col gap-6 px-6 py-8">
+        <nav aria-label="Mobile" onClick={(event) => { if ((event.target as HTMLElement).closest("a")) setIsOpen(false); }} className="flex flex-col gap-6 px-6 py-8">
           {links.map((link) => (
             <Button key={link.href} href={link.href} variant="ghost" className="text-body-md">
               {link.label}

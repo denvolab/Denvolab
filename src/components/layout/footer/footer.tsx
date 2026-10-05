@@ -1,52 +1,30 @@
-// ---------------------------------------------------------------------------
-// Footer — link columns + brand wordmark, rendered on every page via the
-// root layout. Server Component; see lib/data/footer.ts for the
-// API-readiness note (same pattern as the header).
-// ---------------------------------------------------------------------------
+import "@fontsource/dm-mono/latin-500-italic.css";
 import { getFooterColumns } from "@/lib/data/footer";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/seo/site-config";
+import styles from "./footer.module.css";
 
+/** Lower half of Figma's Closing Section (860:5668). ContactCta draws the upper half. */
 export async function Footer() {
   const columns = await getFooterColumns();
+  const wordmark = siteConfig.name.replace(/\s/g, "").toUpperCase();
 
   return (
-    <footer className="bg-surface-dark text-foreground-inverse">
-      <div className="mx-auto max-w-[1920px] px-6 pt-20 lg:px-16">
-        {/* Logo + link columns -------------------------------------------
-            Breakpoints: per the homepage-responsive-tablet-mobile project
-            doc, the Figma tablet (768px) frame ALSO stacks the logo above
-            the columns (same as mobile) — only the desktop frame (lg+) puts
-            them side by side, so that switch is `lg:`, not `md:`. The
-            column count still steps at `md:` (768px tablet -> 2 columns)
-            before reaching the full 4 at `lg:` (desktop). */}
-        <div className="flex flex-col gap-16 border-b border-foreground-inverse/10 pb-16 lg:flex-row lg:items-start lg:justify-between">
-          {/*
-            TODO: this points at a temporary Figma asset URL (expires ~7 days
-            after export). Automated download was blocked by this sandbox's
-            network policy — export the logo from Figma and drop it at
-            public/denvolab-logo.svg, then swap the src below.
-          */}
+    <footer data-site-footer="" data-figma-node="860:5682" data-wash="off" className={styles.footer}>
+      <div className={styles.bars} aria-hidden="true" />
+      <div className={styles.navigation}>
+        <div className={styles.brandRow}>
+          {/* Exact full lockup exported from the current Figma footer. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="https://www.figma.com/api/mcp/asset/483855c4-157b-4536-83f4-6b0bab1970ec.svg"
-            alt={siteConfig.name}
-            className="h-[60px] w-auto"
-          />
-
-          <div className="grid grid-cols-1 gap-x-12 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-16">
+          <img src="/denvolab-footer-logo.svg" alt={siteConfig.name} width={330.309} height={120} className={styles.logo} />
+          <nav aria-label="Footer" className={styles.links}>
             {columns.map((column) => (
-              <div key={column.title} className="flex flex-col gap-4">
-                <h3 className="font-sans text-heading-5">{column.title}</h3>
-                <ul className="flex flex-col gap-3">
+              <div key={column.title} className={styles.column}>
+                <h3 className={styles.columnTitle}>{column.title}</h3>
+                <ul className={styles.linkList}>
                   {column.links.map((link) => (
                     <li key={link.href}>
-                      <Button
-                        href={link.href}
-                        external={link.external}
-                        variant="ghost"
-                        className="text-label-sm uppercase"
-                      >
+                      <Button href={link.href} external={link.external} variant="ghost" className={`font-mono text-white uppercase ${styles.link}`}>
                         {link.label}
                       </Button>
                     </li>
@@ -54,21 +32,12 @@ export async function Footer() {
                 </ul>
               </div>
             ))}
-          </div>
+          </nav>
         </div>
-
-        {/* Giant wordmark --------------------------------------------------
-            Real text (not an image) on purpose: it's crawlable brand copy
-            and doubles as a natural place for the legal name for SEO. */}
-        <p
-          aria-hidden="true"
-          className="select-none overflow-hidden font-mono text-[18vw] leading-none text-primary lg:text-[22vw]"
-        >
-          {siteConfig.name.replace(/\s/g, "").toUpperCase()}
-        </p>
-        <span className="sr-only">
-          {siteConfig.legalName} — {siteConfig.tagline}
-        </span>
+        <div className={styles.signature}>
+          <p aria-hidden="true" className={styles.wordmark}>{wordmark}</p>
+        </div>
+        <span className="sr-only">{siteConfig.legalName}. {siteConfig.tagline}</span>
       </div>
     </footer>
   );

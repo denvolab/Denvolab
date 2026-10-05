@@ -1,0 +1,39 @@
+/* Icon spin for the benefits list (Figma node 431:6359).
+ *
+ * Each row is a Reveal (see components/ui/reveal), which sets
+ * `data-in="true"` on it when it scrolls into view. At that moment the icon
+ * makes one full turn: clockwise for `.cw`, counter-clockwise for `.ccw`,
+ * starting a beat after the row has faded in. Figma loops the whole sequence
+ * every 5.2 seconds; here it plays once per visit so it doesn't keep moving
+ * while someone is reading.
+ *
+ * Only runs with JavaScript on and when reduced motion has not been asked for. */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .row[data-in="true"] .cw {
+    animation: spin-cw 1400ms cubic-bezier(0.65, 0, 0.35, 1)
+      calc(var(--reveal-delay, 0ms) + 400ms) both;
+  }
+
+  .row[data-in="true"] .ccw {
+    animation: spin-ccw 1400ms cubic-bezier(0.65, 0, 0.35, 1)
+      calc(var(--reveal-delay, 0ms) + 400ms) both;
+  }
+}
+
+@keyframes spin-cw {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-ccw {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}

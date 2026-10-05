@@ -19,7 +19,7 @@ export async function Header() {
   const [links, cta] = await Promise.all([getPrimaryNavigation(), getHeaderCta()]);
 
   return (
-    <header className="relative z-50 border-b border-foreground-inverse/10 bg-surface-dark">
+    <header data-site-header="" className="relative z-50 border-b border-foreground-inverse/10 bg-surface-dark">
       <div className="mx-auto flex max-w-[1920px] items-center justify-between px-5 py-4 lg:px-16">
         {/* Wordmark — desktop (lg+) carries the DENVOLAB wordmark elsewhere
             (hero's giant background text, footer) rather than in the nav bar

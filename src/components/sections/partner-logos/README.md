@@ -1,21 +1,7 @@
-# `partner-logos/` — Client/Partner Logo Strip
+# Case study brand marquee
 
-Figma: node `230:4222`, y 7588-7796. Two rows of 22 logos each, scrolling infinitely, with white edge-fade gradients over both ends of each row.
+The two rows now live inside the dark AI workflow section (Figma `589:2426`, rows `860:4626`). All eleven case study brands replace the previous placeholders.
 
-- `partner-logos.tsx` — the section (content from `lib/data/homepage.ts`)
-- `partner-logo-row.tsx` — one row (used twice, once reversed)
-- `index.ts` — barrel export
+Original vector paths are reused from each project's local brand-grid asset. Transparent, tightly framed SVG exports live at `public/images/partners/`; alignment guides and the source grid background are excluded. The marks use gray `#A6ADBD`, with lighter navy `#192434` cards against the section's `#142030` background. Existing case study source assets are preserved.
 
-## Why the logos aren't Figma's actual assets
-
-The Figma source alternates exactly two logo images across all 44 slots: **Visa's real logo**, and a generic "it-sks" mark. Visa is a real, unaffiliated company — reproducing its logo here would present it as a Denvo Lab client/partner, which isn't true. This ships **generic placeholder slots** (a bordered chip with a "Client One" / "Client Two" / ... label) at the same two alternating widths (144px "wide" / 103px "narrow") instead.
-
-**To finish this section**: replace the entries in `lib/data/homepage.ts` (`PARTNER_LOGOS`) with Denvo Lab's real client/partner list, export their actual logos from wherever they're sourced (not from this Figma file), drop them at `public/images/partners/<slug>.svg` (or `.png`), and set each entry's `logoSrc`.
-
-## Responsive (mobile/tablet, `<lg`)
-
-Per the `homepage-responsive-tablet-mobile` project doc (Figma nodes `251:1791` mobile / `253:1243` tablet), these widths drop the infinite-scroll marquee for simple static rows — the same logo chips, wrapped in a plain `flex flex-wrap` row rather than the animated track, so nothing scrolls.
-
-## Background + scroll direction
-
-This section sits on the page's plain white background (`bg-background`) — confirmed by reading the frame's own fill directly, not assumed from the dark section above it (`ai-orbit/`). The two rows scroll in opposite directions (`reverse` on the second `PartnerLogoRow`), matching Figma's own per-row annotations ("left side carousel" / "right side carousel") and the standard treatment for a 2-row logo strip.
+Desktop rows scroll in opposite directions using equal repeated groups for a seamless loop. Duplicates are hidden from screen readers. Existing reduced-motion rules stop the animation. Mobile and tablet show all brands in wrapping static rows. The logo group shares the AI section rather than introducing a separate 100vh section. Dark edge fades match the section.

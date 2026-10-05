@@ -54,20 +54,26 @@
 
   /* ===========================================================================
    * Input — 5 states (Default/Filled/Focus/Error/Disabled) in Figma, MD size
-   * only.
+   * only. Also used by the Textarea component (same tokens, taller field).
+   *
+   * Updated Sept 28, 2026 to match the Figma collection as it is now: the
+   * Input sits on light surfaces (white field, gray-200 border). The earlier
+   * values here were a dark version (gray-900 field) that no component used.
+   * First used by the Contact page form (components/ui/text-field,
+   * components/ui/textarea-field).
    * ======================================================================== */
-  --input-bg: var(--gray-900); /* Input is designed to sit on the dark UI regardless of page section */
-  --input-bg-disabled: var(--gray-800);
-  --input-border: var(--gray-700);
-  --input-border-focus: var(--brand-500);
-  --input-border-error: var(--error-700);
-  --input-border-disabled: var(--gray-800);
-  --input-text: var(--base-white);
-  --input-text-placeholder: var(--gray-500);
-  --input-text-disabled: var(--gray-600);
-  --input-label: var(--gray-300);
-  --input-helper-text: var(--gray-500);
-  --input-helper-text-error: var(--error-300);
+  --input-bg: var(--color-surface-primary);
+  --input-bg-disabled: var(--color-surface-secondary);
+  --input-border: var(--color-border-primary);
+  --input-border-focus: var(--color-border-focus);
+  --input-border-error: var(--color-border-error);
+  --input-border-disabled: var(--color-border-secondary);
+  --input-text: var(--color-text-primary);
+  --input-text-placeholder: var(--color-text-tertiary);
+  --input-text-disabled: var(--color-text-disabled);
+  --input-label: var(--color-text-secondary);
+  --input-helper-text: var(--color-text-tertiary);
+  --input-helper-text-error: var(--color-text-error);
 
   --input-radius: var(--radius-md);
   --input-padding-x: var(--space-lg);

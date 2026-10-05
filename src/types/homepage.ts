@@ -12,8 +12,9 @@ export interface HeroContent {
   wordmark: string;
   headline: string;
   cta: { label: string; href: string };
-  /** Left-side vertical list of service names. */
-  services: string[];
+  /** Left-side vertical list of services, each linking to its service
+   *  detail page (/services/<slug>). */
+  services: { label: string; href: string }[];
 }
 
 /** One repeating unit of the marquee strip: a phrase, paired with the icon
@@ -31,7 +32,9 @@ export interface PortfolioProject {
   /** null until a real project screenshot is exported from Figma — see
    *  portfolio-grid/README.md. */
   imageSrc: string | null;
-  href: string;
+  /** The project's case study page (/case-studies/<slug>), or null while it
+   *  has none yet: the card then says "Coming soon" on hover and is not a link. */
+  href: string | null;
 }
 
 export interface WhatWeCreateContent {
@@ -49,6 +52,8 @@ export interface WhatWeCreateItem {
 }
 
 export interface AiOrbitContent {
+  /** Small mono label above the heading (Figma node 572:1574, "Eyebrow"). */
+  eyebrow: string;
   /** Rendered with a line break preserved between the two lines. */
   heading: string;
 }
@@ -84,10 +89,36 @@ export interface TestimonialsContent {
 export interface Testimonial {
   name: string;
   role: string;
-  /** Always 5 in the Figma source — kept as a count rather than hardcoding
-   *  5 icons in the component, in case a real rating field lands later. */
-  rating: number;
   quote: string;
+  /** Actual client photo, supplied by the client or linked to a verified source. */
+  imageSrc?: string;
+  /** Optional public source for the quote. */
+  sourceHref?: string;
+  /** Explicitly labels fictional profiles and sample copy in the visible card. */
+  isSample?: boolean;
+}
+
+/** "What Do You Get By Choosing Denvo Lab?" comparison table, between the
+ *  process timeline and testimonials. Not part of the original Figma source
+ *  (see comparison/README.md) — modeled the same content-driven way as every
+ *  other section regardless. */
+export interface ComparisonContent {
+  /** Rendered with a line break preserved between the two lines, same as
+   *  ProcessContent/AiOrbitContent above. */
+  heading: string;
+  /** Column header for Denvo Lab's own side of the table. */
+  denvoLabLabel: string;
+  /** Column header for the "everyone else" side of the table. */
+  othersLabel: string;
+  cta: { label: string; href: string };
+}
+
+/** One row of the comparison table: a feature/claim, and whether each side
+ *  has it. */
+export interface ComparisonRow {
+  feature: string;
+  denvoLab: boolean;
+  others: boolean;
 }
 
 export interface ContactCtaContent {

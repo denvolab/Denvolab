@@ -23,6 +23,8 @@ Each layer only ever points at the layer above it — never skips one. This is w
 | `component-tokens.css` | `06 · Component Tokens` | The 41 Button/Input variables, aliasing `colors.css` + `foundations.css` |
 | `typography.css` | — (not a Figma variable collection; Figma text styles) | Font families + the 15 fluid/fixed text styles |
 
+**Design System v3.1 scope (`.ds-v31`, Oct 2026).** The service detail pages were designed with a newer Figma design system. Its differences live at the end of `typography.css` (DM Sans with optical sizing, per-style optical size, negative Display/Heading tracking, DM Mono labels, the closing heading's spacing) and `colors.css` (surface/secondary = Gray/50), and only apply inside an element with the `ds-v31` class (`app/services/[slug]/page.tsx`). The new "V3.1 / Editorial hero" style (128/132, -5%) is a normal token, `text-editorial-hero`.
+
 `app/globals.css` imports all four and wires the color/font ones into Tailwind's `@theme` (component-token spacing/radius/height values stay plain CSS vars — see `foundations.css`).
 
 ---
@@ -79,7 +81,7 @@ Short, ergonomic names, each pointing at a semantic token above (so they follow 
 
 ## 4. Component tokens (`component-tokens.css`) — 41 variables
 
-Figma's exact `06 · Component Tokens` collection — what the Button (36 variants) and Input (5 states) components are actually built from. `Button` (`src/components/ui/button/`) already consumes these directly (`bg-button-primary-bg`, `text-button-primary-text`, …) rather than a generic alias — this is the pattern for any future component with its own Figma token set (an Input component would consume `--input-*` the same way).
+Figma's exact `06 · Component Tokens` collection — what the Button (36 variants) and Input (5 states) components are actually built from. `Button` (`src/components/ui/button/`) already consumes these directly (`bg-button-primary-bg`, `text-button-primary-text`, …) rather than a generic alias — this is the pattern for any future component with its own Figma token set (`ui/text-field/` and `ui/textarea-field/` consume `--input-*` the same way; the input values were updated on Sept 28, 2026 to the light version now in Figma).
 
 | Token | Value | Used for |
 |---|---|---|
@@ -94,10 +96,10 @@ Figma's exact `06 · Component Tokens` collection — what the Button (36 varian
 | `button-radius` / `-gap` | `radius-md` (8px) / `space-sm` (8px) | Shared button geometry |
 | `button-size-{sm,md,lg}-padding-x` | `space-lg/xl/2xl` (16/20/24px) | Per-size horizontal padding |
 | `button-size-{sm,md,lg}-height` | 36 / 44 / 52px | Per-size height |
-| `input-bg` / `-bg-disabled` | `gray-900` / `gray-800` | Input fill (always dark, regardless of section) |
-| `input-border` / `-border-focus` / `-border-error` / `-border-disabled` | `gray-700` / `brand-500` / `error-700` / `gray-800` | Input border per state |
-| `input-text` / `-text-placeholder` / `-text-disabled` | white / `gray-500` / `gray-600` | Input text per state |
-| `input-label` / `-helper-text` / `-helper-text-error` | `gray-300` / `gray-500` / `error-300` | Supporting input text |
+| `input-bg` / `-bg-disabled` | `surface-primary` (white) / `surface-secondary` (gray-100) | Input fill |
+| `input-border` / `-border-focus` / `-border-error` / `-border-disabled` | `border-primary` (gray-200) / `border-focus` (brand-600) / `border-error` (error-300) / `border-secondary` (gray-100) | Input border per state |
+| `input-text` / `-text-placeholder` / `-text-disabled` | `text-primary` / `text-tertiary` (gray-500) / `text-disabled` (gray-300) | Input text per state |
+| `input-label` / `-helper-text` / `-helper-text-error` | `text-secondary` (gray-600) / `text-tertiary` (gray-500) / `text-error` (error-700) | Supporting input text |
 | `input-radius` / `-padding-x` / `-gap` | `radius-md` / `space-lg` / `space-sm` | Input geometry |
 | `input-border-width` / `-border-width-focus` | `border-width-default` (1px) / `-thick` (2px) | Input border weight |
 | `input-height` | 44px | Input height |
@@ -120,13 +122,19 @@ Only the **color** component tokens are exposed as Tailwind classes (`bg-button-
 
 ### Font families (`--font-heading` / `--font-sans` / `--font-mono`)
 
-Self-hosted via Fontsource, imported in `app/layout.tsx`. See the root `README.md`'s "Known TODOs" for the Mona Sans → Sora stand-in note.
+Self-hosted via Fontsource, imported in `app/layout.tsx`.
+
+- `font-heading`: also DM Sans, used for the big display headings. It is its own token so the heading font can be changed in one place later. Figma says Mona Sans here; the site uses DM Sans on purpose (Sora, the old stand-in, was removed).
+- `font-sans`: DM Sans, **all other text**, including buttons, labels, eyebrows, nav and footer links, and the footer wordmark.
+- `font-mono`: DM Mono Regular (400 only), **captions only** (`font-mono text-caption-md`). Do not use it for anything else.
+
+The Figma file still shows DM Mono on labels and the footer wordmark. The website deliberately uses DM Sans there (decision: only captions stay mono).
 
 ### The 15 text styles — fluid, not breakpoint-based
 
 Each named style (`Display/2XL`, `Heading/H1`, `Body/MD`, ...) becomes **one Tailwind class** bundling font-size + line-height + letter-spacing + font-weight together — e.g. `text-display-2xl`. Pair it with the matching `font-*` family class (see table).
 
-**11 of the 15 are fluid**: their font-size is a CSS `clamp()` that scales continuously between a minimum (small phones) and the exact Figma desktop value (maximum) — literally a different size at every viewport width in between, never a jump at a breakpoint. The other 4 (Label/Caption/Code — small mono UI text) are fixed-size on purpose: shrinking small UI text below its designed size hurts legibility more than fluid scaling helps.
+**11 of the 15 are fluid**: their font-size is a CSS `clamp()` that scales continuously between a minimum (small phones) and the exact Figma desktop value (maximum) — literally a different size at every viewport width in between, never a jump at a breakpoint. The other 4 (Label/Caption/Code — small UI text) are fixed-size on purpose: shrinking small UI text below its designed size hurts legibility more than fluid scaling helps.
 
 | Style | Class | Family | Weight | Min → Max (fluid) or fixed | Line-height |
 |---|---|---|---|---|---|
@@ -141,12 +149,12 @@ Each named style (`Display/2XL`, `Heading/H1`, `Body/MD`, ...) becomes **one Tai
 | Body/LG | `text-body-lg` | `font-sans` | 400 | 16px → 18px | 1.556 |
 | Body/MD | `text-body-md` | `font-sans` | 400 | 15px → 16px | 1.5 |
 | Body/SM | `text-body-sm` | `font-sans` | 400 | 13px → 14px | 1.429 |
-| Label/MD | `text-label-md` | `font-mono` | 500 | 14px fixed | 20px |
-| Label/SM | `text-label-sm` | `font-mono` | 500 | 12px fixed | 16px |
+| Label/MD | `text-label-md` | `font-sans` | 500 | 14px fixed | 20px |
+| Label/SM | `text-label-sm` | `font-sans` | 500 | 12px fixed | 16px |
 | Caption/MD | `text-caption-md` | `font-mono` | 400 | 12px fixed | 16px |
-| Code/MD | `text-code-md` | `font-mono` | 400 | 14px fixed | 20px |
+| Code/MD | `text-code-md` | `font-sans` | 400 | 14px fixed | 20px |
 
-Note: Heading/H1 uses the **display** font (Mona Sans/Sora), while Heading/H2–H5 use the **body** font (DM Sans) at semibold — this matches the Figma spec exactly, it's not a typo.
+Note: Heading/H1 and the Display styles use the `font-heading` token, while Heading/H2–H5 use `font-sans`. Both now resolve to DM Sans (semibold), so every heading looks the same family. Figma specifies Mona Sans for the display headings; the site deliberately differs.
 
 ### Min/max sizing: where the numbers came from
 

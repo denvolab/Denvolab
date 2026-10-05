@@ -2,13 +2,16 @@
 // Footer column content, mirrored 1:1 from the Figma source (SHOP / SERVICES
 // / EXPERT DOMAIN / CONTACT). Same API-readiness note as lib/data/navigation:
 // swap the body for a `fetch()` once the admin panel can manage these links.
+//
+// SERVICES links go to the service detail pages (/services/<slug>, Oct
+// 2026). "Product Design" has no page of its own, so it goes to /services.
 // ---------------------------------------------------------------------------
 import { siteConfig } from "@/lib/seo/site-config";
 import type { FooterColumn } from "@/types/navigation";
 
 const FOOTER_COLUMNS: FooterColumn[] = [
   {
-    title: "Shop",
+    title: "Explore",
     links: [
       { label: "Home", href: "/" },
       { label: "About Denvo", href: "/about" },
@@ -20,10 +23,10 @@ const FOOTER_COLUMNS: FooterColumn[] = [
     title: "Services",
     links: [
       { label: "UI/UX Design", href: "/services/ui-ux-design" },
-      { label: "Web Design", href: "/services/web-design" },
-      { label: "Product Design", href: "/services/product-design" },
-      { label: "SaaS Design", href: "/services/saas-design" },
-      { label: "Branding Design", href: "/services/branding-design" },
+      { label: "Web Design", href: "/services/web-development" },
+      { label: "Product Design", href: "/services" },
+      { label: "SaaS Design", href: "/services/saas-development" },
+      { label: "Branding Design", href: "/services/branding-visual-identity" },
     ],
   },
   {
@@ -37,7 +40,7 @@ const FOOTER_COLUMNS: FooterColumn[] = [
     ],
   },
   {
-    title: "Contact",
+    title: "Follow US",
     links: [
       { label: "Behance", href: siteConfig.socials.behance, external: true },
       { label: "Dribbble", href: siteConfig.socials.dribbble, external: true },

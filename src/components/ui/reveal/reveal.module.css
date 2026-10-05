@@ -1,0 +1,26 @@
+/* Fade-and-rise entrance for Reveal (see reveal.tsx).
+ *
+ * The hidden starting state only applies when JavaScript is running
+ * (`scripting: enabled`) AND the visitor has not asked for less motion.
+ * Without JS the content is simply visible, so nothing is ever stuck at
+ * opacity 0. reveal.tsx flips `data-in="true"` once the box scrolls into
+ * view. Other components can key off the same attribute, for example
+ * about-benefits spins its icons with `.row[data-in="true"] .icon`. */
+.root {
+  --reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .root {
+    opacity: 0;
+    transform: translateY(var(--reveal-distance, 30px));
+    transition:
+      opacity 800ms var(--reveal-ease) var(--reveal-delay, 0ms),
+      transform 800ms var(--reveal-ease) var(--reveal-delay, 0ms);
+  }
+
+  .root[data-in="true"] {
+    opacity: 1;
+    transform: none;
+  }
+}

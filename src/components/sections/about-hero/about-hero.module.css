@@ -1,0 +1,39 @@
+/* Photo motion for the About hero (Figma "Photos" row, node 431:6313).
+ *
+ * Two things happen, one after the other:
+ *   1. `rise`  each photo fades in and lifts 28px into place, one after the
+ *              next (the delay comes from `--photo-delay`, set per photo).
+ *   2. `bob`   then it drifts up or down by 5px and back, slowly and forever.
+ *              Odd photos go up, even photos go down (`--bob`).
+ *
+ * `rise` animates `transform` and `bob` animates the separate `translate`
+ * property, so the two never fight over the same value.
+ *
+ * Skipped completely for visitors who ask for reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .photo {
+    animation:
+      rise 800ms cubic-bezier(0.22, 1, 0.36, 1) var(--photo-delay, 0ms) both,
+      bob 5200ms ease-in-out calc(var(--photo-delay, 0ms) + 800ms) infinite alternate;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes bob {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: 0 var(--bob, 0px);
+  }
+}

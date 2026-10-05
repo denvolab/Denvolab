@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { siteConfig } from "@/lib/seo/site-config";
 import { Hero } from "@/components/sections/hero";
 import { MarqueeTagline } from "@/components/sections/marquee-tagline";
 import { PortfolioGrid } from "@/components/sections/portfolio-grid";
 import { WhatWeCreate } from "@/components/sections/what-we-create";
 import { AiOrbit } from "@/components/sections/ai-orbit";
-import { PartnerLogos } from "@/components/sections/partner-logos";
 import { ProcessSteps } from "@/components/sections/process-steps";
+
 import { Testimonials } from "@/components/sections/testimonials";
-import { ContactCta } from "@/components/sections/contact-cta";
+import { HomeHeader, HomeConversation, HomeClosing } from "@/components/sections/home-chrome/home-chrome";
+import "./home.css";
 
 // Note: `title.template` from the root layout does NOT apply here — a page
 // in the same route segment as the layout that defines it is exempt (see
@@ -28,16 +30,17 @@ export const metadata: Metadata = {
 // -----------------------------------------------------------------------------
 export default function HomePage() {
   return (
-    <>
+    <div data-homepage="">
+      <HomeHeader />
       <Hero />
       <MarqueeTagline />
-      <PortfolioGrid />
+      <div className="home-portfolio"><PortfolioGrid /><div className="home-portfolio-more"><Link href="/case-studies">VIEW OUR ALL CRAFTS</Link></div></div>
       <WhatWeCreate />
       <AiOrbit />
-      <PartnerLogos />
       <ProcessSteps />
-      <Testimonials />
-      <ContactCta />
-    </>
+      <Testimonials home />
+      <HomeConversation />
+      <HomeClosing />
+    </div>
   );
 }

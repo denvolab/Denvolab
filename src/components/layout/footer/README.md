@@ -1,14 +1,9 @@
-# `footer/` — Site Footer
+# Site footer
 
-| File | What it is |
-|---|---|
-| `footer.tsx` | The footer: logo, four link columns (Shop / Services / Expert Domain / Contact), and the giant DENVOLAB wordmark. Fetches its own column data. |
-| `index.ts` | Re-exports `Footer` so other files can `import { Footer } from "@/components/layout/footer"`. |
+Source: Figma Closing Section `860:5668` (1920px desktop).
 
-## To change the footer links
+`ContactCta` renders the closing message; `Footer` renders the navigation and signature. Both use `footer.module.css` to keep the background, six-column grid and responsive geometry continuous. Desktop starts at 1280px; smaller screens stack the message and use a two-column (mobile) or four-column (tablet) navigation grid.
 
-Don't edit this folder — edit `src/lib/data/footer.ts`. This folder only decides *how columns are displayed*, not *which links exist*.
+Content: `src/lib/data/footer.ts`; CTA defaults: `src/lib/data/homepage.ts`. Service/case-study descriptions and icon attribution remain page-specific.
 
-## Known TODO
-
-The logo currently loads from a temporary Figma export link (see the comment inside `footer.tsx`). Export the real logo SVG from Figma and save it as `public/denvolab-logo.svg`, then update the `src` in `footer.tsx` to `/denvolab-logo.svg`.
+Assets: exact Figma export `public/denvolab-footer-logo.svg` (330.309 × 120), official OFL Mona Sans Regular in `public/fonts/mona-sans/`, and the installed DM Mono Medium Italic font. Fonts and styles are scoped to the closing/footer section. Color-wash is disabled here so the design retains its original background and contrast.

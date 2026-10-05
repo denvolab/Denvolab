@@ -208,6 +208,16 @@
   --color-surface-dark-deep: var(--secondary-900); /* alternate dark section bg (AI-orbit only — confirmed via Rectangle 17's fill; partner-logos sits on plain --color-background, not this, despite the two often being designed together) — same reasoning as surface-dark */
   --color-surface-accent: var(--color-surface-brand-2); /* olive CTA section bg (contact) */
 
+  /* AI section (ai-orbit/, Figma frame 572:1572). Two of these are off the
+   * ramps above, so they're the frame's own values; the rest alias the ramp
+   * color the frame uses. The funnel's gradients live in the generated
+   * ai-orbit/funnel-art.ts with the rest of the exported vector art. */
+  --color-ai-orbit-badge: #26354a; /* tool badge circles (96px + the small one in the card) */
+  --color-ai-orbit-card: var(--secondary-800); /* brand badge card #192434 */
+  --color-ai-orbit-eyebrow: #a6adbd; /* "FULL AI WORKFLOW ..." label */
+  --color-ai-orbit-muted: var(--gray-500); /* brand badge description #6b7a89 */
+  --color-ai-orbit-funnel-deep: #1e2d42; /* funnel fill at the neck (mobile hub ring uses it) */
+
   --color-border: var(--color-border-primary);
   --color-border-subtle: var(--color-border-secondary);
 
@@ -271,3 +281,13 @@
 
   --color-secondary-subtle: var(--secondary-900);
 }
+
+/* ===============================================================================
+ * DESIGN SYSTEM V3.1 scope (see the matching note in typography.css). In
+ * the v3.1 Figma file surface/secondary (Light) is Gray/50, not Gray/100.
+ * Only the service detail pages (/services/[slug]) use it so far.
+ * ============================================================================ */
+.ds-v31 {
+  --color-surface-secondary: var(--gray-50);
+}
+

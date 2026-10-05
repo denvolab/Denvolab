@@ -1,0 +1,47 @@
+[
+  {
+    "id": "ethan",
+    "prompt": "One square professional editorial headshot of an entirely fictional East Asian man around 35, short black hair, round eyeglasses, charcoal overshirt, for a visibly labelled fictional demo testimonial on a creative agency website. One person only, friendly restrained smile, looking at camera, head and shoulders centred with comfortable margin for circular avatar crop. Natural skin texture, believable facial anatomy, realistic photography, soft window light, gently blurred neutral modern office background. No text, watermark, logos or collage. Not a real identifiable person.",
+    "tool": "built-in image_gen"
+  },
+  {
+    "id": "amina",
+    "prompt": "One square professional editorial headshot of an entirely fictional North African woman around 32, elegant cream hijab, navy blouse, for a visibly labelled fictional demo testimonial on a creative agency website. One person only, friendly restrained smile, looking at camera, head and shoulders centred with comfortable margin for circular avatar crop. Natural skin texture, believable facial anatomy, realistic photography, soft window light, gently blurred neutral modern office background. No text, watermark, logos or collage. Not a real identifiable person.",
+    "tool": "built-in image_gen"
+  },
+  {
+    "id": "lucas",
+    "prompt": "One square professional editorial headshot of an entirely fictional Latino man around 39, curly dark hair and trimmed beard, brown casual shirt, for a visibly labelled fictional demo testimonial on a creative agency website. One person only, friendly restrained smile, looking at camera, head and shoulders centred with comfortable margin for circular avatar crop. Natural skin texture, believable facial anatomy, realistic photography, soft window light, gently blurred neutral modern office background. No text, watermark, logos or collage. Not a real identifiable person.",
+    "tool": "built-in image_gen"
+  },
+  {
+    "id": "elena",
+    "prompt": "One square professional editorial headshot of an entirely fictional southern European woman around 42, shoulder length brown hair, forest green blouse, for a visibly labelled fictional demo testimonial on a creative agency website. One person only, friendly restrained smile, looking at camera, head and shoulders centred with comfortable margin for circular avatar crop. Natural skin texture, believable facial anatomy, realistic photography, soft window light, gently blurred neutral modern office background. No text, watermark, logos or collage. Not a real identifiable person.",
+    "tool": "built-in image_gen"
+  },
+  {
+    "id": "noah",
+    "prompt": "One square professional editorial headshot of an entirely fictional Black man around 34, close cropped hair, short beard, white shirt, for a visibly labelled fictional demo testimonial on a creative agency website. One person only, friendly restrained smile, looking at camera, head and shoulders centred with comfortable margin for circular avatar crop. Natural skin texture, believable facial anatomy, realistic photography, soft window light, gently blurred neutral modern office background. No text, watermark, logos or collage. Not a real identifiable person.",
+    "tool": "built-in image_gen"
+  },
+  {
+    "id": "priya",
+    "prompt": "One square professional editorial headshot of an entirely fictional South Asian woman around 36, long dark hair, burgundy top, for a visibly labelled fictional demo testimonial on a creative agency website. One person only, friendly restrained smile, looking at camera, head and shoulders centred with comfortable margin for circular avatar crop. Natural skin texture, believable facial anatomy, realistic photography, soft window light, gently blurred neutral modern office background. No text, watermark, logos or collage. Not a real identifiable person.",
+    "tool": "built-in image_gen"
+  },
+  {
+    "id": "oliver",
+    "prompt": "One square professional editorial headshot of an entirely fictional European man around 47, short blond hair, light beard, charcoal sweater, for a visibly labelled fictional demo testimonial on a creative agency website. One person only, friendly restrained smile, looking at camera, head and shoulders centred with comfortable margin for circular avatar crop. Natural skin texture, believable facial anatomy, realistic photography, soft window light, gently blurred neutral modern office background. No text, watermark, logos or collage. Not a real identifiable person.",
+    "tool": "built-in image_gen"
+  },
+  {
+    "id": "grace",
+    "prompt": "One square professional editorial headshot of an entirely fictional East Asian woman around 31, neat chin length black bob, beige blazer, for a visibly labelled fictional demo testimonial on a creative agency website. One person only, friendly restrained smile, looking at camera, head and shoulders centred with comfortable margin for circular avatar crop. Natural skin texture, believable facial anatomy, realistic photography, soft window light, gently blurred neutral modern office background. No text, watermark, logos or collage. Not a real identifiable person.",
+    "tool": "built-in image_gen"
+  },
+  {
+    "id": "marcus",
+    "prompt": "One square professional editorial headshot of an entirely fictional mixed-race man around 43, short salt-and-pepper curls, olive shirt, for a visibly labelled fictional demo testimonial on a creative agency website. One person only, friendly restrained smile, looking at camera, head and shoulders centred with comfortable margin for circular avatar crop. Natural skin texture, believable facial anatomy, realistic photography, soft window light, gently blurred neutral modern office background. No text, watermark, logos or collage. Not a real identifiable person.",
+    "tool": "built-in image_gen"
+  }
+]

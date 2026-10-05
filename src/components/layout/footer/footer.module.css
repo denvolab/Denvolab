@@ -1,0 +1,152 @@
+@font-face {
+  font-family: "Footer Mona Sans";
+  src: url("/fonts/mona-sans/MonaSans-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Shared geometry keeps ContactCta and Footer continuous at their seam.
+   Desktop dimensions are taken from the 1920px Closing Section, 860:5668. */
+.footer,
+.closing {
+  --footer-unit: min(0.0520833333vw, 1px);
+  --footer-background: #13130b;
+  position: relative;
+  background: var(--footer-background);
+  color: var(--color-text-inverse);
+}
+/* The oversized signature has a fixed cap-height slot. Its line box must
+   not create scrollable blank space below the footer in browsers that
+   calculate text-box-trim differently. Keep this flex child at full height. */
+.footer {
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.bars {
+  position: absolute;
+  inset: 0;
+  max-width: 1920px;
+  margin-inline: auto;
+  pointer-events: none;
+  /* Six equal columns, visible but deliberately very faint. */
+  background-image: linear-gradient(to right, rgb(255 255 255 / 2.5%) 1px, transparent 1px);
+  background-size: calc(100% / 6) 100%;
+}
+.closingInner {
+  position: relative;
+  max-width: 1920px;
+  margin-inline: auto;
+  padding: 80px 20px 64px;
+}
+.message {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.headline {
+  font-family: "Footer Mona Sans", sans-serif;
+  font-size: clamp(56px, 10.9375vw, 160px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
+  margin: 0;
+  color: var(--color-text-inverse);
+}
+.headline span { display: block; }
+.contact { display: flex; flex-direction: column; align-items: flex-start; gap: 32px; max-width: 688px; }
+.description {
+  font-family: "DM Sans Opsz", var(--font-sans);
+  font-variation-settings: "opsz" 14;
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--color-text-disabled);
+  margin: 0;
+}
+.contactButton {
+  font-family: var(--font-mono);
+  height: 60px;
+  padding-inline: 24px;
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: .02em;
+}
+.credit { margin-top: 48px; font-size: 14px; }
+.navigation { position: relative; max-width: 1920px; margin-inline: auto; padding: 0 20px 6px; }
+.brandRow { display: flex; flex-direction: column; gap: 48px; }
+.logo { display: block; width: 220.206px; height: 80px; object-fit: contain; }
+.links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px 24px; }
+.column { display: flex; flex-direction: column; gap: 24px; }
+.columnTitle {
+  font-family: "DM Sans Opsz", var(--font-sans);
+  font-variation-settings: "opsz" 14;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  letter-spacing: -.015em;
+  white-space: nowrap;
+}
+.linkList { display: flex; flex-direction: column; gap: 24px; }
+.linkList > li { display: flex; }
+.link {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  letter-spacing: .02em;
+}
+.signature { margin-top: 80px; margin-inline: -20px; }
+.wordmark {
+  font-family: var(--font-mono);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 22.0833333vw;
+  line-height: 1;
+  letter-spacing: -.04em;
+  white-space: nowrap;
+  color: var(--color-primary);
+  margin: -.141em 0 -.159em;
+}
+@supports (text-box-trim: trim-both) {
+  .headline, .wordmark { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
+  .wordmark { margin-block: 0; }
+}
+@media (min-width: 768px) {
+  .closingInner { padding-inline: 40px; }
+  .navigation { padding-inline: 40px; }
+  .links { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .signature { margin-inline: -40px; }
+}
+@media (min-width: 1280px) {
+  .closingInner { height: calc(823 * var(--footer-unit)); padding: 0; }
+  .message {
+    position: absolute;
+    left: calc(42 * var(--footer-unit));
+    top: calc(240 * var(--footer-unit));
+    width: calc(1840 * var(--footer-unit));
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: calc(405 * var(--footer-unit));
+  }
+  .headline { flex: 1; min-width: 0; font-size: clamp(56px, calc(210 * var(--footer-unit)), 160px); }
+  .contact { flex-shrink: 0; width: calc(429 * var(--footer-unit)); gap: calc(40 * var(--footer-unit)); }
+  .description { font-size: calc(18 * var(--footer-unit)); line-height: calc(28 * var(--footer-unit)); }
+  .contactButton { height: calc(60 * var(--footer-unit)); padding-inline: calc(24 * var(--footer-unit)); border-radius: calc(16 * var(--footer-unit)); font-size: calc(14 * var(--footer-unit)); line-height: calc(20 * var(--footer-unit)); }
+  .credit { position: absolute; left: calc(42 * var(--footer-unit)); bottom: calc(48 * var(--footer-unit)); margin: 0; }
+  .navigation { padding: 0 0 calc(6 * var(--footer-unit)); }
+  .brandRow { flex-direction: row; justify-content: space-between; gap: 40px; padding-inline: calc(40 * var(--footer-unit)); }
+  .logo { width: calc(330.309 * var(--footer-unit)); height: calc(120 * var(--footer-unit)); }
+  .links { display: flex; gap: calc(96 * var(--footer-unit)); }
+  .column, .linkList { gap: calc(24 * var(--footer-unit)); }
+  .columnTitle { font-size: calc(24 * var(--footer-unit)); line-height: calc(32 * var(--footer-unit)); }
+  .link { font-size: calc(12 * var(--footer-unit)); line-height: calc(16 * var(--footer-unit)); }
+  .signature { margin-top: calc(120 * var(--footer-unit)); margin-inline: 0; height: calc(297 * var(--footer-unit)); }
+  .wordmark { font-size: calc(424 * var(--footer-unit)); margin-left: calc(2 * var(--footer-unit)); }
+}
+@media (max-width: 389px) {
+  .columnTitle { font-size: 20px; }
+  .link { font-size: 10px; }
+}

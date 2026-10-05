@@ -1,0 +1,12 @@
+/* Start state for ImageRevealController (image-reveal-controller.tsx): the
+ * picture's frame is invisible and 5em lower (zypsy.com's `.fade-in` start
+ * values) until GSAP brings it up. `="done"` frames are left alone, so a
+ * frame that has already played stays put after the controller re-runs on
+ * a page change. Only when JavaScript runs and the visitor hasn't asked for
+ * less motion. Imported from app/globals.css. */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  [data-image-reveal]:not([data-image-reveal="done"]) {
+    opacity: 0;
+    transform: translate3d(0, 5em, 0);
+  }
+}

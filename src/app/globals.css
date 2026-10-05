@@ -18,6 +18,39 @@
 @import "../styles/tokens/component-tokens.css";
 @import "../styles/tokens/typography.css";
 
+/* Site-wide scroll motion (Oct 2026, see components/motion/README.md). */
+@import "../components/ui/animated-text/animated-text.css";
+@import "../components/motion/image-reveal/image-reveal.css";
+@import "../components/motion/color-wash/color-wash.css";
+
+/* DM Sans WITH its optical-size ("opsz") axis, registered under its own
+ * family name so it only applies where it's asked for. The site-wide DM Sans
+ * (@fontsource-variable/dm-sans default import, layout.tsx) is the
+ * weight-only file, which renders large sizes about 9% wider than Figma:
+ * Figma sizes DM Sans with automatic optical sizing, and at 52px that picks
+ * the tighter display cut (opsz 40). Measured on the AI section headline
+ * (Figma node 572:1575): weight-only 397px vs this file 362.8px vs Figma's
+ * 359px ink width. Used by that headline only for now; switching the whole
+ * site to it is a separate decision (it would change every large heading's
+ * width). Files copied byte-for-byte from @fontsource-variable/dm-sans
+ * (OFL, see public/fonts/dm-sans-opsz/LICENSE.txt). */
+@font-face {
+  font-family: "DM Sans Opsz";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 1000;
+  src: url("/fonts/dm-sans-opsz/dm-sans-latin-ext-opsz-normal.woff2") format("woff2-variations");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "DM Sans Opsz";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 1000;
+  src: url("/fonts/dm-sans-opsz/dm-sans-latin-opsz-normal.woff2") format("woff2-variations");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 @theme inline {
   /* ===========================================================================
    * COLORS — Color library → Tailwind. See tokens/colors.css for values.
@@ -164,6 +197,11 @@
   --color-surface: var(--color-surface);
   --color-surface-dark: var(--color-surface-dark);
   --color-surface-dark-deep: var(--color-surface-dark-deep);
+  --color-ai-orbit-badge: var(--color-ai-orbit-badge);
+  --color-ai-orbit-card: var(--color-ai-orbit-card);
+  --color-ai-orbit-eyebrow: var(--color-ai-orbit-eyebrow);
+  --color-ai-orbit-muted: var(--color-ai-orbit-muted);
+  --color-ai-orbit-funnel-deep: var(--color-ai-orbit-funnel-deep);
   --color-surface-accent: var(--color-surface-accent);
 
   --color-border: var(--color-border);
@@ -221,6 +259,9 @@
   --font-heading: var(--font-heading);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
+  --font-grotesk: var(--font-grotesk);
+  --font-inter: var(--font-inter);
+  --font-sf: var(--font-sf);
 
   /* ... then the 15 named text styles. Each becomes ONE Tailwind class that
      sets font-size + line-height + letter-spacing + font-weight together,
@@ -311,18 +352,71 @@
   --text-display-jumbo--letter-spacing: var(--text-style-display-jumbo-tracking);
   --text-display-jumbo--font-weight: var(--text-style-display-jumbo-weight);
 
+  --text-display-services-hero: var(--text-style-display-services-hero-size);
+  --text-display-services-hero--line-height: var(--text-style-display-services-hero-leading);
+  --text-display-services-hero--letter-spacing: var(--text-style-display-services-hero-tracking);
+  --text-display-services-hero--font-weight: var(--text-style-display-services-hero-weight);
+
+  --text-editorial-hero: var(--text-style-editorial-hero-size);
+  --text-editorial-hero--line-height: var(--text-style-editorial-hero-leading);
+  --text-editorial-hero--letter-spacing: var(--text-style-editorial-hero-tracking);
+  --text-editorial-hero--font-weight: var(--text-style-editorial-hero-weight);
+
   /* --- Marquee — see the @keyframes + reduced-motion override below. Default
      duration is a judgment call (Figma has no timing spec for it); tune
      per-strip with an explicit `[animation-duration:Ns]` if one ever needs a
      different speed. */
   --animate-marquee-scroll: marquee-scroll 38s linear infinite;
   --animate-marquee-scroll-reverse: marquee-scroll 38s linear infinite reverse;
+
+  /* --- Spark spin: the lime asterisk in the tagline marquee turns like a
+     gear, one full clockwise turn every 6s, forever (user request, Oct
+     2026). Keyframes and the reduced-motion override are below. */
+  --animate-spark-spin: spark-spin 6s linear infinite;
+}
+
+/* ---------------------------------------------------------------------------
+ * Height of the global site header (components/layout/header), measured:
+ * 73px below lg (wordmark + hamburger), 77px from lg (nav + "Become a
+ * Client"). Used where a section must fill the first screen together with
+ * the header, e.g. the homepage hero: calc(100svh - var(--site-header-h)).
+ * Update these two numbers if the header's padding or button size changes.
+ * ------------------------------------------------------------------------ */
+:root {
+  --site-header-h: 73px;
+}
+@media (width >= 64rem) {
+  :root {
+    --site-header-h: 77px;
+  }
 }
 
 body {
   background: var(--color-surface-dark);
   color: var(--color-foreground-inverse);
   font-family: var(--font-sans);
+}
+
+/* ---------------------------------------------------------------------------
+ * No sideways page scroll, ever.
+ *
+ * Anything that pokes past the right edge of the screen (a marquee track, an
+ * absolutely placed decoration, the ripple canvas near the edge of a picture)
+ * would otherwise make the whole page wider and show a horizontal scroll bar
+ * along the bottom of the window. This cuts that off site-wide.
+ *
+ * Why `clip` and not `hidden`: `overflow-x: hidden` quietly turns the element
+ * into a scroll container, which breaks `position: sticky` (a sticky header,
+ * a sticky sidebar). `clip` only cuts the overflow off and does nothing else.
+ * The first line is a fallback for very old browsers that do not know `clip`.
+ *
+ * This is a safety net, not a fix. If a section is cut off at the right edge,
+ * that section is too wide: fix its layout instead of relying on this.
+ * ------------------------------------------------------------------------ */
+html,
+body {
+  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* ---------------------------------------------------------------------------
@@ -344,9 +438,28 @@ body {
   }
 }
 
+/* One full turn, used by `animate-spark-spin` (the marquee's asterisk). */
+@keyframes spark-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee-scroll,
-  .animate-marquee-scroll-reverse {
+  .animate-marquee-scroll-reverse,
+  .animate-spark-spin {
     animation-play-state: paused;
   }
+}
+
+/* Main page sections occupy at least one viewport; content may grow taller.
+   Nested sections keep their own sizing. Case-study blocks also include
+   image-only components, so their outer wrappers share this rule. */
+main section:not(section section):not([data-section-height="content"]),
+main [data-page-section] {
+  min-height: 100vh !important;
 }

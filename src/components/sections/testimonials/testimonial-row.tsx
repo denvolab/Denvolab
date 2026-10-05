@@ -1,7 +1,6 @@
+import Image from "next/image";
 import type { Testimonial } from "@/types/homepage";
 import { cn } from "@/lib/utils/cn";
-
-const STAR_COUNT = 5;
 
 // One card — node 230:4440 (and its 13 structurally-identical siblings).
 // Exported (unlike most row-local pieces) because the mobile/tablet static
@@ -20,30 +19,18 @@ export function TestimonialCard({
 }) {
   return (
     <div
+      data-testimonial-card=""
       className={cn(
-        "flex shrink-0 flex-col items-start gap-6 rounded-2xl bg-surface-primary p-8",
+        "flex min-h-[331px] shrink-0 flex-col items-start gap-6 rounded-2xl bg-surface-primary p-8",
         fixedWidth ? "w-[611px]" : "w-full",
       )}
     >
-      <div className="flex w-full items-center justify-between">
-        <div className="flex items-center gap-4">
-          {/* Avatar — node 230:2173 (the shared "Avatar" component). No asset
-              could be exported into this codebase — see testimonials/README.md
-              — a plain circle stands in until a real photo is available. */}
-          <div className="size-14 shrink-0 rounded-full bg-surface" aria-hidden="true" />
-          <div className="flex w-32 flex-col items-start gap-1">
-            <p className="font-sans text-heading-5 text-foreground">{testimonial.name}</p>
-            <p className="font-sans text-body-sm text-foreground-subtle">{testimonial.role}</p>
-          </div>
-        </div>
-
-        {/* Star rating — node 230:4448 etc, 5 x 24px icon frames. The star
-            icon itself couldn't be exported (see README); plain filled chips
-            stand in until the real icon is available. */}
-        <div className="flex items-center gap-2" role="img" aria-label={`${testimonial.rating} out of 5 stars`}>
-          {Array.from({ length: STAR_COUNT }).map((_, i) => (
-            <span key={i} className="size-6 shrink-0 rounded-sm bg-brand" aria-hidden="true" />
-          ))}
+      {testimonial.isSample && <p className="font-mono text-caption-md text-foreground-subtle">Sample testimonial · Fictional profile</p>}
+      <div className="flex w-full items-center gap-4">
+        {testimonial.imageSrc ? <Image src={testimonial.imageSrc} alt={testimonial.name} width={56} height={56} className="size-14 shrink-0 rounded-full object-cover" /> : <span className="flex size-14 shrink-0 items-center justify-center rounded-full bg-surface font-sans text-heading-5 text-foreground" aria-hidden="true">{testimonial.name.split(" ").map(part => part[0]).slice(0, 2).join("")}</span>}
+        <div className="flex min-w-0 flex-col items-start gap-1">
+          <p className="font-sans text-heading-5 text-foreground">{testimonial.name}</p>
+          <p className="font-sans text-body-sm text-foreground-subtle">{testimonial.role}</p>
         </div>
       </div>
 
@@ -51,7 +38,8 @@ export function TestimonialCard({
           reproduced as a plain 1px rule. */}
       <div className="h-px w-full bg-border-subtle" aria-hidden="true" />
 
-      <p className="w-full font-sans text-body-lg text-foreground">{testimonial.quote}</p>
+      <blockquote className="w-full font-sans text-body-lg text-foreground">{testimonial.quote}</blockquote>
+      {testimonial.sourceHref && <a href={testimonial.sourceHref} className="font-sans text-body-sm text-foreground-subtle underline underline-offset-4">View original review</a>}
     </div>
   );
 }
@@ -60,7 +48,7 @@ export function TestimonialCard({
 // reused with a direction flag" pattern as partner-logos/partner-logo-row.tsx.
 // `count` reproduces Figma's own per-row card count (5/4/5) before the track
 // is duplicated for the seamless loop; the content itself is identical
-// across every card (see lib/data/homepage.ts's TESTIMONIAL constant).
+// across two identical animation groups for a seamless loop.
 export function TestimonialRow({
   testimonials,
   count,
@@ -70,20 +58,25 @@ export function TestimonialRow({
   count: number;
   reverse?: boolean;
 }) {
+  if (!testimonials.length) return null;
   const base = Array.from({ length: count }, (_, i) => testimonials[i % testimonials.length]);
-  const track = [...base, ...base];
 
   return (
-    <div className="relative w-full overflow-hidden">
+    // `shrink-0`: this row must never be compressed by a flex-column
+    // parent with less space than its real (card) height needs — that
+    // silently cropped every card's bottom off when this lived inside
+    // testimonials.tsx's old fixed-height row wrapper. See that file's
+    // top-of-file comment for the full story.
+    <div className="relative w-full shrink-0 overflow-hidden">
       <div
         className={cn(
-          "flex w-max items-center gap-6",
+          "flex w-max items-center",
           reverse ? "animate-marquee-scroll-reverse" : "animate-marquee-scroll",
         )}
       >
-        {track.map((testimonial, i) => (
-          <TestimonialCard key={i} testimonial={testimonial} />
-        ))}
+        {[0, 1].map(copy => <div key={copy} className="flex items-center gap-6 pr-6" aria-hidden={copy === 1 || undefined}>
+          {base.map((testimonial, i) => <TestimonialCard key={i} testimonial={testimonial} />)}
+        </div>)}
       </div>
 
       {/* Edge fades — matching Figma's own "Shadow" gradient overlay (node
@@ -91,13 +84,18 @@ export function TestimonialRow({
           surface/secondary), which is what confirmed these rows are meant to
           scroll rather than sit as a static overflowing grid. Uses
           `from-surface` (not `from-background`, unlike partner-logos/) since
-          this section sits on the gray `bg-surface`, not white. */}
+          this section sits on the gray `bg-surface`, not white.
+          `data-wash-fade`: when the page colour wash changes the page
+          colour, the fade starts from the wash colour instead
+          (components/motion/color-wash). */}
       <div
         aria-hidden="true"
+        data-wash-fade=""
         className="pointer-events-none absolute inset-y-0 left-0 w-[250px] bg-gradient-to-r from-surface from-30% to-transparent"
       />
       <div
         aria-hidden="true"
+        data-wash-fade=""
         className="pointer-events-none absolute inset-y-0 right-0 w-[250px] bg-gradient-to-l from-surface from-30% to-transparent"
       />
     </div>
