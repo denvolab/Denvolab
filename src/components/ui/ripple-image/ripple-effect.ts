@@ -3,6 +3,7 @@ import {
   OrthographicCamera,
   PlaneGeometry,
   Scene,
+  SRGBColorSpace,
   ShaderMaterial,
   Texture,
   Vector2,
@@ -132,6 +133,8 @@ export class RippleEffect {
 
     // --- 3. The picture as a texture (the copy is already loaded, so this is instant) ---
     this.texture = new Texture(picture);
+    // Browser images are sRGB; decode before shading so hover keeps their colors.
+    this.texture.colorSpace = SRGBColorSpace;
     this.texture.anisotropy = 4; // keeps the picture sharp when it is bent
     this.texture.needsUpdate = true;
 

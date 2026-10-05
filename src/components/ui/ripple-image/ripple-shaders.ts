@@ -123,9 +123,12 @@ export const fragmentShader = /* glsl */ `
     // STEP 4: cut rounded corners (a distance-to-rounded-box formula).
     vec2 fromCentre = (vUv - 0.5) * uPlaneSize;
     vec2 q = abs(fromCentre) - uPlaneSize * 0.5 + uBorderRadius;
-    float outside = length(max(q, 0.0)) - uBorderRadius;      // below 0 = inside the box
+    // Keep the signed interior distance even for square corners. Without
+    // it a zero-radius image gets mask = 0.5 across the entire picture.
+    float outside = length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - uBorderRadius;
     float mask = 1.0 - clamp(outside + 0.5, 0.0, 1.0);        // +0.5 gives a smooth 1px edge
 
     gl_FragColor = vec4(color.rgb, color.a * mask);
+    #include <colorspace_fragment>
   }
 `;
