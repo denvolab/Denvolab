@@ -25,10 +25,10 @@ main [data-homepage] .home-hero { min-height:100svh!important; background:#0d121
 .home-hero-copy h1 { font-size:40px; line-height:48px; letter-spacing:-.03em; }
 .home-marquee { height:240px; background:white; display:flex; align-items:center; overflow:hidden; }
 .home-marquee-track { display:flex; width:max-content; animation-duration:76s; }
-.home-marquee-group,.home-marquee-item { display:flex; align-items:center; gap:48px; }
+.home-marquee-group,.home-marquee-item { display:flex; flex-shrink:0; align-items:center; gap:48px; }
 .home-marquee-group { padding-right:48px; }
 .home-marquee-item p { font-size:128px; line-height:136px; letter-spacing:-.02em; font-weight:400; white-space:nowrap; text-box-trim:trim-both; text-box-edge:cap alphabetic; }
-.home-marquee-item img { width:96px; height:96px; }
+.home-marquee-item img { width:96px; height:96px; flex-shrink:0; object-fit:contain; transform-origin:center; }
 .home-eyebrow { font-family:var(--font-mono)!important; font-size:14px!important; line-height:20px; letter-spacing:.02em; font-weight:400!important; color:#52616f; padding:8px 12px; border-radius:8px; background:#f4f6f8; width:max-content; }
 .home-portfolio { background:white; padding-bottom:120px; }
 [data-homepage] [data-home-part="portfolio"] { padding:120px 40px 0; background:white; }
