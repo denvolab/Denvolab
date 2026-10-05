@@ -3,7 +3,6 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { OrganizationJsonLd } from "@/components/seo/organization-jsonld";
 import { siteConfig } from "@/lib/seo/site-config";
-import { ColorWashController } from "@/components/motion/color-wash";
 import { ImageRevealController } from "@/components/motion/image-reveal";
 
 // -----------------------------------------------------------------------------
@@ -60,10 +59,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
         <main className="min-w-0 flex-1">{children}</main>
         <Footer />
-        {/* Site-wide scroll motion (components/motion/README.md): the page
-            colour follows the section in the middle of the screen, and
-            pictures marked data-image-reveal rise in. Both render nothing. */}
-        <ColorWashController />
+        {/* Keep image reveals active. ColorWashController is intentionally
+            not mounted: section colors stay fixed across all routes. */}
         <ImageRevealController />
       </body>
     </html>
