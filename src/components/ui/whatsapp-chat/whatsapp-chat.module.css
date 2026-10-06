@@ -1,0 +1,15 @@
+.widget { position:fixed; right:24px; bottom:calc(24px + env(safe-area-inset-bottom)); z-index:60; font-family:var(--font-sans); color:#0d1216; }
+.launcher { display:flex; align-items:center; justify-content:center; width:56px; height:56px; margin-left:auto; border:1px solid #c8d23e; border-radius:50%; background:#dfe94c; color:#0d1216; box-shadow:0 8px 28px #0003; cursor:pointer; transition:transform .2s; }
+.launcher:hover { transform:translateY(-3px); }
+.panel { width:360px; max-height:calc(100dvh - 112px); overflow:auto; margin-bottom:16px; border:1px solid #dce2e8; border-radius:20px; background:#f4f6f8; box-shadow:0 12px 48px #0003; animation:arrive .2s ease-out; }
+.header { position:sticky; top:0; z-index:1; display:flex; align-items:center; justify-content:space-between; padding:20px; background:#0d1216; color:#fcfdf1; }
+.header strong { display:block; font-size:18px; line-height:26px; }.header span { display:block; font-size:12px; line-height:20px; color:#b4c0cc; }
+.header button { width:36px; height:36px; font-size:28px; cursor:pointer; border-radius:50%; }.header button:hover { background:#26313b; }
+.body { display:flex; flex-direction:column; gap:16px; padding:20px; }.bubble { background:white; padding:14px; border-radius:12px; font-size:14px; line-height:22px; }
+.choices { display:flex; flex-wrap:wrap; gap:8px; }.choices button { border:1px solid #b4c0cc; padding:8px 12px; border-radius:20px; font-size:12px; cursor:pointer; background:white; }.choices button[aria-pressed="true"] { background:#dfe94c; border-color:#a6b12f; }
+.label { font-size:12px; font-weight:600; margin-bottom:-8px; }.body textarea { resize:vertical; min-height:86px; width:100%; padding:12px; border:1px solid #b4c0cc; border-radius:10px; background:white; font:inherit; font-size:14px; line-height:22px; }
+.send { display:flex; align-items:center; justify-content:center; gap:8px; padding:12px; border-radius:10px; background:#dfe94c; font-size:14px; font-weight:600; }.send:hover { background:#ced83e; }.send svg { width:20px; height:20px; }
+.note { text-align:center; font-size:11px; line-height:18px; color:#52616f; }.widget :is(button,a,textarea):focus-visible { outline:2px solid #6b7a89; outline-offset:3px; }
+@keyframes arrive { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+@media(width < 768px) { .widget { width:min(360px,calc(100% - 32px)); right:16px; bottom:calc(16px + env(safe-area-inset-bottom)); }.panel { width:100%; }.launcher { width:52px; height:52px; } }
+@media(prefers-reduced-motion:reduce) { .panel { animation:none; }.launcher { transition:none; } }

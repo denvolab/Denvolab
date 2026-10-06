@@ -1,6 +1,6 @@
 /* Service Detail / 01–07: current Figma desktop, tablet and mobile frames.
    Scoped to this route so the homepage and case-study typography stay intact. */
-.service-detail { background:#fff; font-family:var(--font-sans); font-variation-settings:"opsz" 14; }
+.service-detail { background:#fff; color:#0d1216; font-family:var(--font-sans); font-variation-settings:"opsz" 14; }
 .service-detail [data-service-block] section { min-height:0!important; }
 .service-detail [data-service-block] > section > div:not(.hero-lines),
 .service-section-inner { max-width:1920px; margin-inline:auto; padding:120px 40px; }
@@ -15,7 +15,7 @@
 .service-hero { background:#0d1216; color:#fff; }
 .service-hero-inner { display:flex; flex-direction:column; gap:120px; }
 .service-hero-row { display:flex; align-items:flex-end; justify-content:space-between; gap:0; }
-.service-hero h1 { flex:1; min-width:0; font-size:128px; line-height:136px; letter-spacing:-.02em; font-weight:600; white-space:pre-line; text-box-trim:trim-both; text-box-edge:cap alphabetic; padding-block:16px; }
+.service-hero h1 { flex:1; min-width:0; font-size:clamp(60px,calc(9.69697vw - 58.1818px),128px); line-height:1.0625; letter-spacing:-.02em; font-weight:600; white-space:pre-line; text-box-trim:trim-both; text-box-edge:cap alphabetic; padding-block:16px; }
 .service-hero-intro { flex:0 0 520px; display:flex; flex-direction:column; gap:32px; color:#b4c0cc; font-size:18px; line-height:28px; }
 .service-scroll-cue { color:#dfe94c; }
 .service-hero-image { position:relative; height:850px; width:100%; overflow:hidden; border-radius:24px; }

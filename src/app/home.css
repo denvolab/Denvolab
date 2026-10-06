@@ -115,7 +115,9 @@ main [data-homepage] .home-hero { min-height:100svh!important; background:#0d121
 .home-closing-invitation > div { width:520px; display:flex; flex-direction:column; align-items:flex-start; gap:40px; }
 .home-closing-invitation p { font-size:18px; line-height:28px; color:#b4c0cc; }
 .home-footer { max-width:1920px; margin:auto; padding:0 40px; }
-.home-footer-top { display:flex; justify-content:space-between; align-items:flex-start; gap:64px; }
+.home-footer-top { display:flex; justify-content:space-between; align-items:flex-start; gap:64px; border-top:1px solid #52616f; padding-top:48px; }
+.home-footer-brand { display:flex; flex-direction:column; gap:24px; }
+.home-footer-copyright { color:#b4c0cc; font:400 12px/20px var(--font-mono); }
 .home-footer-logo { width:330.309px; height:120px; }
 .home-footer nav { display:flex; gap:96px; }
 .home-footer-column { display:flex; flex-direction:column; gap:24px; }

@@ -17,6 +17,12 @@ export function SmoothScroll() {
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let lenis: Lenis | undefined;
     const tick = (time: number) => lenis?.raf(time * 1000);
+    // Keyboard/focus scrolling is native. Cancel wheel inertia first so it
+    // cannot pull the viewport back after the browser moves to a focused link.
+    const cancelInertia = () => lenis?.scrollTo(window.scrollY, { immediate: true, force: true });
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (["Tab", "ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End", " "].includes(event.key)) cancelInertia();
+    };
 
     const configure = () => {
       gsap.ticker.remove(tick);
@@ -29,7 +35,7 @@ export function SmoothScroll() {
         // html is h-full; observe the growing body so streamed sections and
         // loaded media update the scroll limit without per-frame layout reads.
         content: document.body,
-        lerp: 0.08,
+        lerp: 0.12,
         smoothWheel: true,
         syncTouch: false,
         autoToggle: false,
@@ -37,9 +43,7 @@ export function SmoothScroll() {
         autoResize: true,
         prevent: (node) => node.hasAttribute("data-lenis-prevent") ||
           node.tagName === "TEXTAREA" || node.getAttribute("role") === "dialog" ||
-          node.id === "mobile-nav-panel" ||
-          ((node === document.body || node === document.documentElement) &&
-            ["hidden", "clip"].includes(getComputedStyle(node).overflowY)),
+          node.id === "mobile-nav-panel",
         stopInertiaOnNavigate: true,
         anchors: true,
       });
@@ -51,9 +55,13 @@ export function SmoothScroll() {
     };
 
     configure();
+    document.addEventListener("keydown", onKeyDown);
+    document.addEventListener("focusin", cancelInertia);
     motion.addEventListener("change", configure);
     return () => {
       motion.removeEventListener("change", configure);
+      document.removeEventListener("keydown", onKeyDown);
+      document.removeEventListener("focusin", cancelInertia);
       gsap.ticker.remove(tick);
       lenis?.destroy();
       instance.current = null;

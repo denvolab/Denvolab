@@ -20,7 +20,7 @@
           "tile": 56
         },
         {
-          "title": "",
+          "title": "Naming & messaging",
           "description": "A verbal foundation that keeps your story clear and memorable.",
           "iconAsset": "/images/service-detail/final/3d723fa4-3cf5-461e-bf1e-72996d3b3011.svg",
           "tile": 56
@@ -44,7 +44,7 @@
           "tile": 56
         },
         {
-          "title": "",
+          "title": "Motion & rollout",
           "description": "Expressive motion principles and support across key touchpoints.",
           "iconAsset": "/images/service-detail/final/2a315fa7-44a6-4d70-9edf-850e1740418b.svg",
           "tile": 56
@@ -116,7 +116,7 @@
           "tile": 72
         },
         {
-          "title": "",
+          "title": "Prototyping & testing",
           "description": "Interactive prototypes for early validation and confident iteration.",
           "iconAsset": "/images/service-detail/final/af9a9a63-62e5-4b8e-80f6-361e705aa455.svg",
           "tile": 72
@@ -202,7 +202,7 @@
           "tile": 56
         },
         {
-          "title": "",
+          "title": "iOS & Android UX",
           "description": "Platform-aware flows that still feel consistent with your brand.",
           "iconAsset": "/images/service-detail/final/255b29c7-0a50-4bf6-99df-c3954453a969.svg",
           "tile": 56
@@ -310,7 +310,7 @@
           "tile": 72
         },
         {
-          "title": "",
+          "title": "Dashboards & data",
           "description": "Turn complex information into clear views and meaningful actions.",
           "iconAsset": "/images/service-detail/final/bb001f0a-09d4-4e7d-b951-408295f2273a.svg",
           "tile": 72
@@ -415,7 +415,7 @@
           "tile": 56
         },
         {
-          "title": "",
+          "title": "UX & content flow",
           "description": "Shape page narratives, calls to action, and proof around user intent.",
           "iconAsset": "/images/service-detail/final/8a7415b7-5168-41fa-9f76-f1a2bdc3f8bd.svg",
           "tile": 56
@@ -638,7 +638,7 @@
           "tile": 56
         },
         {
-          "title": "",
+          "title": "Roles & permissions",
           "description": "Define safe access, review states, auditability, and governance.",
           "iconAsset": "/images/service-detail/final/6ed7c7db-5be6-4d45-98cf-66966f642fc5.svg",
           "tile": 56

@@ -18,7 +18,7 @@ export const siteConfig = {
     behance: "https://www.behance.net/denvolab",
     dribbble: "https://dribbble.com/denvolab",
     facebook: "https://www.facebook.com/denvolab",
-    whatsapp: "https://wa.me/000000000000",
+    whatsapp: "https://wa.me/8801521424652",
   },
 } as const;
 

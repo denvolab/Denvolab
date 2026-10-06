@@ -32,11 +32,14 @@ export function LoopCarousel({ children, className = "", label, speed = 24 }: { 
     observer.observe(group);
     measure();
     const images = Array.from(el.querySelectorAll<HTMLImageElement>("img.object-cover"));
+    let visible = false;
+    const visibility = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; });
+    visibility.observe(el);
     let frame = 0, previous = 0;
     const tick = (time: number) => {
       const dt = previous ? Math.min(time - previous, 50) : 16.667;
       const step = dt / 16.667;
-      if (!document.hidden) {
+      if (!document.hidden && visible) {
         if (state.pointer === -1 && Math.abs(state.momentum) > .05) {
           state.target += state.momentum * step;
           state.momentum *= Math.pow(.93, step);
@@ -51,12 +54,15 @@ export function LoopCarousel({ children, className = "", label, speed = 24 }: { 
           const shift = Math.floor((state.current - state.width) / state.width) * state.width;
           if (shift) { state.current -= shift; state.target -= shift; state.startScroll -= shift; }
         }
+        // Read geometry before writing scroll/styles. Interleaving these for
+        // every image forced synchronous layouts during vertical scrolling.
+        const bounds = el.getBoundingClientRect();
+        const cards = !state.reduced ? images.map(image => image.parentElement!.getBoundingClientRect()) : [];
         el.scrollLeft = state.current;
         if (!state.reduced) {
-          const bounds = el.getBoundingClientRect();
           if (bounds.bottom > 0 && bounds.top < innerHeight) {
-            for (const image of images) {
-              const card = image.parentElement!.getBoundingClientRect();
+            for (const [index, image] of images.entries()) {
+              const card = cards[index];
               const ratio = Math.max(-1, Math.min(1, -(card.left + card.width / 2 - bounds.left - bounds.width / 2) / ((bounds.width + card.width) / 2 * .78)));
               const offset = Math.sign(ratio) * Math.pow(Math.abs(ratio), .84) * card.width * .16;
               image.style.setProperty("--carousel-parallax", `${offset}px`);
@@ -75,7 +81,7 @@ export function LoopCarousel({ children, className = "", label, speed = 24 }: { 
     };
     frame = requestAnimationFrame(tick);
     return () => {
-      cancelAnimationFrame(frame); observer.disconnect();
+      cancelAnimationFrame(frame); observer.disconnect(); visibility.disconnect();
       reduced.removeEventListener("change", preferences); fine.removeEventListener("change", preferences);
       images.forEach(image => image.style.removeProperty("--carousel-parallax"));
     };

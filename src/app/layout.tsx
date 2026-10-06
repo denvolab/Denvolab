@@ -7,6 +7,7 @@ import { OrganizationJsonLd } from "@/components/seo/organization-jsonld";
 import { siteConfig } from "@/lib/seo/site-config";
 import { ImageRevealController } from "@/components/motion/image-reveal";
 import { SmoothScroll } from "@/components/motion/smooth-scroll/smooth-scroll";
+import { WhatsAppChat } from "@/components/ui/whatsapp-chat/whatsapp-chat";
 
 // -----------------------------------------------------------------------------
 // Fonts — self-hosted via Fontsource (real font files ship in the npm
@@ -63,6 +64,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
         <main className="min-w-0 flex-1">{children}</main>
         <Footer />
+        <WhatsAppChat />
         {/* Keep image reveals active. ColorWashController is intentionally
             not mounted: section colors stay fixed across all routes. */}
         <ImageRevealController />

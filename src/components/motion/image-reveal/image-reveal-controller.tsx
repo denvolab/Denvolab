@@ -81,7 +81,13 @@ export function ImageRevealController() {
 
     registerFrames();
     // App Router can stream sections after this controller mounts.
-    const additions = new MutationObserver(() => { registerFrames(); });
+    const additions = new MutationObserver(records => {
+      // Text splitting and hover labels also mutate this tree. They must not
+      // rescan every image frame while the visitor is scrolling.
+      const addedFrames = records.some(record => Array.from(record.addedNodes).some(node =>
+        node instanceof Element && (node.matches(SELECTOR) || node.querySelector(SELECTOR))));
+      if (addedFrames) registerFrames();
+    });
     additions.observe(document.body, { childList: true, subtree: true });
 
     // Pictures and fonts that load late can move things down the page after

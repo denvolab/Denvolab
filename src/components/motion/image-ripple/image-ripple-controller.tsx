@@ -19,7 +19,10 @@ export function ImageRippleController() {
       }
       document.querySelectorAll<HTMLImageElement>("img").forEach(image => {
         if (attached.has(image) || image.closest(CAROUSEL) || image.closest("[data-ripple-image]") || image.closest("[data-no-ripple]") || isSvgImage(image)) return;
-        const host = image.parentElement;
+        // <picture> only selects the source. A positioned inline picture has
+        // no box of its own and makes a Next/Image fill image collapse to 0×0.
+        const host = image.parentElement?.tagName === "PICTURE"
+          ? image.parentElement.parentElement : image.parentElement;
         if (!host) return;
         let saved = hosts.get(host);
         if (!saved) {
@@ -42,7 +45,11 @@ export function ImageRippleController() {
       });
     };
     register();
-    const observer = new MutationObserver(register);
+    const observer = new MutationObserver(records => {
+      const imagesChanged = records.some(record => [...record.addedNodes, ...record.removedNodes].some(node =>
+        node instanceof Element && (node.matches("img") || node.querySelector("img"))));
+      if (imagesChanged) register();
+    });
     observer.observe(document.body, { childList: true, subtree: true });
     return () => { observer.disconnect(); attached.forEach(cleanup => cleanup()); attached.clear(); };
   }, [pathname]);
