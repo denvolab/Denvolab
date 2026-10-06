@@ -276,3 +276,152 @@ html.wash-ready [data-site-page] [data-project-copy] span { color:var(--color-se
  .about-photos-carousel .loop-carousel-group { width:479px; }
  .about-final-photos li { border-radius:4px; }
 }
+
+/* Current About card palette, shared across breakpoints. */
+[data-figma-node="431:6247"] { background:#0d1216; }
+[data-figma-node="431:6247"] li { background:#1a2128; border-color:#29333d; border-radius:24px; }
+[data-figma-node="431:6247"] li p { color:#b4c0cc; }
+@media (width >= 1024px) {
+ [data-site-page] [data-figma-node="431:6464"] [data-image-reveal] { width:650px; max-width:45%; flex:none; }
+}
+/* Continuous industry reel retains the Figma card sizes without a scrollbar. */
+[data-site-page] [data-figma-node="483:1256"] { background:white; }
+[data-site-page] [data-figma-node="483:1256"]>div>div:last-child { padding:0; }
+.industries-carousel { scrollbar-width:none; }
+.industries-carousel::-webkit-scrollbar { display:none; }
+.industries-carousel-items { display:flex; gap:24px; padding-right:24px; }
+.industries-carousel .loop-carousel-track { padding-left:40px; }
+[data-site-page] .industries-carousel-items>div { width:438px; gap:24px; }
+[data-site-page] .industries-carousel-items>div:first-child { width:470px; }
+[data-site-page] .industries-carousel-items>div:last-child { width:480px; }
+[data-site-page] [data-figma-node="483:1256"] [data-image-reveal] { background:#f4f6f8; }
+@media (width < 1024px) { [data-site-page] .industries-carousel-items>div { width:320px!important; } }
+@media (width < 768px) {
+ .industries-carousel .loop-carousel-track { padding-left:16px; }
+ [data-site-page] .industries-carousel-items>div { width:280px!important; }
+}
+/* Contact: exact dark field palette and native interactive choice controls. */
+.site-contact-card form { --input-bg:#29333d; --input-border:#4c5662; --input-text-placeholder:#6b7a89; --input-label:white; box-shadow:0 -2px 24px rgba(174,174,174,.02),0 8px 32px rgba(174,174,174,.04); }
+.site-contact-card form h2 { font-size:60px; line-height:72px; letter-spacing:-.04em; padding-block:16px; text-box-trim:trim-both; text-box-edge:cap alphabetic; }
+.site-contact-card form input:not(.sr-only),.site-contact-card form textarea { background:#29333d; border-color:#4c5662; }
+.site-contact-card form label:not(:has(input)),.site-contact-card form p[id$="-label"] { color:white; font-size:14px; line-height:20px; font-weight:400; }
+.site-contact-card form label:has(input) { background:#29333d; border-color:#29333d; color:#b4c0cc; padding:7px 11px; gap:8px; }
+.contact-choice-chip::before { content:""; width:16px; height:16px; border:1px solid #4c5662; border-radius:50%; flex:none; }
+.contact-choice-chip:has(input:checked)::before { background:#0d1216; border-color:#0d1216; box-shadow:inset 0 0 0 4px #dfe94c; }
+.site-contact-card form .contact-chip-group>div { gap:16px; }
+.contact-field-grid>div:nth-child(n+3) { padding-top:24px; border-top:1px solid #29333d; }
+.contact-chip-group { border-top:1px solid #29333d; padding-top:24px; }
+.site-contact-card form textarea { min-height:160px; }
+.site-contact-card form button[type="submit"] { border-radius:16px; box-shadow:0 4px 20px rgba(223,233,76,.24); }
+.site-contact-sidebar>div:nth-child(2) { order:2; }
+.site-contact-sidebar>div:nth-child(2)>div:first-child { flex-wrap:nowrap; align-items:center; gap:24px; }
+.site-contact-sidebar>div:nth-child(2)>div:first-child>div { flex:1; min-width:0; }
+.site-studio-time { align-items:flex-end; text-align:right; }
+.site-contact-sidebar>div:nth-child(2)>div:last-child a { color:#0d1216; }
+@media (width < 1500px) { .site-contact-card form h2 { font-size:48px; line-height:56px; } }
+@media (width < 1024px) {
+ .site-contact-sidebar { display:flex; }
+ .site-contact-card form h2 { font-size:40px; line-height:48px; }
+}
+@media (width < 768px) {
+ .site-contact-sidebar>div:nth-child(2)>div:first-child { flex-wrap:wrap; }
+ .site-contact-sidebar>div:nth-child(2)>div:first-child>div:first-child { flex-basis:100%; }
+ .site-contact-card form h2 { font-size:32px; line-height:40px; }
+}
+[data-site-page] [data-figma-node="483:1256"] .industries-carousel .loop-carousel-track { width:max-content; gap:0; }
+[data-site-page] [data-figma-node="483:1256"] .industries-carousel-items p { width:280px; font-size:18px; line-height:28px; }
+@media (width < 768px) { [data-site-page] [data-figma-node="483:1256"] .industries-carousel-items p { font-size:14px; line-height:20px; } }
+.site-contact-sidebar>div:nth-child(2)>div:first-child>.site-clock { flex:none; width:120px; height:120px; }
+.site-contact-sidebar>div:nth-child(2)>div:first-child>div:first-child { flex:1.4; }
+@media (width < 768px) { .site-contact-sidebar>div:nth-child(2)>div:first-child>div:first-child { flex-basis:100%; } }
+/* Exact round checkbox artwork exported from Figma; services remain multi-select. */
+.contact-choice-chip:has(input[type="checkbox"])::before { border:0; border-radius:0; background:transparent url('/images/contact/final/round-checkbox.svg') center/16px 16px no-repeat; box-shadow:none; }
+.contact-choice-chip:has(input[type="checkbox"]:checked)::before { background:transparent url('/images/contact/final/round-checkbox-checked.svg') center/16px 16px no-repeat; border:0; box-shadow:none; }
+@media (width < 1024px) {
+ .site-contact-section { padding:64px 24px; }
+ .site-contact-card { padding:32px; gap:32px; }
+ .site-contact-sidebar { display:contents; }
+ .site-contact-sidebar>div:first-child { order:1; width:100%; background:#f1f1f2; padding:32px; }
+ .site-contact-card form { order:2; flex:none; width:100%; padding:48px; gap:32px; }
+ .site-contact-sidebar>div:nth-child(2) { order:3; width:100%; padding:32px; }
+ .site-contact-card form h2 { font-size:60px; line-height:72px; letter-spacing:-.04em; padding-block:12px; }
+ .site-contact-card form .contact-chip-group>div { gap:16px; }
+}
+@media (width < 768px) {
+ .site-contact-section { padding:48px 16px; }
+ .site-contact-card { padding:0; gap:24px; background:transparent; }
+ .site-contact-sidebar>div:first-child { background:white; padding:20px; border-radius:16px; }
+ .site-contact-card form { padding:20px 16px; gap:20px; border-radius:16px; }
+ .site-contact-card form h2 { font-size:36px; line-height:40px; letter-spacing:-.02em; padding-block:8px; }
+ .site-contact-card form>div:first-child>p { font-size:14px; line-height:20px; }
+ .site-contact-card form>div:nth-child(2) { gap:16px; }
+ .contact-field-grid { gap:12px; }
+ .contact-field-grid>div:nth-child(n+3) { padding-top:0; border-top:0; }
+ .contact-field-grid>div:nth-child(3) { margin-top:20px; position:relative; }
+ .contact-field-grid>div:nth-child(3)::before { content:""; position:absolute; top:-16px; left:0; width:100%; height:1px; background:#29333d; }
+ .contact-chip-group { padding-top:16px; }
+ .site-contact-card form .contact-chip-group>div { gap:12px; }
+ .site-contact-card form label:has(input) { font-size:14px; line-height:20px; padding:7px 11px; }
+ .site-contact-card form p[id$="-label"] { white-space:normal; overflow-wrap:normal; }
+ #contact-services-label { max-width:100%; }
+ .contact-chip-group[aria-labelledby="contact-services-label"] label:nth-child(1) { order:1; }
+ .contact-chip-group[aria-labelledby="contact-services-label"] label:nth-child(2) { order:3; }
+ .contact-chip-group[aria-labelledby="contact-services-label"] label:nth-child(3) { order:2; }
+ .contact-chip-group[aria-labelledby="contact-services-label"] label:nth-child(4) { order:4; }
+ .contact-chip-group[aria-labelledby="contact-services-label"] label:nth-child(5) { order:5; }
+ .contact-chip-group[aria-labelledby="contact-services-label"] label:nth-child(6) { order:7; }
+ .contact-chip-group[aria-labelledby="contact-services-label"] label:nth-child(7) { order:6; }
+ .contact-chip-group[aria-labelledby="contact-services-label"] label:nth-child(8) { order:8; }
+ .site-contact-card form button[type="submit"] { width:100%; }
+ .site-contact-card form textarea { min-height:180px; }
+ .site-contact-sidebar>div:nth-child(2) { padding:20px 16px; background:white; border-radius:16px; }
+}
+
+/* Contact mobile: dimensions and cap-trim from Figma 903:18252. */
+.site-clock-frame { position:relative; width:120px; height:120px; flex:none!important; }
+.contact-field-divider { display:none; }
+@media (width < 768px) {
+ .site-contact-sidebar>div:first-child { gap:16px; }
+ .site-contact-sidebar>div:first-child>div>div { gap:16px; }
+ .site-contact-sidebar>div:first-child>div p:first-child { font-weight:600; letter-spacing:-.2px; text-box-trim:trim-both; text-box-edge:cap alphabetic; }
+ .site-contact-sidebar>div:first-child>div p:last-child { color:#6b7a89; font-weight:500; }
+ .site-contact-sidebar>div:first-child>p { font-size:18px; line-height:28px; color:#52616f; }
+ .site-contact-sidebar>div:first-child>a { font-size:14px; line-height:20px; letter-spacing:.28px; }
+ .site-contact-card form input:not(.sr-only) { height:40px; padding-block:7px; font-size:16px; line-height:24px; }
+ .contact-field-grid .contact-field-divider { display:block; height:0; margin-block:4px; border-top:0; padding:0; grid-column:1/-1; position:relative; }
+ .contact-field-grid .contact-field-divider::before { content:""; position:absolute; top:0; width:100%; height:1px; background:#29333d; }
+ .contact-field-grid>div:nth-child(3) { margin-top:4px; }
+ .contact-field-grid>div:nth-child(n+3) { padding-top:0; border:0; }
+ .contact-chip-group { padding-top:0; border:0; position:relative; margin-top:16px; }
+ .contact-chip-group::before { content:""; position:absolute; top:-16px; width:100%; height:1px; background:#29333d; }
+ .site-contact-card form label:has(input) { padding-inline:12px; letter-spacing:.28px; }
+ .contact-choice-chip::before { border:0; border-radius:0; background:transparent url('/images/contact/final/round-checkbox.svg') center/16px 16px no-repeat; box-shadow:none; }
+ .contact-choice-chip:has(input:checked)::before { background:transparent url('/images/contact/final/round-checkbox-checked.svg') center/16px 16px no-repeat; box-shadow:none; }
+ .site-contact-card form textarea { height:134px; min-height:134px; padding:11px 15px; font-size:18px; line-height:28px; }
+ .site-contact-card form>div:nth-child(2)>div:last-child { position:relative; margin-top:16px; }
+ .site-contact-card form>div:nth-child(2)>div:last-child::before { content:""; position:absolute; top:-16px; width:100%; height:1px; background:#29333d; }
+ .site-contact-card form button[type="submit"] { height:52px; box-shadow:0 8px 8px rgba(223,233,76,.2); font-size:14px; line-height:20px; letter-spacing:.28px; }
+ .site-contact-sidebar>div:nth-child(2) { padding:16px; border-radius:24px; gap:24px; }
+ .site-contact-sidebar>div:nth-child(2)>div:first-child { display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:center; }
+ .site-contact-sidebar>div:nth-child(2)>div:first-child>.site-clock-frame { grid-column:1/-1; grid-row:1; width:240px; height:240px; justify-self:center; }
+ .site-clock-frame>.site-clock { position:absolute; left:60px; top:60px; transform:scale(2); transform-origin:center; }
+ .site-contact-sidebar>div:nth-child(2)>div:first-child>div:first-child { grid-column:1; grid-row:2; }
+ .site-studio-time { grid-column:2; grid-row:2; }
+ .site-contact-sidebar>div:nth-child(2)>div:first-child>div:first-child p:last-child { font-size:20px; line-height:28px; letter-spacing:-.2px; font-weight:600; text-box-trim:trim-both; text-box-edge:cap alphabetic; }
+ .site-studio-time time,.site-studio-time>div>span:last-child,.site-contact-email>a { font-size:24px; line-height:32px; font-weight:600; letter-spacing:-.24px; text-box-trim:trim-both; text-box-edge:cap alphabetic; }
+ .site-contact-email>p:last-child,.site-contact-sidebar>div:nth-child(2)>div:last-child a { font-size:18px; line-height:28px; }
+}
+@media (width < 768px) {
+ .site-contact-card form>div:last-child>p:empty { display:none; }
+}
+
+/* Agrumea-style drag cursor, using Denvo's existing brand tokens. */
+.loop-carousel.is-dragging { cursor:grabbing; }
+.loop-carousel img { -webkit-user-drag:none; }
+.loop-carousel img.object-cover { width:132%!important; max-width:none; left:-16%!important; right:auto!important; transform:translate3d(var(--carousel-parallax,0px),0,0); will-change:transform; }
+.carousel-cursor { position:fixed; top:0; left:0; z-index:10000; pointer-events:none; }
+.carousel-cursor-pill { display:inline-flex; align-items:center; gap:10px; padding:8px 10px; border-radius:500px; background:var(--color-brand); color:var(--color-brand-ink); font-family:var(--font-sans); font-size:13px; font-weight:600; line-height:1.3; white-space:nowrap; opacity:0; transform:translate(18px,-50%) scale(.4); transform-origin:left center; transition:transform .5s cubic-bezier(.645,.045,.355,1),opacity .35s cubic-bezier(.645,.045,.355,1); }
+.carousel-cursor.is-visible .carousel-cursor-pill { opacity:1; transform:translate(18px,-50%) scale(1); }
+.carousel-cursor-diamond { width:7px; height:7px; flex:none; border-radius:1px; background:currentColor; transform:rotate(45deg); }
+@media (hover:none),(pointer:coarse) { .carousel-cursor { display:none; } }
+@media (prefers-reduced-motion:reduce) { .carousel-cursor-pill { transition:none; } .loop-carousel img.object-cover { width:100%!important; left:0!important; transform:none; will-change:auto; } }

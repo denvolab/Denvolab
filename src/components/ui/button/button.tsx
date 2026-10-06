@@ -9,6 +9,7 @@
 // tokens.
 // ---------------------------------------------------------------------------
 import Link from "next/link";
+import { ButtonText } from "./button-text";
 import type { AnchorHTMLAttributes } from "react";
 import { cn } from "@/lib/utils/cn";
 
@@ -87,7 +88,8 @@ export function Button({
   // purpose (see tokens/typography.css). "outline" sets its own font family
   // (DM Mono) above, so it's excluded from the default `font-sans` here.
   const sharedClassName = cn(
-    "text-label-md whitespace-nowrap inline-flex items-center justify-center",
+    "text-label-md whitespace-nowrap inline-flex items-center justify-center button-sweep",
+    `button-sweep--${variant}`,
     variant !== "outline" && "font-sans",
     VARIANT_STYLES[variant],
     (variant === "primary" || variant === "secondary") && SIZE_STYLES[size],
@@ -104,14 +106,14 @@ export function Button({
         className={sharedClassName}
         {...anchorProps}
       >
-        {children}
+        {typeof children === "string" ? <ButtonText text={children} /> : children}
       </a>
     );
   }
 
   return (
-    <Link href={href} className={sharedClassName}>
-      {children}
+    <Link href={href} className={sharedClassName} {...anchorProps}>
+      {typeof children === "string" ? <ButtonText text={children} /> : children}
     </Link>
   );
 }

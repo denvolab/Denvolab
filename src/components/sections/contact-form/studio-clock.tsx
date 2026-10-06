@@ -10,7 +10,7 @@ export function StudioClock({timeZone}:{timeZone:string}){
  const parts=now===null?[]:new Intl.DateTimeFormat('en-GB',{timeZone,hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).formatToParts(now*1000);
  const part=(key:string)=>Number(parts.find(p=>p.type===key)?.value??0);
  const hour=part('hour'),minute=part('minute'),second=part('second');
- return <div className="site-clock" aria-hidden="true">
+ return <div className="site-clock-frame" aria-hidden="true"><div className="site-clock">
   <Image src="/images/contact/final/SculptedMetalBezel.svg" alt="" width={148} height={148}/>
   <Image src="/images/contact/final/InnerBevel.svg" alt="" width={114} height={114}/>
   <Image src="/images/contact/final/PorcelainDial.svg" alt="" width={108} height={108}/>
@@ -19,5 +19,5 @@ export function StudioClock({timeZone}:{timeZone:string}){
   <span className="site-clock-hand" style={{transform:`rotate(${minute*6+second/10}deg)`}}/>
   <span className="site-clock-hand second" style={{transform:`rotate(${second*6}deg)`}}/>
   <span className="site-clock-pin"/>
- </div>;
+ </div></div>;
 }

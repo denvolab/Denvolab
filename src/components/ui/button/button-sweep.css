@@ -1,0 +1,70 @@
+/* Shared CTA wipe: enters from the left, exits toward the right. */
+.button-sweep {
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+}
+.button-sweep--primary {
+  --button-sweep-base:var(--button-primary-bg);
+  --button-sweep-hover:var(--button-primary-bg-hover);
+  --button-sweep-pressed:var(--button-primary-bg-pressed);
+}
+.button-sweep--secondary {
+  --button-sweep-base:var(--button-secondary-bg);
+  --button-sweep-hover:var(--button-secondary-bg-hover);
+  --button-sweep-pressed:var(--button-secondary-bg-pressed);
+}
+.button-sweep--outline {
+  --button-sweep-base:transparent;
+  --button-sweep-hover:var(--color-surface-secondary);
+}
+.button-sweep--ghost {
+  --button-sweep-base:transparent;
+  --button-sweep-hover:transparent;
+}
+.button-sweep--comparison {
+  --button-sweep-base:var(--color-foreground);
+  --button-sweep-hover:color-mix(in srgb,var(--color-foreground) 90%,transparent);
+}
+.button-sweep.bg-gray-900 {
+  --button-sweep-base:var(--color-gray-900);
+  --button-sweep-hover:var(--color-gray-800);
+  --button-sweep-pressed:var(--color-gray-700);
+}
+.site-contact-sidebar>div:first-child>.button-sweep {
+  --button-sweep-base:#24303e;
+  --button-sweep-hover:var(--button-secondary-bg-hover);
+  --button-sweep-pressed:var(--button-secondary-bg-pressed);
+}
+.button-sweep::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:var(--button-sweep-hover);
+  transform:scaleX(0);
+  transform-origin:right;
+  transition:transform 500ms ease-out;
+}
+/* The sweep, rather than an instant background change, paints the hover. */
+.button-sweep:hover {
+  background:var(--button-sweep-base)!important;
+}
+.button-sweep:not(:disabled):hover::before {
+  transform:scaleX(1);
+  transform-origin:left;
+}
+.button-sweep:active::before {
+  background:var(--button-sweep-pressed,var(--button-sweep-hover));
+}
+@media (prefers-reduced-motion:reduce) {
+  .button-sweep::before { transition-duration:0ms; }
+}
+
+.button-text { position:relative; display:inline-block; white-space:nowrap; }
+.button-text-measure { visibility:hidden; }
+.button-text-live { position:absolute; inset:0; overflow:hidden; }
+
+/* Plain links inherit wrapping, colors and line-height from their original design. */
+.button-text--link { white-space:inherit; max-width:100%; vertical-align:bottom; }

@@ -46,7 +46,7 @@
 // pattern as about-values' section padding.
 // ---------------------------------------------------------------------------
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/ui/animated-link/animated-link";
 import { getServicesList } from "@/lib/data/services";
 import type { ServiceListItem } from "@/types/services";
 

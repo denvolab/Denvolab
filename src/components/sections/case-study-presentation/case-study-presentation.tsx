@@ -1,3 +1,4 @@
+import { AnimatedAnchor } from "@/components/ui/animated-link/animated-link";
 import Image from "next/image";
 import type { CSSProperties } from "react";
 import { Button } from "@/components/ui/button";
@@ -36,7 +37,7 @@ export function CaseStudyPresentation({ content, name }: { content: Presentation
       {content.video ? <video className={styles.video} controls playsInline preload="none" poster={content.overview.src} aria-label={`${name} product walkthrough`}>
         <source src={content.video.src} type={content.video.type ?? "video/mp4"} />
         {content.video.captions && <track kind="captions" src={content.video.captions} srcLang="en" label="English" />}
-        <a href={content.video.src}>Watch the {name} walkthrough</a>
+        <AnimatedAnchor href={content.video.src}>Watch the {name} walkthrough</AnimatedAnchor>
       </video> : <Mockup image={content.overview} className={styles.showcaseImage} />}
     </section>
     <section data-section-height="content" data-wash="off" className={`${styles.band} ${styles.campaign}`} aria-labelledby="case-challenge">

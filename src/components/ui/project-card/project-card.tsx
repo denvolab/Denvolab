@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/animated-link/animated-link";
 
 import { RippleImage } from "@/components/ui/ripple-image";
 import styles from "./project-card.module.css";

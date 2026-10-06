@@ -40,7 +40,7 @@
 // ---------------------------------------------------------------------------
 import Image from "next/image";
 import { getIndustriesServed } from "@/lib/data/services";
-import { Button } from "@/components/ui/button";
+import { LoopCarousel } from "@/components/ui/loop-carousel";
 import { AnimatedText } from "@/components/ui/animated-text";
 
 export async function IndustriesServed() {
@@ -56,12 +56,10 @@ export async function IndustriesServed() {
               {industries.description}
             </p>
           </div>
-          <Button href={industries.cta.href} variant="outline" className="shrink-0">
-            {industries.cta.label}
-          </Button>
+
         </div>
 
-        <div className="flex w-full gap-6 overflow-x-auto px-5 pb-2 md:px-10">
+        <LoopCarousel className="industries-carousel" label="Industries we serve"><div className="industries-carousel-items">
           {industries.items.map((industry) => (
             <div key={industry.name} className="flex w-[280px] shrink-0 flex-col items-start gap-3">
               <div data-image-reveal="" className="relative flex h-[200px] w-[280px] shrink-0 items-center justify-center overflow-hidden rounded-lg border border-border-primary bg-surface-secondary">
@@ -70,7 +68,7 @@ export async function IndustriesServed() {
                     src={industry.imageSrc}
                     alt=""
                     fill
-                    sizes="280px"
+                    sizes="(max-width: 767px) 280px, (max-width: 1023px) 320px, 470px"
                     className="object-cover"
                   />
                 ) : (
@@ -83,7 +81,7 @@ export async function IndustriesServed() {
               </p>
             </div>
           ))}
-        </div>
+        </div></LoopCarousel>
       </div>
     </section>
   );

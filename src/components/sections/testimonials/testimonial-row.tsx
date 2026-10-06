@@ -1,3 +1,4 @@
+import { AnimatedAnchor } from "@/components/ui/animated-link/animated-link";
 import Image from "next/image";
 import type { Testimonial } from "@/types/homepage";
 import { cn } from "@/lib/utils/cn";
@@ -39,7 +40,7 @@ export function TestimonialCard({
       <div className="h-px w-full bg-border-subtle" aria-hidden="true" />
 
       <blockquote className="w-full font-sans text-body-lg text-foreground">{testimonial.quote}</blockquote>
-      {testimonial.sourceHref && <a href={testimonial.sourceHref} className="font-sans text-body-sm text-foreground-subtle underline underline-offset-4">View original review</a>}
+      {testimonial.sourceHref && <AnimatedAnchor href={testimonial.sourceHref} className="font-sans text-body-sm text-foreground-subtle underline underline-offset-4">View original review</AnimatedAnchor>}
     </div>
   );
 }

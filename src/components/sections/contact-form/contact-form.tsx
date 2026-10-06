@@ -1,4 +1,5 @@
 "use client";
+import { ButtonText } from "@/components/ui/button/button-text";
 // ---------------------------------------------------------------------------
 // ContactForm: the "Start a project" card (Figma node 585:1535). Client
 // Component: it checks the fields before sending, shows the errors in the
@@ -98,7 +99,7 @@ export function ContactForm({ content }: { content: ContactFormContent }) {
       </div>
 
       <div className="flex flex-col gap-6">
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="contact-field-grid grid gap-6 md:grid-cols-2">
           <TextField
             id="contact-name"
             name="name"
@@ -118,6 +119,7 @@ export function ContactForm({ content }: { content: ContactFormContent }) {
             maxLength={LIMITS.company}
             error={errors.company}
           />
+          <div className="contact-field-divider" aria-hidden="true" />
           <TextField
             id="contact-email"
             name="email"
@@ -165,9 +167,9 @@ export function ContactForm({ content }: { content: ContactFormContent }) {
         <button
           type="submit"
           disabled={pending}
-          className="inline-flex h-[var(--button-size-lg-height)] items-center justify-center gap-[var(--button-gap)] whitespace-nowrap rounded-lg bg-button-primary-bg px-[var(--button-size-lg-padding-x)] font-mono text-label-md text-button-primary-text transition-colors hover:bg-button-primary-bg-hover active:bg-button-primary-bg-pressed disabled:cursor-wait disabled:opacity-70"
+          className="button-sweep button-sweep--primary inline-flex h-[var(--button-size-lg-height)] items-center justify-center gap-[var(--button-gap)] whitespace-nowrap rounded-lg bg-button-primary-bg px-[var(--button-size-lg-padding-x)] font-mono text-label-md text-button-primary-text transition-colors hover:bg-button-primary-bg-hover active:bg-button-primary-bg-pressed disabled:cursor-wait disabled:opacity-70"
         >
-          {pending ? content.pendingLabel : content.submitLabel}
+          <ButtonText text={pending ? content.pendingLabel : content.submitLabel} />
         </button>
         <p
           role="status"
@@ -201,7 +203,7 @@ function ChipGroup({ id, name, type, group, error }: ChipGroupProps) {
       role={type === "radio" ? "radiogroup" : "group"}
       aria-labelledby={labelId}
       aria-describedby={error ? errorId : undefined}
-      className="flex flex-col gap-3"
+      className="contact-chip-group flex flex-col gap-3"
     >
       <p id={labelId} className={FIELD_LABEL}>
         {group.label}
@@ -214,6 +216,7 @@ function ChipGroup({ id, name, type, group, error }: ChipGroupProps) {
             name={name}
             value={option.value}
             label={option.label}
+            className="contact-choice-chip"
             aria-invalid={error ? true : undefined}
           />
         ))}

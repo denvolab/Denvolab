@@ -1,0 +1,36 @@
+/* Grail's rising, tilted content panel adapted to the actual destination page. */
+html.route-transitioning::view-transition-group(root) { animation-duration:1000ms; }
+html.route-transitioning::view-transition-image-pair(root) { isolation:isolate; }
+html.route-transitioning::view-transition-old(root) {
+  animation:route-page-recede 1000ms cubic-bezier(.22,1,.36,1) both;
+  mix-blend-mode:normal;
+}
+html.route-transitioning::view-transition-new(root) {
+  animation:route-page-rise 1000ms cubic-bezier(.22,1,.36,1) both;
+  transform-origin:50% 100%;
+  mix-blend-mode:normal;
+  box-shadow:0 -16px 64px rgba(0,0,0,.25);
+}
+@keyframes route-page-rise {
+  from { transform:translateY(110%) rotate(6deg) scale(.9); clip-path:inset(0 round 24px); }
+  to { transform:translateY(0) rotate(0) scale(1); clip-path:inset(0 round 0); }
+}
+@keyframes route-page-recede {
+  from { transform:scale(1); filter:brightness(1); }
+  to { transform:translateY(-3%) scale(.96); filter:brightness(.7); }
+}
+@media (width < 768px) {
+  @keyframes route-page-rise {
+    from { transform:translateY(110%) rotate(5deg) scale(.94); clip-path:inset(0 round 20px); }
+    to { transform:translateY(0) rotate(0) scale(1); clip-path:inset(0 round 0); }
+  }
+}
+@media (prefers-reduced-motion:reduce) {
+  html.route-transitioning::view-transition-old(root),
+  html.route-transitioning::view-transition-new(root) { animation:none; }
+}
+/* Snapshots carry readable labels and the destination's hero heading. */
+html.route-transitioning .button-text-live { visibility:hidden; }
+html.route-transitioning .button-text-measure { visibility:visible; }
+html.route-transitioning main h1 [data-line-animation] { visibility:visible!important; }
+html.route-transitioning main h1 [data-line-animation] .line-inner { transform:none!important; }

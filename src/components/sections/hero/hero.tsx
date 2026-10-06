@@ -1,5 +1,5 @@
 import { HeroLines } from "@/components/ui/hero-lines";
-import Link from "next/link";
+import Link from "@/components/ui/animated-link/animated-link";
 import Image from "next/image";
 import { getHeroContent } from "@/lib/data/homepage";
 import { Button } from "@/components/ui/button";

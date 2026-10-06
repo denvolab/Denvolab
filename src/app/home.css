@@ -365,3 +365,9 @@ html.wash-ready [data-homepage] .home-portfolio-more a { color:var(--home-wash-i
 
 [data-homepage] [data-home-part="process"] .bg-surface-accent { background-color:#0d1216; }
 [data-homepage] [data-home-part="process"] .bg-gray-200 { background-color:#f1f1f2; }
+
+[data-homepage] [data-home-part="process"] li[data-shadow-covered="true"] { box-shadow:none; }
+
+/* SitePage owns its closing; detail pages reuse the same footer through RootLayout. */
+body:has([data-homepage]) > .home-closing { display:none; }
+.home-closing-credit { max-width:1920px; margin:auto; padding:0 40px 48px; font:400 12px/16px var(--font-mono); color:#b4c0cc; }

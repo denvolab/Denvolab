@@ -20,6 +20,8 @@
 
 /* Site-wide scroll motion (Oct 2026, see components/motion/README.md). */
 @import "../components/ui/animated-text/animated-text.css";
+@import "../components/ui/button/button-sweep.css";
+@import "../components/motion/page-transition/page-transition.css";
 @import "../components/motion/image-reveal/image-reveal.css";
 @import "../components/motion/color-wash/color-wash.css";
 

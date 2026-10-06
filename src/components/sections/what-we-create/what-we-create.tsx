@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/animated-link/animated-link";
 import { getWhatWeCreateItems } from "@/lib/data/homepage";
 import { Button } from "@/components/ui/button";
 import { RippleImage } from "@/components/ui/ripple-image";

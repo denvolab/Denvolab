@@ -9,7 +9,7 @@
 //   index.ts        <- barrel export, so other files import from
 //                      "@/components/layout/header" instead of this filename
 // ---------------------------------------------------------------------------
-import Link from "next/link";
+import Link from "@/components/ui/animated-link/animated-link";
 import { getHeaderCta, getPrimaryNavigation } from "@/lib/data/navigation";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/seo/site-config";

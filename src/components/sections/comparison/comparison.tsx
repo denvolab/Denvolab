@@ -1,3 +1,5 @@
+import { AnimatedAnchor } from "@/components/ui/animated-link/animated-link";
+import { ButtonText } from "@/components/ui/button/button-text";
 // ---------------------------------------------------------------------------
 // Comparison — "What Do You Get By Choosing Denvo Lab?" table, sitting
 // between the process timeline and testimonials. Server Component: content
@@ -92,13 +94,13 @@ export async function Comparison() {
               are this site's actual Figma-spec'd shapes), so this is built
               inline rather than stretching that component for a one-off
               shape that isn't part of the design system. */}
-          <a
+          <AnimatedAnchor
             href={content.cta.href}
-            className="inline-flex shrink-0 items-center gap-2 rounded-full bg-foreground px-6 py-3.5 font-sans text-label-md text-background transition-colors hover:bg-foreground/90"
+            className="button-sweep button-sweep--comparison inline-flex shrink-0 items-center gap-2 rounded-full bg-foreground px-6 py-3.5 font-sans text-label-md text-background transition-colors hover:bg-foreground/90"
           >
-            {content.cta.label}
+            <ButtonText text={content.cta.label} />
             <ArrowUpRightIcon className="size-4" />
-          </a>
+          </AnimatedAnchor>
         </div>
 
         <div className="flex w-full flex-col divide-y divide-border-subtle overflow-hidden rounded-[28px] border border-border-subtle bg-surface-primary">

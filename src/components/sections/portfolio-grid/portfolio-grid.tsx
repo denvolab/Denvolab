@@ -20,7 +20,7 @@
 // (`href: null`) is not a link and shows "Coming soon". On touch screens,
 // where there is no hover, the label is always shown.
 // ---------------------------------------------------------------------------
-import Link from "next/link";
+import Link from "@/components/ui/animated-link/animated-link";
 import { RippleImage } from "@/components/ui/ripple-image";
 import { getPortfolioProjects } from "@/lib/data/homepage";
 import { cn } from "@/lib/utils/cn";

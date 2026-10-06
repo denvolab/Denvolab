@@ -5,6 +5,7 @@
 // ---------------------------------------------------------------------------
 import { getProcessContent } from "@/lib/data/homepage";
 import { ProcessIcon } from "./process-icon";
+import { ProcessShadow } from "./process-shadow";
 import { ProcessRail } from "./process-rail";
 import { AnimatedText } from "@/components/ui/animated-text";
 
@@ -20,6 +21,7 @@ export async function ProcessSteps({ heading }: { heading?: string } = {}) {
 
   return (
     <section data-home-part="process" className="w-full bg-background py-24" data-figma-node="230:4248">
+      <ProcessShadow />
       <div className="mx-auto flex w-full max-w-[1120px] flex-col items-center gap-12 px-5 md:px-10 lg:px-6">
         <div className="flex flex-col items-center gap-7 text-center">
           <p className="font-sans text-label-md tracking-[0.02em] text-secondary">{content.eyebrow}</p>

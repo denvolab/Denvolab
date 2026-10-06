@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/ui/animated-link/animated-link";
 import { siteConfig } from "@/lib/seo/site-config";
 import { Hero } from "@/components/sections/hero";
 import { MarqueeTagline } from "@/components/sections/marquee-tagline";

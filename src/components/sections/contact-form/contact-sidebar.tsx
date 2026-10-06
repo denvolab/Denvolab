@@ -1,3 +1,4 @@
+import { AnimatedAnchor } from "@/components/ui/animated-link/animated-link";
 // ---------------------------------------------------------------------------
 // ContactSidebar: the three cards next to the form (Figma node 585:1603):
 // founder card (book a call), email card, studio card with the live clock.
@@ -47,18 +48,6 @@ export function ContactSidebar({ content }: { content: ContactSidebarContent }) 
         </Button>
       </div>
 
-      {/* Email (586:1582) */}
-      <div className={`${CARD} gap-2 bg-surface-primary`}>
-        <p className={CARD_LABEL}>{email.label}</p>
-        <a
-          href={`mailto:${email.email}`}
-          className="self-start font-sans text-heading-4 text-text-primary underline-offset-4 hover:underline"
-        >
-          {email.email}
-        </a>
-        <p className="font-sans text-body-sm text-text-secondary">{email.note}</p>
-      </div>
-
       {/* Studio (586:1586) */}
       <div className={`${CARD} gap-6 bg-surface-primary`}>
         <div className="flex flex-wrap items-start justify-between gap-4">
@@ -68,8 +57,8 @@ export function ContactSidebar({ content }: { content: ContactSidebarContent }) 
           </div>
           {/* Right-aligned like Figma; on phones, where it wraps under the
               city, it lines up on the left instead. */}
-          <div className="site-studio-time flex flex-col items-center gap-4">
-            <StudioClock timeZone={office.timeZone}/>
+          <StudioClock timeZone={office.timeZone}/>
+          <div className="site-studio-time flex flex-col items-center gap-2">
             <div className="flex items-center gap-2">
               <span aria-hidden="true" className="size-2 shrink-0 rounded-full bg-success-default" />
               <LiveClock timeZone={office.timeZone} className="font-sans text-heading-4 text-text-primary" />
@@ -80,26 +69,39 @@ export function ContactSidebar({ content }: { content: ContactSidebarContent }) 
 
         <div className="h-px w-full bg-border-secondary" />
 
+      {/* Email (586:1582) */}
+      <div className="site-contact-email flex flex-col gap-2">
+        <p className={CARD_LABEL}>{email.label}</p>
+        <AnimatedAnchor
+          href={`mailto:${email.email}`}
+          className="self-start font-sans text-heading-4 text-text-primary underline-offset-4 hover:underline"
+        >
+          {email.email}
+        </AnimatedAnchor>
+        <p className="font-sans text-body-sm text-text-secondary">{email.note}</p>
+      </div>
+
+        <div className="h-px w-full bg-border-secondary" />
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
             <p className={CARD_LABEL}>{office.address.label}</p>
-            <a
+            <AnimatedAnchor
               href={office.address.href}
               target="_blank"
               rel="noopener noreferrer"
               className="self-start font-sans text-body-md text-text-info underline-offset-4 hover:underline"
             >
               {office.address.value}
-            </a>
+            </AnimatedAnchor>
           </div>
           <div className="flex flex-col gap-1">
             <p className={CARD_LABEL}>{office.phone.label}</p>
-            <a
+            <AnimatedAnchor
               href={office.phone.href}
               className="self-start font-sans text-body-md text-text-info underline-offset-4 hover:underline"
             >
               {office.phone.value}
-            </a>
+            </AnimatedAnchor>
           </div>
         </div>
       </div>

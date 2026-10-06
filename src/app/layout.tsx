@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PageTransition } from "@/components/motion/page-transition/page-transition";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { OrganizationJsonLd } from "@/components/seo/organization-jsonld";
@@ -62,6 +63,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {/* Keep image reveals active. ColorWashController is intentionally
             not mounted: section colors stay fixed across all routes. */}
         <ImageRevealController />
+        <PageTransition />
       </body>
     </html>
   );
