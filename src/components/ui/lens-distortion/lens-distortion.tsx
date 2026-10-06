@@ -129,10 +129,16 @@ export function LensDistortion({ aberration, distortion = 0, className, children
     let fontsReady = false;
     let frame = 0;
     let disposed = false;
+    // The WebGL canvas keeps showing its last frame, so the band is redrawn
+    // only when something changed (size, fonts, a hover colour), not every
+    // time it scrolls back near the screen. Redrawing it on each approach
+    // (DOM to canvas, a full-width texture upload and the shader) was a
+    // hitch near the bottom of every page.
+    let dirty = true;
 
     const draw = async () => {
       frame = 0;
-      if (disposed || !visible || !fontsReady || !renderer) return;
+      if (disposed || !visible || !fontsReady || !renderer || !dirty) return;
       if (!desktop.matches) {
         setActive(false);
         return;
@@ -142,6 +148,7 @@ export function LensDistortion({ aberration, distortion = 0, className, children
         await loadCanvasFonts(root);
         if (disposed || !rasterize(root, source, dpr)) return;
         renderer.render(source, dpr, distortion, aberration);
+        dirty = false;
         setActive(true);
       } catch {
         setActive(false);
@@ -150,10 +157,14 @@ export function LensDistortion({ aberration, distortion = 0, className, children
     const schedule = () => {
       if (!frame) frame = requestAnimationFrame(() => void draw());
     };
+    const invalidate = () => {
+      dirty = true;
+      schedule();
+    };
 
     document.fonts.ready.then(() => {
       fontsReady = true;
-      schedule();
+      invalidate();
     });
 
     const io = new IntersectionObserver(
@@ -165,20 +176,20 @@ export function LensDistortion({ aberration, distortion = 0, className, children
     );
     io.observe(root);
 
-    const ro = new ResizeObserver(schedule);
+    const ro = new ResizeObserver(invalidate);
     ro.observe(root);
 
     // Hover / press colours on the button: redraw once the transition ends.
-    root.addEventListener("transitionend", schedule);
-    desktop.addEventListener("change", schedule);
+    root.addEventListener("transitionend", invalidate);
+    desktop.addEventListener("change", invalidate);
 
     return () => {
       disposed = true;
       if (frame) cancelAnimationFrame(frame);
       io.disconnect();
       ro.disconnect();
-      root.removeEventListener("transitionend", schedule);
-      desktop.removeEventListener("change", schedule);
+      root.removeEventListener("transitionend", invalidate);
+      desktop.removeEventListener("change", invalidate);
     };
   }, [aberration, distortion]);
 

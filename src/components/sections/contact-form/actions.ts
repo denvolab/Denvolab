@@ -37,7 +37,7 @@ import { confirmationEmail } from "@/lib/email/confirmation-email";
 import type { InquiryState } from "@/types/contact";
 import { HONEYPOT_FIELD, labelsFor, readInquiry, validateInquiry } from "./validation";
 
-const SUCCESS_MESSAGE = "Thanks, your message is on its way. We’ll reply by email.";
+const SUCCESS_MESSAGE = "Your message is on its way. We’ll get back to you shortly by email.";
 const INVALID_MESSAGE = "A few fields need a look.";
 const INQUIRY_EMAIL = "denvolab@gmail.com";
 const FAILURE_MESSAGE = `Something went wrong on our side. Please email ${INQUIRY_EMAIL} instead.`;

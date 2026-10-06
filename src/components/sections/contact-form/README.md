@@ -5,7 +5,8 @@ The light block of the Contact page (`/contact`): the "Start a project" form and
 | File | What it is |
 |---|---|
 | `contact-form-section.tsx` | `ContactFormSection` (Server Component). Loads the content and lays out the two columns. |
-| `contact-form.tsx` | `ContactForm` (Client Component). The form card: fields, chip groups, submit, error and success messages. |
+| `contact-form.tsx` | `ContactForm` (Client Component). The form card: fields, chip groups, submit and error messages. |
+| `contact-toast.tsx` / `contact-toast.css` | `ContactToast`: the "Thank you!" toast after a successful send (bottom centre, closes after 6s or with its close button). Replaced the green success line next to the submit button on Oct 7, 2026. |
 | `contact-sidebar.tsx` | `ContactSidebar` (Server Component). Founder card, email card, studio card. |
 | `live-clock.tsx` | `LiveClock` (Client Component). The studio's local time, ticking on the minute. |
 | `actions.ts` | `sendInquiry`, the Server Action that emails each inquiry through the site's SMTP setup (`lib/email/`). |

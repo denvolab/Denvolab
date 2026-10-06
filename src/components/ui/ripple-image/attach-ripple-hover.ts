@@ -24,21 +24,34 @@ import type { RippleEffect } from "./ripple-effect";
 /** How long to keep the canvas after the cursor leaves, so ripples can finish fading. */
 const LINGER_MS = 2200;
 
-// Only active canvases subscribe. Wheel scrolling should composite normal
-// images, not upload large textures as new images pass under a stationary mouse.
+// Wheel scrolling should composite normal images, not upload large textures as
+// new images pass under a stationary mouse. The page's scroll (and wheel, which
+// arrives before Lenis moves the page) is therefore ALWAYS watched, by one
+// passive listener for the whole page, so no effect can start while the page
+// is moving or just after. (It used to be watched only while a canvas was
+// active, so a scroll with no canvas left `scrollingUntil` at 0: every picture
+// that slid under the cursor built a WebGL canvas, uploaded its texture and
+// swapped out its <img> mid-scroll, and the pictures jerked.) Active canvases
+// also subscribe so a scroll removes them at once.
+const SCROLL_QUIET_MS = 250;
 const activeScrollStops = new Set<() => void>();
 let scrollingUntil = 0;
+let watchingScroll = false;
 function onPageScroll() {
-  scrollingUntil = performance.now() + 180;
+  scrollingUntil = performance.now() + SCROLL_QUIET_MS;
   activeScrollStops.forEach(stop => stop());
 }
+function watchScroll() {
+  if (watchingScroll) return;
+  watchingScroll = true;
+  window.addEventListener("scroll", onPageScroll, { passive: true });
+  window.addEventListener("wheel", onPageScroll, { passive: true });
+}
 function subscribeScroll(stop: () => void) {
-  if (!activeScrollStops.size) window.addEventListener("scroll", onPageScroll, { passive: true });
   activeScrollStops.add(stop);
 }
 function unsubscribeScroll(stop: () => void) {
   activeScrollStops.delete(stop);
-  if (!activeScrollStops.size) window.removeEventListener("scroll", onPageScroll);
 }
 
 /** SVG logos and illustrations keep their original rendering on hover. */
@@ -125,6 +138,8 @@ export function attachRippleHover(
     else explain("the system setting \"Reduce motion\" is on.");
     return () => {};
   }
+
+  watchScroll();
 
   let effect: RippleEffect | null = null; // the WebGL effect, only while hovering
   let loading = false;                    // true while three.js is being downloaded
@@ -247,7 +262,7 @@ export function attachRippleHover(
   frame.addEventListener("pointerleave", onLeave);
 
   // Responsive srcsets and React image swaps must use the newly loaded texture.
-  function onLoad() { stop(true); if (cursorInside) start(); }
+  function onLoad() { stop(true); if (cursorInside) void start(); }
   image.addEventListener("load", onLoad);
 
   // Cleanup: remove the listeners and the effect.

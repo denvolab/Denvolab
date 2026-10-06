@@ -13,13 +13,15 @@ import { ButtonText } from "@/components/ui/button/button-text";
 //
 // The chips are real checkboxes (services) and radios (budget), so their
 // values arrive in the same FormData as the text fields.
+//
+// After a successful send the "Thank you" shows as a toast (contact-toast.tsx);
+// the line next to the submit button only shows errors.
 // ---------------------------------------------------------------------------
-import { startTransition, useActionState, useEffect, useRef, useState, type FormEvent } from "react";
+import { startTransition, useActionState, useCallback, useEffect, useRef, useState, type FormEvent } from "react";
 import { ChoiceChip } from "@/components/ui/choice-chip";
 import { TextField } from "@/components/ui/text-field";
 import { FIELD_HINT_ERROR, FIELD_LABEL } from "@/components/ui/text-field";
 import { TextareaField } from "@/components/ui/textarea-field";
-import { cn } from "@/lib/utils/cn";
 import type { ContactChipGroup, ContactFormContent, InquiryField, InquiryState } from "@/types/contact";
 import { sendInquiry } from "./actions";
 import {
@@ -31,9 +33,11 @@ import {
   type InquiryErrors,
 } from "./validation";
 import { AnimatedText } from "@/components/ui/animated-text";
+import { ContactToast } from "./contact-toast";
 
 const INITIAL_STATE: InquiryState = { status: "idle" };
 const INVALID_MESSAGE = "A few fields need a look.";
+const TOAST_TITLE = "Thank you!";
 
 export function ContactForm({ content }: { content: ContactFormContent }) {
   const [state, dispatch, pending] = useActionState(sendInquiry, INITIAL_STATE);
@@ -43,8 +47,12 @@ export function ContactForm({ content }: { content: ContactFormContent }) {
 
   const errors: InquiryErrors = clientErrors ?? state.fieldErrors ?? {};
   const hasClientErrors = clientErrors !== null && Object.keys(clientErrors).length > 0;
-  const statusMessage = hasClientErrors ? INVALID_MESSAGE : state.message;
-  const statusIsSuccess = !hasClientErrors && state.status === "success";
+  const statusMessage = hasClientErrors ? INVALID_MESSAGE : state.status === "error" ? state.message : undefined;
+  // The toast shows the latest successful send until it is closed. `state`
+  // is a new object on every send, so a second success opens it again.
+  const [dismissed, setDismissed] = useState<InquiryState | null>(null);
+  const toastOpen = state.status === "success" && dismissed !== state;
+  const closeToast = useCallback(() => setDismissed(state), [state]);
 
   // Clear the form once an inquiry has gone through.
   useEffect(() => {
@@ -171,17 +179,11 @@ export function ContactForm({ content }: { content: ContactFormContent }) {
         >
           <ButtonText text={pending ? content.pendingLabel : content.submitLabel} />
         </button>
-        <p
-          role="status"
-          aria-live="polite"
-          className={cn(
-            "font-sans text-body-sm",
-            statusIsSuccess ? "text-text-success" : "text-text-error",
-          )}
-        >
+        <p role="status" aria-live="polite" className="font-sans text-body-sm text-text-error">
           {pending ? "" : (statusMessage ?? "")}
         </p>
       </div>
+      {toastOpen && <ContactToast title={TOAST_TITLE} message={state.message ?? ""} onClose={closeToast} />}
     </form>
   );
 }

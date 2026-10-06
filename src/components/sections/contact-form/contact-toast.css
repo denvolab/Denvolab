@@ -1,0 +1,91 @@
+/* ContactToast (contact-toast.tsx): the "Thank you" toast after the Contact
+ * form is sent. Dark card with the lime check, bottom centre, above the
+ * page (the WhatsApp button keeps the bottom-right corner). */
+.contact-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 32px;
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  width: max-content;
+  max-width: min(480px, calc(100vw - 32px));
+  padding: 16px 16px 16px 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.14); /* still reads over the dark hero */
+  background: #0d1216;
+  color: #fff;
+  font-family: var(--font-sans);
+  box-shadow: 0 12px 40px -8px rgba(13, 18, 22, 0.35), 0 2px 8px rgba(13, 18, 22, 0.12);
+  transform: translateX(-50%);
+  animation: contact-toast-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.contact-toast-icon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: #dfe94c;
+  color: #0d1216;
+}
+.contact-toast-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 1px;
+}
+.contact-toast-title {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+}
+.contact-toast-message {
+  font-size: 14px;
+  line-height: 20px;
+  color: #b4c0cc;
+}
+.contact-toast-close {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-left: 4px;
+  border-radius: 8px;
+  color: #b4c0cc;
+  transition: background-color 0.2s, color 0.2s;
+}
+.contact-toast-close:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+.contact-toast-close:focus-visible {
+  outline: 2px solid #dfe94c;
+  outline-offset: 2px;
+}
+@keyframes contact-toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 16px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+@media (max-width: 767px) {
+  .contact-toast {
+    bottom: 96px; /* above the WhatsApp button on phones */
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .contact-toast {
+    animation: none;
+  }
+}
