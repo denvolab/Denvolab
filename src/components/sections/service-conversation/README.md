@@ -9,7 +9,9 @@ The lime closing band of every service page (Figma "Conversation / Start somethi
 
 ## Layout
 
-brand/default, 96px top/bottom. Title (Display/XL, Gray/900) in an 857px box on the branding page and 1320px on the others, then 80px, then a 440px column: the description and a Gray/900 "Let's talk" button (135 x 60).
+The same lime banner the other pages use (`.home-conversation*` in `app/home.css`, the markup of `SiteConversation` / `HomeConversation`): title and description side by side (880px each on the 1920 frame), stacked on phone, same title size and button. Only the copy comes from the page's data: title, description, button label/link and the shader's aberration. The old `titleWidth` field in `types/service-detail.ts` is no longer read.
+
+The service pages have their own spacing in Figma, set in `service-detail.css`: 120px top/bottom on desktop (a 386px frame; the homepage banner is 96px / 338px), 64px / 24px sides on tablet, 48px / 16px on phone. `data-homepage` is set on the section because `home.css` scopes the banner's button and heading styles to it. A second rule in `service-detail.css` stops the generic service-section padding from stacking on the banner's own (before this, the band measured about 810px at 1920 instead of 386px).
 
 ## The effect
 

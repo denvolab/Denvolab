@@ -8,7 +8,7 @@ The light block of the Contact page (`/contact`): the "Start a project" form and
 | `contact-form.tsx` | `ContactForm` (Client Component). The form card: fields, chip groups, submit, error and success messages. |
 | `contact-sidebar.tsx` | `ContactSidebar` (Server Component). Founder card, email card, studio card. |
 | `live-clock.tsx` | `LiveClock` (Client Component). The studio's local time, ticking on the minute. |
-| `actions.ts` | `sendInquiry`, the Server Action that emails each inquiry through Resend. |
+| `actions.ts` | `sendInquiry`, the Server Action that emails each inquiry through the site's SMTP setup (`lib/email/`). |
 | `validation.ts` | Field rules shared by the form and the server action (limits, allowed chip values, honeypot name). |
 | `index.ts` | Barrel export (`ContactFormSection`). |
 
@@ -37,21 +37,17 @@ Labels and buttons use DM Mono like the Figma styles (Label/SM, Label/MD).
 1. The browser checks the fields first (`validateInquiry`): name, a valid email, at least one "What do you need?" chip, and project details. Problems show in the Design System's Error state (red border, message under the field), the first bad field gets focus, and "A few fields need a look." shows next to the button. Editing a field clears its error.
 2. If it's all fine, the form data goes to `sendInquiry` (a Server Action, through `useActionState`). The server checks everything again, since anyone can post to an action.
 3. A filled honeypot field (`website`, off screen) means a bot: the action pretends it worked and sends nothing.
-4. The action emails the inquiry with Resend: to `denvolab@gmail.com`, reply-to set to the visitor, subject "New inquiry from Name (Company)", plain text and simple HTML.
-5. Success clears the form and shows "Thanks, your message is on its way. We'll reply by email." A failure keeps what they typed and shows "Something went wrong on our side. Please email denvolab@gmail.com instead."
+4. The action emails the inquiry through `lib/email` (Gmail SMTP, from "Denvolab"): to `denvolab@gmail.com`, reply-to set to the visitor, subject "New inquiry from Name (Company)", a plain-text version and the branded HTML from `lib/email/inquiry-email.ts`.
+5. Once the studio's email has gone, the visitor gets an automatic "We got your message" email (`lib/email/confirmation-email.ts`), replies to it going to `denvolab@gmail.com`. It is sent with Next's `after()`, so the visitor doesn't wait for it, and only after the studio's email worked. If it fails, the inquiry is still delivered and the server logs `[contact] ... confirmation email was not` sent.
+6. Success clears the form and shows "Thanks, your message is on its way. We'll reply by email." A failure keeps what they typed and shows "Something went wrong on our side. Please email denvolab@gmail.com instead."
 
 The form is sent from `onSubmit` (inside `startTransition`) rather than `<form action>`, because React clears a form after every `action` submission, even one that returns errors.
 
-## Setup: Resend
+## Setup: email (SMTP)
 
-Add these to `.env.local` (see `.env.example` in the project root):
+The inquiry goes out through the site's shared SMTP setup in `lib/email/` (Gmail, `denvolab@gmail.com`, sender name "Denvolab"). Put `SMTP_USER` and `SMTP_PASS` (a Google app password) in `.env.local` and in the hosting dashboard; the full table and the security note are in `lib/email/README.md`.
 
-| Variable | Needed | What |
-|---|---|---|
-| `RESEND_API_KEY` | yes | resend.com -> API Keys |
-| `CONTACT_FROM_EMAIL` | no | sender, on a domain verified in Resend, e.g. `Denvo Lab <inquiries@denvolab.com>`. Default is Resend's test sender, which only delivers to the Resend account owner's own email |
-
-Without `RESEND_API_KEY` the form still validates, then shows the "please email us instead" message and logs `[contact] RESEND_API_KEY is not set` on the server.
+Without them the form still validates, then shows the "please email us instead" message and logs `[email] SMTP_USER or SMTP_PASS is not set` on the server.
 
 Not done yet: rate limiting. If spam gets past the honeypot, add a per-IP limit at the top of `sendInquiry`.
 

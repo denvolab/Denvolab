@@ -65,9 +65,9 @@ export async function IndustriesServed() {
           {industries.items.map((industry) => (
             <div key={industry.name} className="flex w-[280px] shrink-0 flex-col items-start gap-3">
               <div data-image-reveal="" className="relative flex h-[200px] w-[280px] shrink-0 items-center justify-center overflow-hidden rounded-lg border border-border-primary bg-surface-secondary">
-                {(industry.imageSrc || ["Healthcare", "Software & Apps", "AI Tools"].includes(industry.name)) ? (
+                {industry.imageSrc ? (
                   <Image
-                    src={industry.imageSrc ?? `/images/services/current/industry-${industry.name === "Healthcare" ? 1 : industry.name === "Software & Apps" ? 2 : 3}.png`}
+                    src={industry.imageSrc}
                     alt=""
                     fill
                     sizes="(max-width: 767px) 280px, (max-width: 1023px) 320px, 470px"

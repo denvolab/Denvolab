@@ -30,7 +30,7 @@ Every role here matches an existing token exactly, confirmed via `get_design_con
 
 ## Card photo placeholders
 
-Each card's 280x200 "Industry Image Placeholder" box (`bg-surface-secondary` / `border-border-primary` / `rounded-lg`) shows a centered "Photo placeholder" label when `imageSrc` is `null` — that label is itself part of the Figma design, not something invented here. `IndustryItem.imageSrc: string | null` follows the same pattern as `services-list/`'s Supporting Visual and `about-values/`'s illustrations; set it in `lib/data/services.ts` once real photos are supplied, and it swaps in as a `next/image` `fill` `object-cover` crop.
+Each card's 280x200 "Industry Image Placeholder" box (`bg-surface-secondary` / `border-border-primary` / `rounded-lg`) shows a centered "Photo placeholder" label when `imageSrc` is `null` — that label is itself part of the Figma design, not something invented here. `IndustryItem.imageSrc: string | null` follows the same pattern as `services-list/`'s Supporting Visual and `about-values/`'s illustrations; set it in `lib/data/services.ts` once real photos are supplied, and it swaps in as a `next/image` `fill` `object-cover` crop. Healthcare, Software & Apps and AI Tools have theirs (`public/images/services/current/industry-1/2/3.png`), shown at every screen size; Hotels & Travel, Money & Finance and Online Stores still show the empty box until their photos are added.
 
 ## Card width normalization
 

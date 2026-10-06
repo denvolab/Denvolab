@@ -11,7 +11,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-The Contact form sends email through Resend. To turn it on, copy `.env.example` to `.env.local` and add a Resend API key (details in `src/components/sections/contact-form/README.md`).
+Every email the site sends (today, the Contact form's inquiries) goes through one Gmail SMTP account. To turn it on, copy `.env.example` to `.env.local` and add the Google app password as `SMTP_PASS`, and set the same variables in the hosting dashboard (details in `src/lib/email/README.md`). Never commit the password: this repository is public.
 
 Other commands: `npm run build` (production build), `npm run start` (run a production build), `npm run lint` (ESLint).
 
@@ -29,7 +29,7 @@ src/
 │   │   └── [slug]/               The eleven case study pages (/case-studies/<slug>), prerendered from lib/data/case-study
 │   ├── services/              The Services page (/services), assembled from services-hero + services-list + the About page's about-benefits + industries-served + the homepage's testimonials
 │   │   └── [slug]/               The seven service detail pages (/services/<slug>), prerendered from lib/data/service-detail
-│   ├── contact/               The Contact page (/contact), assembled from contact-hero + contact-form (the form emails through Resend)
+│   ├── contact/               The Contact page (/contact), assembled from contact-hero + contact-form (the form emails through `lib/email`, Gmail SMTP)
 │   ├── globals.css            Wires the Color/Font library (below) into Tailwind, plus the site-wide no-sideways-scroll rule
 │   ├── sitemap.ts / robots.ts SEO files, auto-generated
 │   └── project-card-preview/  TEMPORARY page to try the ProjectCard hover (delete when done)
@@ -76,6 +76,7 @@ src/
 │   │   ├── case-study/            One data file per case study page + shared template + index.ts
 │   │   └── contact.ts
 │   ├── seo/                   site-config.ts — single source of truth for name/url/socials
+│   ├── email/                 Sends every email (Gmail SMTP) + the branded email templates — see lib/email/README.md
 │   └── utils/                  cn.ts (Tailwind class helper), fluid.ts (1920-frame sizing helpers)
 │
 └── types/                   Shared TypeScript shapes — see types/README.md
@@ -106,7 +107,7 @@ src/
 - **Service detail pages** (`/services/<slug>`): desktop (1920) is built to the Figma frames; tablet and phone layouts were added in Oct 2026 (no Figma frames exist for them). Two copy issues are kept as designed and should be fixed in `lib/data/service-detail/`: the UI/UX page reuses the branding page's hero headline/intro and FAQ, and the AI agent page's hero intro is the MVP page's text.
 - **Case study pages** (`/case-studies/<slug>`): all eleven Figma frames are built and responsive. Kept as designed, to fix in `lib/data/case-study/`: AI Assistant and My Crew reuse Job Sea's overview picture; their facts cards say "Local Job Portal"; My Crew's solution paragraph is Job Sea's text; the AI page's title says "Manager everything". Quotable and Sanime have no case study yet, so their cards say "Coming soon".
 - **Design System v3.1**: the service pages use newer Figma styles than the rest of the site (optical-size DM Sans, negative heading tracking, DM Mono labels, surface/secondary = Gray/50). They apply inside `.ds-v31` only; see `styles/tokens/typography.css` to move the whole site over.
-- **Contact page**: inquiries are only delivered once Resend is set up (API key, and a sending domain verified in Resend). "Book a call" opens an email until there's a booking page; set `BOOKING_HREF` in `lib/data/contact.ts`. See `sections/contact-form/README.md`.
+- **Contact page**: inquiries are only delivered once `SMTP_USER` / `SMTP_PASS` are set locally and on the host (see `lib/email/README.md`). "Book a call" opens an email until there's a booking page; set `BOOKING_HREF` in `lib/data/contact.ts`. See `sections/contact-form/README.md`.
 
 ## Stack
 

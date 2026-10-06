@@ -3,9 +3,24 @@
 // "Conversation / Start something meaningful"). Server Component; the
 // effect is the client LensDistortion wrapper.
 //
-// FIGMA LAYOUT: brand/default, 96px top/bottom. Title (Display/XL, Gray/900)
-// in an 857px box on the branding page and 1320px on the others, then 80px,
-// then a 440px column: description + Gray/900 "Let's talk" (135 x 60).
+// SAME BANNER AS THE OTHER PAGES: this is the lime conversation banner the
+// homepage, About, Services and Case Studies pages already use (the
+// `.home-conversation*` classes in app/home.css, same markup as
+// SiteConversation / HomeConversation), so its title size, button and column
+// split (title and description side by side, 880px each on the 1920 frame,
+// stacked on phone) are theirs. Only the copy comes from the service page's
+// data (title, description, button, and the shader's aberration). The
+// service pages' Figma spacing (120px top/bottom on desktop, so the frame is
+// 386px; 64px on tablet; 48px on phone) is set in
+// app/services/[slug]/service-detail.css.
+//
+// `data-homepage` is what home.css scopes the banner's button and heading
+// styles to (see SitePage). It is set on this section only, so the rest of
+// the service page keeps its own look.
+//
+// A "\n" in the title is a hard line break typed in Figma, so the heading
+// keeps `whitespace-pre-line` (UI/UX page: "Let's make your product / easier
+// to love.").
 //
 // EFFECT: the frame carries Figma's "Lens distortion" shader (Distortion 0,
 // Aberration 0.02 on pages 01-02 and 0.03 on 03-07, centre 50/50, Lateral,
@@ -20,23 +35,13 @@ import type { ServiceConversationBlock } from "@/types/service-detail";
 
 export function ServiceConversation({ block }: { block: ServiceConversationBlock }) {
   return (
-    <section className="w-full">
-      <LensDistortion aberration={block.aberration} className="bg-brand-default">
-        <div className="mx-auto flex w-full max-w-[1920px] flex-col gap-10 px-5 py-16 md:px-10 xl:flex-row xl:gap-20 xl:py-24">
-          <h2
-            className="min-w-0 whitespace-pre-line font-sans text-display-xl text-gray-900 xl:shrink"
-            style={{ width: block.titleWidth, maxWidth: "100%" }}
-          >
-            {block.title}
-          </h2>
-          <div className="flex flex-col items-start gap-6 xl:w-[440px] xl:shrink-0">
-            <p className="font-sans text-body-lg text-gray-900">{block.description}</p>
-            <Button
-              href={block.cta.href}
-              variant="primary"
-              size="lg"
-              className="h-[60px] rounded-2xl bg-gray-900 px-6 font-mono text-white hover:bg-gray-800 active:bg-gray-700"
-            >
+    <section className="home-conversation" data-homepage="">
+      <LensDistortion aberration={block.aberration} className="home-conversation-lens">
+        <div className="home-conversation-inner">
+          <h2 className="whitespace-pre-line">{block.title}</h2>
+          <div>
+            <p>{block.description}</p>
+            <Button href={block.cta.href} className="home-button home-talk">
               {block.cta.label}
             </Button>
           </div>

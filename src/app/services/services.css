@@ -104,7 +104,6 @@
  [data-site-page="/services"] .industries-carousel-items>div:nth-child(4) { width:296px!important; }
  [data-site-page="/services"] .industries-carousel-items>div:last-child { width:325px!important; }
  [data-site-page="/services"] [data-figma-node="483:1256"] [data-image-reveal] { height:420px; }
- .services-industry-image { display:none; }
  [data-site-page="/services"] .home-testimonials { padding:64px 0; gap:24px; }
  [data-site-page="/services"] .home-testimonials .home-eyebrow { display:block; }
  [data-site-page="/services"] .home-testimonials h2 { font-size:48px; line-height:56px; letter-spacing:-.035em; padding-block:12px; }
@@ -153,7 +152,6 @@
  [data-site-page="/services"] .industries-carousel-items>div:last-child { width:325px!important; }
  [data-site-page="/services"] [data-figma-node="483:1256"] [data-image-reveal] { height:580px; }
  [data-site-page="/services"] [data-figma-node="483:1256"] .industries-carousel-items p { font-size:16px; line-height:24px; }
- .services-industry-image { display:none; }
  [data-site-page="/services"] .home-testimonials { padding:48px 0; gap:16px; }
  [data-site-page="/services"] .home-testimonials .home-eyebrow { display:block; }
  [data-site-page="/services"] .home-testimonials h2 { font-size:36px; line-height:40px; letter-spacing:-.02em; padding-block:8px; }

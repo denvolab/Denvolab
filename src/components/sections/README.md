@@ -84,9 +84,9 @@ Built from the Figma "Contact" frame (node `584:2194`), designed for this page o
 | Folder | Status |
 |---|---|
 | `contact-hero/` | Built: eyebrow, "Tell us what you're building." and the intro |
-| `contact-form/` | Built: the "Start a project" form (emails through Resend) and the founder, email and studio cards, with a live Rangpur clock |
+| `contact-form/` | Built: the "Start a project" form (emails through the site's SMTP setup, `lib/email/`) and the founder, email and studio cards, with a live Rangpur clock |
 
-The form uses the new `ui/text-field/`, `ui/textarea-field/` and `ui/choice-chip/`. Inquiries are only delivered once Resend has an API key; see `contact-form/README.md`.
+The form uses the new `ui/text-field/`, `ui/textarea-field/` and `ui/choice-chip/`. Inquiries are only delivered once the SMTP variables are set; see `lib/email/README.md`.
 
 ## Contents (service detail pages, `/services/<slug>`)
 

@@ -57,11 +57,11 @@
 .service-detail [data-service-block="brand-study"] [class*="text-[calc(128"] { letter-spacing:-.02em; line-height:1.0625; }
 .service-detail [data-service-block="practice"] > section > div { padding:120px 40px; height:860px; min-height:0; justify-content:center; }
 .service-detail [data-service-block="craft-split"] > section > div { gap:48px; }
-.service-detail [data-service-block="conversation"] > section > div { padding:0; }
-.service-detail [data-service-block="conversation"] > section > div > div { padding:120px 40px; flex-direction:row; gap:80px; }
-.service-detail [data-service-block="conversation"] h2 { flex:1; width:auto!important; }
-.service-detail [data-service-block="conversation"] h2 + div { width:440px; }
-.service-icon-credit { padding:16px 40px; background:#0d1216; color:#b4c0cc; font:400 12px/16px var(--font-mono); }
+/* The closing band is the same lime banner the other pages use (home.css .home-conversation). The first rule stops the
+   generic section padding above (all breakpoints) from stacking on top of the banner's own; the second sets the
+   service pages' Figma spacing (desktop 120px top/bottom = the 386px frame; the home banner is 96px). */
+.service-detail [data-service-block="conversation"] > section.home-conversation > div.home-conversation-lens { padding:0; }
+.service-detail [data-service-block="conversation"] .home-conversation-inner { padding:120px 40px; }
 @media (768px <= width < 1280px) {
  .service-detail [data-service-block] > section > div:not(.hero-lines),.service-section-inner { padding:64px 24px; }
  .service-detail .text-display-xl,.service-heading { font-size:48px; line-height:56px; letter-spacing:-.035em; padding-block:12px; }
@@ -103,8 +103,8 @@
  .service-detail [data-faq-card] .text-heading-4 { font-size:20px; line-height:28px; letter-spacing:-.01em; }
  .service-detail [data-service-block="practice"] > section > div { height:auto; gap:48px; }
  .service-detail [data-service-block="showcase"] [data-image-reveal] { aspect-ratio:auto!important; height:400px; }
- .service-detail [data-service-block="conversation"] > section > div > div { padding:64px 24px; gap:48px; }
- .service-detail [data-service-block="conversation"] h2 + div { flex:1; width:auto; }
+ .service-detail [data-service-block="conversation"] .home-conversation-inner { padding:64px 24px; gap:48px; }
+ .service-detail [data-service-block="conversation"] .home-conversation-inner h2 { flex:1; width:auto; margin-block:12px; }
 }
 @media (width < 768px) {
  .service-detail [data-service-block] > section > div:not(.hero-lines),.service-section-inner { padding:48px 16px; }
@@ -149,7 +149,6 @@
  .service-detail [data-faq-card] .text-heading-4 { font-size:18px; line-height:24px; letter-spacing:0; }
  .service-detail [data-service-block="practice"] > section > div { height:auto; gap:32px; }
  .service-detail [data-service-block="showcase"] [data-image-reveal] { aspect-ratio:auto!important; height:220px; }
- .service-detail [data-service-block="conversation"] > section > div > div { padding:48px 16px; flex-direction:column; gap:32px; }
- .service-detail [data-service-block="conversation"] h2 + div { width:100%; }
- .service-icon-credit { padding:16px; }
+ .service-detail [data-service-block="conversation"] .home-conversation-inner { padding:48px 16px; gap:32px; }
+ .service-detail [data-service-block="conversation"] .home-conversation-inner h2 { margin-block:8px; }
 }

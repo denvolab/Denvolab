@@ -87,7 +87,6 @@ export default async function ServiceDetailPage(props: PageProps<"/services/[slu
       {page.blocks.map((block, i) => (
         <div key={`${block.type}-${i}`} data-service-block={block.type}><Block block={block} /></div>
       ))}
-      <p className="service-icon-credit">Icons by Streamline · CC BY 4.0</p>
     </div>
   );
 }
