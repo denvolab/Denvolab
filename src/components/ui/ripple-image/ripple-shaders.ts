@@ -71,6 +71,8 @@ export const fragmentShader = /* glsl */ `
   uniform sampler2D uTexture;      // the picture
   uniform vec2  uPlaneSize;        // picture size in CSS pixels
   uniform vec2  uCoverScale;       // crops the picture to fill the frame (like object-fit: cover)
+  uniform float uAnchorX;
+  uniform float uContainMask;
   uniform float uAnchorY;          // vertical crop anchor: 0.5 = centered (default), 1 = top, like CSS object-position
   uniform float uBorderRadius;     // rounded corner size in CSS pixels
   uniform float uTime;             // seconds since the effect started
@@ -115,10 +117,11 @@ export const fragmentShader = /* glsl */ `
     // fixed 0.5 here regardless of the <img>'s own object-position is what
     // made the picture's framing visibly jump the instant a hover starts.
     vec2 uv = vec2(
-      (vUv.x + push.x - 0.5) * uCoverScale.x + 0.5,
+      (vUv.x + push.x - uAnchorX) * uCoverScale.x + uAnchorX,
       (vUv.y + push.y - uAnchorY) * uCoverScale.y + uAnchorY
     );
     vec4 color = texture2D(uTexture, uv);
+    if (uContainMask > .5 && (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0)) color.a = 0.0;
 
     // STEP 4: cut rounded corners (a distance-to-rounded-box formula).
     vec2 fromCentre = (vUv - 0.5) * uPlaneSize;

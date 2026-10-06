@@ -96,7 +96,7 @@ export function RippleImage({
     // this, an explicit z-index anywhere inside the frame beats an ordinary
     // positioned sibling regardless of DOM order, so that overlaid content would
     // disappear behind the canvas the instant a hover starts.
-    <div ref={frameRef} className={cn("relative isolate", className)}>
+    <div data-ripple-image="" ref={frameRef} className={cn("relative isolate", className)}>
       <Image
         src={src}
         alt={alt}

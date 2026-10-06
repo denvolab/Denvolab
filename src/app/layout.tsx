@@ -1,3 +1,4 @@
+import { ImageRippleController } from "@/components/motion/image-ripple/image-ripple-controller";
 import type { Metadata } from "next";
 import { PageTransition } from "@/components/motion/page-transition/page-transition";
 import { Header } from "@/components/layout/header";
@@ -63,6 +64,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {/* Keep image reveals active. ColorWashController is intentionally
             not mounted: section colors stay fixed across all routes. */}
         <ImageRevealController />
+        <ImageRippleController />
         <PageTransition />
       </body>
     </html>

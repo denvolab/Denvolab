@@ -80,9 +80,9 @@ function afterFrames(frames: number, fn: () => void) {
 
 export function attachRippleHover(
   frame: HTMLElement,
-  options?: { objectPosition?: "center" | "top" },
+  options?: { objectPosition?: "center" | "top"; image?: HTMLImageElement; imageBounds?: boolean },
 ): () => void {
-  const image = frame.querySelector("img");
+  const image = options?.image ?? frame.querySelector("img");
 
   // Skip the effect on touch screens, and for people who asked for less motion.
   const hasMouse = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -104,8 +104,8 @@ export function attachRippleHover(
 
   /** Cursor position in pixels from the frame's top-left corner. */
   function positionOf(event: PointerEvent) {
-    const rect = frame.getBoundingClientRect();
-    return { x: event.clientX - rect.left, y: event.clientY - rect.top };
+    const rect = options?.imageBounds ? image!.getBoundingClientRect() : frame.getBoundingClientRect();
+    return { x: (event.clientX - rect.left) * (options?.imageBounds ? image!.offsetWidth / rect.width : 1), y: (event.clientY - rect.top) * (options?.imageBounds ? image!.offsetHeight / rect.height : 1) };
   }
 
   /** Create the WebGL effect (the first time, this also downloads three.js). */
@@ -125,7 +125,7 @@ export function attachRippleHover(
       ]);
       if (removed) return;
 
-      const created = new RippleEffect(frame, image!, picture, options?.objectPosition);
+      const created = new RippleEffect(frame, image!, picture, options?.objectPosition, options?.imageBounds);
       effect = created;
 
       // The canvas now draws the picture. Hide the <img> only once the canvas is really on
@@ -160,6 +160,7 @@ export function attachRippleHover(
   // ---- The three mouse events ----
 
   function onEnter(event: PointerEvent) {
+    if (options?.imageBounds && !insideImage(event)) return;
     cursorInside = true;
     last = positionOf(event);
     window.clearTimeout(lingerTimer); // came back before the fade finished: keep going
@@ -171,12 +172,22 @@ export function attachRippleHover(
     } else start();
   }
 
+  function insideImage(event: PointerEvent) {
+    const rect = image!.getBoundingClientRect();
+    return event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom;
+  }
+
   function onMove(event: PointerEvent) {
+    if (options?.imageBounds) {
+      if (!insideImage(event)) { if (cursorInside) onLeave(); return; }
+      if (!cursorInside) { onEnter(event); return; }
+    }
     last = positionOf(event);
     effect?.move(last.x, last.y);
   }
 
   function onLeave() {
+    if (!cursorInside) return;
     cursorInside = false;
     effect?.leave();
     lingerTimer = window.setTimeout(() => stop(), LINGER_MS);
@@ -192,9 +203,14 @@ export function attachRippleHover(
   frame.addEventListener("pointermove", onMove);
   frame.addEventListener("pointerleave", onLeave);
 
+  // Responsive srcsets and React image swaps must use the newly loaded texture.
+  function onLoad() { stop(true); if (cursorInside) start(); }
+  image.addEventListener("load", onLoad);
+
   // Cleanup: remove the listeners and the effect.
   return () => {
     removed = true;
+    image.removeEventListener("load", onLoad);
     window.clearTimeout(lingerTimer);
     window.clearTimeout(revealTimer);
     frame.removeEventListener("pointerenter", onEnter);

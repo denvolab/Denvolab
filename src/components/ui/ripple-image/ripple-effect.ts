@@ -112,6 +112,7 @@ export class RippleEffect {
      * keeps the top of the picture and crops from the bottom instead.
      */
     objectPosition: "center" | "top" = "center",
+    private readonly imageBounds = false,
   ) {
     // --- 1. The canvas: a transparent layer on top of the picture frame ---
     this.canvas = document.createElement("canvas");
@@ -120,6 +121,12 @@ export class RippleEffect {
       pointerEvents: "none", // clicks and hovers pass straight through to what is underneath
       zIndex: "2",           // above neighbouring content, so a bulge is not cut off
     });
+    if (imageBounds) {
+      const style = getComputedStyle(image);
+      this.canvas.style.filter = style.filter;
+      this.canvas.style.opacity = style.opacity;
+      this.canvas.style.mixBlendMode = style.mixBlendMode;
+    }
     frame.appendChild(this.canvas);
 
     // --- 2. The renderer: three.js's way of drawing onto the canvas ---
@@ -153,6 +160,8 @@ export class RippleEffect {
         uTexture: { value: this.texture },
         uPlaneSize: { value: new Vector2(1, 1) },
         uCoverScale: { value: new Vector2(1, 1) },
+        uAnchorX: { value: .5 },
+        uContainMask: { value: 0 },
         uAnchorY: { value: objectPosition === "top" ? 1 : 0.5 },
         uBorderRadius: { value: 0 },
         uTime: { value: 0 },
@@ -250,9 +259,14 @@ export class RippleEffect {
 
   /** Measure the frame and tell the shaders about sizes. */
   private resize() {
-    const rect = this.frame.getBoundingClientRect();
-    this.width = rect.width;
-    this.height = rect.height;
+    const rect = (this.imageBounds ? this.image : this.frame).getBoundingClientRect();
+    const hostRect = this.frame.getBoundingClientRect();
+    const scaleX = this.imageBounds && this.frame.offsetWidth ? hostRect.width / this.frame.offsetWidth : 1;
+    const scaleY = this.imageBounds && this.frame.offsetHeight ? hostRect.height / this.frame.offsetHeight : 1;
+    this.width = Math.max(1, rect.width / (scaleX || 1));
+    this.height = Math.max(1, rect.height / (scaleY || 1));
+    const imageLeft = this.imageBounds ? (rect.left - hostRect.left) / (scaleX || 1) + this.frame.scrollLeft - this.frame.clientLeft : 0;
+    const imageTop = this.imageBounds ? (rect.top - hostRect.top) / (scaleY || 1) + this.frame.scrollTop - this.frame.clientTop : 0;
     const shorter = Math.min(this.width, this.height);
 
     // The canvas is a little bigger than the frame, so the edge has room to bulge.
@@ -263,7 +277,7 @@ export class RippleEffect {
     const roomRight = Math.min(S.room, Math.max(0, Math.floor(document.documentElement.clientWidth - rect.right)));
     const canvasWidth = Math.ceil(this.width) + S.room + roomRight;
     const canvasHeight = Math.ceil(this.height) + S.room * 2;
-    Object.assign(this.canvas.style, { left: `${-S.room}px`, top: `${-S.room}px` });
+    Object.assign(this.canvas.style, { left: `${imageLeft - S.room}px`, top: `${imageTop - S.room}px` });
     this.renderer.setSize(canvasWidth, canvasHeight); // also sets the CSS size
 
     // A camera that maps 1 unit to 1 CSS pixel, and the picture as a sheet of that size.
@@ -285,13 +299,29 @@ export class RippleEffect {
     // Crop the picture like CSS "object-fit: cover" does.
     const frameAspect = this.width / this.height;
     const imageAspect = this.picture.naturalWidth / this.picture.naturalHeight;
-    const cover =
+    let cover =
       imageAspect > frameAspect
         ? new Vector2(frameAspect / imageAspect, 1) // picture is wider: crop the sides
         : new Vector2(1, imageAspect / frameAspect); // picture is taller: crop top and bottom
 
+    const imageStyle = getComputedStyle(this.image);
+    const contain = this.imageBounds && (imageStyle.objectFit === "contain" || imageStyle.objectFit === "scale-down");
+    if (contain) {
+      cover = imageAspect > frameAspect ? new Vector2(1, imageAspect / frameAspect) : new Vector2(frameAspect / imageAspect, 1);
+    } else if (this.imageBounds && imageStyle.objectFit === "fill") {
+      cover.set(1, 1);
+    }
+    if (this.imageBounds) {
+      const [x = "50%", y = "50%"] = imageStyle.objectPosition.split(" ");
+      const anchor = (value: string) => value.endsWith("%") ? parseFloat(value) / 100 : value === "left" || value === "top" ? 0 : value === "right" || value === "bottom" ? 1 : .5;
+      this.material.uniforms.uAnchorX.value = anchor(x);
+      this.material.uniforms.uAnchorY.value = 1 - anchor(y);
+    }
+    this.material.uniforms.uContainMask.value = contain ? 1 : 0;
+
     // Match the rounded corners set in CSS on the <img>.
-    const radius = parseFloat(getComputedStyle(this.image).borderTopLeftRadius) || 0;
+    const radiusValue = getComputedStyle(this.image).borderTopLeftRadius;
+    const radius = Math.min(shorter / 2, (parseFloat(radiusValue) || 0) * (radiusValue.includes("%") ? shorter / 100 : 1));
 
     const u = this.material.uniforms;
     u.uPlaneSize.value.set(this.width, this.height);
