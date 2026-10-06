@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/footer";
 import { OrganizationJsonLd } from "@/components/seo/organization-jsonld";
 import { siteConfig } from "@/lib/seo/site-config";
 import { ImageRevealController } from "@/components/motion/image-reveal";
+import { SmoothScroll } from "@/components/motion/smooth-scroll/smooth-scroll";
 
 // -----------------------------------------------------------------------------
 // Fonts — self-hosted via Fontsource (real font files ship in the npm
@@ -27,6 +28,7 @@ import "@fontsource-variable/dm-sans";
 import "@fontsource/dm-mono/400.css";
 import "@fontsource/dm-mono/500.css";
 import "./globals.css";
+import "lenis/dist/lenis.css";
 
 // -----------------------------------------------------------------------------
 // Site-wide metadata — per-page titles compose into "<page> | Denvo Lab" via
@@ -66,6 +68,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <ImageRevealController />
         <ImageRippleController />
         <PageTransition />
+        <SmoothScroll />
       </body>
     </html>
   );

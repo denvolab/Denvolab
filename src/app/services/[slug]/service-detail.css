@@ -1,0 +1,155 @@
+/* Service Detail / 01–07: current Figma desktop, tablet and mobile frames.
+   Scoped to this route so the homepage and case-study typography stay intact. */
+.service-detail { background:#fff; font-family:var(--font-sans); font-variation-settings:"opsz" 14; }
+.service-detail [data-service-block] section { min-height:0!important; }
+.service-detail [data-service-block] > section > div:not(.hero-lines),
+.service-section-inner { max-width:1920px; margin-inline:auto; padding:120px 40px; }
+.service-detail .text-display-xl,.service-heading { font-size:60px; line-height:72px; letter-spacing:-.04em; font-weight:600; white-space:pre-line; text-box-trim:trim-both; text-box-edge:cap alphabetic; padding-block:16px; }
+.service-detail .text-display-lg { font-size:48px; line-height:56px; letter-spacing:-.035em; }
+.service-detail .text-heading-2 { font-size:32px; line-height:40px; letter-spacing:-.025em; }
+.service-detail .text-heading-3 { font-size:28px; line-height:36px; letter-spacing:-.02em; }
+.service-detail .text-heading-4 { font-size:24px; line-height:32px; letter-spacing:-.015em; }
+.service-detail .text-body-lg { font-size:18px; line-height:28px; }
+.service-detail .text-label-md,.service-label { font:400 14px/20px var(--font-mono); letter-spacing:.02em; }
+.service-detail :is(h1,h2,h3) { font-variation-settings:"opsz" 14; }
+.service-hero { background:#0d1216; color:#fff; }
+.service-hero-inner { display:flex; flex-direction:column; gap:120px; }
+.service-hero-row { display:flex; align-items:flex-end; justify-content:space-between; gap:0; }
+.service-hero h1 { flex:1; min-width:0; font-size:128px; line-height:136px; letter-spacing:-.02em; font-weight:600; white-space:pre-line; text-box-trim:trim-both; text-box-edge:cap alphabetic; padding-block:16px; }
+.service-hero-intro { flex:0 0 520px; display:flex; flex-direction:column; gap:32px; color:#b4c0cc; font-size:18px; line-height:28px; }
+.service-scroll-cue { color:#dfe94c; }
+.service-hero-image { position:relative; height:850px; width:100%; overflow:hidden; border-radius:24px; }
+.service-disciplines { display:flex; align-items:flex-end; gap:120px; }
+.service-disciplines-intro { width:520px; flex-shrink:0; display:flex; flex-direction:column; gap:32px; }
+.service-principles { background:#fcfdf1; border-radius:24px; padding:12px 16px; display:flex; flex-direction:column; gap:40px; }
+.service-principles-image { position:relative; height:250px; overflow:hidden; border-radius:24px; }
+.service-principles-copy { display:flex; flex-direction:column; gap:24px; padding:8px; }
+.service-principles-copy h3 { font-size:48px; line-height:56px; letter-spacing:-.035em; font-weight:600; white-space:pre-line; text-box-trim:trim-both; text-box-edge:cap alphabetic; max-width:440px; }
+.service-principles-copy p { max-width:440px; font-size:18px; line-height:28px; color:#52616f; }
+.service-discipline-list { flex:1; min-width:0; display:flex; flex-direction:column; gap:32px; }
+.service-discipline-list li { display:flex; align-items:center; gap:32px; padding-bottom:32px; border-bottom:1px solid #f4f6f8; }
+.service-discipline-icon { display:flex; align-items:center; justify-content:center; padding:20px; border-radius:12px; flex-shrink:0; background:#e7e9ea; }
+.service-detail[data-service-detail="branding-visual-identity"] .service-discipline-icon { background:#f1f1f2; }
+.service-discipline-copy { flex:1; min-width:0; display:flex; align-items:center; gap:32px; }
+.service-discipline-copy h3 { flex:0 0 380px; font-size:28px; line-height:36px; font-weight:600; letter-spacing:-.02em; text-box-trim:trim-both; text-box-edge:cap alphabetic; }
+.service-discipline-copy p { flex:1; font-size:18px; line-height:28px; color:#52616f; }
+.service-detail [data-service-block="process-narrative"] > section { background:#1a2128; }
+.service-detail [data-service-block="process-narrative"] > section > div { flex-direction:row; align-items:flex-start; gap:80px; }
+.service-detail [data-service-block="process-narrative"] > section > div > div { width:auto; flex:1; max-width:none; padding-block:16px; position:sticky; top:96px; }
+.service-detail [data-service-block="process-narrative"] ol { flex:1; gap:64px; }
+.service-detail [data-service-block="process-narrative"] li > div { flex-direction:row; gap:32px; }
+.service-detail [data-service-block="process-narrative"] li > div > p { width:112px; }
+.service-detail [data-service-block="process-narrative"] li .text-display-lg { text-box-trim:trim-both; text-box-edge:cap alphabetic; }
+.service-detail [data-service-block="checklist"] > section > div { flex-direction:row; justify-content:space-between; gap:80px; }
+.service-detail [data-service-block="checklist"] > section > div > div { width:520px; max-width:none; flex-shrink:0; gap:24px; }
+.service-detail [data-service-block="checklist"] ul { flex:0 1 900px; gap:48px; }
+.service-detail [data-service-block="checklist"] li { gap:48px; }
+.service-detail [data-service-block="checklist"] li > div { gap:24px; align-items:center; }
+.service-detail [data-service-block="checklist"] li > div > div { flex-direction:row; align-items:center; gap:24px; }
+.service-detail [data-service-block="checklist"] li .text-label-md { flex:0 0 180px; width:180px; }
+.service-detail [data-service-block="checklist"] .bg-border-primary { background:#f4f6f8; }
+.service-detail [data-service-block="faq"] > section > div { flex-direction:row; gap:80px; }
+.service-detail [data-service-block="faq"] > section > div > div { width:auto; flex:1; max-width:none; }
+.service-detail [data-faq-card] { padding:24px; border:1px solid #f4f6f8; border-radius:12px; background:#fff; }
+.service-detail [data-faq-card][data-open="true"] { background:#f1f1f2; border-radius:24px; }
+.service-detail [data-faq-card] svg { width:24px; height:24px; }
+.service-detail [data-service-block="brand-study"] .bg-brand-100 { background:#f4f6f8; }
+.service-detail [data-service-block="brand-study"] [class*="text-[calc(128"] { letter-spacing:-.02em; line-height:1.0625; }
+.service-detail [data-service-block="practice"] > section > div { padding:120px 40px; height:860px; min-height:0; justify-content:center; }
+.service-detail [data-service-block="craft-split"] > section > div { gap:48px; }
+.service-detail [data-service-block="conversation"] > section > div { padding:0; }
+.service-detail [data-service-block="conversation"] > section > div > div { padding:120px 40px; flex-direction:row; gap:80px; }
+.service-detail [data-service-block="conversation"] h2 { flex:1; width:auto!important; }
+.service-detail [data-service-block="conversation"] h2 + div { width:440px; }
+.service-icon-credit { padding:16px 40px; background:#0d1216; color:#b4c0cc; font:400 12px/16px var(--font-mono); }
+@media (768px <= width < 1280px) {
+ .service-detail [data-service-block] > section > div:not(.hero-lines),.service-section-inner { padding:64px 24px; }
+ .service-detail .text-display-xl,.service-heading { font-size:48px; line-height:56px; letter-spacing:-.035em; padding-block:12px; }
+ .service-detail .text-body-lg { font-size:16px; line-height:24px; }
+ .service-hero-inner { gap:64px; }
+ .service-hero-row { gap:24px; }
+ .service-hero h1 { font-size:60px; line-height:72px; letter-spacing:-.04em; }
+ .service-hero-intro { flex:1; font-size:16px; line-height:24px; }
+ .service-hero-image { height:380px; border-radius:16px; }
+ .service-disciplines { flex-direction:column; align-items:stretch; gap:64px; }
+ .service-disciplines-intro { width:100%; flex-direction:row; gap:24px; align-items:center; }
+ .service-disciplines-intro > * { flex:1; min-width:0; }
+ .service-principles { gap:24px; border-radius:16px; }
+ .service-principles-image { height:220px; border-radius:16px; flex-shrink:0; }
+ .service-principles-copy { padding:12px; gap:16px; }
+ .service-principles-copy h3 { font-size:36px; line-height:40px; letter-spacing:-.02em; }
+ .service-principles-copy p { font-size:16px; line-height:24px; }
+ .service-discipline-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:32px; }
+ .service-discipline-list li { flex-direction:column; align-items:flex-start; gap:24px; padding-bottom:0; border:0; }
+ .service-discipline-icon { padding:16px; }
+ .service-discipline-copy { flex-direction:column; align-items:stretch; gap:20px; }
+ .service-discipline-copy h3 { flex:auto; font-size:24px; line-height:32px; letter-spacing:-.015em; }
+ .service-discipline-copy p { font-size:16px; line-height:24px; }
+ .service-detail [data-service-block="process-narrative"] > section > div { gap:48px; }
+ .service-detail [data-service-block="process-narrative"] ol { gap:32px; }
+ .service-detail [data-service-block="process-narrative"] li > div { gap:16px; }
+ .service-detail [data-service-block="process-narrative"] li > div > p { width:64px; font-size:40px; line-height:48px; letter-spacing:-.03em; }
+ .service-detail [data-service-block="process-narrative"] .text-heading-2 { font-size:24px; line-height:32px; letter-spacing:-.015em; }
+ .service-detail [data-service-block="process-narrative"] .text-label-md { font-size:12px; line-height:16px; }
+ .service-detail [data-service-block="checklist"] > section > div { gap:24px; }
+ .service-detail [data-service-block="checklist"] > section > div > div { flex:1; width:auto; }
+ .service-detail [data-service-block="checklist"] ul { flex:1; gap:24px; }
+ .service-detail [data-service-block="checklist"] li { gap:24px; }
+ .service-detail [data-service-block="checklist"] li > div > div { flex-direction:column; align-items:flex-start; gap:16px; }
+ .service-detail [data-service-block="checklist"] li .text-label-md { flex:auto; width:auto; }
+ .service-detail [data-service-block="checklist"] .text-heading-4 { font-size:20px; line-height:28px; letter-spacing:-.01em; }
+ .service-detail [data-service-block="faq"] > section > div { gap:24px; }
+ .service-detail [data-faq-card] { padding:24px 16px; border-radius:16px!important; }
+ .service-detail [data-faq-card] .text-heading-4 { font-size:20px; line-height:28px; letter-spacing:-.01em; }
+ .service-detail [data-service-block="practice"] > section > div { height:auto; gap:48px; }
+ .service-detail [data-service-block="showcase"] [data-image-reveal] { aspect-ratio:auto!important; height:400px; }
+ .service-detail [data-service-block="conversation"] > section > div > div { padding:64px 24px; gap:48px; }
+ .service-detail [data-service-block="conversation"] h2 + div { flex:1; width:auto; }
+}
+@media (width < 768px) {
+ .service-detail [data-service-block] > section > div:not(.hero-lines),.service-section-inner { padding:48px 16px; }
+ .service-detail .text-display-xl,.service-heading { font-size:36px; line-height:40px; letter-spacing:-.02em; padding-block:8px; }
+ .service-detail .text-body-lg { font-size:14px; line-height:20px; }
+ .service-hero-inner { gap:32px; }
+ .service-hero-row { flex-direction:column; align-items:stretch; gap:32px; }
+ .service-hero h1 { font-size:40px; line-height:48px; letter-spacing:-.03em; padding:0; }
+ .service-hero-intro { flex:auto; font-size:18px; line-height:28px; }
+ .service-hero-image { height:220px; border-radius:12px; }
+ .service-disciplines { flex-direction:column; align-items:stretch; gap:32px; }
+ .service-disciplines-intro { width:100%; gap:16px; }
+ .service-principles { gap:16px; border-radius:12px; }
+ .service-principles-image { height:220px; border-radius:12px; }
+ .service-principles-copy { padding:12px; gap:16px; }
+ .service-principles-copy h3 { font-size:32px; line-height:40px; letter-spacing:-.025em; }
+ .service-principles-copy p { font-size:14px; line-height:20px; }
+ .service-discipline-list { gap:16px; }
+ .service-discipline-list li { align-items:flex-start; gap:16px; padding-bottom:16px; }
+ .service-discipline-icon { padding:12px; }
+ .service-discipline-copy { flex-direction:column; align-items:stretch; gap:16px; }
+ .service-discipline-copy h3 { flex:auto; font-size:20px; line-height:28px; letter-spacing:-.01em; }
+ .service-discipline-copy p { font-size:14px; line-height:20px; }
+ .service-detail [data-service-block="process-narrative"] > section > div { flex-direction:column; gap:32px; }
+ .service-detail [data-service-block="process-narrative"] > section > div > div { position:static; padding-block:8px; }
+ .service-detail [data-service-block="process-narrative"] ol { gap:32px; }
+ .service-detail [data-service-block="process-narrative"] li > div { flex-direction:row; gap:16px; }
+ .service-detail [data-service-block="process-narrative"] li > div > p { width:64px; font-size:32px; line-height:40px; letter-spacing:-.025em; }
+ .service-detail [data-service-block="process-narrative"] .text-heading-2 { font-size:20px; line-height:28px; letter-spacing:-.01em; }
+ .service-detail [data-service-block="process-narrative"] .text-label-md { font-size:12px; line-height:16px; }
+ .service-detail [data-service-block="checklist"] > section > div { flex-direction:column; gap:32px; }
+ .service-detail [data-service-block="checklist"] > section > div > div { width:100%; }
+ .service-detail [data-service-block="checklist"] ul { flex:auto; width:100%; gap:16px; }
+ .service-detail [data-service-block="checklist"] li { gap:16px; }
+ .service-detail [data-service-block="checklist"] li > div { align-items:flex-start; }
+ .service-detail [data-service-block="checklist"] li > div > div { flex-direction:column; align-items:flex-start; gap:16px; }
+ .service-detail [data-service-block="checklist"] li .text-label-md { flex:auto; width:auto; }
+ .service-detail [data-service-block="checklist"] .text-heading-4 { font-size:18px; line-height:24px; letter-spacing:0; }
+ .service-detail [data-service-block="faq"] > section > div { flex-direction:column; gap:32px; }
+ .service-detail [data-faq-card] { padding:16px; border-radius:12px!important; }
+ .service-detail [data-service-block="faq"] > section > div > div:last-child { gap:16px!important; width:100%; }
+ .service-detail [data-faq-card] .text-heading-4 { font-size:18px; line-height:24px; letter-spacing:0; }
+ .service-detail [data-service-block="practice"] > section > div { height:auto; gap:32px; }
+ .service-detail [data-service-block="showcase"] [data-image-reveal] { aspect-ratio:auto!important; height:220px; }
+ .service-detail [data-service-block="conversation"] > section > div > div { padding:48px 16px; flex-direction:column; gap:32px; }
+ .service-detail [data-service-block="conversation"] h2 + div { width:100%; }
+ .service-icon-credit { padding:16px; }
+}

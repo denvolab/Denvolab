@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { attachRippleHover } from "@/components/ui/ripple-image/attach-ripple-hover";
+import { attachRippleHover, isSvgImage } from "@/components/ui/ripple-image/attach-ripple-hover";
 
 const CAROUSEL = '.loop-carousel, [aria-roledescription="carousel"]';
 
@@ -15,10 +15,10 @@ export function ImageRippleController() {
     const hosts = new Map<HTMLElement, { count: number; position: string; isolation: string }>();
     const register = () => {
       for (const [image, cleanup] of attached) {
-        if (!image.isConnected || image.closest(CAROUSEL)) { cleanup(); attached.delete(image); }
+        if (!image.isConnected || image.closest(CAROUSEL) || image.closest("[data-no-ripple]") || isSvgImage(image)) { cleanup(); attached.delete(image); }
       }
       document.querySelectorAll<HTMLImageElement>("img").forEach(image => {
-        if (attached.has(image) || image.closest(CAROUSEL) || image.closest("[data-ripple-image]")) return;
+        if (attached.has(image) || image.closest(CAROUSEL) || image.closest("[data-ripple-image]") || image.closest("[data-no-ripple]") || isSvgImage(image)) return;
         const host = image.parentElement;
         if (!host) return;
         let saved = hosts.get(host);

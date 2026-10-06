@@ -66,6 +66,8 @@ export interface ServiceHeroBlock {
 
 export interface ServiceCapability {
   icon: ServiceIconName;
+  iconAsset?: string;
+  tile?: number;
   title: string;
   description: string;
 }
@@ -229,6 +231,7 @@ export interface ServiceChecklistBlock {
   tone: "plain" | "brand";
   eyebrow?: string;
   title: string;
+  body?: string;
   rowAlign: "center" | "start";
   items: { format: string; deliverable: string }[];
 }

@@ -40,6 +40,8 @@ export function FaqAccordion({ items, gap, openBorder }: FaqAccordionProps) {
         return (
           <div
             key={item.question}
+            data-faq-card=""
+            data-open={isOpen}
             className={cn(
               "rounded-[12px] border p-5 transition-colors duration-300 md:p-8",
               isOpen

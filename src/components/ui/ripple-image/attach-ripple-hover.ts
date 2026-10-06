@@ -24,6 +24,37 @@ import type { RippleEffect } from "./ripple-effect";
 /** How long to keep the canvas after the cursor leaves, so ripples can finish fading. */
 const LINGER_MS = 2200;
 
+// Only active canvases subscribe. Wheel scrolling should composite normal
+// images, not upload large textures as new images pass under a stationary mouse.
+const activeScrollStops = new Set<() => void>();
+let scrollingUntil = 0;
+function onPageScroll() {
+  scrollingUntil = performance.now() + 180;
+  activeScrollStops.forEach(stop => stop());
+}
+function subscribeScroll(stop: () => void) {
+  if (!activeScrollStops.size) window.addEventListener("scroll", onPageScroll, { passive: true });
+  activeScrollStops.add(stop);
+}
+function unsubscribeScroll(stop: () => void) {
+  activeScrollStops.delete(stop);
+  if (!activeScrollStops.size) window.removeEventListener("scroll", onPageScroll);
+}
+
+/** SVG logos and illustrations keep their original rendering on hover. */
+export function isSvgImage(image: HTMLImageElement): boolean {
+  return [image.currentSrc, image.getAttribute("src") ?? ""].some(source => {
+    if (/^data:image\/svg\+xml/i.test(source)) return true;
+    try {
+      const url = new URL(source, document.baseURI);
+      const original = url.searchParams.get("url") ?? url.pathname;
+      return /\.svg$/i.test(original.split(/[?#]/)[0]);
+    } catch {
+      return /\.svg(?:[?#]|$)/i.test(source);
+    }
+  });
+}
+
 /**
  * How long after the cursor leaves the edge wobble is over (it lasts 1 second).
  * From then on the canvas has no see-through parts, so the <img> can safely be shown
@@ -83,6 +114,7 @@ export function attachRippleHover(
   options?: { objectPosition?: "center" | "top"; image?: HTMLImageElement; imageBounds?: boolean },
 ): () => void {
   const image = options?.image ?? frame.querySelector("img");
+  if (image && (isSvgImage(image) || image.closest("[data-no-ripple]"))) return () => {};
 
   // Skip the effect on touch screens, and for people who asked for less motion.
   const hasMouse = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -110,6 +142,8 @@ export function attachRippleHover(
 
   /** Create the WebGL effect (the first time, this also downloads three.js). */
   async function start() {
+    if (performance.now() < scrollingUntil) return;
+    if (isSvgImage(image!) || image!.closest("[data-no-ripple]")) return;
     if (effect || loading) return;
     if (!image!.complete || image!.naturalWidth === 0) {
       explain("the picture has not finished loading yet. Hover again in a moment.");
@@ -123,10 +157,11 @@ export function attachRippleHover(
         import("./ripple-effect"),
         loadPicture(image!),
       ]);
-      if (removed) return;
+      if (removed || !cursorInside || performance.now() < scrollingUntil) return;
 
       const created = new RippleEffect(frame, image!, picture, options?.objectPosition, options?.imageBounds);
       effect = created;
+      subscribeScroll(stopForScroll);
 
       // The canvas now draws the picture. Hide the <img> only once the canvas is really on
       // screen (see SWAP_FRAMES). The canvas sits on top, so nothing shows through meanwhile.
@@ -149,12 +184,19 @@ export function attachRippleHover(
    * The <img> comes back first and the canvas is removed a few frames later (see SWAP_FRAMES).
    */
   function stop(immediately = false) {
+    unsubscribeScroll(stopForScroll);
     const old = effect;
     effect = null;
     image!.style.visibility = "";
     if (!old) return;
     if (immediately) old.dispose();
     else afterFrames(SWAP_FRAMES, () => old.dispose());
+  }
+
+  function stopForScroll() {
+    window.clearTimeout(lingerTimer);
+    window.clearTimeout(revealTimer);
+    stop(true);
   }
 
   // ---- The three mouse events ----
@@ -183,6 +225,7 @@ export function attachRippleHover(
       if (!cursorInside) { onEnter(event); return; }
     }
     last = positionOf(event);
+    if (!effect && !loading && cursorInside) void start();
     effect?.move(last.x, last.y);
   }
 

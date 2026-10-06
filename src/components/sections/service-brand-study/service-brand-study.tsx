@@ -36,12 +36,12 @@ function box(x: number, y: number, w: number, h: number): CSSProperties {
 // Text styles inside the panel: same families/weights/tracking as the
 // tokens, with the size and line height scaled by --k.
 const label = (lh = 20): CSSProperties => ({ fontSize: k(14), lineHeight: k(lh), letterSpacing: "0.02em" });
-const editorial: CSSProperties = { fontSize: k(128), lineHeight: k(132), letterSpacing: "-0.05em" };
+const editorial: CSSProperties = { fontSize: k(128), lineHeight: k(136), letterSpacing: "-0.02em" };
 // Display styles use DM Sans' fixed opsz-14 cut, like everywhere on these
 // pages (see the v3.1 note in styles/tokens/typography.css).
 const displayXl: CSSProperties = {
   fontSize: k(60),
-  lineHeight: k(68),
+  lineHeight: k(72),
   letterSpacing: "-0.04em",
   fontVariationSettings: '"opsz" 14',
 };
@@ -53,7 +53,7 @@ const displayLg: CSSProperties = {
 };
 const bodyLg: CSSProperties = { fontSize: k(18), lineHeight: k(28) };
 
-const SWATCHES = ["bg-white", "bg-brand-100", "bg-brand-default", "bg-gray-700"];
+const SWATCHES = ["bg-white", "bg-warning-50", "bg-brand-default", "bg-secondary-600"];
 
 export function ServiceBrandStudy({ block }: { block: ServiceBrandStudyBlock }) {
   const { specimen, typography, application } = block;

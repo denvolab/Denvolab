@@ -1,7 +1,8 @@
-import { SitePage, SiteHero, SiteConversation } from "@/components/sections/site-page/site-page";
+import { SitePage, SiteHero } from "@/components/sections/site-page/site-page";
 import type { Metadata } from "next";
 import { ServicesList } from "@/components/sections/services-list";
-import { AboutBenefits } from "@/components/sections/about-benefits";
+import { ServicesBenefits, ServicesConversation } from "./services-page-content";
+import "./services.css";
 import { IndustriesServed } from "@/components/sections/industries-served";
 import { Testimonials } from "@/components/sections/testimonials";
 
@@ -30,10 +31,10 @@ export default function ServicesPage() {
     <SitePage path="/services">
       <SiteHero title={"What can we\ncraft for you?"} intro="A clear brand, a useful app, or a website that tells your story. Find the right place to begin." action="EXPLORE OUR SERVICES" href="#services-list" node="986:3155" />
       <ServicesList />
-      <AboutBenefits />
+      <ServicesBenefits />
       <IndustriesServed />
-      <Testimonials home />
-      <SiteConversation />
+      <Testimonials home services />
+      <ServicesConversation />
     </SitePage>
   );
 }

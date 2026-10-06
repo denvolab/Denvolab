@@ -1,13 +1,12 @@
 /* Home 230:4043. Values from the desktop, 768px and 390px frames.
    Scoped to this route; shared service/case-study components retain their styles. */
-body:has([data-homepage]) > header[data-site-header],
 body:has([data-homepage]) > footer[data-site-footer] { display: none; }
 [data-homepage] { --home-dark:#0d1216; --home-muted:#52616f; --color-surface-dark-deep:#0d1216; --color-ai-orbit-card:#192027; color:#0d1216; background:white; font-family:"DM Sans Opsz",var(--font-sans); font-optical-sizing:none; font-variation-settings:"opsz" 14; }
 main [data-homepage] section { min-height:0!important; }
 [data-homepage] h1,[data-homepage] h2,[data-homepage] h3 { font-family:inherit; font-variation-settings:"opsz" 14; font-optical-sizing:none; font-weight:600; text-box-trim:trim-both; text-box-edge:cap alphabetic; }
 [data-homepage] .font-sans,[data-homepage] .font-heading { font-family:inherit; }
 [data-homepage] a:focus-visible,[data-homepage] button:focus-visible { outline:2px solid #dfe94c; outline-offset:5px; }
-[data-homepage] .home-button { font-family:var(--font-mono); font-size:14px; line-height:20px; letter-spacing:.02em; font-weight:400; background:#dfe94c; color:#0d151f; height:60px; padding:20px 24px; border-radius:16px; box-shadow:0 8px 16px -4px #dfe94c33; }
+[data-homepage] .home-button,.home-closing .home-button { font-family:var(--font-mono); font-size:14px; line-height:20px; letter-spacing:.02em; font-weight:400; background:#dfe94c; color:#0d151f; height:60px; padding:20px 24px; border-radius:16px; box-shadow:0 8px 16px -4px #dfe94c33; }
 .home-header { background:#0d1216; color:white; position:relative; z-index:50; }
 .home-header-inner { max-width:1920px; margin:auto; height:100px; padding:24px 40px; display:flex; align-items:center; justify-content:space-between; position:relative; }
 .home-nav-home,.home-nav a { font-family:var(--font-mono); font-size:14px; line-height:20px; letter-spacing:.02em; font-weight:400; }
@@ -44,13 +43,27 @@ main [data-homepage] .home-hero { min-height:100svh!important; background:#0d121
 .home-portfolio-more a,.home-outline { border:1px solid #4c5662; border-radius:8px; padding:12px 20px; font:400 14px/20px var(--font-mono); letter-spacing:.02em; }
 .home-services { padding:120px 40px; background:white; }
 .home-services-intro { display:flex; align-items:flex-start; gap:48px; max-width:1840px; margin:auto; }
-.home-services-intro h2 { width:986px; max-width:calc(100% - 460px); font-size:60px; line-height:72px; letter-spacing:-.04em; margin:16px 0; }
+.home-services-intro .home-eyebrow { padding:0; background:transparent; flex-shrink:0; }
+.home-services-intro h2 { width:820px; max-width:calc(100% - 460px); font-size:60px; line-height:72px; letter-spacing:-.04em; margin:0; padding-bottom:16px; }
+/* Keep Figma's cap alignment on the text itself after the animated line split. */
+[data-homepage] .home-services-intro h2 { text-box-trim:none; }
+.home-services-intro h2 > [data-line-animation] { display:block; text-box-trim:trim-both; text-box-edge:cap alphabetic; }
+.home-services-intro h2 [data-line-animation="ready"] .line:first-child .line-inner { text-box-trim:trim-start; text-box-edge:cap alphabetic; }
+.home-services-intro h2 [data-line-animation="ready"] .line:only-child .line-inner { text-box-trim:trim-both; }
 .home-services-intro .home-outline { margin-left:auto; flex-shrink:0; }
 .home-services-grid { max-width:1840px; margin:48px auto 0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:48px; }
 .home-service-card { position:relative; overflow:hidden; height:720px; border-radius:24px; padding:32px; }
 .home-service-image { position:absolute; inset:0; width:100%; height:100%; z-index:0; isolation:isolate; }
 .home-service-copy { position:relative; z-index:1; display:flex; flex-direction:column; gap:24px; align-items:flex-start; }
 .home-service-copy h3 { font-size:32px; line-height:40px; letter-spacing:-.025em; }
+/* Trim the actual block label, rather than the inline hover wrapper's baseline.
+   Otherwise a multiline title protrudes above the card and gets clipped. */
+[data-homepage] .home-service-copy h3 { text-box-trim:none; }
+.home-service-copy h3 a,
+.home-service-copy h3 .button-text--link { display:block; }
+.home-service-copy h3 .button-text-measure,
+.home-service-copy h3 .button-text-live { display:block; text-box-trim:trim-both; text-box-edge:cap alphabetic; }
+.home-service-copy h3 .button-text-live { overflow:visible; }
 .home-service-card:first-child h3 { max-width:223px; }
 .home-service-card:last-child h3 { max-width:369px; }
 .home-service-copy p { font-size:16px; line-height:24px; color:#52616f; }
@@ -175,7 +188,7 @@ main [data-homepage] .home-hero { min-height:100svh!important; background:#0d121
  .home-closing-invitation h2 { font-size:60px; line-height:72px; letter-spacing:-.04em; }
  .home-closing-invitation > div { width:100%; gap:24px; }
  .home-closing-invitation p { max-width:600px; font-size:16px; line-height:24px; }
- [data-homepage] .home-closing .home-button { height:44px; padding:12px 20px; }
+ .home-closing .home-button { height:44px; padding:12px 20px; }
  .home-footer { padding:0 24px; }
  .home-footer-top { flex-direction:column; gap:48px; }
  .home-footer-logo { width:220px; height:auto; }
@@ -260,7 +273,7 @@ main [data-homepage] .home-hero { min-height:100svh!important; background:#0d121
  .home-closing-invitation h2 { font-size:48px; line-height:56px; letter-spacing:-.035em; }
  .home-closing-invitation > div { width:100%; gap:24px; }
  .home-closing-invitation p { font-size:16px; line-height:24px; }
- [data-homepage] .home-closing .home-button { height:44px; padding:12px 20px; }
+ .home-closing .home-button { height:44px; padding:12px 20px; }
  .home-footer { padding:0 16px; }
  .home-footer-top { flex-direction:column; gap:40px; }
  .home-footer-logo { width:220px; height:auto; }
@@ -369,5 +382,4 @@ html.wash-ready [data-homepage] .home-portfolio-more a { color:var(--home-wash-i
 [data-homepage] [data-home-part="process"] li[data-shadow-covered="true"] { box-shadow:none; }
 
 /* SitePage owns its closing; detail pages reuse the same footer through RootLayout. */
-body:has([data-homepage]) > .home-closing { display:none; }
 .home-closing-credit { max-width:1920px; margin:auto; padding:0 40px 48px; font:400 12px/16px var(--font-mono); color:#b4c0cc; }

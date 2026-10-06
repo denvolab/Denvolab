@@ -11,7 +11,8 @@ export function ProcessShadow() {
       frame = 0;
       const bounds = cards.map(card => card.getBoundingClientRect());
       cards.forEach((card, index) => {
-        card.dataset.shadowCovered = String(index < cards.length-1 && bounds[index+1].top < bounds[index].bottom);
+        const covered = String(index < cards.length-1 && bounds[index+1].top < bounds[index].bottom);
+        if (card.dataset.shadowCovered !== covered) card.dataset.shadowCovered = covered;
       });
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };

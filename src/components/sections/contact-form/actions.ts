@@ -5,8 +5,7 @@
 //
 // SETUP (.env.local, see .env.example):
 //   RESEND_API_KEY      required. From resend.com -> API Keys.
-//   CONTACT_TO_EMAIL    optional. Where inquiries go. Default: the site
-//                       email in lib/seo/site-config.ts (hello@denvolab.com).
+//   Inquiries currently go to denvolab@gmail.com.
 //   CONTACT_FROM_EMAIL  optional. The sender. Must be on a domain verified in
 //                       Resend, e.g. "Denvo Lab <inquiries@denvolab.com>".
 //                       Default: Resend's test sender, which only delivers
@@ -19,13 +18,13 @@
 // (e.g. per-IP with Upstash) at the top of this function.
 // ---------------------------------------------------------------------------
 import { Resend } from "resend";
-import { siteConfig } from "@/lib/seo/site-config";
 import type { InquiryState } from "@/types/contact";
 import { HONEYPOT_FIELD, labelsFor, readInquiry, validateInquiry, type InquiryValues } from "./validation";
 
 const SUCCESS_MESSAGE = "Thanks, your message is on its way. We’ll reply by email.";
 const INVALID_MESSAGE = "A few fields need a look.";
-const FAILURE_MESSAGE = `Something went wrong on our side. Please email ${siteConfig.email} instead.`;
+const INQUIRY_EMAIL = "denvolab@gmail.com";
+const FAILURE_MESSAGE = `Something went wrong on our side. Please email ${INQUIRY_EMAIL} instead.`;
 
 export async function sendInquiry(_previous: InquiryState, formData: FormData): Promise<InquiryState> {
   // A filled honeypot means a bot. Pretend it worked so it doesn't retry.
@@ -49,7 +48,7 @@ export async function sendInquiry(_previous: InquiryState, formData: FormData): 
     const resend = new Resend(apiKey);
     const { error } = await resend.emails.send({
       from: process.env.CONTACT_FROM_EMAIL || "Denvo Lab <onboarding@resend.dev>",
-      to: process.env.CONTACT_TO_EMAIL || siteConfig.email,
+      to: INQUIRY_EMAIL,
       replyTo: values.email,
       subject: subjectFor(values),
       text: textBody(values),

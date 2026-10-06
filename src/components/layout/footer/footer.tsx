@@ -1,7 +1,7 @@
 import { HomeClosing } from "@/components/sections/home-chrome/home-chrome";
 import "@/app/home.css";
 
-/** Every route uses the current Figma footer. SitePage renders its own closing. */
+/** The only closing invitation and footer used by every route. */
 export function Footer() {
-  return <HomeClosing invitation={false} />;
+  return <HomeClosing />;
 }

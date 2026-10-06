@@ -1,0 +1,18 @@
+.header { position: relative; z-index: 50; background: #0d1216; color: #fff; }
+.inner { max-width: 1920px; margin: auto; height: 100px; padding: 24px 40px; display: flex; align-items: center; justify-content: space-between; position: relative; }
+.home, .nav a { font: 400 14px/20px var(--font-mono); letter-spacing: .02em; }
+.nav { display: flex; gap: 32px; position: absolute; left: 50%; transform: translateX(-50%); }
+.cta { font: 400 14px/20px var(--font-mono); letter-spacing: .02em; height: 52px; padding: 16px 20px; border-radius: 16px; background: #dfe94c; color: #0d151f; box-shadow: 0 8px 16px -4px #dfe94c33; }
+.wordmark, .mobile { display: none; }
+@media (768px <= width < 1024px) {
+ .inner { height: 84px; padding: 20px 24px; }
+ .cta { height: 44px; padding: 12px 20px; }
+}
+@media (width < 768px) {
+ .inner { height: 56px; padding: 16px; }
+ .home, .nav, .cta { display: none; }
+ .wordmark { display: block; font-family: "DM Sans Opsz", var(--font-sans); font-size: 20px; font-weight: 600; line-height: 24px; letter-spacing: -.01em; }
+ .mobile { display: block; }
+ .mobile button { width: 36px; height: 24px; gap: 8px; }
+ .mobile button span { height: 2px; width: 36px; }
+}

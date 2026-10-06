@@ -97,32 +97,32 @@ const ABOUTVALUES: AboutValuesContent = {
     {
       "label": "CURIOSITY",
       "description": "We ask before we assume. Understanding the reason behind a request often leads to a better answer.",
-      "imageSrc": "/images/About/final/value-1.png"
+      "imageSrc": "/images/About/values/curiosity.png"
     },
     {
       "label": "CRAFTSMANSHIP",
       "description": "We care about how something feels and how it behaves. The small details deserve attention too.",
-      "imageSrc": "/images/About/final/value-2.png"
+      "imageSrc": "/images/About/values/craftsmanship.png"
     },
     {
       "label": "PERSISTENCE",
       "description": "When something isn’t right, we keep looking. We test, adjust, and give the problem another try.",
-      "imageSrc": "/images/About/final/value-3.png"
+      "imageSrc": "/images/About/values/gritty.png"
     },
     {
       "label": "HONESTY",
       "description": "We say what we think, explain our choices, and speak up when something needs to change.",
-      "imageSrc": "/images/About/final/value-4.png"
+      "imageSrc": "/images/About/values/authenticity.png"
     },
     {
       "label": "TOGETHERNESS",
       "description": "Everyone brings a different eye. We share ideas early and help each other make them stronger.",
-      "imageSrc": "/images/About/final/value-5.png"
+      "imageSrc": "/images/About/values/community.png"
     },
     {
       "label": "CARE",
       "description": "We think about the people who will use what we build—and the team who will look after it.",
-      "imageSrc": "/images/About/final/value-6.png"
+      "imageSrc": "/images/About/values/passion.png"
     }
   ]
 };

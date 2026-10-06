@@ -268,6 +268,10 @@ html.wash-ready [data-site-page] [data-project-copy] span { color:var(--color-se
 .about-photos-carousel { margin-top:120px; }
 .about-photos-carousel .loop-carousel-track { width:300%; }
 .about-photos-carousel .loop-carousel-group { width:calc(100% / 3); }
+/* Match the photo spacing at the join between repeated desktop/tablet groups. */
+@media (width >= 768px) {
+ .about-photos-carousel .loop-carousel-group { box-sizing:content-box; padding-right:clamp(12px,1.73913vw,32px); }
+}
 .about-photos-carousel .about-final-photos { margin-top:0; }
 @media (width < 1024px) { .about-photos-carousel { margin-top:48px; } }
 @media (width < 768px) {

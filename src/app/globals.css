@@ -25,6 +25,14 @@
 @import "../components/motion/image-reveal/image-reveal.css";
 @import "../components/motion/color-wash/color-wash.css";
 
+/* Lenis owns wheel interpolation. Native anchoring must not pull the page
+   back while lazy media and text reveals update its layout. */
+html.lenis,
+html.lenis body {
+  overflow-anchor: none;
+  scroll-behavior: auto !important;
+}
+
 /* DM Sans WITH its optical-size ("opsz") axis, registered under its own
  * family name so it only applies where it's asked for. The site-wide DM Sans
  * (@fontsource-variable/dm-sans default import, layout.tsx) is the

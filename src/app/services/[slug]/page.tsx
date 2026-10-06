@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getServiceDetail, getServiceDetailCta, getServiceDetailSlugs } from "@/lib/data/service-detail";
+import { getServiceDetail, getServiceDetailSlugs } from "@/lib/data/service-detail";
 import type { ServiceDetailBlock } from "@/types/service-detail";
-import { ContactCta } from "@/components/sections/contact-cta";
+import "./service-detail.css";
 import { ServiceHero } from "@/components/sections/service-hero";
 import { ServiceCapabilities } from "@/components/sections/service-capabilities";
 import { ServiceBrandStudy } from "@/components/sections/service-brand-study";
@@ -81,14 +81,13 @@ export default async function ServiceDetailPage(props: PageProps<"/services/[slu
   const { slug } = await props.params;
   const page = await getServiceDetail(slug);
   if (!page) notFound();
-  const closing = await getServiceDetailCta();
 
   return (
-    <div className="ds-v31">
+    <div className="ds-v31 service-detail" data-service-detail={slug}>
       {page.blocks.map((block, i) => (
-        <Block key={`${block.type}-${i}`} block={block} />
+        <div key={`${block.type}-${i}`} data-service-block={block.type}><Block block={block} /></div>
       ))}
-      <ContactCta content={closing.content} attribution={closing.attribution} />
+      <p className="service-icon-credit">Icons by Streamline · CC BY 4.0</p>
     </div>
   );
 }

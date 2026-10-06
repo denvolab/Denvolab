@@ -9,7 +9,7 @@ import { AiOrbit } from "@/components/sections/ai-orbit";
 import { ProcessSteps } from "@/components/sections/process-steps";
 
 import { Testimonials } from "@/components/sections/testimonials";
-import { HomeHeader, HomeConversation, HomeClosing } from "@/components/sections/home-chrome/home-chrome";
+import { HomeConversation } from "@/components/sections/home-chrome/home-chrome";
 import "./home.css";
 
 // Note: `title.template` from the root layout does NOT apply here — a page
@@ -31,7 +31,6 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <div data-homepage="">
-      <HomeHeader />
       <Hero />
       <MarqueeTagline />
       <div className="home-portfolio"><PortfolioGrid /><div className="home-portfolio-more"><Link href="/case-studies">VIEW OUR ALL CRAFTS</Link></div></div>
@@ -40,7 +39,6 @@ export default function HomePage() {
       <ProcessSteps />
       <Testimonials home />
       <HomeConversation />
-      <HomeClosing />
     </div>
   );
 }

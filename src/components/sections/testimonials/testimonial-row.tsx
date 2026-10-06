@@ -26,7 +26,6 @@ export function TestimonialCard({
         fixedWidth ? "w-[611px]" : "w-full",
       )}
     >
-      {testimonial.isSample && <p className="font-mono text-caption-md text-foreground-subtle">Sample testimonial · Fictional profile</p>}
       <div className="flex w-full items-center gap-4">
         {testimonial.imageSrc ? <Image src={testimonial.imageSrc} alt={testimonial.name} width={56} height={56} className="size-14 shrink-0 rounded-full object-cover" /> : <span className="flex size-14 shrink-0 items-center justify-center rounded-full bg-surface font-sans text-heading-5 text-foreground" aria-hidden="true">{testimonial.name.split(" ").map(part => part[0]).slice(0, 2).join("")}</span>}
         <div className="flex min-w-0 flex-col items-start gap-1">

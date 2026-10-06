@@ -25,6 +25,7 @@ export function ServiceChecklist({ block }: { block: ServiceChecklistBlock }) {
         <div className="flex w-full flex-col gap-6 xl:w-[34.783%] xl:max-w-[640px] xl:shrink-0">
           {block.eyebrow ? <p className="font-mono text-label-md text-text-secondary">{block.eyebrow}</p> : null}
           <h2 className="whitespace-pre-line font-sans text-display-xl text-text-primary"><AnimatedText>{block.title}</AnimatedText></h2>
+          {block.body && <p className="font-sans text-body-lg text-text-secondary">{block.body}</p>}
         </div>
 
         <ul className="flex min-w-0 flex-1 flex-col gap-6 md:gap-12">

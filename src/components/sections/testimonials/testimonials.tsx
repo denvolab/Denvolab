@@ -38,7 +38,7 @@ import { getTestimonials, getTestimonialsContent } from "@/lib/data/homepage";
 import { TestimonialCard, TestimonialRow } from "./testimonial-row";
 import { AnimatedText } from "@/components/ui/animated-text";
 
-export async function Testimonials({ home = false }: { home?: boolean } = {}) {
+export async function Testimonials({ home = false, services = false }: { home?: boolean; services?: boolean } = {}) {
   const [content, testimonials] = await Promise.all([
     getTestimonialsContent(),
     getTestimonials(),
@@ -47,7 +47,7 @@ export async function Testimonials({ home = false }: { home?: boolean } = {}) {
   if (!testimonials.length) return null;
 
   if (home) return <section className="home-testimonials" data-figma-node="1087:20526">
-    <div className="home-section-intro"><p className="home-eyebrow">CLIENT VOICES</p><h2><AnimatedText>The craft is ours. The story is shared.</AnimatedText></h2></div>
+    <div className="home-section-intro"><p className="home-eyebrow">CLIENT VOICES</p><h2><AnimatedText>{services ? "What our clients say." : "The craft is ours. The story is shared."}</AnimatedText></h2></div>
     <div className="home-reviews-desktop"><TestimonialRow testimonials={testimonials.slice(0, 5)} count={5} /><TestimonialRow testimonials={testimonials.slice(5, 9)} count={4} reverse /><TestimonialRow testimonials={[...testimonials.slice(9), ...testimonials.slice(0, 2)]} count={5} /></div>
     <div className="home-reviews-responsive"><TestimonialRow testimonials={testimonials.slice(0, 6)} count={6} /><TestimonialRow testimonials={testimonials.slice(6, 12)} count={6} reverse /></div>
   </section>;

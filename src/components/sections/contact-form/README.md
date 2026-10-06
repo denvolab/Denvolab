@@ -37,8 +37,8 @@ Labels and buttons use DM Mono like the Figma styles (Label/SM, Label/MD).
 1. The browser checks the fields first (`validateInquiry`): name, a valid email, at least one "What do you need?" chip, and project details. Problems show in the Design System's Error state (red border, message under the field), the first bad field gets focus, and "A few fields need a look." shows next to the button. Editing a field clears its error.
 2. If it's all fine, the form data goes to `sendInquiry` (a Server Action, through `useActionState`). The server checks everything again, since anyone can post to an action.
 3. A filled honeypot field (`website`, off screen) means a bot: the action pretends it worked and sends nothing.
-4. The action emails the inquiry with Resend: to `hello@denvolab.com`, reply-to set to the visitor, subject "New inquiry from Name (Company)", plain text and simple HTML.
-5. Success clears the form and shows "Thanks, your message is on its way. We'll reply by email." A failure keeps what they typed and shows "Something went wrong on our side. Please email hello@denvolab.com instead."
+4. The action emails the inquiry with Resend: to `denvolab@gmail.com`, reply-to set to the visitor, subject "New inquiry from Name (Company)", plain text and simple HTML.
+5. Success clears the form and shows "Thanks, your message is on its way. We'll reply by email." A failure keeps what they typed and shows "Something went wrong on our side. Please email denvolab@gmail.com instead."
 
 The form is sent from `onSubmit` (inside `startTransition`) rather than `<form action>`, because React clears a form after every `action` submission, even one that returns errors.
 
@@ -49,7 +49,6 @@ Add these to `.env.local` (see `.env.example` in the project root):
 | Variable | Needed | What |
 |---|---|---|
 | `RESEND_API_KEY` | yes | resend.com -> API Keys |
-| `CONTACT_TO_EMAIL` | no | where inquiries go; default `hello@denvolab.com` (from `lib/seo/site-config.ts`) |
 | `CONTACT_FROM_EMAIL` | no | sender, on a domain verified in Resend, e.g. `Denvo Lab <inquiries@denvolab.com>`. Default is Resend's test sender, which only delivers to the Resend account owner's own email |
 
 Without `RESEND_API_KEY` the form still validates, then shows the "please email us instead" message and logs `[contact] RESEND_API_KEY is not set` on the server.

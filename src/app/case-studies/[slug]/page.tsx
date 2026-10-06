@@ -10,8 +10,6 @@ import "@fontsource/frank-ruhl-libre/500.css";
 import "@fontsource/frank-ruhl-libre/700.css";
 import { getCaseStudy, getCaseStudySlugs } from "@/lib/data/case-study";
 import { getCaseStudyPresentation } from "@/lib/data/case-study/presentation";
-import { getServiceDetailCta } from "@/lib/data/service-detail";
-import { ContactCta } from "@/components/sections/contact-cta";
 import { CaseStudyPresentation } from "@/components/sections/case-study-presentation/case-study-presentation";
 
 export const dynamicParams = false;
@@ -33,9 +31,7 @@ export default async function CaseStudyPage(props: PageProps<"/case-studies/[slu
   const study = await getCaseStudy(slug);
   const presentation = getCaseStudyPresentation(slug);
   if (!study || !presentation) notFound();
-  const { content } = await getServiceDetailCta();
   return <div className="ds-v31 bg-background">
     <CaseStudyPresentation content={presentation} name={study.name} />
-    <ContactCta content={{ ...content, description: study.closing }} />
   </div>;
 }

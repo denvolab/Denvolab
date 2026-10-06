@@ -88,9 +88,18 @@ export function ImageRevealController() {
     // the trigger points were measured: re-measure when the page changes
     // height (debounced).
     let timer = 0;
+    let width = document.body.offsetWidth;
+    let height = document.body.offsetHeight;
     const observer = new ResizeObserver(() => {
+      const nextWidth = document.body.offsetWidth;
+      const nextHeight = document.body.offsetHeight;
+      if (width === nextWidth && height === nextHeight) return;
+      width = nextWidth;
+      height = nextHeight;
       window.clearTimeout(timer);
-      timer = window.setTimeout(() => ScrollTrigger.refresh(), 200);
+      // A refresh can temporarily reset native scroll positions. Defer it
+      // until scrolling finishes rather than interrupting Lenis interpolation.
+      timer = window.setTimeout(() => ScrollTrigger.refresh(true), 200);
     });
     observer.observe(document.body);
 

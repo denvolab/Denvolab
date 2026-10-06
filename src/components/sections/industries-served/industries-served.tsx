@@ -42,6 +42,7 @@ import Image from "next/image";
 import { getIndustriesServed } from "@/lib/data/services";
 import { LoopCarousel } from "@/components/ui/loop-carousel";
 import { AnimatedText } from "@/components/ui/animated-text";
+import { Button } from "@/components/ui/button";
 
 export async function IndustriesServed() {
   const industries = await getIndustriesServed();
@@ -57,19 +58,20 @@ export async function IndustriesServed() {
             </p>
           </div>
 
+          <Button href={industries.cta.href} variant="outline">{industries.cta.label}</Button>
         </div>
 
         <LoopCarousel className="industries-carousel" label="Industries we serve"><div className="industries-carousel-items">
           {industries.items.map((industry) => (
             <div key={industry.name} className="flex w-[280px] shrink-0 flex-col items-start gap-3">
               <div data-image-reveal="" className="relative flex h-[200px] w-[280px] shrink-0 items-center justify-center overflow-hidden rounded-lg border border-border-primary bg-surface-secondary">
-                {industry.imageSrc ? (
+                {(industry.imageSrc || ["Healthcare", "Software & Apps", "AI Tools"].includes(industry.name)) ? (
                   <Image
-                    src={industry.imageSrc}
+                    src={industry.imageSrc ?? `/images/services/current/industry-${industry.name === "Healthcare" ? 1 : industry.name === "Software & Apps" ? 2 : 3}.png`}
                     alt=""
                     fill
                     sizes="(max-width: 767px) 280px, (max-width: 1023px) 320px, 470px"
-                    className="object-cover"
+                    className="object-cover services-industry-image"
                   />
                 ) : (
                   <span aria-hidden="true" />

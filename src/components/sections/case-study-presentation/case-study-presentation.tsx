@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import type { CaseStudyImage } from "@/types/case-study";
 import type { CaseStudyPresentation as Presentation } from "@/types/case-presentation";
 import styles from "./case-study-presentation.module.css";
+import { CaseStudyHighlighter } from "./case-study-highlighter";
 
 const assets = "/images/case-studies/job-sea/current/";
 const icons = { industry: "imgIndustryBriefcase.svg", services: "imgServicesUiLayout.svg", timeline: "imgTimelineCalendar.svg" };
@@ -33,7 +34,7 @@ export function CaseStudyPresentation({ content, name }: { content: Presentation
       <Mockup image={content.hero} className={styles.heroImage} eager />
     </section>
     <section data-section-height="content" data-wash="off" className={`${styles.band} ${styles.overview}`} aria-label="Project overview">
-      <p className={styles.statement}>{content.intro.lead && <span>{content.intro.lead}</span>}{content.intro.text}</p>
+      <p className={styles.statement}><CaseStudyHighlighter text={`${content.intro.lead ?? ""}${content.intro.text}`} /></p>
       {content.video ? <video className={styles.video} controls playsInline preload="none" poster={content.overview.src} aria-label={`${name} product walkthrough`}>
         <source src={content.video.src} type={content.video.type ?? "video/mp4"} />
         {content.video.captions && <track kind="captions" src={content.video.captions} srcLang="en" label="English" />}

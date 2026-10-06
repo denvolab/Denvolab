@@ -1,0 +1,704 @@
+{
+  "branding-visual-identity": {
+    "hero": {
+      "headline": "Make your name\nmean something.",
+      "intro": "When your product has moved forward but your brand has not, every introduction takes too much explaining. We help turn what makes you different into an identity people can recognize—and a system your team can actually use.",
+      "image": "/images/service-detail/final/ac277b40-6fdb-4a15-b7f4-296cb4f61092.png"
+    },
+    "capabilities": {
+      "title": "A complete identity.\nEvery expression considered.",
+      "feature": {
+        "statement": "Distinctive by design.\nConsistent by system.",
+        "description": "From your core positioning to the smallest brand application, every choice should feel connected.",
+        "image": "/images/service-detail/final/5935100c-d934-4767-92a1-51305de0470b.png"
+      },
+      "items": [
+        {
+          "title": "Brand strategy",
+          "description": "Positioning, audience, differentiation, and a focused creative direction.",
+          "iconAsset": "/images/service-detail/final/9b72f58f-03f9-4c7b-9a61-c4f2fd12fb0f.svg",
+          "tile": 56
+        },
+        {
+          "title": "",
+          "description": "A verbal foundation that keeps your story clear and memorable.",
+          "iconAsset": "/images/service-detail/final/3d723fa4-3cf5-461e-bf1e-72996d3b3011.svg",
+          "tile": 56
+        },
+        {
+          "title": "Visual identity",
+          "description": "Logo, color, typography, imagery, and a cohesive art direction.",
+          "iconAsset": "/images/service-detail/final/7c92b503-1d1c-47fe-90a2-818d3a663aa6.svg",
+          "tile": 56
+        },
+        {
+          "title": "Brand guidelines",
+          "description": "Rules, examples, and templates that make consistency easy.",
+          "iconAsset": "/images/service-detail/final/8f05f3f4-8405-46f9-8221-c5ec607f4b87.svg",
+          "tile": 56
+        },
+        {
+          "title": "Campaign toolkit",
+          "description": "Flexible assets for launch, social, sales, and marketing.",
+          "iconAsset": "/images/service-detail/final/79010d73-3d67-41b1-95db-705b69238eee.svg",
+          "tile": 56
+        },
+        {
+          "title": "",
+          "description": "Expressive motion principles and support across key touchpoints.",
+          "iconAsset": "/images/service-detail/final/2a315fa7-44a6-4d70-9edf-850e1740418b.svg",
+          "tile": 56
+        }
+      ]
+    },
+    "faq": [
+      {
+        "question": "Can you handle complex enterprise workflows?",
+        "answer": "Yes. We map roles, permissions, dependencies, exceptions, and data states before simplifying the interface."
+      },
+      {
+        "question": "How do you design trustworthy AI features?"
+      },
+      {
+        "question": "Can you improve an existing SaaS product?"
+      },
+      {
+        "question": "Will the design be implementation-ready?"
+      }
+    ],
+    "photos": [
+      "/images/service-detail/final/6733125a-ad33-4c7f-84df-12c61d2049b7.png"
+    ],
+    "order": [
+      "Capabilities / Branding & visual identity",
+      "Craft / Service concept showcase / 01",
+      "05 / Process — decisions and tangible outputs",
+      "Craft / Service concept showcase / 02",
+      "FAQs / Interactive accordion"
+    ]
+  },
+  "ui-ux-design": {
+    "hero": {
+      "headline": "Clear journeys.\nConfident decisions.",
+      "intro": "We turn product complexity into clear user journeys through research, interface design, prototyping and testing. AI helps us explore faster; real user needs guide every decision.",
+      "image": "/images/service-detail/final/17537d7b-85a6-4136-8690-97a370a5ee6f.png"
+    },
+    "capabilities": {
+      "title": "Every layer of your\nproduct experience, connected.",
+      "feature": {
+        "statement": "Clear journeys.\nConfident decisions.",
+        "description": "We turn product complexity into clear user journeys through research, interface design, prototyping and testing. AI helps us explore faster; real user needs guide every decision.",
+        "image": "/images/service-detail/final/7e8056d3-252e-49a4-b316-84ad67069ce7.png"
+      },
+      "items": [
+        {
+          "title": "UX research",
+          "description": "Interviews, audits, competitive review, and behavior-focused insights.",
+          "iconAsset": "/images/service-detail/final/252b8524-6ca0-4642-ba28-f585180f1c00.svg",
+          "tile": 72
+        },
+        {
+          "title": "Information architecture",
+          "description": "Clear structures that make features and content easier to find.",
+          "iconAsset": "/images/service-detail/final/a8a5da64-b1fb-40d2-a85c-523a88be41c1.svg",
+          "tile": 72
+        },
+        {
+          "title": "User flows",
+          "description": "Purposeful journeys for core tasks, edge cases, and handoffs.",
+          "iconAsset": "/images/service-detail/final/e00e0d70-3909-4ae9-9a3f-9d496266b4f1.svg",
+          "tile": 72
+        },
+        {
+          "title": "UI design",
+          "description": "Accessible, responsive interfaces with strong visual hierarchy.",
+          "iconAsset": "/images/service-detail/final/a8a5da64-b1fb-40d2-a85c-523a88be41c1.svg",
+          "tile": 72
+        },
+        {
+          "title": "",
+          "description": "Interactive prototypes for early validation and confident iteration.",
+          "iconAsset": "/images/service-detail/final/af9a9a63-62e5-4b8e-80f6-361e705aa455.svg",
+          "tile": 72
+        },
+        {
+          "title": "Design systems",
+          "description": "Reusable components, tokens, and documentation for product teams.",
+          "iconAsset": "/images/service-detail/final/f335c092-02cc-42b7-b84e-db280f612cef.svg",
+          "tile": 72
+        }
+      ]
+    },
+    "faq": [
+      {
+        "question": "Can you handle complex enterprise workflows?",
+        "answer": "Yes. We map roles, permissions, dependencies, exceptions, and data states before simplifying the interface."
+      },
+      {
+        "question": "How do you design trustworthy AI features?"
+      },
+      {
+        "question": "Can you improve an existing SaaS product?"
+      },
+      {
+        "question": "Will the design be implementation-ready?"
+      }
+    ],
+    "deliverables": [
+      {
+        "format": "EVIDENCE",
+        "deliverable": "Research notes, audit findings and the assumptions still to validate."
+      },
+      {
+        "format": "STRUCTURE",
+        "deliverable": "Navigation model, information architecture and primary task flows."
+      },
+      {
+        "format": "PROTOTYPE",
+        "deliverable": "Clickable critical journeys for review and scoped usability testing."
+      },
+      {
+        "format": "UI DESIGN",
+        "deliverable": "Agreed screens and responsive layouts with edge and system states."
+      },
+      {
+        "format": "SYSTEM",
+        "deliverable": "Reusable components, variables and interaction specifications."
+      },
+      {
+        "format": "BUILD SUPPORT",
+        "deliverable": "Handover walkthrough and an agreed design QA review."
+      }
+    ],
+    "photos": [
+      "/images/service-detail/final/29c25d19-b99a-4159-9787-12da0f930d65.png"
+    ],
+    "order": [
+      "Capabilities / AI-enhanced UI/UX design",
+      "UI/UX in practice / A clear next step",
+      "05 / Process — decisions and tangible outputs",
+      "Deliverables / Built to be used",
+      "FAQs / Interactive accordion"
+    ]
+  },
+  "mobile-app-development": {
+    "hero": {
+      "headline": "An app people open.\nAn experience they keep.",
+      "intro": "A good mobile app works in short, interrupted moments—not just in a perfect demo. We design and build the core journey, the awkward edge cases and the feedback that helps people trust every tap.",
+      "image": "/images/service-detail/final/0d86f157-1b3c-4cfa-9123-43a1a9ea0937.png"
+    },
+    "capabilities": {
+      "title": "From the first tap to a lasting habit.",
+      "feature": {
+        "statement": "Designed for the moments\nbetween screens.",
+        "description": "Feedback, transitions and states make an interface feel complete.",
+        "image": "/images/service-detail/final/d490a085-027f-4c5e-af15-9855a6340ed6.png"
+      },
+      "items": [
+        {
+          "title": "Product strategy",
+          "description": "Define the audience, core value, feature priorities, and release path.",
+          "iconAsset": "/images/service-detail/final/83453768-c569-466c-855e-12e4052d163e.svg",
+          "tile": 56
+        },
+        {
+          "title": "",
+          "description": "Platform-aware flows that still feel consistent with your brand.",
+          "iconAsset": "/images/service-detail/final/255b29c7-0a50-4bf6-99df-c3954453a969.svg",
+          "tile": 56
+        },
+        {
+          "title": "Interactive prototype",
+          "description": "Validate navigation, interactions, and key moments before build.",
+          "iconAsset": "/images/service-detail/final/83402719-a98d-4d00-a527-0a3f3eabfef5.svg",
+          "tile": 56
+        },
+        {
+          "title": "Mobile UI system",
+          "description": "Reusable components, states, accessibility, and responsive behavior.",
+          "iconAsset": "/images/service-detail/final/4493790b-223f-42fe-9764-51fe50681632.svg",
+          "tile": 56
+        },
+        {
+          "title": "Development handoff",
+          "description": "Detailed specs, edge cases, and collaboration through implementation.",
+          "iconAsset": "/images/service-detail/final/cd1b1cb5-e70c-44d8-8bc8-885db6922eff.svg",
+          "tile": 56
+        },
+        {
+          "title": "Launch refinement",
+          "description": "QA support, usability feedback, and focused post-launch improvements.",
+          "iconAsset": "/images/service-detail/final/fe1026fa-b780-4ae4-9ab7-569085738f98.svg",
+          "tile": 56
+        }
+      ]
+    },
+    "faq": [
+      {
+        "question": "Can you handle complex enterprise workflows?",
+        "answer": "Yes. We map roles, permissions, dependencies, exceptions, and data states before simplifying the interface."
+      },
+      {
+        "question": "How do you design trustworthy AI features?"
+      },
+      {
+        "question": "Can you improve an existing SaaS product?"
+      },
+      {
+        "question": "Will the design be implementation-ready?"
+      }
+    ],
+    "deliverables": [
+      {
+        "format": "PRODUCT SCOPE",
+        "deliverable": "Core journeys, release boundaries and platform decisions."
+      },
+      {
+        "format": "EXPERIENCE",
+        "deliverable": "Screen designs, navigation and motion/feedback specifications."
+      },
+      {
+        "format": "UI KIT",
+        "deliverable": "Mobile components, type scales and platform-specific behavior."
+      },
+      {
+        "format": "APP BUILD",
+        "deliverable": "Agreed frontend, integrations and authentication flows."
+      },
+      {
+        "format": "QUALITY CHECKS",
+        "deliverable": "Device test coverage, failure states and release issue list."
+      },
+      {
+        "format": "RELEASE PACKAGE",
+        "deliverable": "Store submission assets and a documented handover, as scoped."
+      }
+    ],
+    "photos": [],
+    "order": [
+      "Capabilities / Mobile app design & development",
+      "Process / From first tap to launch",
+      "Deliverables / Built to be used",
+      "05 / Process — decisions and tangible outputs",
+      "FAQs / Interactive accordion"
+    ]
+  },
+  "saas-development": {
+    "hero": {
+      "headline": "Powerful software.\nSimple to use.",
+      "intro": "More roles, more data and more features should not mean more effort for your users. We connect product design and engineering around the workflows that make your software worth returning to.",
+      "image": "/images/service-detail/final/1db9f57e-8212-4348-8d05-bfe8d662d44b.png"
+    },
+    "capabilities": {
+      "title": "Complex software,\ncarefully simplified.",
+      "feature": {
+        "statement": "Powerful software.\nSimple to use.",
+        "description": "More roles, more data and more features should not mean more effort for your users. We connect product design and engineering around the workflows that make your software worth returning to.",
+        "image": "/images/service-detail/final/052044c2-2ddc-4eff-9e5a-a7d103de4e32.png"
+      },
+      "items": [
+        {
+          "title": "Product strategy",
+          "description": "Align business model, user roles, jobs-to-be-done, and roadmap priorities.",
+          "iconAsset": "/images/service-detail/final/f0187122-f7f7-4eb6-a6f6-4bffc88ee60e.svg",
+          "tile": 72
+        },
+        {
+          "title": "SaaS onboarding",
+          "description": "Guide new users to value with progressive, role-aware experiences.",
+          "iconAsset": "/images/service-detail/final/6191ee06-63cb-4592-b237-aac2c795b41f.svg",
+          "tile": 72
+        },
+        {
+          "title": "",
+          "description": "Turn complex information into clear views and meaningful actions.",
+          "iconAsset": "/images/service-detail/final/bb001f0a-09d4-4e7d-b951-408295f2273a.svg",
+          "tile": 72
+        },
+        {
+          "title": "Design system",
+          "description": "Reusable patterns for dense workflows, tables, forms, and states.",
+          "iconAsset": "/images/service-detail/final/958fe7ec-174f-423a-a9c5-e5a11dac9630.svg",
+          "tile": 72
+        },
+        {
+          "title": "AI feature UX",
+          "description": "Design transparent, controllable AI experiences users can trust.",
+          "iconAsset": "/images/service-detail/final/f79bf169-55a3-4364-94d3-92271aa95b58.svg",
+          "tile": 72
+        },
+        {
+          "title": "Developer collaboration",
+          "description": "Practical specs, responsive behavior, and ongoing design QA.",
+          "iconAsset": "/images/service-detail/final/73c38ce2-9f09-42d0-937c-41417a1001b1.svg",
+          "tile": 72
+        }
+      ]
+    },
+    "faq": [
+      {
+        "question": "Can you handle complex enterprise workflows?",
+        "answer": "Yes. We map roles, permissions, dependencies, exceptions, and data states before simplifying the interface."
+      },
+      {
+        "question": "How do you design trustworthy AI features?"
+      },
+      {
+        "question": "Can you improve an existing SaaS product?"
+      },
+      {
+        "question": "Will the design be implementation-ready?"
+      }
+    ],
+    "deliverables": [
+      {
+        "format": "STRATEGY",
+        "deliverable": ""
+      },
+      {
+        "format": "ARCHITECTURE",
+        "deliverable": ""
+      },
+      {
+        "format": "PROTOTYPE",
+        "deliverable": "Validated core-flow prototype"
+      },
+      {
+        "format": "DESIGN",
+        "deliverable": ""
+      },
+      {
+        "format": "SYSTEM",
+        "deliverable": "Scalable component library"
+      },
+      {
+        "format": "HANDOFF",
+        "deliverable": ""
+      }
+    ],
+    "photos": [
+      "/images/service-detail/final/6b2b0edb-4296-4e7a-bd98-8c1492a4f9a6.png"
+    ],
+    "order": [
+      "Capabilities / SaaS design & development",
+      "Craft / Service concept showcase",
+      "Process / A connected delivery system",
+      "Deliverables / Built to be used",
+      "05 / Process — decisions and tangible outputs",
+      "FAQs / Interactive accordion"
+    ]
+  },
+  "web-development": {
+    "hero": {
+      "headline": "A better first\nconversation.",
+      "intro": "Your website should help the right people understand the offer, trust the business and take a useful next step. We bring the message, visual experience and build together so the site works beyond launch day.",
+      "image": "/images/service-detail/final/86a76266-fda2-43ba-aafa-89125acca260.png"
+    },
+    "capabilities": {
+      "title": "Strategy to launch.\nOne cohesive web experience.",
+      "feature": {
+        "statement": "A better first\nconversation.",
+        "description": "Your website should help the right people understand the offer, trust the business and take a useful next step. We bring the message, visual experience and build together so the site works beyond launch day.",
+        "image": "/images/service-detail/final/1329fdd3-81e6-4eab-b9a3-058ac063257f.png"
+      },
+      "items": [
+        {
+          "title": "Web strategy",
+          "description": "Clarify audiences, goals, conversion paths, and the role of each page.",
+          "iconAsset": "/images/service-detail/final/86ff90c1-796e-4e35-ac85-d25d4f52ac82.svg",
+          "tile": 56
+        },
+        {
+          "title": "Information architecture",
+          "description": "Organize content so visitors find answers quickly and naturally.",
+          "iconAsset": "/images/service-detail/final/67bd2851-2ce8-4994-834e-ff7dfd7ad3de.svg",
+          "tile": 56
+        },
+        {
+          "title": "",
+          "description": "Shape page narratives, calls to action, and proof around user intent.",
+          "iconAsset": "/images/service-detail/final/8a7415b7-5168-41fa-9f76-f1a2bdc3f8bd.svg",
+          "tile": 56
+        },
+        {
+          "title": "Responsive UI design",
+          "description": "Create a distinctive system that works across desktop, tablet, and mobile.",
+          "iconAsset": "/images/service-detail/final/dfea7b88-92d3-4019-908b-ace818e25dd9.svg",
+          "tile": 56
+        },
+        {
+          "title": "Interaction design",
+          "description": "Use motion and feedback to guide attention without slowing the experience.",
+          "iconAsset": "/images/service-detail/final/b2124eba-edbd-4046-8979-dfbf03921f63.svg",
+          "tile": 56
+        },
+        {
+          "title": "Build-ready system",
+          "description": "Reusable sections, components, specifications, and implementation support.",
+          "iconAsset": "/images/service-detail/final/71856386-c25b-4812-97f2-21f87ac0daa9.svg",
+          "tile": 56
+        }
+      ]
+    },
+    "faq": [
+      {
+        "question": "Can you handle complex enterprise workflows?",
+        "answer": "Yes. We map roles, permissions, dependencies, exceptions, and data states before simplifying the interface."
+      },
+      {
+        "question": "How do you design trustworthy AI features?"
+      },
+      {
+        "question": "Can you improve an existing SaaS product?"
+      },
+      {
+        "question": "Will the design be implementation-ready?"
+      }
+    ],
+    "deliverables": [
+      {
+        "format": "PLANNING",
+        "deliverable": ""
+      },
+      {
+        "format": "CONTENT",
+        "deliverable": ""
+      },
+      {
+        "format": "DESIGN",
+        "deliverable": "Responsive page designs"
+      },
+      {
+        "format": "SYSTEM",
+        "deliverable": "Reusable website sections"
+      },
+      {
+        "format": "BUILD",
+        "deliverable": "Implementation-ready specs"
+      },
+      {
+        "format": "LAUNCH",
+        "deliverable": ""
+      }
+    ],
+    "photos": [
+      "/images/service-detail/final/340c078b-3ee3-483a-8743-d00124e63c98.png"
+    ],
+    "order": [
+      "Capabilities / Web design & development",
+      "Craft / Service concept showcase",
+      "Process / Strategy to launch",
+      "Deliverables / Built to be used",
+      "05 / Process — decisions and tangible outputs",
+      "FAQs / Interactive accordion"
+    ]
+  },
+  "mvp-development": {
+    "hero": {
+      "headline": "Start focused.\nLearn faster.",
+      "intro": "Your first release does not need every feature. It needs a complete, useful journey that helps you learn whether the idea deserves the next investment. We help decide what to build, what to leave out and what to measure.",
+      "image": "/images/service-detail/final/5cb87fc9-4ad3-49e2-bf40-54d104d82421.png"
+    },
+    "capabilities": {
+      "title": "From first hypothesis\nto a product worth testing.",
+      "feature": {
+        "statement": "Start focused.\nLearn faster.",
+        "description": "Your first release does not need every feature. It needs a complete, useful journey that helps you learn whether the idea deserves the next investment. We help decide what to build, what to leave out and what to measure.",
+        "image": "/images/service-detail/final/1ffacef7-59fc-42c9-827c-9d0293e4ceb9.png"
+      },
+      "items": [
+        {
+          "title": "Product framing",
+          "description": "Clarify the problem, audience, value proposition, and validation goal.",
+          "iconAsset": "/images/service-detail/final/d96bb2ec-bcf0-4f55-8f52-7c87d9ece6e0.svg",
+          "tile": 72
+        },
+        {
+          "title": "Feature prioritization",
+          "description": "Separate must-have learning from features that can wait.",
+          "iconAsset": "/images/service-detail/final/e471f6d2-cbc4-4d21-931a-b2142c41f34b.svg",
+          "tile": 72
+        },
+        {
+          "title": "UX flows",
+          "description": "Design the shortest coherent journey from entry to core value.",
+          "iconAsset": "/images/service-detail/final/96b6df41-ea2f-43aa-b232-456f99c63152.svg",
+          "tile": 72
+        },
+        {
+          "title": "Prototype",
+          "description": "Create a realistic interactive experience for testing and alignment.",
+          "iconAsset": "/images/service-detail/final/9acaf0b4-cd20-4c1b-88e1-f3e457588265.svg",
+          "tile": 72
+        },
+        {
+          "title": "MVP interface",
+          "description": "Build a reusable UI foundation for the first release.",
+          "iconAsset": "/images/service-detail/final/d58f3654-82ae-4347-aaae-5285a6aa1a21.svg",
+          "tile": 72
+        },
+        {
+          "title": "Validation roadmap",
+          "description": "Define what to measure, learn, improve, and build next.",
+          "iconAsset": "/images/service-detail/final/28bc4eb0-bd06-406c-a679-04c7b9914588.svg",
+          "tile": 72
+        }
+      ]
+    },
+    "faq": [
+      {
+        "question": "Can you handle complex enterprise workflows?",
+        "answer": "Yes. We map roles, permissions, dependencies, exceptions, and data states before simplifying the interface."
+      },
+      {
+        "question": "How do you design trustworthy AI features?"
+      },
+      {
+        "question": "Can you improve an existing SaaS product?"
+      },
+      {
+        "question": "Will the design be implementation-ready?"
+      }
+    ],
+    "deliverables": [
+      {
+        "format": "PRODUCT BRIEF",
+        "deliverable": "Audience, core problem, assumptions and intended learning."
+      },
+      {
+        "format": "RELEASE SCOPE",
+        "deliverable": "Explicit in-scope and later lists with acceptance criteria."
+      },
+      {
+        "format": "PROTOTYPE",
+        "deliverable": "The complete primary journey before the build begins."
+      },
+      {
+        "format": "WORKING MVP",
+        "deliverable": "Agreed application, integrations and essential operational setup."
+      },
+      {
+        "format": "MEASUREMENT",
+        "deliverable": "Events and feedback collection tied to the learning question."
+      },
+      {
+        "format": "HANDOVER",
+        "deliverable": "Source access, documentation and a post-release decision review."
+      }
+    ],
+    "photos": [
+      "/images/service-detail/final/226f2b07-9e1a-440e-b872-d1758b956213.png"
+    ],
+    "order": [
+      "Perspective / Why this service",
+      "05 / Process — decisions and tangible outputs / 01",
+      "Capabilities / MVP development",
+      "Deliverables / Built to be used",
+      "Craft / Service concept showcase",
+      "05 / Process — decisions and tangible outputs / 02",
+      "FAQs / Interactive accordion"
+    ]
+  },
+  "ai-agent-custom-cms": {
+    "hero": {
+      "headline": "Less manual work.\nMore human control.",
+      "intro": "We connect your content, workflows and tools in a custom system built around your team. AI agents handle repetitive tasks while clear approvals, permissions and review checkpoints keep people in control.",
+      "image": "/images/service-detail/final/c654b966-6a76-4e2d-b720-47999986eb61.png"
+    },
+    "capabilities": {
+      "title": "Your workflows.\nYour content. Your system.",
+      "feature": {
+        "statement": "Automation with\na human checkpoint.",
+        "description": "Review queues, permissions and clear status keep every publishing decision accountable.",
+        "image": "/images/service-detail/final/6c944920-3f98-44ff-8488-d8bedb945ac2.png"
+      },
+      "items": [
+        {
+          "title": "Workflow discovery",
+          "description": "Map contributors, approvals, handoffs, repetitive tasks, and exceptions.",
+          "iconAsset": "/images/service-detail/final/54ca8941-585d-460e-8d5f-e8edaf5310b3.svg",
+          "tile": 56
+        },
+        {
+          "title": "Content modeling",
+          "description": "Create flexible structures that support channels, markets, and future needs.",
+          "iconAsset": "/images/service-detail/final/30ac28fa-35e4-4d19-a991-4d2d33393260.svg",
+          "tile": 56
+        },
+        {
+          "title": "Admin experience",
+          "description": "Design clear dashboards, editors, queues, and operational feedback.",
+          "iconAsset": "/images/service-detail/final/c1e8a657-fdf1-4c94-8d32-3ff0cdd786dc.svg",
+          "tile": 56
+        },
+        {
+          "title": "AI agent workflows",
+          "description": "Automate drafting, enrichment, classification, routing, and quality checks.",
+          "iconAsset": "/images/service-detail/final/6e8cc25c-8026-4964-8fa4-ca834b5ce4fd.svg",
+          "tile": 56
+        },
+        {
+          "title": "",
+          "description": "Define safe access, review states, auditability, and governance.",
+          "iconAsset": "/images/service-detail/final/6ed7c7db-5be6-4d45-98cf-66966f642fc5.svg",
+          "tile": 56
+        },
+        {
+          "title": "API integrations",
+          "description": "Connect the CMS with products, data sources, and business tools.",
+          "iconAsset": "/images/service-detail/final/40647001-2e8f-4a85-b7aa-c17fb96a694a.svg",
+          "tile": 56
+        }
+      ]
+    },
+    "faq": [
+      {
+        "question": "Can you handle complex enterprise workflows?",
+        "answer": "Yes. We map roles, permissions, dependencies, exceptions, and data states before simplifying the interface."
+      },
+      {
+        "question": "How do you design trustworthy AI features?"
+      },
+      {
+        "question": "Can you improve an existing SaaS product?"
+      },
+      {
+        "question": "Will the design be implementation-ready?"
+      }
+    ],
+    "deliverables": [
+      {
+        "format": "ARCHITECTURE",
+        "deliverable": ""
+      },
+      {
+        "format": "GOVERNANCE",
+        "deliverable": ""
+      },
+      {
+        "format": "AUTOMATION",
+        "deliverable": ""
+      },
+      {
+        "format": "DESIGN",
+        "deliverable": ""
+      },
+      {
+        "format": "INTEGRATION",
+        "deliverable": ""
+      },
+      {
+        "format": "OPERATIONS",
+        "deliverable": ""
+      }
+    ],
+    "photos": [],
+    "order": [
+      "Capabilities / AI agent & custom CMS",
+      "Process / A governed workflow",
+      "Deliverables / Built to be used",
+      "05 / Process — decisions and tangible outputs",
+      "FAQs / Interactive accordion"
+    ]
+  }
+}
