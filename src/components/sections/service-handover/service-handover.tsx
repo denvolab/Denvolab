@@ -18,7 +18,7 @@ export function ServiceHandover({ block }: { block: ServiceHandoverBlock }) {
         <div className="flex w-full flex-col gap-8 xl:w-[34.783%] xl:max-w-[640px] xl:shrink-0">
           {block.label ? <p className="font-mono text-label-md text-text-secondary">{block.label}</p> : null}
           <h2 className="whitespace-pre-line font-sans text-display-xl text-text-primary"><AnimatedText>{block.title}</AnimatedText></h2>
-          <p className="max-w-[560px] font-sans text-body-lg text-text-secondary">{block.body}</p>
+          <p className="max-w-[560px] font-sans text-body-lg text-text-secondary"><AnimatedText>{block.body}</AnimatedText></p>
         </div>
 
         <ol className="flex min-w-0 flex-1 flex-col gap-8 md:gap-12">
@@ -29,7 +29,7 @@ export function ServiceHandover({ block }: { block: ServiceHandoverBlock }) {
               <div className="flex flex-col gap-2 2xl:flex-row 2xl:gap-8">
                 <p className="w-16 shrink-0 font-mono text-label-md text-text-tertiary">{row.index}</p>
                 <h3 className="shrink-0 font-sans text-heading-3 text-text-primary 2xl:w-[28.57%] 2xl:max-w-[320px]">{row.title}</h3>
-                <p className="min-w-0 flex-1 font-sans text-body-lg text-text-secondary">{row.body}</p>
+                <p className="min-w-0 flex-1 font-sans text-body-lg text-text-secondary"><AnimatedText>{row.body}</AnimatedText></p>
               </div>
               <span aria-hidden="true" className="h-px w-full bg-gray-200" />
             </li>

@@ -28,7 +28,7 @@ export function ServiceProcessNarrative({ block }: { block: ServiceProcessNarrat
         <div className="flex w-full flex-col gap-8 xl:sticky xl:top-24 xl:w-[34.783%] xl:max-w-[640px] xl:shrink-0">
           {block.label ? <p className="font-mono text-label-md text-brand-default">{block.label}</p> : null}
           <h2 className="whitespace-pre-line font-sans text-display-xl text-white"><AnimatedText>{block.title}</AnimatedText></h2>
-          {block.body ? <p className="max-w-[560px] font-sans text-body-lg text-gray-300">{block.body}</p> : null}
+          {block.body ? <p className="max-w-[560px] font-sans text-body-lg text-gray-300"><AnimatedText>{block.body}</AnimatedText></p> : null}
           {block.footnote ? <p className="max-w-[560px] font-mono text-label-md text-gray-300">{block.footnote}</p> : null}
         </div>
 
@@ -40,7 +40,7 @@ export function ServiceProcessNarrative({ block }: { block: ServiceProcessNarrat
                 <div className="flex min-w-0 flex-1 flex-col gap-4">
                   <p className="font-mono text-label-md text-gray-300">{step.question}</p>
                   <h3 className="font-sans text-heading-2 text-white">{step.title}</h3>
-                  <p className="max-w-[880px] font-sans text-body-lg text-gray-300">{step.body}</p>
+                  <p className="max-w-[880px] font-sans text-body-lg text-gray-300"><AnimatedText>{step.body}</AnimatedText></p>
                   {step.output ? <p className="font-mono text-label-md text-brand-default">{step.output}</p> : null}
                 </div>
               </div>

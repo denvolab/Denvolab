@@ -44,7 +44,7 @@ export function WideCards({ block }: { block: CapabilitiesWideCards }) {
               />
               <div className="flex flex-col gap-4">
                 <h3 className="font-sans text-heading-3 text-text-primary">{item.title}</h3>
-                <p className="font-sans text-body-lg text-text-secondary">{item.description}</p>
+                <p className="font-sans text-body-lg text-text-secondary"><AnimatedText>{item.description}</AnimatedText></p>
               </div>
             </article>
           ))}

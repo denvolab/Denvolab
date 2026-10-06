@@ -22,7 +22,7 @@ export function CaseStudyChallenge({ block }: { block: CaseStudyChallengeBlock }
       >
         <h2 className="font-sans text-display-lg text-gray-950"><AnimatedText>{block.title}</AnimatedText></h2>
         <p className={cn("font-sans text-body-lg", block.bodyColor === "dark" ? "wash-ink [--ink:#312f33]" : "text-gray-600")}>
-          {block.body}
+          <AnimatedText>{block.body}</AnimatedText>
         </p>
       </div>
     </section>

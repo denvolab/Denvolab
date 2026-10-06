@@ -17,7 +17,7 @@ function Column({ items }: { items: ServiceCapability[] }) {
         <div key={item.title} className="flex flex-col items-start gap-4">
           <ServiceIconTile name={item.icon} size={56} className="bg-brand-100" />
           <h3 className="font-sans text-heading-3 text-text-primary">{item.title}</h3>
-          <p className="font-sans text-body-lg text-text-secondary">{item.description}</p>
+          <p className="font-sans text-body-lg text-text-secondary"><AnimatedText>{item.description}</AnimatedText></p>
         </div>
       ))}
     </div>
@@ -51,8 +51,8 @@ export function Anatomy({ block }: { block: CapabilitiesAnatomy }) {
           </div>
           <div className="px-4 md:px-6">
             <div className="flex flex-col gap-4 rounded-b-2xl bg-brand-400 p-6 md:p-8">
-              <p className="whitespace-pre-line font-sans text-heading-2 text-text-primary">{block.showcase.title}</p>
-              <p className="font-sans text-body-lg text-text-secondary">{block.showcase.body}</p>
+              <p className="whitespace-pre-line font-sans text-heading-2 text-text-primary"><AnimatedText>{block.showcase.title}</AnimatedText></p>
+              <p className="font-sans text-body-lg text-text-secondary"><AnimatedText>{block.showcase.body}</AnimatedText></p>
             </div>
           </div>
         </div>

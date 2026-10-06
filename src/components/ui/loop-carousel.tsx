@@ -16,6 +16,7 @@ export function LoopCarousel({ children, className = "", label, speed = 24 }: { 
 
   useEffect(() => {
     const el = viewport.current!;
+    const track = el.querySelector<HTMLElement>(".loop-carousel-track")!;
     const group = el.querySelector<HTMLElement>(".loop-carousel-group")!;
     const state = motion.current;
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
@@ -24,14 +25,30 @@ export function LoopCarousel({ children, className = "", label, speed = 24 }: { 
     preferences();
     reduced.addEventListener("change", preferences);
     fine.addEventListener("change", preferences);
+    const images = Array.from(el.querySelectorAll<HTMLImageElement>("img.object-cover"));
+    // The track moves with a sub-pixel transform, not scrollLeft: scrollLeft
+    // snaps to whole pixels, so the cards stepped 1px at a time while the
+    // parallax inside them moved smoothly, and the pictures shook. The
+    // geometry the parallax needs (viewport left/width, each frame's offset
+    // in the track) is cached here and on resize, so the loop below never
+    // reads layout while the page is scrolling.
+    const geometry = { left: 0, width: 0, cards: [] as { offset: number; width: number }[] };
     const measure = () => {
       const width = group.getBoundingClientRect().width;
-      if (width !== state.width) { state.width = width; state.current = state.target = width; state.momentum = 0; el.scrollLeft = width; }
+      if (width !== state.width) { state.width = width; state.current = state.target = width; state.momentum = 0; }
+      const box = el.getBoundingClientRect();
+      const trackLeft = track.getBoundingClientRect().left;
+      geometry.left = box.left;
+      geometry.width = box.width;
+      geometry.cards = images.map(image => {
+        const card = image.parentElement!.getBoundingClientRect();
+        return { offset: card.left - trackLeft, width: card.width };
+      });
     };
     const observer = new ResizeObserver(measure);
     observer.observe(group);
+    observer.observe(el);
     measure();
-    const images = Array.from(el.querySelectorAll<HTMLImageElement>("img.object-cover"));
     let visible = false;
     const visibility = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; });
     visibility.observe(el);
@@ -54,19 +71,18 @@ export function LoopCarousel({ children, className = "", label, speed = 24 }: { 
           const shift = Math.floor((state.current - state.width) / state.width) * state.width;
           if (shift) { state.current -= shift; state.target -= shift; state.startScroll -= shift; }
         }
-        // Read geometry before writing scroll/styles. Interleaving these for
-        // every image forced synchronous layouts during vertical scrolling.
-        const bounds = el.getBoundingClientRect();
-        const cards = !state.reduced ? images.map(image => image.parentElement!.getBoundingClientRect()) : [];
-        el.scrollLeft = state.current;
+        track.style.transform = `translate3d(${-state.current}px,0,0)`;
+        if (el.scrollLeft) el.scrollLeft = 0; // focus can scroll the clipped viewport
         if (!state.reduced) {
-          if (bounds.bottom > 0 && bounds.top < innerHeight) {
-            for (const [index, image] of images.entries()) {
-              const card = cards[index];
-              const ratio = Math.max(-1, Math.min(1, -(card.left + card.width / 2 - bounds.left - bounds.width / 2) / ((bounds.width + card.width) / 2 * .78)));
-              const offset = Math.sign(ratio) * Math.pow(Math.abs(ratio), .84) * card.width * .16;
-              image.style.setProperty("--carousel-parallax", `${offset}px`);
-            }
+          // Card positions from the cached offsets and this frame's
+          // translate, so pictures and frames move together in the same frame.
+          for (const [index, image] of images.entries()) {
+            const card = geometry.cards[index];
+            if (!card) continue;
+            const left = geometry.left + card.offset - state.current;
+            const ratio = Math.max(-1, Math.min(1, -(left + card.width / 2 - geometry.left - geometry.width / 2) / ((geometry.width + card.width) / 2 * .78)));
+            const offset = Math.sign(ratio) * Math.pow(Math.abs(ratio), .84) * card.width * .16;
+            image.style.setProperty("--carousel-parallax", `${offset.toFixed(2)}px`);
           }
         }
         if (cursor.current && state.cursorReady) {
@@ -84,6 +100,7 @@ export function LoopCarousel({ children, className = "", label, speed = 24 }: { 
       cancelAnimationFrame(frame); observer.disconnect(); visibility.disconnect();
       reduced.removeEventListener("change", preferences); fine.removeEventListener("change", preferences);
       images.forEach(image => image.style.removeProperty("--carousel-parallax"));
+      track.style.removeProperty("transform");
     };
   }, [speed]);
 

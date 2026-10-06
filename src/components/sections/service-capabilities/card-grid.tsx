@@ -42,7 +42,7 @@ export function CardGrid({ block }: { block: CapabilitiesCardGrid }) {
                 {/* Figma's text boxes are a fixed 508px, even in the wider SaaS cards. */}
                 <div className="flex max-w-[508px] flex-col gap-4">
                   <h3 className="font-sans text-heading-3 text-text-primary">{item.title}</h3>
-                  <p className="font-sans text-body-lg text-text-secondary">{item.description}</p>
+                  <p className="font-sans text-body-lg text-text-secondary"><AnimatedText>{item.description}</AnimatedText></p>
                 </div>
               </article>
             ))}

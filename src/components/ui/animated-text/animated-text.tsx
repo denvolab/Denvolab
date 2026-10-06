@@ -129,8 +129,14 @@ export function AnimatedText({ children, className, delay = DEFAULT_DELAY }: Ani
           width = window.innerWidth;
           if (split) build();
         };
-        const onFontsLoaded = () => {
-          if (split) build();
+        // Only a font this text is set in can move its lines. Re-splitting on
+        // every font load re-ran the animation of every text on the page,
+        // so text already on screen dropped and rose again mid-scroll.
+        const onFontsLoaded = (event: FontFaceSetLoadEvent) => {
+          if (!split) return;
+          const family = getComputedStyle(root).fontFamily.toLowerCase();
+          const ours = event.fontfaces.some((face) => family.includes(face.family.replace(/["']/g, "").toLowerCase()));
+          if (ours) build();
         };
 
         document.fonts.ready.then(() => {

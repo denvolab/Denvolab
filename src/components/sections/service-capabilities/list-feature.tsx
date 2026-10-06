@@ -23,7 +23,7 @@ export function ListFeature({ block }: { block: CapabilitiesListFeature }) {
               <ServiceIconTile name={item.icon} size={56} className="bg-brand-100" />
               <div className="flex min-w-0 flex-1 flex-col gap-2">
                 <h3 className="font-sans text-heading-4 text-text-primary">{item.title}</h3>
-                <p className="font-sans text-body-lg text-text-secondary">{item.description}</p>
+                <p className="font-sans text-body-lg text-text-secondary"><AnimatedText>{item.description}</AnimatedText></p>
               </div>
             </div>,
             <span key={`${item.title}-rule`} aria-hidden="true" className="h-px w-full bg-border-primary" />,
@@ -44,7 +44,7 @@ export function ListFeature({ block }: { block: CapabilitiesListFeature }) {
         <div className="flex flex-col items-start gap-4 p-6 md:p-10">
           <ServiceIconTile name={block.feature.icon} size={56} className="bg-white" />
           <h3 className="whitespace-pre-line font-sans text-heading-2 text-text-primary">{block.feature.title}</h3>
-          <p className="font-sans text-body-lg text-text-secondary">{block.feature.description}</p>
+          <p className="font-sans text-body-lg text-text-secondary"><AnimatedText>{block.feature.description}</AnimatedText></p>
         </div>
       </div>
     </div>

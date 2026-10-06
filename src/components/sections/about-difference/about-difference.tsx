@@ -72,7 +72,7 @@ export async function AboutDifference() {
                 {item.title}
               </h3>
               <p className="mt-5 font-sans text-body-lg text-foreground-disabled">
-                {item.description}
+                <AnimatedText>{item.description}</AnimatedText>
               </p>
             </li>
           ))}

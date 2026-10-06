@@ -54,6 +54,8 @@ While split, the wrapper is a block with a minimum width equal to the heading's 
 
 The section headings (`h2`) on every page: homepage (`what-we-create`, `ai-orbit`, `process-steps`, `comparison`, `testimonials`, `contact-cta`), About (`about-difference`, `about-values`, `about-team`), Services (`industries-served`), every service page (`service-perspective`, `service-practice`, `service-capabilities` in all six layouts, `service-process-steps`, `service-process-narrative`, `service-craft-split`, `service-checklist`, `service-handover`, `service-faq`), every case study page (`case-study-intro`, `case-study-process`, `case-study-competitors`, `case-study-challenge`, `case-study-solution`) and Contact (`contact-form`).
 
+Since Oct 7, 2026 the body text of those sections uses it too (the user: "jeta title a ache seta paragraph text a o hobe"): the description / body `<p>` next to each animated heading, and the card and list descriptions inside the same sections, wrapped the same way (`<p className="..."><AnimatedText>{body}</AnimatedText></p>`). Eyebrows, step numbers, mono labels and form labels are left as they are.
+
 ## Where not to use it
 
 | Case | Why |

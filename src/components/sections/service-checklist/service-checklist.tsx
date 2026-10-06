@@ -25,7 +25,7 @@ export function ServiceChecklist({ block }: { block: ServiceChecklistBlock }) {
         <div className="flex w-full flex-col gap-6 xl:w-[34.783%] xl:max-w-[640px] xl:shrink-0">
           {block.eyebrow ? <p className="font-mono text-label-md text-text-secondary">{block.eyebrow}</p> : null}
           <h2 className="whitespace-pre-line font-sans text-display-xl text-text-primary"><AnimatedText>{block.title}</AnimatedText></h2>
-          {block.body && <p className="font-sans text-body-lg text-text-secondary">{block.body}</p>}
+          {block.body && <p className="font-sans text-body-lg text-text-secondary"><AnimatedText>{block.body}</AnimatedText></p>}
         </div>
 
         <ul className="flex min-w-0 flex-1 flex-col gap-6 md:gap-12">
@@ -46,7 +46,7 @@ export function ServiceChecklist({ block }: { block: ServiceChecklistBlock }) {
                   )}
                 >
                   <p className="font-mono text-label-md text-text-tertiary md:w-[28%] md:max-w-[210px] md:shrink-0">{item.format}</p>
-                  <p className="min-w-0 flex-1 font-sans text-heading-4 text-text-primary">{item.deliverable}</p>
+                  <p className="min-w-0 flex-1 font-sans text-heading-4 text-text-primary"><AnimatedText>{item.deliverable}</AnimatedText></p>
                 </div>
               </div>
               <span aria-hidden="true" className="h-px w-full bg-border-primary" />

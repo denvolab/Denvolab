@@ -1,6 +1,7 @@
 // Updated Services content and local assets from Figma Final design 437:8298.
-// Industry photos: Healthcare, Software & Apps and AI Tools have theirs (industry-1/2/3.png); the other
-// three cards stay on the empty placeholder until their photos are supplied (set `imageSrc` below).
+// Industry photos: every card has its Figma photo (node 483:1256, "<Industry> / Portfolio mockup"):
+// industry-1/2/3.png for Healthcare, Software & Apps and AI Tools, and industry-travel / -finance /
+// -online-store.jpg for the other three.
 import type {
   IndustriesServedContent,
   ServiceListItem,
@@ -153,7 +154,7 @@ const INDUSTRIES_SERVED: IndustriesServedContent = {
       name: "Hotels & Travel",
       description:
         "Help guests explore, book, and plan their stay.",
-      imageSrc: null,
+      imageSrc: "/images/services/current/industry-travel.jpg",
     },
     {
       name: "Healthcare",
@@ -165,7 +166,7 @@ const INDUSTRIES_SERVED: IndustriesServedContent = {
       name: "Money & Finance",
       description:
         "Make spending, payments, and financial information easier to follow.",
-      imageSrc: null,
+      imageSrc: "/images/services/current/industry-finance.jpg",
     },
     {
       name: "Software & Apps",
@@ -176,7 +177,7 @@ const INDUSTRIES_SERVED: IndustriesServedContent = {
     {
       name: "Online Stores",
       description: "Make it easier to find a product, choose it, and check out.",
-      imageSrc: null,
+      imageSrc: "/images/services/current/industry-online-store.jpg",
     },
     {
       name: "AI Tools",

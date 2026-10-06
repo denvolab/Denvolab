@@ -18,7 +18,7 @@ export function IndexedGrid({ block }: { block: CapabilitiesIndexedGrid }) {
             <div className="flex min-w-0 flex-1 flex-col items-start gap-4">
               <ServiceIconTile name={item.icon} size={56} className="bg-brand-100" />
               <h3 className="font-sans text-heading-3 text-text-primary">{item.title}</h3>
-              <p className="font-sans text-body-lg text-text-secondary">{item.description}</p>
+              <p className="font-sans text-body-lg text-text-secondary"><AnimatedText>{item.description}</AnimatedText></p>
             </div>
           </div>
         ))}

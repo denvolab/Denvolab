@@ -6,8 +6,8 @@ Everything the site needs to send email. Every email goes through the one SMTP a
 |---|---|
 | `mailer.ts` | `sendEmail({ to, subject, text, html, replyTo })`. Opens the SMTP connection (Nodemailer) from the environment variables below. Never throws: returns `{ ok: false }` and logs `[email] ...` on the server when something is missing or fails. |
 | `layout.ts` | `renderEmailLayout(...)`, the brand shell every email is drawn in (dark header with the DENVOLAB wordmark and a lime tag, lime line, white card, footer), plus `escapeHtml` / `escapeMultiline` / `oneLine`, `firstNameOf`, `studioTime` (Dhaka time), `siteHost`, the brand name (`EMAIL_BRAND_NAME`, "Denvolab") and the email color and font constants. |
-| `inquiry-email.ts` | `inquiryEmail(data)`, the Contact form's "New project inquiry" email to the studio: subject, plain text and HTML. Used by `components/sections/contact-form/actions.ts`. |
-| `confirmation-email.ts` | `confirmationEmail(data)`, the automatic "We got your message" email to the visitor (tag MESSAGE RECEIVED): what they picked, what happens next, a SEE OUR WORK link and Abdur's sign-off. Repeats only their first name and chip choices, never their free text, so the form can't be used to send someone else's words to a stranger. |
+| `inquiry-email.ts` | `inquiryEmail(data)`, the Contact form's "New project inquiry" email to the studio: subject, plain text and HTML, including the visitor's approximate location and IP (from Vercel's `x-vercel-ip-*` headers). Used by `components/sections/contact-form/actions.ts`. |
+| `confirmation-email.ts` | `confirmationEmail(data)`, the automatic "We got your message" email to the visitor (tag MESSAGE RECEIVED): what they picked, that the team will get back to them shortly, what happens next, a VIEW OUR WORK link and a "The Denvolab Team" sign-off (the founder isn't named). Repeats only their first name and chip choices, never their free text, so the form can't be used to send someone else's words to a stranger. |
 
 ## Setup
 

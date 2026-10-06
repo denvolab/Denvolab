@@ -37,7 +37,7 @@ export function CaseStudyProcess({ block }: { block: CaseStudyProcessBlock }) {
               <div className="flex w-full flex-col gap-10">
                 <div className="flex flex-col gap-3">
                   <h3 className="font-sans text-heading-3 text-gray-950">{step.title}</h3>
-                  <p className="font-sans text-body-lg text-gray-600">{step.description}</p>
+                  <p className="font-sans text-body-lg text-gray-600"><AnimatedText>{step.description}</AnimatedText></p>
                 </div>
                 <ul className="flex flex-col gap-6">
                   {step.items.map((item) => (

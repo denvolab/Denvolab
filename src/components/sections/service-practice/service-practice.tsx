@@ -21,7 +21,7 @@ export function ServicePractice({ block }: { block: ServicePracticeBlock }) {
         <div className="flex w-full flex-col gap-10 xl:w-[35.652%] xl:max-w-[656px] xl:shrink-0">
           <div className="flex flex-col gap-6">
             <h2 className="whitespace-pre-line font-sans text-display-xl text-text-primary"><AnimatedText>{block.title}</AnimatedText></h2>
-            <p className="max-w-[560px] font-sans text-body-lg text-text-secondary">{block.intro}</p>
+            <p className="max-w-[560px] font-sans text-body-lg text-text-secondary"><AnimatedText>{block.intro}</AnimatedText></p>
           </div>
 
           <div className="flex max-w-[560px] flex-col gap-6">
@@ -31,7 +31,7 @@ export function ServicePractice({ block }: { block: ServicePracticeBlock }) {
                 <p className="w-8 shrink-0 font-mono text-label-md text-text-primary">{decision.index}</p>
                 <div className="flex min-w-0 flex-1 flex-col gap-2">
                   <h3 className="font-sans text-heading-4 text-text-primary">{decision.title}</h3>
-                  <p className="font-sans text-body-md text-text-secondary">{decision.benefit}</p>
+                  <p className="font-sans text-body-md text-text-secondary"><AnimatedText>{decision.benefit}</AnimatedText></p>
                 </div>
               </div>,
             ])}

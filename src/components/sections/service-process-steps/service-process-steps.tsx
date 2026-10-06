@@ -47,7 +47,7 @@ export function ServiceProcessSteps({ block }: { block: ServiceProcessStepsBlock
               <span aria-hidden="true" className={cn("h-px w-full", friction ? "bg-gray-200" : "bg-border-primary")} />
               <h3 className="font-sans text-heading-2 text-text-primary">{item.title}</h3>
               <p className={cn("font-sans text-body-lg text-text-secondary", friction ? "max-w-[540px]" : "max-w-[400px]")}>
-                {item.body}
+                <AnimatedText>{item.body}</AnimatedText>
               </p>
             </li>
           ))}

@@ -31,7 +31,7 @@ export async function AboutTeam() {
           </AnimatedText>
         </h2>
 
-        <p className="site-team-description">Meet the people who ask the questions, shape the experience, and bring the pieces together.</p>
+        <p className="site-team-description"><AnimatedText>Meet the people who ask the questions, shape the experience, and bring the pieces together.</AnimatedText></p>
         <TeamRoster members={team.members} />
       </div>
     </section>

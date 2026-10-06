@@ -54,7 +54,7 @@ export async function IndustriesServed() {
           <div className="flex flex-col items-start gap-3.5">
             <h2 className="font-sans text-heading-2 text-foreground"><AnimatedText>{industries.heading}</AnimatedText></h2>
             <p className="max-w-[820px] font-sans text-body-lg text-secondary">
-              {industries.description}
+              <AnimatedText>{industries.description}</AnimatedText>
             </p>
           </div>
 
@@ -79,7 +79,7 @@ export async function IndustriesServed() {
               </div>
               <h3 className="font-sans text-heading-5 text-foreground">{industry.name}</h3>
               <p className="w-[280px] font-sans text-body-md text-secondary">
-                {industry.description}
+                <AnimatedText>{industry.description}</AnimatedText>
               </p>
             </div>
           ))}

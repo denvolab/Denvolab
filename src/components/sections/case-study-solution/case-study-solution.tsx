@@ -39,7 +39,7 @@ export function CaseStudySolution({ block }: { block: CaseStudySolutionBlock }) 
             </AnimatedText>
           </h2>
           <p className="font-grotesk text-[length:clamp(1.0625rem,1rem+0.3vw,1.25rem)] leading-[1.2] wash-ink [--ink:#524566]">
-            {block.body}
+            <AnimatedText>{block.body}</AnimatedText>
           </p>
         </div>
 
@@ -53,7 +53,7 @@ export function CaseStudySolution({ block }: { block: CaseStudySolutionBlock }) 
               <div className="flex flex-col gap-2">
                 <h3 className="font-grotesk text-xl font-bold leading-[1.4] wash-ink [--ink:#342f3d] lg:text-2xl">{card.title}</h3>
                 <p className={cn("font-grotesk text-base leading-normal", wide ? "wash-ink [--ink:#312f33]" : "wash-ink [--ink:#524566]")}>
-                  {card.description}
+                  <AnimatedText>{card.description}</AnimatedText>
                 </p>
               </div>
               <div

@@ -95,7 +95,7 @@ export function ContactForm({ content }: { content: ContactFormContent }) {
             {content.title}
           </AnimatedText>
         </h2>
-        <p className="font-sans text-body-md text-text-secondary">{content.subtitle}</p>
+        <p className="font-sans text-body-md text-text-secondary"><AnimatedText>{content.subtitle}</AnimatedText></p>
       </div>
 
       <div className="flex flex-col gap-6">

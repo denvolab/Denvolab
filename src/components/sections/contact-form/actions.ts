@@ -22,10 +22,14 @@
 // Without the SMTP settings the form still validates, then shows a friendly
 // "email us instead" message and logs the reason on the server.
 //
+// The studio's email also says where the form was sent from (approximate
+// location and IP), read from the request headers in visitorOrigin() below.
+//
 // Not done here: rate limiting. If spam gets past the honeypot, add one
 // (e.g. per-IP with Upstash) at the top of this function. Gmail also caps
 // sending at about 500 emails a day.
 // ---------------------------------------------------------------------------
+import { headers } from "next/headers";
 import { after } from "next/server";
 import { sendEmail } from "@/lib/email/mailer";
 import { inquiryEmail } from "@/lib/email/inquiry-email";
@@ -37,6 +41,30 @@ const SUCCESS_MESSAGE = "Thanks, your message is on its way. We’ll reply by em
 const INVALID_MESSAGE = "A few fields need a look.";
 const INQUIRY_EMAIL = "denvolab@gmail.com";
 const FAILURE_MESSAGE = `Something went wrong on our side. Please email ${INQUIRY_EMAIL} instead.`;
+
+/** The visitor's IP and approximate location from the host's request headers.
+ *  Vercel adds the x-vercel-ip-* geolocation headers; the city is URL-encoded.
+ *  Both are "" when the host doesn't send them (e.g. local development). */
+async function visitorOrigin() {
+  const h = await headers();
+  const ip = (h.get("x-forwarded-for")?.split(",")[0] ?? h.get("x-real-ip") ?? "").trim();
+  const decode = (value: string | null) => {
+    try {
+      return value ? decodeURIComponent(value) : "";
+    } catch {
+      return value ?? "";
+    }
+  };
+  const city = decode(h.get("x-vercel-ip-city"));
+  const region = decode(h.get("x-vercel-ip-country-region"));
+  const countryCode = h.get("x-vercel-ip-country") ?? h.get("cf-ipcountry") ?? "";
+  let country = countryCode;
+  try {
+    if (countryCode) country = new Intl.DisplayNames(["en"], { type: "region" }).of(countryCode) ?? countryCode;
+  } catch {}
+  const location = [city, city ? "" : region, country].filter(Boolean).join(", ");
+  return { ip, location };
+}
 
 export async function sendInquiry(_previous: InquiryState, formData: FormData): Promise<InquiryState> {
   // A filled honeypot means a bot. Pretend it worked so it doesn't retry.
@@ -62,6 +90,7 @@ export async function sendInquiry(_previous: InquiryState, formData: FormData): 
     budget,
     details: values.details,
     submittedAt: new Date(),
+    ...(await visitorOrigin()),
   });
 
   const result = await sendEmail({ to: INQUIRY_EMAIL, replyTo: values.email, ...email });

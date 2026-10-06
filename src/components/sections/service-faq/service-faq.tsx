@@ -22,7 +22,7 @@ export function ServiceFaq({ block }: { block: ServiceFaqBlock }) {
           {block.eyebrow ? <p className="font-mono text-label-md text-text-secondary">{block.eyebrow}</p> : null}
           <h2 className="whitespace-pre-line font-sans text-display-xl text-text-primary"><AnimatedText>{block.title}</AnimatedText></h2>
           <p className="font-sans text-body-lg text-text-secondary" style={{ maxWidth: block.descriptionWidth }}>
-            {block.description}
+            <AnimatedText>{block.description}</AnimatedText>
           </p>
           <Button
             href={block.cta.href}

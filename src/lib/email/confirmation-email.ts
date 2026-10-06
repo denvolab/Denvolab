@@ -3,10 +3,10 @@
 // gets after sending the Contact form. Returns the subject, plain text and
 // the branded HTML (drawn in renderEmailLayout).
 //
-// WHAT IT PROMISES: only what the Contact page already says ("Abdur reads
-// every inquiry and replies with next steps and a rough timeline", and the
-// founder card's 30-minute call). No reply-time promise until the studio
-// decides on one.
+// WHAT IT PROMISES: that the team reviews the inquiry and gets back shortly
+// with next steps and an estimated timeline, plus an optional 30-minute call.
+// It speaks as "the team" and never names the founder. No exact reply time
+// until the studio decides on one.
 //
 // WHAT IT REPEATS BACK: the visitor's first name and the chips they picked
 // (services, budget), never their free-text project details or company. The
@@ -35,36 +35,42 @@ export interface ConfirmationEmailData {
 }
 
 const NEXT_STEPS = [
-  "Abdur, our founder, reads your message himself.",
-  "He replies by email with next steps and a rough timeline.",
-  "If it helps, you walk him through your idea on a 30-minute call.",
+  "Our team will carefully review your inquiry.",
+  "We will reply by email with the next steps and an estimated timeline.",
+  "If needed, we can arrange a 30-minute call to talk through your project in more detail.",
 ];
+
+const INTRO = `Thank you for getting in touch with ${EMAIL_BRAND_NAME}. We have received your inquiry, and we appreciate you thinking of us for your project. A member of our team will get back to you shortly with a response to your inquiry.`;
+const ADD_MORE = "If you’d like to share more information, such as references, documents or a brief, simply reply to this email.";
+const SEE_WORK = "In the meantime, you’re welcome to look through our recent work.";
 
 export function confirmationEmail(data: ConfirmationEmailData) {
   const c = EMAIL_COLORS;
   const f = EMAIL_FONTS;
   const firstName = firstNameOf(data.name);
-  const subject = oneLine(`We got your message, ${firstName} | ${EMAIL_BRAND_NAME}`);
+  const subject = oneLine(`Thank you for contacting ${EMAIL_BRAND_NAME}, ${firstName}`);
   const workUrl = new URL("/case-studies", siteConfig.url).toString();
 
   // --- Plain text ------------------------------------------------------------
   const text = [
-    `Hi ${firstName},`,
+    `Dear ${firstName},`,
     "",
-    `Thanks for reaching out to ${EMAIL_BRAND_NAME}. Your message is with us.`,
+    INTRO,
     "",
-    `What you need: ${data.services.join(", ")}`,
+    "Your request",
+    `Services: ${data.services.join(", ")}`,
     ...(data.budget ? [`Budget: ${data.budget}`] : []),
     "",
     "What happens next:",
     ...NEXT_STEPS.map((step, i) => `${i + 1}. ${step}`),
     "",
-    "Have something to add? Just reply to this email.",
+    ADD_MORE,
     "",
-    `See our work: ${workUrl}`,
+    SEE_WORK,
+    `View our work: ${workUrl}`,
     "",
-    "Talk soon,",
-    `Abdur Razzak, Founder, ${EMAIL_BRAND_NAME}`,
+    "Kind regards,",
+    `The ${EMAIL_BRAND_NAME} Team`,
   ].join("\n");
 
   // --- HTML ------------------------------------------------------------------
@@ -94,11 +100,12 @@ export function confirmationEmail(data: ConfirmationEmailData) {
 
   const body = `
       <div style="font-family:${f.mono};font-size:12px;line-height:16px;letter-spacing:0.04em;color:${c.textTertiary};">THANK YOU</div>
-      <h1 style="margin:12px 0 0;font-family:${f.sans};font-size:28px;line-height:36px;font-weight:600;letter-spacing:-0.02em;color:${c.dark};">We got your message, ${escapeHtml(firstName)}.</h1>
-      <p style="margin:12px 0 0;font-family:${f.sans};font-size:16px;line-height:24px;color:${c.textSecondary};">Thanks for reaching out to ${EMAIL_BRAND_NAME}. Your message is with us, and a real person will read it.</p>
+      <h1 style="margin:12px 0 0;font-family:${f.sans};font-size:28px;line-height:36px;font-weight:600;letter-spacing:-0.02em;color:${c.dark};">Thank you, ${escapeHtml(firstName)}. We’ve received your inquiry.</h1>
+      <p style="margin:16px 0 0;font-family:${f.sans};font-size:16px;line-height:24px;color:${c.dark};">Dear ${escapeHtml(firstName)},</p>
+      <p style="margin:12px 0 0;font-family:${f.sans};font-size:16px;line-height:24px;color:${c.textSecondary};">${escapeHtml(INTRO)}</p>
 
       <div style="margin-top:32px;background:${c.page};border-radius:12px;padding:20px;">
-        ${label("What you need")}
+        ${label("Your request")}
         <div style="margin-top:12px;">${chips}</div>
         ${budget}
       </div>
@@ -108,25 +115,25 @@ export function confirmationEmail(data: ConfirmationEmailData) {
         ${steps}
       </table>
 
-      <p style="margin:8px 0 0;font-family:${f.sans};font-size:16px;line-height:24px;color:${c.textSecondary};">Have something to add? Just reply to this email.</p>
+      <p style="margin:8px 0 0;font-family:${f.sans};font-size:16px;line-height:24px;color:${c.textSecondary};">${escapeHtml(ADD_MORE)}</p>
+      <p style="margin:12px 0 0;font-family:${f.sans};font-size:16px;line-height:24px;color:${c.textSecondary};">${escapeHtml(SEE_WORK)}</p>
 
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin-top:28px;"><tr>
         <td bgcolor="${c.ink}" style="background:${c.ink};border-radius:16px;">
-          <a href="${escapeHtml(workUrl)}" style="display:inline-block;padding:16px 24px;font-family:${f.mono};font-size:14px;line-height:20px;letter-spacing:0.02em;color:${c.white};text-decoration:none;">SEE OUR WORK</a>
+          <a href="${escapeHtml(workUrl)}" style="display:inline-block;padding:16px 24px;font-family:${f.mono};font-size:14px;line-height:20px;letter-spacing:0.02em;color:${c.white};text-decoration:none;">VIEW OUR WORK</a>
         </td>
       </tr></table>
 
       <div style="margin-top:36px;padding-top:24px;border-top:1px solid ${c.border};">
-        <div style="font-family:${f.sans};font-size:16px;line-height:24px;color:${c.textSecondary};">Talk soon,</div>
-        <div style="margin-top:4px;font-family:${f.sans};font-size:16px;line-height:24px;font-weight:600;color:${c.dark};">Abdur Razzak</div>
-        <div style="margin-top:2px;font-family:${f.mono};font-size:12px;line-height:16px;letter-spacing:0.04em;color:${c.textTertiary};">FOUNDER, ${EMAIL_BRAND_NAME.toUpperCase()}</div>
+        <div style="font-family:${f.sans};font-size:16px;line-height:24px;color:${c.textSecondary};">Kind regards,</div>
+        <div style="margin-top:4px;font-family:${f.sans};font-size:16px;line-height:24px;font-weight:600;color:${c.dark};">The ${EMAIL_BRAND_NAME} Team</div>
       </div>`;
 
   const footer = `You’re getting this because someone sent the contact form on ${escapeHtml(siteHost())} with this address. If that wasn’t you, you can ignore this email.<br />${EMAIL_BRAND_NAME}, Rangpur, Bangladesh`;
 
   const html = renderEmailLayout({
     title: subject,
-    preheader: "Abdur reads every inquiry and replies with next steps and a rough timeline.",
+    preheader: "We’ve received your inquiry. Our team will get back to you shortly.",
     tag: "MESSAGE RECEIVED",
     body,
     footer,

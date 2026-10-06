@@ -15,7 +15,7 @@ export function ServicePerspective({ block }: { block: ServicePerspectiveBlock }
         <p className="font-mono text-label-md text-text-secondary xl:w-[400px] xl:shrink-0">{block.marker}</p>
         <div className="flex min-w-0 flex-1 flex-col gap-8">
           <h2 className="max-w-[1260px] whitespace-pre-line font-sans text-display-xl text-text-primary"><AnimatedText>{block.title}</AnimatedText></h2>
-          <p className="max-w-[1000px] font-sans text-body-lg text-text-secondary">{block.body}</p>
+          <p className="max-w-[1000px] font-sans text-body-lg text-text-secondary"><AnimatedText>{block.body}</AnimatedText></p>
         </div>
       </div>
     </section>

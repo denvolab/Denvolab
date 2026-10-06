@@ -263,7 +263,7 @@ html.wash-ready [data-site-page] [data-project-copy] span { color:var(--color-se
 .about-final-photos li { border-radius:24px; }
 .loop-carousel { width:100%; overflow:hidden; cursor:grab; touch-action:pan-y; user-select:none; }
 .loop-carousel:active { cursor:grabbing; }
-.loop-carousel-track { display:flex; width:max-content; }
+.loop-carousel-track { display:flex; width:max-content; will-change:transform; }
 .loop-carousel-group { flex:none; }
 .about-photos-carousel { margin-top:120px; }
 .about-photos-carousel .loop-carousel-track { width:300%; }

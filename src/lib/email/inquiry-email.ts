@@ -7,6 +7,10 @@
 // caller, contact-form/actions.ts, does that), so this file knows nothing
 // about the form itself. Everything the visitor typed is escaped here.
 //
+// LOCATION / IP: where the form was sent from, read by the caller from the
+// host's request headers (Vercel's IP geolocation). Approximate, city level,
+// and "-" when the host doesn't provide it (e.g. local development).
+//
 // The big button is a mailto: back to the visitor; replying to the email
 // itself works too, because the sender sets reply-to to the visitor.
 // ---------------------------------------------------------------------------
@@ -34,6 +38,10 @@ export interface InquiryEmailData {
   budget: string;
   details: string;
   submittedAt: Date;
+  /** e.g. "Dhaka, Bangladesh", or "" when unknown. */
+  location: string;
+  /** The visitor's IP address, or "" when unknown. */
+  ip: string;
 }
 
 export function inquiryEmail(data: InquiryEmailData) {
@@ -50,6 +58,8 @@ export function inquiryEmail(data: InquiryEmailData) {
     ["Email", data.email],
     ["Phone / WhatsApp", data.phone || "-"],
     ["Budget", data.budget || "-"],
+    ["Location", data.location || "-"],
+    ["IP address", data.ip || "-"],
   ];
 
   // --- Plain text ------------------------------------------------------------

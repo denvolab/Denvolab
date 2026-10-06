@@ -9,7 +9,7 @@ export function EditorialList({ block }: { block: CapabilitiesEditorialList }) {
       <h2 className="service-heading"><AnimatedText>{block.title}</AnimatedText></h2>
       <div className="service-principles">
         <div data-image-reveal="" className="service-principles-image"><Image src={block.feature.image.src} alt={block.feature.image.alt} fill sizes="(min-width: 1024px) 488px, (min-width: 768px) 316px, 100vw" className="object-cover" /></div>
-        <div className="service-principles-copy"><h3>{block.feature.statement}</h3><p>{block.feature.description}</p></div>
+        <div className="service-principles-copy"><h3>{block.feature.statement}</h3><p><AnimatedText>{block.feature.description}</AnimatedText></p></div>
       </div>
     </div>
     <ul className="service-discipline-list">{block.items.map(item => <li key={item.title}>
@@ -18,7 +18,7 @@ export function EditorialList({ block }: { block: CapabilitiesEditorialList }) {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={item.iconAsset} alt="" aria-hidden="true" />
       </span> : <ServiceIconTile name={item.icon} size={56} className="bg-brand-100" />}
-      <div className="service-discipline-copy"><h3>{item.title}</h3><p>{item.description}</p></div>
+      <div className="service-discipline-copy"><h3>{item.title}</h3><p><AnimatedText>{item.description}</AnimatedText></p></div>
     </li>)}</ul>
   </div>;
 }
