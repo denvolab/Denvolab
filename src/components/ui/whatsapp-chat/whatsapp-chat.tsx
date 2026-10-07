@@ -4,6 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { siteConfig } from "@/lib/seo/site-config";
 import styles from "./whatsapp-chat.module.css";
 
+/** Phones: the button comes back this long after the page stops scrolling. */
+const SCROLL_STOP_MS = 300;
+
 const services = ["UI/UX design", "Website", "Mobile app", "Branding", "Something else"];
 
 /** WhatsApp's own logo (the speech bubble with the phone), one filled path
@@ -36,6 +39,35 @@ export function WhatsAppChat() {
   const [message, setMessage] = useState("");
   const launcher = useRef<HTMLButtonElement>(null);
   const close = useRef<HTMLButtonElement>(null);
+  const widget = useRef<HTMLElement>(null);
+
+  // Phones: the floating button gets out of the way while the page scrolls
+  // down, and is back as soon as it scrolls up or stops (the user, Oct 7,
+  // 2026). Attribute only; the slide is in whatsapp-chat.module.css. Never
+  // hidden while the chat is open.
+  useEffect(() => {
+    const el = widget.current;
+    if (!el || open) return;
+    const phone = window.matchMedia("(width < 768px)");
+    let lastY = window.scrollY;
+    let stopTimer = 0;
+    const onScroll = () => {
+      if (!phone.matches) return;
+      const y = window.scrollY;
+      if (y > lastY + 2) el.setAttribute("data-hidden", "");
+      else if (y < lastY - 2) el.removeAttribute("data-hidden");
+      lastY = y;
+      window.clearTimeout(stopTimer);
+      stopTimer = window.setTimeout(() => el.removeAttribute("data-hidden"), SCROLL_STOP_MS);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.clearTimeout(stopTimer);
+      el.removeAttribute("data-hidden");
+    };
+  }, [open]);
+
   useEffect(() => {
     if (!open) return;
     close.current?.focus();
@@ -46,7 +78,7 @@ export function WhatsAppChat() {
     return () => document.removeEventListener("keydown", escape);
   }, [open]);
   const text = ["Hi Denvo Lab!", service && `I’m interested in ${service}.`, message.trim()].filter(Boolean).join("\n\n");
-  return <aside className={styles.widget} aria-label="WhatsApp chat">
+  return <aside ref={widget} className={styles.widget} aria-label="WhatsApp chat">
     {open && <section id="whatsapp-chat-panel" className={styles.panel} role="region" aria-label="Chat with Denvo Lab" data-lenis-prevent>
       <header className={styles.header}><div><strong>Denvo Lab</strong><span>Let’s craft your next idea.</span></div><button ref={close} type="button" aria-label="Close WhatsApp chat" onClick={() => { setOpen(false); launcher.current?.focus(); }}><CloseIcon /></button></header>
       <div className={styles.body}><p className={styles.bubble}>Hi there! What would you like to create? Choose a service and tell us a little about your project.</p>

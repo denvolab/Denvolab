@@ -1,7 +1,7 @@
 .widget { position:fixed; right:24px; bottom:calc(24px + env(safe-area-inset-bottom)); z-index:60; font-family:var(--font-sans); color:#0d1216; }
 .launcher { display:flex; align-items:center; justify-content:center; width:88px; height:88px; margin-left:auto; border:1px solid #c8d23e; border-radius:50%; background:#dfe94c; color:#0d1216; box-shadow:0 8px 28px #0003; cursor:pointer; transition:transform .2s; }
 .launcher:hover { transform:translateY(-3px); }
-/* Launcher size (the user, Oct 7, 2026): 88px desktop, 72px tablet, 36px
+/* Launcher size (the user, Oct 7, 2026): 88px desktop, 72px tablet, 48px
    phone; the icon is half the button. */
 .launcher { padding:0; line-height:0; }
 .launcher svg { display:block; flex-shrink:0; width:44px; height:44px; }
@@ -16,5 +16,13 @@
 .send { display:flex; align-items:center; justify-content:center; gap:8px; padding:12px; border-radius:10px; background:#dfe94c; font-size:14px; font-weight:600; text-transform:uppercase; }.send:hover { background:#ced83e; }.send svg { width:20px; height:20px; }
 .note { text-align:center; font-size:11px; line-height:18px; color:#52616f; }.widget :is(button,a,textarea):focus-visible { outline:2px solid #6b7a89; outline-offset:3px; }
 @keyframes arrive { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
-@media(width < 768px) { .widget { width:min(360px,calc(100% - 32px)); right:16px; bottom:calc(16px + env(safe-area-inset-bottom)); }.panel { width:100%; }.launcher { width:36px; height:36px; }.launcher svg { width:18px; height:18px; } }
+@media(width < 768px) { .widget { width:min(360px,calc(100% - 32px)); right:16px; bottom:calc(16px + env(safe-area-inset-bottom)); }.panel { width:100%; }.launcher { width:48px; height:48px; }.launcher svg { width:24px; height:24px; } }
 @media(prefers-reduced-motion:reduce) { .panel { animation:none; }.launcher { transition:none; } }
+
+/* Phones: slides down out of view while the page scrolls down
+   (whatsapp-chat.tsx sets data-hidden), back on scroll up or stop. */
+@media (width < 768px) {
+  .widget { transition: transform .35s cubic-bezier(.22,1,.36,1), opacity .25s ease; }
+  .widget[data-hidden] { transform: translateY(calc(100% + 24px)); opacity: 0; pointer-events: none; transition-timing-function: cubic-bezier(.55,0,.67,.2), ease; }
+}
+@media (prefers-reduced-motion: reduce) { .widget { transition: none; } }
