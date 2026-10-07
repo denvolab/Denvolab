@@ -122,7 +122,10 @@ export function ImageRevealController() {
       const windowBox = document.createElement("div");
       const content = document.createElement("div");
       windowBox.style.cssText = "position:absolute;inset:0;overflow:hidden;pointer-events:none;";
-      content.style.cssText = "position:absolute;inset:0;pointer-events:auto;";
+      // The frame's own padding carries over, so content laid out inside it
+      // (a card's text) stays where it was (Oct 8, 2026).
+      const pad = getComputedStyle(frame);
+      content.style.cssText = `position:absolute;inset:0;pointer-events:auto;padding:${pad.paddingTop} ${pad.paddingRight} ${pad.paddingBottom} ${pad.paddingLeft};`;
       content.append(...Array.from(frame.childNodes));
       windowBox.append(content);
       frame.append(windowBox);
