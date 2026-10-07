@@ -27,6 +27,11 @@ export function HeaderScroll() {
     let turnY = lastY; // where the direction last changed
     let goingDown = false;
     let frame = 0;
+    let scrolled = false;
+    let hidden = false;
+    // Measured once (and on resize), not on every scroll frame.
+    let height = header.offsetHeight;
+    const onResize = () => { height = header.offsetHeight; };
 
     const update = () => {
       frame = 0;
@@ -38,11 +43,13 @@ export function HeaderScroll() {
       }
       lastY = y;
 
-      header.toggleAttribute("data-scrolled", y > 0);
-      if (y <= header.offsetHeight) header.removeAttribute("data-hidden");
-      else if (header.contains(document.activeElement)) header.removeAttribute("data-hidden");
-      else if (goingDown && y - turnY > TOLERANCE) header.setAttribute("data-hidden", "");
-      else if (!goingDown && turnY - y > TOLERANCE) header.removeAttribute("data-hidden");
+      // Attributes change only when the state does (each change restyles).
+      if ((y > 0) !== scrolled) header.toggleAttribute("data-scrolled", (scrolled = y > 0));
+      let next = hidden;
+      if (y <= height || header.contains(document.activeElement)) next = false;
+      else if (goingDown && y - turnY > TOLERANCE) next = true;
+      else if (!goingDown && turnY - y > TOLERANCE) next = false;
+      if (next !== hidden) header.toggleAttribute("data-hidden", (hidden = next));
     };
     const onScroll = () => {
       if (!frame) frame = requestAnimationFrame(update);
@@ -50,9 +57,11 @@ export function HeaderScroll() {
 
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize);
     header.addEventListener("focusin", onScroll);
     return () => {
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
       header.removeEventListener("focusin", onScroll);
       cancelAnimationFrame(frame);
       header.removeAttribute("data-hidden");

@@ -39,6 +39,10 @@ html.lenis body {
 /* While the wheel turns (smooth-scroll.tsx), nothing in the page reacts to
    the cursor, so hover effects don't start and stop on every card that
    slides under it. The fixed header and chat button stay clickable. */
+/* Pressable cards (motion/press): the press itself is the feedback on touch
+   screens, so no grey tap flash over them. */
+[data-press-card] { -webkit-tap-highlight-color: transparent; }
+
 html.is-wheeling :is(main, footer) {
   /* Only while the wheel turns: not during Lenis's glide afterwards (the
      user, Oct 7, 2026: the hover ripple waited for the glide to end). */

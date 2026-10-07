@@ -56,9 +56,13 @@ export function LoopCarousel({ children, className = "", label, speed = 24, drag
     observer.observe(el);
     measure();
     let visible = false;
-    const visibility = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; });
-    visibility.observe(el);
     let frame = 0, previous = 0;
+    // The frame loop only runs while the carousel is on screen (it used to
+    // tick every frame for every carousel on the page; Oct 7, 2026, phones).
+    const visibility = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      if (visible && !frame) { previous = 0; frame = requestAnimationFrame(tick); }
+    });
     const tick = (time: number) => {
       const dt = previous ? Math.min(time - previous, 50) : 16.667;
       const step = dt / 16.667;
@@ -101,9 +105,9 @@ export function LoopCarousel({ children, className = "", label, speed = 24, drag
         }
       }
       previous = time;
-      frame = requestAnimationFrame(tick);
+      frame = visible || document.hidden ? requestAnimationFrame(tick) : 0;
     };
-    frame = requestAnimationFrame(tick);
+    visibility.observe(el);
     return () => {
       cancelAnimationFrame(frame); observer.disconnect(); visibility.disconnect();
       reduced.removeEventListener("change", preferences); fine.removeEventListener("change", preferences);

@@ -225,8 +225,11 @@
  [data-site-page] [data-figma-node="431:6359"]>div>div:first-child p { font-size:14px; line-height:20px; }
  [data-site-page] [data-figma-node="431:6464"]>div { gap:24px; }
  .site-team-description { font-size:14px; line-height:20px; }
- [data-site-page] [data-figma-node="431:6464"]>div>div:last-child { flex-direction:row; gap:12px; }
- [data-site-page] [data-figma-node="431:6464"] [data-image-reveal] { order:2; width:calc(50% - 6px); height:250px; }
+ /* Phones, Figma 919:17367: the names and the portrait side by side, 12px
+    apart, top-aligned; the portrait is half the width, 250px tall, 16px
+    corners. Tapping a name shows that person. */
+ [data-site-page] [data-figma-node="431:6464"]>div>div:last-child { flex-direction:row; align-items:flex-start; gap:12px; }
+ [data-site-page] [data-figma-node="431:6464"] [data-image-reveal] { order:2; width:calc(50% - 6px); height:250px; border-radius:16px; }
  [data-site-page] [data-figma-node="431:6464"] ul { order:1; flex:1; min-width:0; }
  [data-site-page] [data-figma-node="431:6464"] li { padding:8px 0; }
  [data-site-page] [data-figma-node="431:6464"] li p:first-child { font-size:20px; line-height:28px; letter-spacing:-.01em; }
@@ -389,10 +392,6 @@ html.wash-ready [data-site-page] [data-project-copy] span:not(.line, .line-inner
 }
 
 
-/* About team (431:6464): the Figma tablet (768) and mobile (390) frames show
-   only the list of names, no portrait. The portrait swaps on hover, which
-   phones and tablets don't have, so below 1024px it is left out and the
-   list takes the full width (Oct 7, 2026). */
-@media (width < 1024px) {
- [data-site-page] [data-figma-node="431:6464"] [data-image-reveal] { display:none; }
-}
+/* About team (431:6464): the portrait shows on every screen, beside the
+   names (Figma 919:17365 on mobile); tapping a name shows that person
+   (team-roster.tsx). */

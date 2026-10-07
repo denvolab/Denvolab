@@ -50,6 +50,7 @@ import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { fxOff } from "@/lib/motion/fx-off";
+import { phoneStill } from "@/lib/motion/phone-still";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -174,6 +175,10 @@ export function ImageRevealController() {
     const registerFrames = () => document.querySelectorAll<HTMLElement>(SELECTOR).forEach((frame) => {
       if (registered.has(frame)) return;
       registered.add(frame);
+      if (phoneStill(frame)) {
+        frame.dataset.imageReveal = "done";
+        return;
+      }
 
       // Scroll drift, for the frame's whole life (also after the reveal).
       // Off since Oct 7, 2026 (DRIFT_ENABLED): the user still saw the

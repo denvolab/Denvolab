@@ -1,13 +1,13 @@
 /* No flash before TextRevealController (text-reveal-controller.tsx) has cut
  * the text into lines: while <html> has `text-reveal-pending` (set before the
- * first paint by the inline script in app/layout.tsx, from 992px wide and
+ * first paint by the inline script in app/layout.tsx, on every screen size and
  * without "Reduce motion"), text in the header, main and footer is
  * transparent. Colour, not visibility, so pictures, icons and buttons stay
  * on screen. Buttons keep their labels (they are never animated). The
  * controller removes the class once the lines are waiting below their masks;
  * the script and the controller both remove it after a few seconds anyway.
  * Imported from app/globals.css. */
-@media (min-width: 992px) and (prefers-reduced-motion: no-preference) {
+@media (prefers-reduced-motion: no-preference) {
   html.text-reveal-pending :is(body > header, main, footer)
     :not(button, button *, .button-sweep, .button-sweep *, [role="button"], [role="button"] *, svg, svg *, input, textarea, select) {
     color: transparent !important;

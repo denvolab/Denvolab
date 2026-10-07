@@ -1,12 +1,12 @@
 /* AnimatedText (animated-text.tsx), zypsy.com's line animation.
  *
- * Before the split, from 992px wide, with JavaScript and without "Reduce
+ * Before the split, at any width (from 992px until Oct 7, 2026), with JavaScript and without "Reduce
  * motion", the heading is hidden (zypsy.com: `visibility: hidden` from 991px
  * until its script has split the lines). The component then sets
  * data-line-animation="ready" (split, lines waiting below their masks) or
  * "off" (no animation at this size: plain text). Imported from
  * app/globals.css. */
-@media (min-width: 992px) and (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
   [data-line-animation=""] {
     visibility: hidden;
   }

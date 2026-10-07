@@ -1,0 +1,11 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Benefit Icon / 03" clip-path="url(#clip0_0_11)">
+<path id="Benefit Icon / 03 / Shape / 01" d="M75 28.125C75 14.3179 63.8071 3.125 50 3.125C36.1929 3.125 25 14.3179 25 28.125V71.875C25 85.6821 36.1929 96.875 50 96.875C63.8071 96.875 75 85.6821 75 71.875V28.125Z" stroke="#DFE94C" stroke-width="5.4"/>
+<path id="Benefit Icon / 03 / Shape / 02" d="M28.125 25C14.3179 25 3.125 36.1929 3.125 50C3.125 63.8071 14.3179 75 28.125 75H71.875C85.6821 75 96.875 63.8071 96.875 50C96.875 36.1929 85.6821 25 71.875 25L28.125 25Z" stroke="#DFE94C" stroke-width="5.4"/>
+</g>
+<defs>
+<clipPath id="clip0_0_11">
+<rect width="100" height="100" fill="white"/>
+</clipPath>
+</defs>
+</svg>

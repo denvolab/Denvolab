@@ -8,7 +8,8 @@
 // changes and when new text appears (an FAQ answer opening, streamed
 // sections).
 //
-// Same motion as AnimatedText: from 992px wide and without "Reduce motion";
+// Same motion as AnimatedText: on every screen size (from 992px until
+// Oct 7, 2026) and without "Reduce motion";
 // after the fonts are ready and 300ms; yPercent 110 -> 0, 1.25s expo.out,
 // stagger 0.2 (expo.out); plays when the text's bottom comes into view,
 // resets when it drops below the screen; re-split when the width changes.
@@ -43,6 +44,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { splitLines, type LineSplit } from "@/components/ui/animated-text/split-lines";
 import { TEXT_REVEAL_PENDING, TEXT_REVEAL_QUERY } from "./text-reveal-config";
 import { lineTrigger } from "@/components/ui/animated-text/line-trigger";
+import { phoneStill } from "@/lib/motion/phone-still";
 import { fxOff } from "@/lib/motion/fx-off";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -119,7 +121,7 @@ function collect(done: WeakSet<Element>) {
     for (let node = walker.nextNode(); node; node = walker.nextNode()) {
       if (!node.textContent?.trim()) continue;
       const parent = node.parentElement;
-      if (!parent || parent.closest(SKIP)) continue;
+      if (!parent || parent.closest(SKIP) || phoneStill(parent)) continue;
 
       const label = parent.closest<HTMLElement>(".button-text");
       if (label) {

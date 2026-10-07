@@ -222,3 +222,16 @@
     zoom: 0.5;
   }
 }
+
+/* Touch screens (phones, tablets): the wheel is always shown on every Work
+ * card, so a live backdrop blur meant the phone re-blurring the picture
+ * behind each wheel on every frame of scrolling (Oct 7, 2026: "mobile a onek
+ * slow"). A plain see-through dark fill instead, close to the dimmed glass. */
+@media (hover: none) {
+  .work-wheel-disc {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .work-wheel-disc--outer { background: rgb(13 18 22 / 0.72); }
+  .work-wheel-disc--inner { background: rgb(13 18 22 / 0.35); }
+}

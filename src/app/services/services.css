@@ -10,8 +10,8 @@
 [data-site-page="/services"] .site-editorial-hero a { font:400 14px/20px var(--font-mono); letter-spacing:.02em; color:#dfe94c; }
 .services-catalog-inner { max-width:1920px; margin:auto; padding:120px 40px; display:flex; flex-direction:column; gap:120px; }
 .services-entry { display:flex; align-items:center; gap:80px; }
-/* Desktop: no divider between services (removed in Figma, Oct 7, 2026);
-   the list's 120px gap is the space between them. Tablet and phone keep it. */
+/* No divider between services on any screen (desktop removed in Figma on
+   Oct 7, 2026; tablet and phone on Oct 8); the list's gap spaces them. */
 .services-entry-copy { flex:1; min-width:0; display:grid; grid-template-columns:120px minmax(0,1fr); column-gap:40px; row-gap:40px; align-items:start; }
 .services-entry-number { grid-column:1; grid-row:1 / 4; color:#6b7a89; font-size:40px; line-height:48px; letter-spacing:-.03em; font-weight:600; text-box-trim:trim-both; text-box-edge:cap alphabetic; }
 .services-entry h2 { grid-column:2; font-size:48px; line-height:56px; letter-spacing:-.035em; padding-block:16px; color:#0d1216; }
@@ -54,11 +54,24 @@
  .services-benefits-heading p { margin-left:auto; }
  .services-entry:nth-child(4) .services-entry-copy { min-height:512px; }
 }
+/* Benefit icons, Figma 479:9141 timeline: a 5.2s loop, repeated for as long
+   as the section is on screen. Each icon holds still, then turns a full
+   circle at an even speed until the loop ends; the holds are staggered
+   (31.7%, 39.8%, 47.9%, 56%) and the direction alternates (+, -, +, -).
+   It starts once its row has come into view (Reveal's data-in). */
 @media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
- .services-benefit-row[data-in="true"] .services-benefit-icon img { animation:services-benefit-spin 1400ms cubic-bezier(.65,0,.35,1) calc(var(--reveal-delay,0ms) + 400ms) both; }
- .services-benefits li:nth-child(even) .services-benefit-icon img { animation-direction:reverse; }
+ /* Longhands: the CSS bundler rewrote a name-less animation shorthand to
+    its defaults (0s, once). */
+ .services-benefit-row[data-in="true"] .services-benefit-icon img { animation-duration:5.2s; animation-timing-function:linear; animation-iteration-count:infinite; animation-fill-mode:both; }
+ .services-benefits li:nth-child(1) .services-benefit-row[data-in="true"] .services-benefit-icon img { animation-name:services-benefit-spin-1; }
+ .services-benefits li:nth-child(2) .services-benefit-row[data-in="true"] .services-benefit-icon img { animation-name:services-benefit-spin-2; }
+ .services-benefits li:nth-child(3) .services-benefit-row[data-in="true"] .services-benefit-icon img { animation-name:services-benefit-spin-3; }
+ .services-benefits li:nth-child(4) .services-benefit-row[data-in="true"] .services-benefit-icon img { animation-name:services-benefit-spin-4; }
 }
-@keyframes services-benefit-spin { from { transform:rotate(0); } to { transform:rotate(360deg); } }
+@keyframes services-benefit-spin-1 { 0%, 31.73% { transform:rotate(0); } 100% { transform:rotate(360deg); } }
+@keyframes services-benefit-spin-2 { 0%, 39.81% { transform:rotate(0); } 100% { transform:rotate(-360deg); } }
+@keyframes services-benefit-spin-3 { 0%, 47.88% { transform:rotate(0); } 100% { transform:rotate(360deg); } }
+@keyframes services-benefit-spin-4 { 0%, 55.96% { transform:rotate(0); } 100% { transform:rotate(-360deg); } }
 @media (768px <= width < 1280px) {
  [data-site-page="/services"] .site-editorial-hero { height:420px; padding:64px 40px; }
  [data-site-page="/services"] .site-editorial-hero>div:not(.hero-lines) { gap:48px; }
@@ -67,10 +80,10 @@
  [data-site-page="/services"] .site-editorial-hero p { font-size:16px; line-height:24px; }
  [data-site-page="/services"] .services-catalog-inner { padding:64px 24px; gap:48px; }
  .services-entry { flex-direction:column-reverse; align-items:stretch; gap:24px; }
- .services-entry+.services-entry { border-top:2px solid #f4f6f8; padding-top:48px; }
+ .services-entry+.services-entry { padding-top:0; } /* no divider (Oct 8, 2026); the list's gap spaces them */
  .services-entry-copy { flex:auto; grid-template-columns:auto minmax(0,1fr); column-gap:16px; row-gap:24px; }
- .services-entry-number { grid-row:1; font-size:40px; line-height:48px; padding-block:8px; }
- .services-entry h2 { font-size:40px; line-height:48px; letter-spacing:-.03em; padding-block:8px; }
+ .services-entry-number { grid-row:1; align-self:start; font-size:40px; line-height:48px; padding-block:8px; text-box-trim:none; }
+ .services-entry h2 { align-self:start; font-size:40px; line-height:48px; letter-spacing:-.03em; padding-block:8px; text-box-trim:none; }
  .services-entry-description { grid-column:1 / -1; gap:24px; }
  .services-entry-description>p { font-size:16px; line-height:24px; }
  .services-entry-bullets { gap:20px 16px; }
@@ -101,10 +114,14 @@
  [data-site-page="/services"] .site-editorial-hero p { max-width:350px; font-size:14px; line-height:20px; }
  [data-site-page="/services"] .services-catalog-inner { padding:48px 16px; gap:32px; }
  .services-entry { flex-direction:column-reverse; align-items:stretch; gap:16px; }
- .services-entry+.services-entry { border-top:1px solid #f4f6f8; padding-top:32px; }
+ .services-entry+.services-entry { padding-top:0; } /* no divider (Oct 8, 2026) */
  .services-entry-copy { flex:auto; grid-template-columns:auto minmax(0,1fr); column-gap:16px; row-gap:16px; }
- .services-entry-number { grid-row:1; font-size:32px; line-height:40px; letter-spacing:-.025em; padding-block:8px; }
- .services-entry h2 { font-size:32px; line-height:40px; letter-spacing:-.025em; padding-block:8px; }
+ /* Figma 1220:22128: "07" and the title side by side, both from the top of
+    the row. No text-box-trim here: with the title split into animated
+    lines it shrank the title's box to one line, so the title rose above it
+    and "07" sat level with its second line (Oct 8, 2026). */
+ .services-entry-number { grid-row:1; align-self:start; font-size:32px; line-height:40px; letter-spacing:-.025em; padding-block:8px; text-box-trim:none; }
+ .services-entry h2 { align-self:start; font-size:32px; line-height:40px; letter-spacing:-.025em; padding-block:8px; text-box-trim:none; }
  .services-entry-description { grid-column:1 / -1; gap:16px; }
  .services-entry-description>p { font-size:14px; line-height:20px; }
  .services-entry-bullets { gap:16px; }

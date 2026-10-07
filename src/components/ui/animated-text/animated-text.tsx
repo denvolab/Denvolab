@@ -38,7 +38,8 @@
 // wrapper is a block as wide as the heading's content was, so a heading that
 // sizes itself to its text keeps its width.
 //
-// Below 992px, with "Reduce motion", or without JavaScript, nothing is split
+// With "Reduce motion" or without JavaScript nothing is split (until Oct 7,
+// 2026 also below 992px; now every screen size animates)
 // and the text is simply there. The split waits for the fonts, and is redone
 // when the window width changes or a late font loads.
 //
@@ -53,11 +54,12 @@ import { useGSAP } from "@gsap/react";
 import { cn } from "@/lib/utils/cn";
 import { splitLines, type LineSplit } from "./split-lines";
 import { lineTrigger } from "./line-trigger";
+import { PHONE_QUERY, PHONE_STILL } from "@/lib/motion/phone-still";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 /** zypsy.com: `window.innerWidth > 991`, and nothing for "Reduce motion". */
-const QUERY = "(min-width: 992px) and (prefers-reduced-motion: no-preference)";
+const QUERY = "(prefers-reduced-motion: no-preference)"; // all sizes since Oct 7, 2026 (was from 992px)
 const FROM_Y_PERCENT = 110; // zypsy.com: { yPercent: 110 }
 const DURATION = 1.25; // zypsy.com: duration: 1.25
 const STAGGER = 200; // ms; zypsy.com: stagger { amount: 0.2, ease: "expo.out" }
@@ -85,7 +87,9 @@ export function AnimatedText({ children, className, delay = DEFAULT_DELAY }: Ani
       if (!root) return;
       const mm = gsap.matchMedia();
 
-      mm.add(QUERY, () => {
+      // Sections that keep still on phones (lib/motion/phone-still).
+      const still = !!root.closest(PHONE_STILL);
+      mm.add(still ? `${QUERY} and (width >= 768px)` : QUERY, () => {
         let split: LineSplit | null = null;
         let killTrigger: (() => void) | null = null;
         let animations: Animation[] = [];
@@ -166,7 +170,7 @@ export function AnimatedText({ children, className, delay = DEFAULT_DELAY }: Ani
       });
 
       // Phones, tablets and "Reduce motion": no split, the text is shown.
-      mm.add(`not all and ${QUERY}`, () => {
+      mm.add(still ? `(prefers-reduced-motion: reduce), ${PHONE_QUERY}` : `not all and ${QUERY}`, () => {
         root.dataset.lineAnimation = "off";
       });
 

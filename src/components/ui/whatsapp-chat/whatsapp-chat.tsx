@@ -50,20 +50,33 @@ export function WhatsAppChat() {
     if (!el || open) return;
     const phone = window.matchMedia("(width < 768px)");
     let lastY = window.scrollY;
+    let hidden = false;
     let stopTimer = 0;
+    let frame = 0;
+    // Only touches the page when the state changes, at most once a frame.
+    const set = (next: boolean) => {
+      if (next === hidden) return;
+      hidden = next;
+      el.toggleAttribute("data-hidden", next);
+    };
+    const update = () => {
+      frame = 0;
+      const y = window.scrollY;
+      if (y > lastY + 2) set(true);
+      else if (y < lastY - 2) set(false);
+      lastY = y;
+    };
     const onScroll = () => {
       if (!phone.matches) return;
-      const y = window.scrollY;
-      if (y > lastY + 2) el.setAttribute("data-hidden", "");
-      else if (y < lastY - 2) el.removeAttribute("data-hidden");
-      lastY = y;
+      if (!frame) frame = requestAnimationFrame(update);
       window.clearTimeout(stopTimer);
-      stopTimer = window.setTimeout(() => el.removeAttribute("data-hidden"), SCROLL_STOP_MS);
+      stopTimer = window.setTimeout(() => set(false), SCROLL_STOP_MS);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.clearTimeout(stopTimer);
+      cancelAnimationFrame(frame);
       el.removeAttribute("data-hidden");
     };
   }, [open]);

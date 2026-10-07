@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const WHEEL_IDLE_MS = 160;
 const LERP_DESKTOP = 0.04;
-const LERP_PHONE = 0.9;
+const LERP_PHONE = 0.1;
 
 /** One scroll engine, synchronized with the site's existing GSAP animations. */
 export function SmoothScroll() {
@@ -47,8 +47,10 @@ export function SmoothScroll() {
         // Each frame covers this much of the distance left (lower is
         // heavier, higher is quicker). Desktop: 0.04, a heavy, smooth glide
         // (the user's choice, Oct 7, 2026; was 0.12, duration 1.6, then
-        // 0.06). Phones: 0.9, close to the finger (the user, Oct 7, 2026:
-        // 0.04 made scrolling on mobile feel broken). Updated live below.
+        // 0.06). Narrow screens: 0.1, light and quick (the user, Oct 7, 2026:
+        // 0.04 felt broken there; 0.9 then moved a mouse wheel in steps, notch
+        // by notch). Fingers on a real phone scroll natively (syncTouch off),
+        // this only applies to a wheel. Updated live below.
         lerp: phone.matches ? LERP_PHONE : LERP_DESKTOP,
         smoothWheel: true,
         syncTouch: false,

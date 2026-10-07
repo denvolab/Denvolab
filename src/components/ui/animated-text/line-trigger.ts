@@ -15,17 +15,64 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const SECTION_START = 0.75; // of the screen's height
 
+/** One trigger per section, shared by every text in it (each text used to
+ *  add its own: hundreds of triggers on a page, all checked on every scroll
+ *  frame, which phones felt; Oct 7, 2026). */
+interface SectionWatch {
+  trigger: ScrollTrigger;
+  inside: boolean;
+  listeners: Set<() => void>;
+}
+const sections = new WeakMap<Element, SectionWatch>();
+
+function watchSection(section: HTMLElement, listener: () => void) {
+  let watch = sections.get(section);
+  if (!watch) {
+    // The trigger is made after the record: ScrollTrigger can call onEnter
+    // straight away while creating it (a section already in view).
+    const created = {
+      inside: section.getBoundingClientRect().top <= window.innerHeight * SECTION_START,
+      listeners: new Set<() => void>(),
+    } as SectionWatch;
+    created.trigger = ScrollTrigger.create({
+      trigger: section,
+      start: `top ${SECTION_START * 100}%`,
+      onEnter: () => {
+        created.inside = true;
+        created.listeners.forEach((fn) => fn());
+      },
+      onLeaveBack: () => {
+        created.inside = false;
+      },
+    });
+    watch = created;
+    sections.set(section, watch);
+  }
+  const shared = watch;
+  shared.listeners.add(listener);
+  return {
+    isInside: () => shared.inside,
+    stop: () => {
+      shared.listeners.delete(listener);
+      if (!shared.listeners.size) {
+        shared.trigger.kill();
+        sections.delete(section);
+      }
+    },
+  };
+}
+
 export function lineTrigger(text: HTMLElement, play: () => void, reset: () => void) {
   const section = text.closest<HTMLElement>("section") ?? text;
   let textIn = false;
-  let sectionIn = false;
   let played = false;
   const update = () => {
-    if (textIn && sectionIn && !played) {
+    if (textIn && sectionWatch.isInside() && !played) {
       played = true;
       play();
     }
   };
+  const sectionWatch = watchSection(section, update);
 
   const textTrigger = ScrollTrigger.create({
     trigger: text,
@@ -41,25 +88,13 @@ export function lineTrigger(text: HTMLElement, play: () => void, reset: () => vo
       reset();
     },
   });
-  const sectionTrigger = ScrollTrigger.create({
-    trigger: section,
-    start: `top ${SECTION_START * 100}%`,
-    onEnter: () => {
-      sectionIn = true;
-      update();
-    },
-    onLeaveBack: () => {
-      sectionIn = false;
-    },
-  });
 
   // Already there when the page opens (or after a re-split).
   textIn = textTrigger.progress >= 1 || text.getBoundingClientRect().bottom <= window.innerHeight;
-  sectionIn = section.getBoundingClientRect().top <= window.innerHeight * SECTION_START;
   update();
 
   return () => {
     textTrigger.kill();
-    sectionTrigger.kill();
+    sectionWatch.stop();
   };
 }
