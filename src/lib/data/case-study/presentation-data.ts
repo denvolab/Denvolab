@@ -946,7 +946,7 @@ export default {
     ]
   },
   "metro-hr": {
-    "title": "Metro HR — One workspace for the people behind hospitality.",
+    "title": "Denvo HR — One workspace for the people behind hospitality.",
     "summary": "Mobile SaaS for hr & hospitality. People → operations → approvals.",
     "facts": [
       {
@@ -970,32 +970,32 @@ export default {
     },
     "hero": {
       "src": "/images/case-studies/metro-hr/current/img8KMetroHr1People.jpg",
-      "alt": "metro-hr / 1 / People",
+      "alt": "Denvo HR / 1 / People",
       "width": 7680,
       "height": 4320
     },
     "overview": {
       "src": "/images/case-studies/metro-hr/current/img8KMetroHr1People.jpg",
-      "alt": "metro-hr / 1 / People",
+      "alt": "Denvo HR / 1 / People",
       "width": 7680,
       "height": 4320
     },
     "banner": {
       "src": "/images/case-studies/metro-hr/current/img8KMetroHr5LeaveManagement.jpg",
-      "alt": "metro-hr / 5 / Leave management",
+      "alt": "Denvo HR / 5 / Leave management",
       "width": 7680,
       "height": 4320
     },
     "challenge": "HR teams move between employee records, recruitment, payroll and attendance throughout the day. On mobile, dense operational information can be difficult to scan. The challenge is to keep priorities clear while giving each workflow enough detail to act.",
     "solution": {
-      "body": "Metro HR brings the main HR workflows into a shared mobile navigation structure. Overview cards, employee lists and dedicated task screens connect people, hiring, payroll, attendance and leave management.",
+      "body": "Denvo HR brings the main HR workflows into a shared mobile navigation structure. Overview cards, employee lists and dedicated task screens connect people, hiring, payroll, attendance and leave management.",
       "cards": [
         {
           "title": "People & hiring",
           "description": "Connect employee information and job openings through focused mobile screens.",
           "image": {
             "src": "/images/case-studies/metro-hr/current/img8KMetroHr2JobOpenings.jpg",
-            "alt": "metro-hr / 2 / Job openings",
+            "alt": "Denvo HR / 2 / Job openings",
             "width": 7680,
             "height": 4320
           }
@@ -1005,7 +1005,7 @@ export default {
           "description": "Present payroll status and related actions in a dedicated operational view.",
           "image": {
             "src": "/images/case-studies/metro-hr/current/img8KMetroHr3Payroll.jpg",
-            "alt": "metro-hr / 3 / Payroll",
+            "alt": "Denvo HR / 3 / Payroll",
             "width": 7680,
             "height": 4320
           }
@@ -1015,7 +1015,7 @@ export default {
           "description": "Keep attendance and leave management accessible within the same workspace.",
           "image": {
             "src": "/images/case-studies/metro-hr/current/img8KMetroHr4Attendance.jpg",
-            "alt": "metro-hr / 4 / Attendance",
+            "alt": "Denvo HR / 4 / Attendance",
             "width": 7680,
             "height": 4320
           }
@@ -1025,37 +1025,37 @@ export default {
     "collage": [
       {
         "src": "/images/case-studies/metro-hr/current/img8KMetroHr2JobOpenings1.jpg",
-        "alt": "metro-hr / 2 / Job openings",
+        "alt": "Denvo HR / 2 / Job openings",
         "width": 7078,
         "height": 7680
       },
       {
         "src": "/images/case-studies/metro-hr/current/img8KMetroHr4Attendance1.jpg",
-        "alt": "metro-hr / 4 / Attendance",
+        "alt": "Denvo HR / 4 / Attendance",
         "width": 7680,
         "height": 7322
       },
       {
         "src": "/images/case-studies/metro-hr/current/img8KMetroHr0Home.jpg",
-        "alt": "metro-hr / 0 / Home",
+        "alt": "Denvo HR / 0 / Home",
         "width": 7680,
         "height": 5030
       },
       {
         "src": "/images/case-studies/metro-hr/current/img8KMetroHr3Payroll1.jpg",
-        "alt": "metro-hr / 3 / Payroll",
+        "alt": "Denvo HR / 3 / Payroll",
         "width": 5552,
         "height": 7680
       },
       {
         "src": "/images/case-studies/metro-hr/current/img8KMetroHr5LeaveManagement1.jpg",
-        "alt": "metro-hr / 5 / Leave management",
+        "alt": "Denvo HR / 5 / Leave management",
         "width": 5804,
         "height": 7680
       },
       {
         "src": "/images/case-studies/metro-hr/current/img8KMetroHr1People1.jpg",
-        "alt": "metro-hr / 1 / People",
+        "alt": "Denvo HR / 1 / People",
         "width": 7680,
         "height": 5491
       }
@@ -1068,7 +1068,7 @@ export default {
       "background": "#f5f7f0",
       "grid": {
         "src": "/images/case-studies/metro-hr/current/brand-grid.svg",
-        "alt": "metro-hr original vector logo and alignment grid",
+        "alt": "Denvo HR original vector logo and alignment grid",
         "width": 692,
         "height": 702
       },
@@ -1094,37 +1094,37 @@ export default {
     "gallery": [
       {
         "src": "/images/case-studies/metro-hr/current/img8KMetroHr0Home1.jpg",
-        "alt": "metro-hr / 0 / Home",
+        "alt": "Denvo HR / 0 / Home",
         "width": 7680,
         "height": 4320
       },
       {
         "src": "/images/case-studies/metro-hr/current/img8KMetroHr1People.jpg",
-        "alt": "metro-hr / 1 / People",
+        "alt": "Denvo HR / 1 / People",
         "width": 7680,
         "height": 4320
       },
       {
         "src": "/images/case-studies/metro-hr/current/img8KMetroHr2JobOpenings.jpg",
-        "alt": "metro-hr / 2 / Job openings",
+        "alt": "Denvo HR / 2 / Job openings",
         "width": 7680,
         "height": 4320
       },
       {
         "src": "/images/case-studies/metro-hr/current/img8KMetroHr3Payroll.jpg",
-        "alt": "metro-hr / 3 / Payroll",
+        "alt": "Denvo HR / 3 / Payroll",
         "width": 7680,
         "height": 4320
       },
       {
         "src": "/images/case-studies/metro-hr/current/img8KMetroHr4Attendance.jpg",
-        "alt": "metro-hr / 4 / Attendance",
+        "alt": "Denvo HR / 4 / Attendance",
         "width": 7680,
         "height": 4320
       },
       {
         "src": "/images/case-studies/metro-hr/current/img8KMetroHr5LeaveManagement.jpg",
-        "alt": "metro-hr / 5 / Leave management",
+        "alt": "Denvo HR / 5 / Leave management",
         "width": 7680,
         "height": 4320
       }

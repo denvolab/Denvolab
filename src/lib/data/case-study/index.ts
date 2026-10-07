@@ -79,7 +79,7 @@ const MORE_PROJECTS: PortfolioProject[] = [
     href: caseStudyHref(locksmith.slug),
   },
   {
-    title: "Metro HR - HR & Hospitality",
+    title: "Denvo HR - HR & Hospitality",
     description: metroHr.description,
     tags: ["UI/UX design", "Mobile SaaS"],
     imageSrc: "/images/case-studies/metro-hr/home.webp",

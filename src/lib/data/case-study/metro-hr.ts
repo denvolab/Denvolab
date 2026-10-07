@@ -1,18 +1,18 @@
-// Metro HR (Figma frame 727:4205). Template page, see shared.ts.
+// Denvo HR, formerly Metro HR (Figma frame 727:4205; renamed Oct 7, 2026, the slug stays metro-hr so links keep working). Template page, see shared.ts.
 import { buildTemplateCaseStudy, SPECIMEN_LINES } from "./shared";
 
 export const metroHr = buildTemplateCaseStudy({
   slug: "metro-hr",
-  name: "Metro HR",
+  name: "Denvo HR",
   tags: ["UI/UX design", "Mobile SaaS"],
-  title: "Metro HR",
+  title: "Denvo HR",
   industry: "HR & hospitality",
   intro:
     "A mobile HR workspace for hospitality teams, bringing people, hiring, payroll, attendance and leave into connected screens with clear operational summaries and actions.",
   challenge:
     "HR teams move between employee records, recruitment, payroll and attendance throughout the day. On mobile, dense operational information can be difficult to scan. The challenge is to keep priorities clear while giving each workflow enough detail to act.",
   solution: {
-    body: "Metro HR brings the main HR workflows into a shared mobile navigation structure. Overview cards, employee lists and dedicated task screens connect people, hiring, payroll, attendance and leave management.",
+    body: "Denvo HR brings the main HR workflows into a shared mobile navigation structure. Overview cards, employee lists and dedicated task screens connect people, hiring, payroll, attendance and leave management.",
     cards: [
       {
         title: "People & hiring",

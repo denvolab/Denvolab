@@ -253,8 +253,8 @@ const PARTNER_LOGOS: PartnerLogo[] = [
     "size": "wide"
   },
   {
-    "name": "Metro HR",
-    "logoSrc": "/images/partners/metro-hr.svg",
+    "name": "Denvo HR",
+    "logoSrc": "/images/partners/denvo-hr.svg",
     "size": "wide"
   }
 ];

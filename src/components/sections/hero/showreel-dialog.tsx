@@ -64,7 +64,11 @@ export function ShowreelDialog({ videoSrc, onClosed, ref }: ShowreelDialogProps)
       onClick={(e) => {
         if (e.target === e.currentTarget) e.currentTarget.close();
       }}
-      className="m-auto max-h-none w-[min(92vw,calc(85svh*16/9))] max-w-none overflow-visible border-0 bg-transparent p-0 text-white backdrop:bg-black/85 backdrop:backdrop-blur-sm"
+      // Phones (below md): a portrait player, 9:16, the full width of the
+      // screen with no gap at the sides (the 16:9 one was a thin strip on a
+      // phone held upright; Oct 7, 2026). The film fills it (object-cover),
+      // cropped at the sides; never taller than the screen.
+      className="m-auto max-h-none w-screen max-w-none overflow-visible border-0 bg-transparent p-0 text-white backdrop:bg-black/85 backdrop:backdrop-blur-sm md:w-[min(92vw,calc(85svh*16/9))]"
     >
       <div className="relative">
         <video
@@ -73,7 +77,9 @@ export function ShowreelDialog({ videoSrc, onClosed, ref }: ShowreelDialogProps)
           controls
           playsInline
           preload="none"
-          className="aspect-video w-full rounded-2xl bg-black"
+          // Hand cursor over the film (the user, Oct 7, 2026): a click plays
+          // or pauses it.
+          className="aspect-[9/16] max-h-[100svh] w-full cursor-pointer bg-black object-cover md:aspect-video md:max-h-none md:rounded-2xl md:object-contain"
         />
         <button
           type="button"

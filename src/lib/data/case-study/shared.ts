@@ -2,7 +2,7 @@
 // Pieces shared by the case study pages.
 //
 // Eight of the eleven Figma frames (Denvo Hotel, Denvo Travel, Part Pilot,
-// Pro Budget Tracker, Locksmith, Metro HR, Casana AI, Smart Aqua Farm 360) are
+// Pro Budget Tracker, Locksmith, Denvo HR, Casana AI, Smart Aqua Farm 360) are
 // one template with different content: same sections, same positions, same
 // process copy. `buildTemplateCaseStudy` turns a page's own content into the
 // full block list, so each of those data files only holds what is different.
