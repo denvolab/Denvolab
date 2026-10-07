@@ -27,6 +27,14 @@
 // The small muted preview pauses while the player is open and resumes after.
 // A lime "PLAY REEL" pill on the card says it can be clicked.
 //
+// OUT OF THE WAY OF LINKS (Oct 7, 2026): within 40px of the service list
+// (the whole column, not link by link) or of the "Let's craft your idea"
+// button (any other link or button in the hero) the card fades out and
+// stops catching clicks, so the link under the pointer works; it keeps
+// following and fades back in once the pointer moves away. The card sits
+// above those links, so the pointer isn't checked by event target but
+// against their boxes.
+//
 // Touch screens (no hover) and "Reduce motion" skip the tracking: the card
 // stays visible at its Figma spot and a tap opens the player. Keyboard focus
 // also shows the card (the button is a normal tab stop).
@@ -39,6 +47,9 @@ import { ShowreelDialog, type ShowreelDialogHandle } from "./showreel-dialog";
 // How long the cursor has to sit still before the card settles — matches the
 // reference's own value.
 const IDLE_MS = 66;
+// How close (px) the pointer may come to the service list or a button
+// before the card gets out of the way.
+const CONTROL_MARGIN = 40;
 // Resting vs settled scale for the inner media element (reference uses
 // 1 -> 1.2; toned down here since this card is a small fixed mockup slot,
 // not a full-bleed hero video, and 1.2 read as too large a jump at that
@@ -108,6 +119,37 @@ export function MovingVisual({ className, videoSrc = null }: MovingVisualProps) 
     };
     measure();
 
+    // The service list as one block, plus the hero's other links and
+    // buttons (not the card's own play button).
+    const hero = wrapper.closest("section");
+    const list = hero?.querySelector<HTMLElement>(".home-hero-services") ?? null;
+    const controls = hero
+      ? [
+          ...(list ? [list] : []),
+          ...Array.from(hero.querySelectorAll<HTMLElement>("a, button")).filter(
+            (el) => !wrapper.contains(el) && !list?.contains(el),
+          ),
+        ]
+      : [];
+    const isOverControl = (x: number, y: number) =>
+      controls.some((el) => {
+        const r = el.getBoundingClientRect();
+        return (
+          r.width > 0 &&
+          x >= r.left - CONTROL_MARGIN &&
+          x <= r.right + CONTROL_MARGIN &&
+          y >= r.top - CONTROL_MARGIN &&
+          y <= r.bottom + CONTROL_MARGIN
+        );
+      });
+    let overControl = false;
+    const setOverControl = (over: boolean) => {
+      overControl = over;
+      // Let clicks through to the link at once, not after the fade.
+      wrapper.style.pointerEvents = over ? "none" : "";
+      opacityTo(over ? 0 : 1);
+    };
+
     let lastX = 0;
     let lastY = 0;
     let hasEntered = false;
@@ -124,6 +166,8 @@ export function MovingVisual({ className, videoSrc = null }: MovingVisualProps) 
       if (!isInsideHero) {
         if (hasEntered) {
           hasEntered = false;
+          overControl = false;
+          wrapper.style.pointerEvents = "";
           opacityTo(0);
           xTo(0);
           yTo(0);
@@ -135,9 +179,12 @@ export function MovingVisual({ className, videoSrc = null }: MovingVisualProps) 
 
       if (!hasEntered) {
         hasEntered = true;
-        opacityTo(1);
         lastX = e.clientX;
         lastY = e.clientY;
+        setOverControl(isOverControl(e.clientX, e.clientY));
+      } else {
+        const over = isOverControl(e.clientX, e.clientY);
+        if (over !== overControl) setOverControl(over);
       }
 
       // The card's center tracks the cursor 1:1 — the cursor sits in the
@@ -186,6 +233,7 @@ export function MovingVisual({ className, videoSrc = null }: MovingVisualProps) 
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("resize", onResize);
+      wrapper.style.pointerEvents = "";
       clearTimeout(idleTimer);
       clearTimeout(resizeTimer);
     };

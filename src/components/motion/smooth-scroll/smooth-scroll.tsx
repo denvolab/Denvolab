@@ -41,9 +41,10 @@ export function SmoothScroll() {
         autoToggle: false,
         // Cache dimensions instead of forcing a document measurement every tick.
         autoResize: true,
+        // CAL-*: Cal.com's booking popup (contact page, book-call-button.tsx).
         prevent: (node) => node.hasAttribute("data-lenis-prevent") ||
           node.tagName === "TEXTAREA" || node.getAttribute("role") === "dialog" ||
-          node.id === "mobile-nav-panel",
+          node.id === "mobile-nav-panel" || node.tagName.startsWith("CAL-"),
         stopInertiaOnNavigate: true,
         anchors: true,
       });

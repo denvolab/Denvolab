@@ -36,9 +36,16 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const SELECTOR = "[data-image-reveal]";
-const START = "clamp(top 70%)"; // clamp(): a picture at the very end of a page still plays
-const DURATION = 0.8;
-const EASE = "circ.out";
+// Smoothed on Oct 7, 2026 (the user: the pictures "hut kore upore uthe
+// asteche", and the page seemed to shake while scrolling). Measured with a
+// real wheel scroll: with the old values (start at 70%, 0.8s circ.out) a
+// picture sat invisible until its top was 70% down the screen, then jumped
+// ~15px ahead of the page in the first frame, because circ.out starts almost
+// vertically. Now the fade starts as the picture comes onto the screen, and
+// a gentle ease over a longer time lets it rise without a jolt.
+const START = "clamp(top 92%)"; // clamp(): a picture at the very end of a page still plays
+const DURATION = 1.1;
+const EASE = "power2.out";
 
 export function ImageRevealController() {
   const pathname = usePathname();
@@ -66,6 +73,7 @@ export function ImageRevealController() {
                 y: 0,
                 duration: DURATION,
                 ease: EASE,
+                force3D: true, // stay on the GPU for the whole rise, no 2D switch mid-way
                 onComplete: () => {
                   frame.dataset.imageReveal = "done";
                   // Hand the box back to its own CSS once it has arrived, so

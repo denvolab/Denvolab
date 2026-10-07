@@ -23,7 +23,8 @@ export const metadata: Metadata = {
 //
 // The grid shows the homepage's six projects first, then the seven other
 // case studies, so every case study page (/case-studies/<slug>) can be
-// reached from here. Cards with a page say "View project" on hover; Quotable
+// reached from here. Cards with a page show the turning "EXPLORE THE STORY"
+// wheel on hover (ui/work-wheel); Quotable
 // and Sanime have none yet and say "Coming soon". See
 // claude/case-studies-page.md (the project doc).
 // -----------------------------------------------------------------------------

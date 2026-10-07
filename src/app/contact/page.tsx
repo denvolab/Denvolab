@@ -6,7 +6,7 @@ import { ContactFormSection } from "@/components/sections/contact-form";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Tell Denvo Lab about your project. Send a short brief, book a call with our founder, or email hello@denvolab.com. Studio in Rangpur, Bangladesh.",
+    "Tell Denvo Lab about your project. Send a short brief, book a call with our founder, or email denvolab@gmail.com. Studio in Rangpur, Bangladesh.",
 };
 
 // -----------------------------------------------------------------------------

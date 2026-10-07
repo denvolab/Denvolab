@@ -7,13 +7,15 @@
 | juice.agency | Each work card has `data-card-reveal`. When the card's top reaches 70% of the screen, once: `gsap.to(card, { opacity: 1, y: 0, duration: .8, ease: "circ.out" })`. | trigger point, duration, easing, plays once |
 | zypsy.com | The work cards (`.fade-in`) start at `translate3d(0, 5em, 0)` with opacity 0. | the start position |
 
-So a picture's frame starts 5em lower and invisible, and the first time its top reaches 70% of the screen it rises into place over 0.8s. A picture that is already on screen when the page opens (a hero image) plays straight away.
+So a picture's frame starts lower and invisible, and the first time it comes onto the screen it fades and rises into place. A picture that is already on screen when the page opens (a hero image) plays straight away.
+
+**Smoothed on Oct 7, 2026.** The user found the rise abrupt ("hut kore upore uthe asteche") and the page seemed to shake while scrolling. Measured with a real wheel scroll at 1440px: with juice.agency's values (start at 70%, 0.8s `circ.out`, 5em) a picture stayed invisible until its top was 70% down the screen and then moved ~15px ahead of the page in its first frame, because `circ.out` starts almost vertically. Now: start as the picture's top passes 92% of the screen, rise 4em, 1.1s `power2.out`, kept on the GPU (`force3D`) for the whole rise. The most a picture moves beyond the page in one frame dropped from 15.4px to 2.4px, easing out over about 35 frames, and frames stay at 13-14ms.
 
 ## Files
 
 | File | Job |
 |---|---|
-| `image-reveal-controller.tsx` | The controller. One `ScrollTrigger` per box (`start: "clamp(top 70%)"`, `once: true`). When a box has arrived it gets `data-image-reveal="done"` and its inline styles are cleared, so it is back to plain CSS. A `ResizeObserver` on the page re-measures the trigger points when late pictures or fonts change the page height. Runs again after each page change. |
+| `image-reveal-controller.tsx` | The controller. One `ScrollTrigger` per box (`start: "clamp(top 92%)"`, `once: true`). When a box has arrived it gets `data-image-reveal="done"` and its inline styles are cleared, so it is back to plain CSS. A `ResizeObserver` on the page re-measures the trigger points when late pictures or fonts change the page height. Runs again after each page change. |
 | `image-reveal.css` | The hidden start state, imported from `app/globals.css`. Only inside `@media (scripting: enabled) and (prefers-reduced-motion: no-preference)`, so with JavaScript off or "Reduce motion" on every picture is simply there. |
 | `index.ts` | `export { ImageRevealController }` |
 

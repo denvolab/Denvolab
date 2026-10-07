@@ -8,7 +8,7 @@
 .body { display:flex; flex-direction:column; gap:16px; padding:20px; }.bubble { background:white; padding:14px; border-radius:12px; font-size:14px; line-height:22px; }
 .choices { display:flex; flex-wrap:wrap; gap:8px; }.choices button { border:1px solid #b4c0cc; padding:8px 12px; border-radius:20px; font-size:12px; cursor:pointer; background:white; }.choices button[aria-pressed="true"] { background:#dfe94c; border-color:#a6b12f; }
 .label { font-size:12px; font-weight:600; margin-bottom:-8px; }.body textarea { resize:vertical; min-height:86px; width:100%; padding:12px; border:1px solid #b4c0cc; border-radius:10px; background:white; font:inherit; font-size:14px; line-height:22px; }
-.send { display:flex; align-items:center; justify-content:center; gap:8px; padding:12px; border-radius:10px; background:#dfe94c; font-size:14px; font-weight:600; }.send:hover { background:#ced83e; }.send svg { width:20px; height:20px; }
+.send { display:flex; align-items:center; justify-content:center; gap:8px; padding:12px; border-radius:10px; background:#dfe94c; font-size:14px; font-weight:600; text-transform:uppercase; }.send:hover { background:#ced83e; }.send svg { width:20px; height:20px; }
 .note { text-align:center; font-size:11px; line-height:18px; color:#52616f; }.widget :is(button,a,textarea):focus-visible { outline:2px solid #6b7a89; outline-offset:3px; }
 @keyframes arrive { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
 @media(width < 768px) { .widget { width:min(360px,calc(100% - 32px)); right:16px; bottom:calc(16px + env(safe-area-inset-bottom)); }.panel { width:100%; }.launcher { width:52px; height:52px; } }

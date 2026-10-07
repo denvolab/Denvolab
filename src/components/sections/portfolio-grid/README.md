@@ -7,7 +7,7 @@ Figma: "Home Page" frame, node `230:4066`, y 1420-4120. Six project cards (Quota
 
 ## Hover label and links (Oct 2026)
 
-Each project's `href` points at its case study page (`/case-studies/<slug>`). On hover (and keyboard focus) the picture shows a label: lime "View project" for a project with a page, dark "Coming soon" for one without (`href: null`, today Quotable and Sanime). A "Coming soon" card is not a link. On touch screens, where there is no hover, the label is always visible.
+Each project's `href` points at its case study page (`/case-studies/<slug>`). A project with a page shows the round "EXPLORE THE STORY" wheel (`ui/work-wheel`, Figma 1087:20132; it replaced the lime "View project" pill on Oct 7, 2026): its text ring turns like a gear and its arrow reaches out in its direction. With a mouse the wheel rides next to the pointer like the carousels' Drag cursor: the pointer stays visible and one wheel for the whole section (`work-wheel-cursor.tsx`) sits 18px to its right, gliding after it (12% of the gap per frame) and growing in from 0.4. Keyboard focus shows the wheel in the middle of the picture; on touch screens, where there is no hover, it is always shown there. A project without a page (`href: null`, today Quotable and Sanime) shows a dark "Coming soon" pill on hover and is not a link.
 
 The component takes an optional `projects` prop. The homepage uses the default six; the Case Studies page passes `getCaseStudyGridProjects()` (the six plus the seven other case studies).
 
@@ -42,6 +42,6 @@ The project descriptions are also identical across all 6 cards in the Figma file
 
 Added when the user asked for the scroll feel of juice.agency and zypsy.com.
 
-Pictures rise into place (from 5em lower, fading in, 0.8s) the first time they reach 70% of the screen: `data-image-reveal` is on each project picture (the ripple hover and the label are unchanged). See `components/motion/image-reveal/`.
+Pictures rise into place (from 4em lower, fading in, 1.1s) as they come onto the screen: `data-image-reveal` is on each project picture (the ripple hover and the label are unchanged). See `components/motion/image-reveal/`.
 
 Like every section, it takes part in the page colour wash (`components/motion/color-wash/`): the whole screen takes the background colour of the section you are in (it switches the moment the section before has fully left the screen), and in its own colour this section looks exactly as before. None of its existing animations changed. With "Reduce motion" on, none of this runs.

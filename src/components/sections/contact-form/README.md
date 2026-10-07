@@ -6,6 +6,7 @@ The light block of the Contact page (`/contact`): the "Start a project" form and
 |---|---|
 | `contact-form-section.tsx` | `ContactFormSection` (Server Component). Loads the content and lays out the two columns. |
 | `contact-form.tsx` | `ContactForm` (Client Component). The form card: fields, chip groups, submit and error messages. |
+| `book-call-button.tsx` | `BookCallButton`: the founder card's "BOOK A CALL". For a Cal.com link (`BOOKING_HREF` in `lib/data/contact.ts`, now `https://cal.com/denvo-lab-mfqfpq/30min`) a click opens Cal.com's booking widget in a popup (`@calcom/embed-react`, dark theme with the brand lime). The embed script loads on first hover/focus/touch, not with the page, and preloads the booking page. Without JavaScript, or if the embed can't load, it is a link to the booking page in a new tab. Added Oct 7, 2026. |
 | `contact-toast.tsx` / `contact-toast.css` | `ContactToast`: the "Thank you!" toast after a successful send (bottom centre, closes after 6s or with its close button). Replaced the green success line next to the submit button on Oct 7, 2026. |
 | `contact-sidebar.tsx` | `ContactSidebar` (Server Component). Founder card, email card, studio card. |
 | `live-clock.tsx` | `LiveClock` (Client Component). The studio's local time, ticking on the minute. |

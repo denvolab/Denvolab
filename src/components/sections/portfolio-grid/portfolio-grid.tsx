@@ -16,12 +16,18 @@
 // "components only ever reference the design system by name" rule.
 //
 // HOVER LABEL (Oct 2026): a project with a case study page is a link and
-// shows "View project" over its picture on hover; a project without one
-// (`href: null`) is not a link and shows "Coming soon". On touch screens,
-// where there is no hover, the label is always shown.
+// shows the round "EXPLORE THE STORY" wheel (ui/work-wheel, Figma 1087:20132)
+// over its picture on hover, its text ring turning and its arrow pulsing
+// (it replaced the "View project" pill on Oct 7, 2026); a project without
+// one (`href: null`) is not a link and shows "Coming soon". With a mouse
+// the wheel rides next to the pointer and glides after it, like the
+// carousels' Drag cursor (work-wheel-cursor.tsx). Keyboard focus shows the wheel in the middle; on
+// touch screens, where there is no hover, the label is always shown.
 // ---------------------------------------------------------------------------
 import Link from "@/components/ui/animated-link/animated-link";
 import { RippleImage } from "@/components/ui/ripple-image";
+import { WorkWheel } from "@/components/ui/work-wheel";
+import { WorkWheelCursor } from "./work-wheel-cursor";
 import { getPortfolioProjects } from "@/lib/data/homepage";
 import { cn } from "@/lib/utils/cn";
 import type { PortfolioProject } from "@/types/homepage";
@@ -39,15 +45,18 @@ export async function PortfolioGrid({ projects: given }: PortfolioGridProps = {}
       {/* Breakpoint: `md:` (768px), matching the Figma tablet frame's own
           2-column portfolio grid exactly (mobile stays 1-column). */}
       <div className="mx-auto grid w-full max-w-[1920px] grid-cols-1 gap-x-6 gap-y-16 px-5 md:gap-x-10 md:gap-y-20 md:px-10 md:grid-cols-2">
-        {projects.map((project) => (
-          <ProjectCard key={project.title} project={project} />
+        {projects.map((project, index) => (
+          <ProjectCard key={project.title} project={project} index={index} />
         ))}
       </div>
+      {/* On a mouse, the wheel rides next to the pointer over the pictures
+          (one for the whole section, like the carousels' Drag cursor). */}
+      <WorkWheelCursor />
     </section>
   );
 }
 
-function ProjectCard({ project }: { project: PortfolioProject }) {
+function ProjectCard({ project, index }: { project: PortfolioProject; index: number }) {
   const { href } = project;
   const live = href !== null;
 
@@ -56,7 +65,7 @@ function ProjectCard({ project }: { project: PortfolioProject }) {
       {/* The picture plus the hover label. The label sits after the
           RippleImage with its own z-index: RippleImage isolates its hover
           canvas, so the label always stays on top of the ripple. */}
-      <div data-image-reveal="" data-project-image="" className="relative">
+      <div data-image-reveal="" data-project-image="" data-wheel-cursor={live ? "" : undefined} className="relative">
         {/* Project screenshot: a RippleImage, so the picture ripples like
             water under the cursor (see components/ui/ripple-image). Keeps
             the design's exact 700px-tall, 16px-rounded frame. Projects
@@ -75,28 +84,41 @@ function ProjectCard({ project }: { project: PortfolioProject }) {
           </div>
         )}
 
+        {/* No fade on this box or on the wheel's own box: in Chrome an
+            ancestor with opacity below 1 hides the picture from a
+            backdrop-filter inside it, so the wheel's dark glass only
+            switched on, all at once, when the fade ended (light, then
+            suddenly dark). Each layer fades itself instead (see
+            work-wheel.css; the pill below), and the glass darkens
+            smoothly with it. */}
         <span
           aria-hidden="true"
-          className={cn(
-            "pointer-events-none absolute inset-0 z-10 flex items-center justify-center",
-            "opacity-0 transition-opacity duration-300 ease-out",
-            "group-hover:opacity-100 group-focus-visible:opacity-100 [@media(hover:none)]:opacity-100",
-          )}
+          className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center"
         >
-          <span
-            className={cn(
-              "inline-flex h-[52px] translate-y-2 items-center gap-2 rounded-full px-6 font-mono text-label-md uppercase shadow-lg transition-transform duration-300 ease-out",
-              "group-hover:translate-y-0 group-focus-visible:translate-y-0 [@media(hover:none)]:translate-y-0",
-              live ? "bg-brand-default text-text-on-brand" : "bg-gray-950/85 text-white backdrop-blur-sm",
-            )}
-          >
-            {live ? "View project" : "Coming soon"}
-            {live && (
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M4 12 12 4M5.5 4H12v6.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            )}
-          </span>
+          {live ? (
+            // Centred wheel: keyboard focus and touch screens. With a mouse
+            // the section's cursor wheel takes over (work-wheel-cursor.tsx).
+            <span
+              className={cn(
+                "block translate-y-2 scale-90 transition-transform duration-500 ease-out",
+                "group-hover:translate-y-0 group-hover:scale-100 group-focus-visible:translate-y-0 group-focus-visible:scale-100",
+                "[@media(hover:none)]:translate-y-0 [@media(hover:none)]:scale-100",
+              )}
+            >
+              <WorkWheel pathId={`work-wheel-path-${index}`} />
+            </span>
+          ) : (
+            <span
+              className={cn(
+                "inline-flex h-[52px] translate-y-2 items-center gap-2 rounded-full px-6 font-mono text-label-md uppercase shadow-lg opacity-0 transition-[opacity,transform] duration-300 ease-out",
+                "group-hover:translate-y-0 group-focus-visible:translate-y-0 [@media(hover:none)]:translate-y-0",
+                "group-hover:opacity-100 group-focus-visible:opacity-100 [@media(hover:none)]:opacity-100",
+                "bg-gray-950/85 text-white backdrop-blur-sm",
+              )}
+            >
+              Coming soon
+            </span>
+          )}
         </span>
       </div>
 

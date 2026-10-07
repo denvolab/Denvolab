@@ -12,7 +12,7 @@ export const siteConfig = {
     "Denvo Lab is a UI/UX design and development agency providing end-to-end product design and engineering — from research and design systems to production-ready builds.",
   // TODO: replace with the live production domain before launch.
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.denvolab.com",
-  email: "hello@denvolab.com",
+  email: "denvolab@gmail.com",
   // TODO: swap placeholder handles for the real Denvo Lab profiles.
   socials: {
     behance: "https://www.behance.net/denvolab",

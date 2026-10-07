@@ -1,0 +1,206 @@
+/* WorkWheel (work-wheel.tsx): Figma "Wheel" 1087:20132, 120x120.
+ * Positions and sizes are Figma's own. */
+.work-wheel {
+  position: relative;
+  display: block;
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+}
+
+/* Ellipse 2 / Ellipse 3: #29333D at 20% / 40% with Figma's 4px glass,
+ * here a background blur (Figma's blur radius is twice CSS's). */
+.work-wheel-disc {
+  position: absolute;
+  overflow: hidden;
+  border-radius: 50%;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+.work-wheel-disc img,
+.work-wheel-arrow img,
+.work-wheel-dot {
+  display: block;
+  max-width: none;
+}
+.work-wheel-disc--outer {
+  left: 0;
+  top: 0;
+  width: 120px;
+  height: 120px;
+  /* The ring text sits on this disc, so it gets a stronger glass than
+   * Figma's 4px (Oct 7, 2026: the text was hard to read over light
+   * pictures). A blur alone keeps a white picture white, which left the
+   * text/disabled letters at 0.79:1; dimming what is behind to 30% gives
+   * 5.0:1 even over pure white (WCAG AA for 12px text), more over darker
+   * pictures. The 12px blur smooths busy detail under the letters. */
+  -webkit-backdrop-filter: blur(12px) brightness(0.3);
+  backdrop-filter: blur(12px) brightness(0.3);
+}
+.work-wheel-disc--inner {
+  left: 22.373px;
+  top: 22.373px;
+  width: 75.254px;
+  height: 75.254px;
+}
+
+/* The ring turns about the text circle's centre (59.5, 60.5 in Figma; the
+ * dots sit at y 60, so the middle of the two). */
+.work-wheel-ring {
+  position: absolute;
+  inset: 0;
+  transform-origin: 59.5px 60.25px;
+  animation: work-wheel-turn 12s linear infinite paused;
+}
+.work-wheel-ring svg {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+.work-wheel-text {
+  fill: #b4c0cc; /* text/disabled */
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.work-wheel-dot {
+  position: absolute;
+  top: 58px;
+  width: 4px;
+  height: 4px;
+}
+.work-wheel-dot--right { left: 107px; }
+.work-wheel-dot--left { left: 8px; }
+
+/* Frame 8: 56.34px box at (31, 32), the 36px arrow centred in it. The arrow
+ * grows and shrinks in the direction it points: it scales from its tail
+ * (the line's bottom-left end, 10.5/25.5 in the 36px drawing), so the tail
+ * stays put and the head reaches out to the top right and back. */
+.work-wheel-arrow {
+  position: absolute;
+  left: 31px;
+  top: 32px;
+  width: 56.339px;
+  height: 56.339px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.work-wheel-arrow img {
+  transform-origin: 10.5px 25.5px;
+  animation: work-wheel-reach 1.6s ease-in-out infinite paused;
+}
+
+/* Showing the wheel: each layer fades in by itself, never the wheel as a
+ * whole. An ancestor with opacity below 1 cuts a backdrop-filter off from
+ * the picture behind it (Chrome), so fading the whole wheel left the glass
+ * light until the fade ended and then darkened it in one jump. A layer's
+ * own opacity doesn't, so the picture now darkens smoothly from light to
+ * dark (Oct 7, 2026). Shown while the card is hovered or focused, and
+ * always on touch screens. */
+.work-wheel > * {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+.group:hover .work-wheel > *,
+.group:focus-visible .work-wheel > * {
+  opacity: 1;
+}
+@media (hover: none) {
+  .work-wheel > * {
+    opacity: 1;
+  }
+}
+
+/* Run only while the card is hovered or focused, and always on touch
+ * screens, where the wheel is always shown. */
+.group:hover .work-wheel-ring,
+.group:hover .work-wheel-arrow img,
+.group:focus-visible .work-wheel-ring,
+.group:focus-visible .work-wheel-arrow img {
+  animation-play-state: running;
+}
+@media (hover: none) {
+  .work-wheel-ring,
+  .work-wheel-arrow img {
+    animation-play-state: running;
+  }
+}
+
+@keyframes work-wheel-turn {
+  to { transform: rotate(360deg); }
+}
+@keyframes work-wheel-reach {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-wheel-ring,
+  .work-wheel-arrow img {
+    animation: none;
+  }
+}
+
+/* ---- The wheel beside the cursor (sections/portfolio-grid/work-wheel-cursor.tsx)
+ * Once the cursor wheel runs, the section is marked data-wheel-cursor-active.
+ * Then, with a mouse, the in-card wheel stays hidden on hover (the wheel
+ * next to the pointer shows instead); it still shows for keyboard focus.
+ * The pointer itself stays visible, as with the carousels' Drag cursor.
+ * Without JavaScript nothing changes. */
+@media (hover: hover) and (pointer: fine) {
+  [data-wheel-cursor-active] .group:hover:not(:focus-visible) .work-wheel > * {
+    opacity: 0;
+  }
+  [data-wheel-cursor-active] .group:hover:not(:focus-visible) .work-wheel-ring,
+  [data-wheel-cursor-active] .group:hover:not(:focus-visible) .work-wheel-arrow img {
+    animation-play-state: paused;
+  }
+}
+
+/* The cursor wheel itself, built like the carousels' Drag cursor
+ * (site-pages.css .carousel-cursor / .carousel-cursor-pill): a fixed layer
+ * moved by JS with translate3d; the wheel sits 18px to the right of the
+ * pointer, its middle level with it, and grows from 0.4 out of its left
+ * edge (the side next to the pointer), fading in with the Drag pill's
+ * curve. The fade is on the wheel's layers, not on a box around them (see
+ * "Showing the wheel" above). */
+.work-wheel-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  pointer-events: none;
+  will-change: transform;
+}
+.work-wheel-cursor-scale {
+  transform: translate(18px, -60px) scale(0.4);
+  transform-origin: left center;
+  transition: transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.work-wheel-cursor .work-wheel > * {
+  transition: opacity 0.35s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.work-wheel-cursor.is-visible .work-wheel-cursor-scale {
+  transform: translate(18px, -60px) scale(1);
+}
+.work-wheel-cursor.is-visible .work-wheel > * {
+  opacity: 1;
+}
+.work-wheel-cursor.is-visible .work-wheel-ring,
+.work-wheel-cursor.is-visible .work-wheel-arrow img {
+  animation-play-state: running;
+}
+@media (hover: none), (pointer: coarse) {
+  .work-wheel-cursor {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .work-wheel-cursor-scale,
+  .work-wheel-cursor .work-wheel > * {
+    transition: none;
+  }
+}

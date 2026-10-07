@@ -1,8 +1,13 @@
-/* Shared CTA wipe: enters from the left, exits toward the right. */
+/* Shared CTA wipe: enters from the left, exits toward the right.
+ * Every button label is set in capitals (the user, Oct 7, 2026: "every
+ * button label has capital letter"), whatever case the copy is written in,
+ * so a label typed as "Let’s talk" still shows LET’S TALK. Screen readers
+ * keep reading the copy as written. */
 .button-sweep {
   position:relative;
   isolation:isolate;
   overflow:hidden;
+  text-transform:uppercase;
 }
 .button-sweep--primary {
   --button-sweep-base:var(--button-primary-bg);

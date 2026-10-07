@@ -66,10 +66,11 @@ export async function getContactForm(): Promise<ContactFormContent> {
   return FORM;
 }
 
-// TODO(contact): replace with the real booking page (Calendly, Cal.com...)
-// once it exists. Until then "Book a call" opens an email with the subject
-// filled in, so the button still does something useful.
-const BOOKING_HREF = `mailto:${siteConfig.email}?subject=${encodeURIComponent("Book a 30-minute call")}`;
+// The founder's 30-minute call on Cal.com. "Book a call" opens Cal.com's
+// booking widget in a popup for this link (see
+// sections/contact-form/book-call-button.tsx); without JavaScript it is a
+// plain link to the booking page.
+const BOOKING_HREF = "https://cal.com/denvo-lab-mfqfpq/30min";
 
 const ADDRESS = "Parkmore, University Area, Rangpur Sadar, Rangpur";
 const PHONE = "+880 1521 424652";

@@ -8,8 +8,8 @@ import { AnimatedAnchor } from "@/components/ui/animated-link/animated-link";
 // too: the address opens Google Maps, the phone number dials.
 // ---------------------------------------------------------------------------
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import type { ContactSidebarContent } from "@/types/contact";
+import { BookCallButton } from "./book-call-button";
 import { LiveClock } from "./live-clock";
 import { StudioClock } from "./studio-clock";
 
@@ -18,7 +18,6 @@ const CARD_LABEL = "font-mono text-label-sm text-text-tertiary";
 
 export function ContactSidebar({ content }: { content: ContactSidebarContent }) {
   const { founder, email, office } = content;
-  const bookingIsWeb = founder.cta.href.startsWith("http");
 
   return (
     <aside
@@ -43,9 +42,8 @@ export function ContactSidebar({ content }: { content: ContactSidebarContent }) 
           </div>
         </div>
         <p className="font-sans text-body-md text-gray-300">{founder.pitch}</p>
-        <Button href={founder.cta.href} external={bookingIsWeb} size="md" className="self-start font-mono">
-          {founder.cta.label}
-        </Button>
+        {/* Opens Cal.com's booking widget (book-call-button.tsx). */}
+        <BookCallButton href={founder.cta.href} label={founder.cta.label} className="self-start font-mono" />
       </div>
 
       {/* Studio (586:1586) */}
