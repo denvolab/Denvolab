@@ -10,6 +10,8 @@ import { fxOff } from "@/lib/motion/fx-off";
 gsap.registerPlugin(ScrollTrigger);
 
 const WHEEL_IDLE_MS = 160;
+const LERP_DESKTOP = 0.04;
+const LERP_PHONE = 0.9;
 
 /** One scroll engine, synchronized with the site's existing GSAP animations. */
 export function SmoothScroll() {
@@ -18,6 +20,10 @@ export function SmoothScroll() {
 
   useEffect(() => {
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const phone = window.matchMedia("(width < 768px)");
+    const setLerp = () => {
+      if (lenis) lenis.options.lerp = phone.matches ? LERP_PHONE : LERP_DESKTOP;
+    };
     let lenis: Lenis | undefined;
     const tick = (time: number) => lenis?.raf(time * 1000);
     // Keyboard/focus scrolling is native. Cancel wheel inertia first so it
@@ -38,10 +44,12 @@ export function SmoothScroll() {
         // html is h-full; observe the growing body so streamed sections and
         // loaded media update the scroll limit without per-frame layout reads.
         content: document.body,
-        // Each frame covers 4% of the distance left: a heavy, smooth glide
-        // (the user's choice, Oct 7, 2026; was 0.12, duration 1.6, then 0.06).
-        // Lower is heavier, higher is quicker.
-        lerp: 0.04,
+        // Each frame covers this much of the distance left (lower is
+        // heavier, higher is quicker). Desktop: 0.04, a heavy, smooth glide
+        // (the user's choice, Oct 7, 2026; was 0.12, duration 1.6, then
+        // 0.06). Phones: 0.9, close to the finger (the user, Oct 7, 2026:
+        // 0.04 made scrolling on mobile feel broken). Updated live below.
+        lerp: phone.matches ? LERP_PHONE : LERP_DESKTOP,
         smoothWheel: true,
         syncTouch: false,
         autoToggle: false,
@@ -83,8 +91,10 @@ export function SmoothScroll() {
     document.addEventListener("keydown", onKeyDown);
     document.addEventListener("focusin", cancelInertia);
     motion.addEventListener("change", configure);
+    phone.addEventListener("change", setLerp);
     return () => {
       motion.removeEventListener("change", configure);
+      phone.removeEventListener("change", setLerp);
       window.removeEventListener("wheel", onWheel);
       window.clearTimeout(wheelTimer);
       root.classList.remove("is-wheeling");
