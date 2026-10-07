@@ -203,28 +203,28 @@ export default {
       },
       {
         "icon": "timeline",
-        "title": "Journey",
-        "value": "4 weeks"
+        "title": "Timeline",
+        "value": "3 weeks"
       }
     ],
     "intro": {
       "text": "A responsive travel website that pairs immersive destinations with clear retreat, coach and contact journeys, helping visitors explore meaningful travel at their own pace."
     },
     "hero": {
-      "src": "/images/case-studies/denvo-travel/current/img8KDenvoTravel0HomeDesktop.jpg",
-      "alt": "denvo-travel / 0 / Home desktop",
+      "src": "/images/case-studies/denvo-travel/updated/hero.jpg",
+      "alt": "Denvo Travel desktop website in a mountain retreat setting",
       "width": 7680,
       "height": 4320
     },
     "overview": {
-      "src": "/images/case-studies/denvo-travel/current/img8KDenvoTravel1CoachesDesktop.jpg",
-      "alt": "denvo-travel / 1 / Coaches desktop",
+      "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel1CoachesDesktop.jpg",
+      "alt": "Denvo Travel coaches desktop mockup",
       "width": 7680,
       "height": 4320
     },
     "banner": {
-      "src": "/images/case-studies/denvo-travel/current/img8KDenvoTravel5ContactTablet.jpg",
-      "alt": "denvo-travel / 5 / Contact tablet",
+      "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel5ContactTablet.jpg",
+      "alt": "Denvo Travel contact tablet mockup",
       "width": 7680,
       "height": 4320
     },
@@ -236,8 +236,8 @@ export default {
           "title": "Destination discovery",
           "description": "Lead with expressive travel imagery and a direct path to exploring retreats.",
           "image": {
-            "src": "/images/case-studies/denvo-travel/current/img8KDenvoTravel2ContactDesktop.jpg",
-            "alt": "denvo-travel / 2 / Contact desktop",
+            "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel2ContactDesktop.jpg",
+            "alt": "Destination discovery — Denvo Travel mockup",
             "width": 7680,
             "height": 4320
           }
@@ -246,8 +246,8 @@ export default {
           "title": "Coach profiles",
           "description": "Make it easy to find the people behind the experience through a dedicated coach page.",
           "image": {
-            "src": "/images/case-studies/denvo-travel/current/img8KDenvoTravel3HomeTablet.jpg",
-            "alt": "denvo-travel / 3 / Home tablet",
+            "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel3HomeTablet.jpg",
+            "alt": "Coach profiles — Denvo Travel mockup",
             "width": 7680,
             "height": 4320
           }
@@ -256,8 +256,8 @@ export default {
           "title": "Easy enquiries",
           "description": "Keep contact information and enquiry forms clear across responsive layouts.",
           "image": {
-            "src": "/images/case-studies/denvo-travel/current/img8KDenvoTravel4CoachesTablet.jpg",
-            "alt": "denvo-travel / 4 / Coaches tablet",
+            "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel4CoachesTablet.jpg",
+            "alt": "Easy enquiries — Denvo Travel mockup",
             "width": 7680,
             "height": 4320
           }
@@ -266,111 +266,129 @@ export default {
     },
     "collage": [
       {
-        "src": "/images/case-studies/denvo-travel/current/img8KDenvoTravel2ContactDesktop1.jpg",
-        "alt": "denvo-travel / 2 / Contact desktop",
-        "width": 7078,
+        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel2ContactDesktop1.jpg",
+        "alt": "Denvo Travel branding application",
+        "width": 7069,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/denvo-travel/current/img8KDenvoTravel4CoachesTablet1.jpg",
-        "alt": "denvo-travel / 4 / Coaches tablet",
+        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel4CoachesTablet1.jpg",
+        "alt": "Denvo Travel branding application",
         "width": 7680,
-        "height": 7322
+        "height": 7315
       },
       {
-        "src": "/images/case-studies/denvo-travel/current/img8KDenvoTravel0HomeDesktop1.jpg",
-        "alt": "denvo-travel / 0 / Home desktop",
+        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel0HomeDesktop.jpg",
+        "alt": "Denvo Travel branding application",
         "width": 7680,
-        "height": 5030
+        "height": 5021
       },
       {
-        "src": "/images/case-studies/denvo-travel/current/img8KDenvoTravel3HomeTablet1.jpg",
-        "alt": "denvo-travel / 3 / Home tablet",
-        "width": 5552,
+        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel3HomeTablet1.jpg",
+        "alt": "Denvo Travel branding application",
+        "width": 5550,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/denvo-travel/current/img8KDenvoTravel5ContactTablet1.jpg",
-        "alt": "denvo-travel / 5 / Contact tablet",
-        "width": 5804,
+        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel5ContactTablet1.jpg",
+        "alt": "Denvo Travel branding application",
+        "width": 5792,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/denvo-travel/current/img8KDenvoTravel1CoachesDesktop1.jpg",
-        "alt": "denvo-travel / 1 / Coaches desktop",
+        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel1CoachesDesktop1.jpg",
+        "alt": "Denvo Travel branding application",
         "width": 7680,
-        "height": 5491
+        "height": 5485
       }
     ],
     "brand": {
       "fontName": "Inter",
       "fontFamily": "var(--font-inter)",
       "primary": "#FB9826",
-      "surface": "#DDEAE6",
-      "background": "#f5f7f0",
+      "surface": "#FFFAEB",
+      "background": "#F1F1F2",
       "grid": {
-        "src": "/images/case-studies/denvo-travel/current/brand-grid.svg",
-        "alt": "denvo-travel original vector logo and alignment grid",
+        "src": "/images/case-studies/denvo-travel/updated/grid.svg",
+        "alt": "Denvo Travel logo construction grid",
         "width": 692,
         "height": 702
       },
       "swatches": [
         {
           "name": "Primary",
-          "hex": "#FB9826"
-        },
-        {
-          "name": "Dark",
-          "hex": "#081D22"
+          "hex": "#FB9826",
+          "sampleColor": "#F79009"
         },
         {
           "name": "Surface",
-          "hex": "#DDEAE6"
+          "hex": "#DDEAE6",
+          "sampleColor": "#E7E9EA"
+        },
+        {
+          "name": "Dark",
+          "hex": "#081D22",
+          "sampleColor": "#0D151F"
         },
         {
           "name": "White",
-          "hex": "#FFFFFF"
+          "hex": "#FFFFFF",
+          "sampleColor": "#FFFFFF"
         }
-      ]
+      ],
+      "glyph": {
+        "src": "/images/case-studies/denvo-travel/updated/imgTypographySample.svg",
+        "alt": "Inter typography sample",
+        "width": 567,
+        "height": 702
+      },
+      "gridBackground": "#F79009",
+      "logo": {
+        "src": "/images/case-studies/denvo-travel/updated/logo.svg",
+        "alt": "Denvo Travel",
+        "width": 443,
+        "height": 90
+      }
     },
     "gallery": [
       {
-        "src": "/images/case-studies/denvo-travel/current/img8KDenvoTravel0HomeDesktop.jpg",
-        "alt": "denvo-travel / 0 / Home desktop",
+        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel0HomeDesktop1.jpg",
+        "alt": "01 — Denvo Travel in context",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/denvo-travel/current/img8KDenvoTravel1CoachesDesktop.jpg",
-        "alt": "denvo-travel / 1 / Coaches desktop",
+        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel1CoachesDesktop2.jpg",
+        "alt": "02 — The connected journey",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/denvo-travel/current/img8KDenvoTravel2ContactDesktop.jpg",
-        "alt": "denvo-travel / 2 / Contact desktop",
+        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel4CoachesTablet.jpg",
+        "alt": "03 — Coaches desktop",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/denvo-travel/current/img8KDenvoTravel3HomeTablet.jpg",
-        "alt": "denvo-travel / 3 / Home tablet",
+        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel2ContactDesktop.jpg",
+        "alt": "04 — Contact desktop",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/denvo-travel/current/img8KDenvoTravel4CoachesTablet.jpg",
-        "alt": "denvo-travel / 4 / Coaches tablet",
+        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel3HomeTablet.jpg",
+        "alt": "05 — Home tablet",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/denvo-travel/current/img8KDenvoTravel5ContactTablet.jpg",
-        "alt": "denvo-travel / 5 / Contact tablet",
+        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel5ContactTablet.jpg",
+        "alt": "06 — Bringing the experience together",
         "width": 7680,
         "height": 4320
       }
-    ]
+    ],
+    "designVariant": "travel"
   },
   "part-pilot": {
     "title": "Part Pilot — The right part.",

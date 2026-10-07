@@ -42,6 +42,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { splitLines, type LineSplit } from "@/components/ui/animated-text/split-lines";
 import { TEXT_REVEAL_PENDING, TEXT_REVEAL_QUERY } from "./text-reveal-config";
+import { lineTrigger } from "@/components/ui/animated-text/line-trigger";
+import { fxOff } from "@/lib/motion/fx-off";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -71,12 +73,22 @@ const SKIP = [
   // Oct 7, 2026: the highlight "must thakbe").
   "[data-word]",
   "[data-highlight-word]",
+  // Looping carousels: the cards slide sideways, rising lines on top of
+  // that looked broken (the user, Oct 7, 2026, Industries section).
+  ".loop-carousel",
 ].join(",");
 const NOT_SPLITTABLE_INSIDE = "[data-word], [data-highlight-word], a, button, input, select, textarea, time, svg, img, video, canvas, iframe, .button-text, [aria-live]";
 const DELAY = 300; // ms, as AnimatedText
-const FROM = { yPercent: 110 };
-const TO = { yPercent: 0, duration: 1.25, ease: "expo.out", stagger: { amount: 0.2, ease: "expo.out" } } as const;
-const TRIGGER = { start: "top bottom", end: "bottom bottom", toggleActions: "none play none reset" } as const;
+// The lines move with Web Animations, which the browser runs off the main
+// thread (Oct 7, 2026: with GSAP moving dozens of lines at once, Lenis lost
+// frames and the page shook; with these turned off it was smooth). GSAP's
+// ScrollTrigger only says when to play and reset. Same motion as before:
+// yPercent 110 -> 0, 1.25s expo.out, stagger 0.2s spread with expo.out.
+const KEYFRAMES: Keyframe[] = [{ transform: "translateY(110%)" }, { transform: "translateY(0)" }];
+const DURATION = 1250; // ms
+const EASE = "cubic-bezier(0.16, 1, 0.3, 1)"; // expo.out
+const STAGGER = 200; // ms, spread over all lines
+const expoOut = (t: number) => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
 
 const isInline = (el: Element) => {
   const display = getComputedStyle(el).display;
@@ -94,7 +106,8 @@ interface Unit {
   el: HTMLElement;
   kind: "split" | "label";
   split: LineSplit | null;
-  timeline: gsap.core.Timeline | null;
+  kill: (() => void) | null;
+  animations: Animation[];
 }
 
 /** Find the text boxes and link labels not handled yet. */
@@ -144,6 +157,10 @@ export function TextRevealController() {
   useEffect(() => {
     const root = document.documentElement;
     const reveal = () => root.classList.remove(TEXT_REVEAL_PENDING);
+    if (fxOff("text")) {
+      reveal();
+      return;
+    }
     const mm = gsap.matchMedia();
 
     mm.add(TEXT_REVEAL_QUERY, () => {
@@ -157,8 +174,10 @@ export function TextRevealController() {
       let width = window.innerWidth;
 
       const teardown = (unit: Unit) => {
-        unit.timeline?.revert();
-        unit.timeline = null;
+        unit.kill?.();
+        unit.kill = null;
+        unit.animations.forEach((animation) => animation.cancel());
+        unit.animations = [];
         unit.split?.revert();
         unit.split = null;
         if (unit.kind === "label") unit.el.style.removeProperty("clip-path");
@@ -175,7 +194,18 @@ export function TextRevealController() {
           unit.el.style.clipPath = "inset(-0.05em -0.1em -0.2em -0.1em)";
           targets = Array.from(unit.el.querySelectorAll<HTMLElement>(".button-text-live"));
         }
-        unit.timeline = gsap.timeline({ scrollTrigger: { trigger: unit.el, ...TRIGGER } }).fromTo(targets, FROM, TO);
+        // Held at the start (lines below their masks) until played.
+        unit.animations = targets.map((line, i) => {
+          const delay = targets.length > 1 ? STAGGER * expoOut(i / (targets.length - 1)) : 0;
+          const animation = line.animate(KEYFRAMES, { duration: DURATION, easing: EASE, delay, fill: "both" });
+          animation.pause();
+          return animation;
+        });
+        const play = () => unit.animations.forEach((animation) => animation.play());
+        const reset = () => unit.animations.forEach((animation) => { animation.pause(); animation.currentTime = 0; });
+        // Plays once the text is on screen and its section has come in;
+        // resets once it is back below the screen (ui/animated-text/line-trigger).
+        unit.kill = lineTrigger(unit.el, play, reset);
       };
 
       const scan = () => {
@@ -183,19 +213,20 @@ export function TextRevealController() {
         // scroll triggers doesn't keep growing while the visitor scrolls.
         for (let i = units.length - 1; i >= 0; i--) {
           if (units[i].el.isConnected) continue;
-          units[i].timeline?.kill();
+          units[i].kill?.();
+          units[i].animations.forEach((animation) => animation.cancel());
           units.splice(i, 1);
         }
         const { splits, labels } = collect(done);
         for (const el of splits) {
           done.add(el);
-          const unit: Unit = { el, kind: "split", split: null, timeline: null };
+          const unit: Unit = { el, kind: "split", split: null, kill: null, animations: [] };
           units.push(unit);
           build(unit);
         }
         for (const el of labels) {
           done.add(el);
-          const unit: Unit = { el, kind: "label", split: null, timeline: null };
+          const unit: Unit = { el, kind: "label", split: null, kill: null, animations: [] };
           units.push(unit);
           build(unit);
         }

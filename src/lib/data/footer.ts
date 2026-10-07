@@ -17,7 +17,7 @@ const FOOTER_COLUMNS: FooterColumn[] = [
     links: [
       { label: "Home", href: "/" },
       { label: "About Denvo", href: "/about" },
-      { label: "Case Study", href: "/case-studies" },
+      { label: "Our Craft", href: "/case-studies" },
       { label: "Contact", href: "/contact" },
     ],
   },

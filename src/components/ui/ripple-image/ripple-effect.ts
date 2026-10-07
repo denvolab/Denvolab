@@ -221,9 +221,28 @@ export class RippleEffect {
     }
   }
 
-  /** The cursor left the picture. The wobble starts where it was last seen. */
-  leave() {
-    this.startEdgeWobble(-1); // -1 = going out
+  /**
+   * The cursor left the picture. The wobble starts where it was last seen,
+   * unless `wobble` is false (the page scrolled the picture away: the
+   * ripples just fade, the edge stays still).
+   */
+  leave(wobble = true) {
+    if (wobble) this.startEdgeWobble(-1); // -1 = going out
+  }
+
+  /**
+   * Fade the canvas out over `ms` (the picture underneath shows through),
+   * then stop drawing. The WebGL context is kept until dispose(): tearing
+   * it down can stall the page for a few frames, so the caller does that
+   * once nothing is moving.
+   */
+  fadeOut(ms: number) {
+    this.canvas.style.transition = `opacity ${ms}ms ease-out`;
+    this.canvas.style.opacity = "0";
+    window.setTimeout(() => {
+      cancelAnimationFrame(this.frameId);
+      this.frameId = 0;
+    }, ms);
   }
 
   /** Stop everything and give the graphics memory back. */

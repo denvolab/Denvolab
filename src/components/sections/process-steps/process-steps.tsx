@@ -20,7 +20,7 @@ export async function ProcessSteps({ heading }: { heading?: string } = {}) {
   const steps = [{"week": "Week 1", "title": "Listen & Understand", "description": "We get to know your business, your audience, and what needs to change. Together, we agree on where to begin.", "tasks": ["Research", "Competitor Analysis", "Industry Analysis", "Sitemap Creation", "Formulate Team"]}, {"week": "Week 2", "title": "Map & Shape", "description": "We map the main journeys and sketch the key screens. You can follow the flow before the finer details take shape.", "tasks": ["User Interviews", "Competitor Analysis", "Journey Mapping", "Challenges & Goals", "Sketching & Wireframes"]}, {"week": "Week 3", "title": "Craft the Experience", "description": "We bring together type, colour, and interaction. Each choice helps people understand where they are and what to do next.", "tasks": ["Typography Selection", "Color Palette Creation", "Icon Set Design", "UI Planning"]}, {"week": "Week 4", "title": "Bring It to Life", "description": "We turn the approved screens into a working experience, checking each journey across desktop, tablet, and mobile.", "tasks": ["A/B Testing", "Reviews & Feedback", "Final Refinement", "Quality Assurance"]}, {"week": "Week 5", "title": "Connect the Parts", "description": "We connect the data and services your product needs, then check that each step leads to the right result.", "tasks": ["A/B Testing", "Reviews & Feedback", "Final Refinement", "Quality Assurance"]}, {"week": "Week 6", "title": "Refine & Launch", "description": "We test the details, resolve issues, and prepare for launch. Your team gets the files and guidance needed to take it forward.", "tasks": ["A/B Testing", "Reviews & Feedback", "Final Refinement", "Quality Assurance"]}];
 
   return (
-    <section data-home-part="process" className="w-full bg-background py-24" data-figma-node="230:4248">
+    <section data-home-part="process" className="w-full bg-surface-secondary py-24" data-figma-node="230:4248">
       <ProcessShadow />
       <div className="mx-auto flex w-full max-w-[1120px] flex-col items-center gap-12 px-5 md:px-10 lg:px-6">
         <div className="flex flex-col items-center gap-7 text-center">
@@ -66,7 +66,9 @@ export async function ProcessSteps({ heading }: { heading?: string } = {}) {
                 // than snapping instantly. Pure CSS (no ScrollTrigger/JS):
                 // sticky already IS scroll-driven. `zIndex` makes the paint
                 // order explicit rather than relying on DOM order alone.
-                className="sticky flex min-h-[320px] w-full items-start gap-4 rounded-[28px] bg-surface-primary p-6 shadow-[0px_-2px_24px_0px_rgba(174,174,174,0.02),0px_8px_32px_-4px_rgba(174,174,174,0.04)] md:gap-7 md:p-8 lg:p-12"
+                // Figma: phones put the icon above the text (24 apart, 16px padding);
+                // tablet side by side (16 apart, 32px); desktop (24 apart, 48px).
+                className="sticky flex min-h-[320px] w-full flex-col items-start gap-6 rounded-[28px] bg-surface-primary p-4 shadow-[0px_-2px_24px_0px_rgba(174,174,174,0.02),0px_8px_32px_-4px_rgba(174,174,174,0.04)] md:flex-row md:gap-4 md:p-8 lg:gap-6 lg:p-12"
                 style={{ top: `${PROCESS_CARD_STICKY_TOP_PX + index * PROCESS_CARD_STACK_OFFSET_PX}px`, zIndex: index + 1 }}
               >
                 <ProcessIcon index={index} />

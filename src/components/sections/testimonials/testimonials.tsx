@@ -53,7 +53,7 @@ export async function Testimonials({ home = false, services = false }: { home?: 
   </section>;
 
   return (
-    <section className="relative w-full bg-surface" data-figma-node="230:4436">
+    <section className="relative w-full bg-surface-secondary" data-figma-node="230:4436">
       {/* Mobile/tablet (<lg) — all twelve reviews in the original responsive grid
           with the original column widths and spacing. Per the
           homepage-responsive-tablet-mobile project doc, these widths drop

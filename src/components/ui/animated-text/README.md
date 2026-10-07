@@ -66,3 +66,5 @@ Since Oct 7, 2026 the body text of those sections uses it too (the user: "jeta t
 | Inside `LensDistortion` (`service-conversation`) | That band copies its HTML into a canvas once, while the lines are still below their masks. |
 | `about-benefits` | Its heading already rises in with `reveal`. |
 | `case-study-visual` | Its heading is made of separately styled runs (some gradient), and on desktop it is part of the picture. |
+
+**Oct 7, 2026:** the lines are Web Animations (off the main thread) instead of a GSAP tween. When they play is decided by `line-trigger.ts`: the text must be fully on screen and its section's top above 75% of the screen. It is shared with `motion/text-reveal`.

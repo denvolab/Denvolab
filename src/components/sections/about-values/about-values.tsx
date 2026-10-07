@@ -88,7 +88,7 @@ export async function AboutValues() {
                     )}
                   </div>
 
-                  <p className="font-sans text-body-md text-foreground-muted"><AnimatedText>{value.description}</AnimatedText></p>
+                  <p className="font-sans text-body-md text-foreground-muted">{value.description}</p>
                 </li>
               );
             })}

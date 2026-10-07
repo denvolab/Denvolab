@@ -52,6 +52,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { cn } from "@/lib/utils/cn";
 import { splitLines, type LineSplit } from "./split-lines";
+import { lineTrigger } from "./line-trigger";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -59,8 +60,12 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 const QUERY = "(min-width: 992px) and (prefers-reduced-motion: no-preference)";
 const FROM_Y_PERCENT = 110; // zypsy.com: { yPercent: 110 }
 const DURATION = 1.25; // zypsy.com: duration: 1.25
-const EASE = "expo.out"; // zypsy.com: ease: "expo.out"
-const STAGGER = { amount: 0.2, ease: "expo.out" }; // zypsy.com
+const STAGGER = 200; // ms; zypsy.com: stagger { amount: 0.2, ease: "expo.out" }
+// Web Animations instead of a GSAP tween (Oct 7, 2026): the browser runs them
+// off the main thread, so dozens of lines rising at once don't cost Lenis
+// frames (the page shook while scrolling). ScrollTrigger only says when.
+const EASE_CSS = "cubic-bezier(0.16, 1, 0.3, 1)"; // expo.out
+const expoOut = (t: number) => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
 const DEFAULT_DELAY = 300; // zypsy.com: js-line-animation="300" on the referenced heading
 
 interface AnimatedTextProps {
@@ -82,14 +87,17 @@ export function AnimatedText({ children, className, delay = DEFAULT_DELAY }: Ani
 
       mm.add(QUERY, () => {
         let split: LineSplit | null = null;
-        let timeline: gsap.core.Timeline | null = null;
+        let killTrigger: (() => void) | null = null;
+        let animations: Animation[] = [];
         let timer = 0;
         let cancelled = false;
         let width = window.innerWidth;
 
         const teardown = () => {
-          timeline?.revert(); // also kills its ScrollTrigger
-          timeline = null;
+          killTrigger?.();
+          killTrigger = null;
+          animations.forEach((animation) => animation.cancel());
+          animations = [];
           split?.revert();
           split = null;
           root.style.removeProperty("display");
@@ -107,20 +115,21 @@ export function AnimatedText({ children, className, delay = DEFAULT_DELAY }: Ani
           root.style.display = "block";
           if (contentWidth > 0) root.style.minWidth = `${contentWidth}px`;
           root.dataset.lineAnimation = "ready";
-          timeline = gsap
-            .timeline({
-              scrollTrigger: {
-                trigger: root,
-                start: "top bottom",
-                end: "bottom bottom",
-                toggleActions: "none play none reset",
-              },
-            })
-            .fromTo(
-              split.lines,
-              { yPercent: FROM_Y_PERCENT },
-              { yPercent: 0, duration: DURATION, ease: EASE, stagger: STAGGER },
+          const lines = split.lines;
+          animations = lines.map((line, i) => {
+            const delay = lines.length > 1 ? STAGGER * expoOut(i / (lines.length - 1)) : 0;
+            const animation = line.animate(
+              [{ transform: `translateY(${FROM_Y_PERCENT}%)` }, { transform: "translateY(0)" }],
+              { duration: DURATION * 1000, easing: EASE_CSS, delay, fill: "both" },
             );
+            animation.pause();
+            return animation;
+          });
+          const play = () => animations.forEach((animation) => animation.play());
+          const reset = () => animations.forEach((animation) => { animation.pause(); animation.currentTime = 0; });
+          // Plays once the text is on screen and its section has come in,
+          // resets below the screen (line-trigger.ts).
+          killTrigger = lineTrigger(root, play, reset);
         };
 
         // zypsy.com splits again when the window width changes.

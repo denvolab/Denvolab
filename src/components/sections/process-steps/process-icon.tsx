@@ -1,6 +1,11 @@
 import Image from "next/image";
 
-// Original Figma SVG layers retain their native dimensions inside a 64px slot.
+// The Figma SVG layers of each icon, measured in a 64px frame. Every layer is
+// placed and sized in % of the frame, so the icon scales as one piece to
+// Figma's size per screen (Oct 7, 2026: on phones the layers kept their 64px
+// sizes in a different-sized slot and the multi-part icons fell apart):
+// 56px desktop, 34px tablet, 40px phone.
+const FRAME = 64;
 const icons = [
   [
     {
@@ -121,8 +126,10 @@ const icons = [
   ]
 ] as const;
 
+const percent = (px: number) => `${(px / FRAME) * 100}%`;
+
 export function ProcessIcon({ index }: { index: number }) {
-  return <div className="relative size-16 shrink-0" aria-hidden="true">
-    {icons[index]?.map(layer => <Image key={layer.name} src={`/icons/process/${layer.name}.svg`} alt="" width={layer.width} height={layer.height} className="absolute max-w-none" style={{ left: `${layer.left}%`, top: `${layer.top}%` }} />)}
+  return <div className="relative size-10 shrink-0 md:size-[34px] lg:size-14" aria-hidden="true">
+    {icons[index]?.map(layer => <Image key={layer.name} src={`/icons/process/${layer.name}.svg`} alt="" width={layer.width} height={layer.height} className="absolute max-w-none" style={{ left: `${layer.left}%`, top: `${layer.top}%`, width: percent(layer.width), height: percent(layer.height) }} />)}
   </div>;
 }

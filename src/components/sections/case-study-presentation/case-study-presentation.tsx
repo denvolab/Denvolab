@@ -21,7 +21,7 @@ function Mockup({ image, className = "", sizes = "(min-width: 1920px) 1840px, 96
 export function CaseStudyPresentation({ content, name }: { content: Presentation; name: string }) {
   const { brand, solution } = content;
   const theme = { "--project-primary": brand.primary, "--project-surface": brand.surface, "--project-font": brand.fontFamily } as CSSProperties;
-  return <article className={styles.presentation} style={theme} aria-label={`${name} case study`}>
+  return <article className={`${styles.presentation} ${content.designVariant === "travel" ? styles.travel : ""}`} style={theme} aria-label={`${name} case study`}>
     <section data-section-height="content" data-wash="off" className={`${styles.band} ${styles.hero}`} aria-labelledby="case-title">
       <div className={styles.editorial}>
         <h1 id="case-title">{content.title}</h1>
@@ -68,19 +68,19 @@ export function CaseStudyPresentation({ content, name }: { content: Presentation
     </section>
     <section data-section-height="content" data-wash="off" className={`${styles.band} ${styles.guidelines}`} style={{ background: brand.background }} aria-label={`${name} brand guidelines`}>
       <div className={styles.brandLayout}>
-        <div className={styles.glyph} aria-hidden="true">Aa</div>
+        {brand.glyph ? <Mockup image={brand.glyph} className={styles.glyphArtwork} sizes="30vw" /> : <div className={styles.glyph} aria-hidden="true">Aa</div>}
         <div className={styles.typePanel}>
-          <div className={styles.specimen}><h2>{brand.fontName}</h2><p>{"A B C D E F G H I J K L M\nN O P Q R S T U V W X Y Z\n\na b c d e f g h i j k l m\nn o p q r s t u v w x y z"}</p><p className={styles.weights}><span>Regular</span><span>Medium</span><strong>Bold</strong></p></div>
-          <Mockup image={brand.grid} className={styles.logoGrid} sizes="(min-width: 1280px) 36vw, 90vw" />
+          <div className={styles.specimen}><h2>{brand.fontName}</h2><p>{"A B C D E F G H I J K L M\nN O P Q R S T U V W X Y Z\n\na b c d e f g h i j k l m\nn o p q r s t u v w x y z"}</p><p className={styles.weights}><span>Regular</span><Image src="/images/case-studies/weight-separator.svg" alt="" width={8} height={8} className={styles.weightSeparator} /><span>Medium</span><Image src="/images/case-studies/weight-separator.svg" alt="" width={8} height={8} className={styles.weightSeparator} /><strong>Bold</strong></p></div>
+          <div className={styles.logoGrid} style={{ background: brand.gridBackground }}><Mockup image={brand.grid} className={styles.gridArtwork} sizes="(min-width: 1280px) 36vw, 90vw" />{brand.logo && <Image src={brand.logo.src} alt={brand.logo.alt} width={brand.logo.width} height={brand.logo.height} className={styles.projectLogo} />}</div>
         </div>
       </div>
       <dl className={styles.palette}>{brand.swatches.map(swatch => <div className={styles.swatch} key={swatch.name}>
-        <div className={styles.colorSample} style={{ backgroundColor: swatch.hex }} />
+        <div className={styles.colorSample} style={{ backgroundColor: swatch.sampleColor ?? swatch.hex }} />
         <div className={styles.colorDetails}><dt>{swatch.name}</dt><dd>{swatch.hex.toUpperCase()}</dd></div>
       </div>)}</dl>
     </section>
     <section data-section-height="content" data-wash="off" className={`${styles.band} ${styles.gallery}`} aria-label={`${name} responsive product screens`}>
-      {content.gallery.map((image, index) => <Mockup image={image} key={`${image.src}-${index}`} className={styles.galleryImage} />)}
+      {content.gallery.map((image, index) => <figure className={styles.journeyPanel} key={`${image.src}-${index}`}><Mockup image={image} className={styles.galleryImage} /></figure>)}
     </section>
   </article>;
 }

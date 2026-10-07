@@ -2,13 +2,17 @@
 
 import { useEffect, useRef, useSyncExternalStore, type PointerEvent, type ReactNode } from "react";
 import { createPortal } from "react-dom";
+import { fxOff } from "@/lib/motion/fx-off";
 
 const subscribeToClient = () => () => {};
 const clientSnapshot = () => true;
 const serverSnapshot = () => false;
 
-/** Reference motion: 5% drag easing, 0.93 momentum decay and a 12% cursor follower. */
-export function LoopCarousel({ children, className = "", label, speed = 24 }: { children: ReactNode; className?: string; label: string; speed?: number }) {
+/** Reference motion: 5% drag easing, 0.93 momentum decay and a 12% cursor follower.
+ *  `dragCursor`: the "Drag" pill shows on hover (true, default), only while
+ *  the carousel is pressed and dragged ("press", for cards with their own
+ *  hover cursor: sections/more-crafts, "Explore the story"), or never (false). */
+export function LoopCarousel({ children, className = "", label, speed = 24, dragCursor = true }: { children: ReactNode; className?: string; label: string; speed?: number; dragCursor?: boolean | "press" }) {
   const viewport = useRef<HTMLDivElement>(null);
   const cursor = useRef<HTMLDivElement>(null);
   const mounted = useSyncExternalStore(subscribeToClient, clientSnapshot, serverSnapshot);
@@ -21,11 +25,13 @@ export function LoopCarousel({ children, className = "", label, speed = 24 }: { 
     const state = motion.current;
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
     const fine = matchMedia("(hover: hover) and (pointer: fine)");
-    const preferences = () => { state.reduced = reduced.matches; state.fine = fine.matches; };
+    const preferences = () => { state.reduced = reduced.matches || fxOff("carousel"); state.fine = fine.matches; };
     preferences();
     reduced.addEventListener("change", preferences);
     fine.addEventListener("change", preferences);
-    const images = Array.from(el.querySelectorAll<HTMLImageElement>("img.object-cover"));
+    // Not RippleImage pictures: the ripple draws the picture unshifted, so a
+    // parallax-shifted one would jump when the ripple starts (more-crafts).
+    const images = Array.from(el.querySelectorAll<HTMLImageElement>("img.object-cover")).filter(image => !image.closest("[data-ripple-image]"));
     // The track moves with a sub-pixel transform, not scrollLeft: scrollLeft
     // snaps to whole pixels, so the cards stepped 1px at a time while the
     // parallax inside them moved smoothly, and the pictures shook. The
@@ -118,6 +124,7 @@ export function LoopCarousel({ children, className = "", label, speed = 24 }: { 
     state.momentum = cancel || state.reduced ? 0 : -state.velocity * 16;
     state.suppressClick = state.distance > 8;
     e.currentTarget.classList.remove("is-dragging");
+    if (dragCursor === "press") cursor.current?.classList.remove("is-visible");
     if (e.currentTarget.hasPointerCapture(e.pointerId)) e.currentTarget.releasePointerCapture(e.pointerId);
     const bounds = e.currentTarget.getBoundingClientRect();
     if (e.clientX < bounds.left || e.clientX > bounds.right || e.clientY < bounds.top || e.clientY > bounds.bottom) {
@@ -128,7 +135,7 @@ export function LoopCarousel({ children, className = "", label, speed = 24 }: { 
   return <>
     <div ref={viewport} className={`loop-carousel ${className}`} role="region" aria-roledescription="carousel" aria-label={label} tabIndex={0}
       data-press-card="" data-press-target=".loop-carousel-group > * > *"
-      onPointerEnter={e => { const state = motion.current; state.hover = true; moveCursor(e); if (state.fine && e.pointerType !== "touch") cursor.current?.classList.add("is-visible"); }}
+      onPointerEnter={e => { const state = motion.current; state.hover = true; moveCursor(e); if (dragCursor === true && state.fine && e.pointerType !== "touch") cursor.current?.classList.add("is-visible"); }}
       onPointerLeave={() => { if (motion.current.pointer !== -1) return; motion.current.hover = false; cursor.current?.classList.remove("is-visible"); }}
       onFocus={() => { motion.current.focus = true; }} onBlur={() => { motion.current.focus = false; }}
       onKeyDown={e => { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); motion.current.momentum = 0; motion.current.target += (e.key === "ArrowRight" ? 1 : -1) * e.currentTarget.clientWidth * .25; } }}
@@ -138,6 +145,7 @@ export function LoopCarousel({ children, className = "", label, speed = 24 }: { 
         state.pointer = e.pointerId; state.startX = state.lastX = e.clientX; state.startScroll = state.target;
         state.lastTime = e.timeStamp; state.distance = state.velocity = state.momentum = 0; state.suppressClick = false;
         e.currentTarget.classList.add("is-dragging"); e.currentTarget.setPointerCapture(e.pointerId);
+        if (dragCursor === "press" && state.fine && e.pointerType !== "touch") { moveCursor(e); cursor.current?.classList.add("is-visible"); }
       }}
       onPointerMove={e => {
         moveCursor(e);
@@ -154,6 +162,6 @@ export function LoopCarousel({ children, className = "", label, speed = 24 }: { 
       onDragStart={e => e.preventDefault()}>
       <div className="loop-carousel-track">{[0, 1, 2].map(i => <div className="loop-carousel-group" key={i} aria-hidden={i !== 1 || undefined} inert={i !== 1 || undefined}>{children}</div>)}</div>
     </div>
-    {mounted && createPortal(<div ref={cursor} className="carousel-cursor" aria-hidden="true"><div className="carousel-cursor-pill"><span className="carousel-cursor-diamond" /><span>Drag</span></div></div>, document.body)}
+    {mounted && dragCursor && createPortal(<div ref={cursor} className="carousel-cursor" aria-hidden="true"><div className="carousel-cursor-pill"><span className="carousel-cursor-diamond" /><span>Drag</span></div></div>, document.body)}
   </>;
 }

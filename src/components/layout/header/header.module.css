@@ -1,4 +1,19 @@
-.header { position: relative; z-index: 50; background: #0d1216; color: #fff; }
+/* Sticky; slides up out of view while the page scrolls down and back on the
+   way up (header-scroll.tsx sets the attributes). A soft ease-out, on the
+   compositor (transform only). */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  /* Fully transparent (the user, Oct 7, 2026): no colour, no glass, at the
+     top or scrolled. */
+  background: transparent;
+  color: #fff;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.header[data-hidden] { transform: translateY(-100%); transition-duration: 0.45s; transition-timing-function: cubic-bezier(0.55, 0, 0.67, 0.2); }
+
+@media (prefers-reduced-motion: reduce) { .header { transition: none; } }
 .inner { max-width: 1920px; margin: auto; height: 100px; padding: 24px 40px; display: flex; align-items: center; justify-content: space-between; position: relative; }
 .home, .nav a { font: 400 14px/20px var(--font-mono); letter-spacing: .02em; }
 .nav { display: flex; gap: 32px; position: absolute; left: 50%; transform: translateX(-50%); }

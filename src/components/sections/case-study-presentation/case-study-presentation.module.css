@@ -56,8 +56,8 @@
 .specimen h2 { font-size: calc(96 * var(--case-unit)); font-weight: 700; line-height: 1.041667; letter-spacing: -.02em; overflow-wrap: break-word; }
 .specimen p { font-size: calc(28 * var(--case-unit)); line-height: 1.285714; letter-spacing: -.02em; white-space: pre-wrap; margin-top: calc(28 * var(--case-unit)); }
 .weights { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-.weights > * + *::before { content: '•'; margin-right: 8px; }
-.weights > :nth-child(2) { font-weight: 500; }
+
+.weights > span:nth-of-type(2) { font-weight: 500; }
 .logoGrid { height: 100%; border-radius: 0; }
 .palette { width: 100%; margin-top: calc(80 * var(--case-unit)); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: calc(65 * var(--case-unit)); }
 .swatch { position: relative; aspect-ratio: 410 / 395; container-type: inline-size; }
@@ -134,7 +134,7 @@
  .specimen h2 { font-size: 32px; line-height: 38px; }
  .specimen p { font-size: 12px; line-height: 17px; margin-top: 12px; }
  .specimen .weights { font-size: 13px; line-height: 22px; gap: 4px; }
- .weights > * + *::before { margin-right: 4px; }
+ 
  .logoGrid { aspect-ratio: 350 / 321; height: auto; grid-column: 1 / -1; }
  .palette { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
  .colorSample, .colorDetails { border-radius: 12px; }
@@ -210,3 +210,65 @@
  .palette { margin-top: 24px; gap: 16px; }
  .gallery { gap: 20px; }
 }
+
+/* Travel's final frame (826:2889); preserve the shared case-study layout. */
+.journeyPanel { width: 100%; margin: 0; }
+.journeyPanel figcaption { margin-top: 12px; color: #52616f; font-size: 18px; line-height: 28px; }
+.gridArtwork { height: 100%; border-radius: 0; }
+.logoGrid { position: relative; overflow: hidden; }
+.projectLogo { position: absolute; width: 64%; height: auto; left: 18%; top: 43.571%; }
+.glyphArtwork { aspect-ratio: 567 / 702; }
+.travel .editorial { gap: calc(80 * var(--case-unit)); }
+.travel .heroSummary { width: 520px; max-width: 29%; }
+.travel .heroSummary p { max-width: 385px; }
+.travel .solution { width: min(100%, calc(1220 * var(--case-unit))); }
+.travel .featureCards { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) calc(383 * var(--case-unit)); }
+.travel .typePanel { background: #fffaeb; }
+.travel .specimen { font-family: inherit; }
+.travel .specimen h2, .travel .specimen p, .travel .weights > * { font-weight: 600; }
+.travel .specimen h2 { line-height: 106px; text-box-trim: trim-both; text-box-edge: cap alphabetic; }
+.travel .colorDetails { background: white; backdrop-filter: none; font-family: inherit; }
+.travel .colorDetails dt, .travel .colorDetails dd { font-weight: 600; }
+.travel .colorSample, .travel .colorDetails { border-radius: 24px; }
+.travel .swatch:nth-child(3) .colorSample { left: 0; right: auto; }
+.travel .swatch:nth-child(3) .colorDetails { left: auto; right: 0; }
+.travel .gallery { gap: calc(48 * var(--case-unit)); }
+@media (width < 1280px) {
+ .travel .heroSummary { width: 100%; max-width: 100%; }
+ .travel .featureCards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+ .glyphArtwork { aspect-ratio: 350 / 272.381; }
+ .travel .specimen h2 { line-height: 56px; }
+ .gridArtwork { position: absolute; inset: 0; }
+ .travel .gallery { gap: 24px; }
+}
+@media (width < 640px) {
+ .travel .featureCards { grid-template-columns: 1fr; }
+ .glyphArtwork { aspect-ratio: 169 / 166; }
+ .travel .specimen h2 { line-height: 40px; }
+ .journeyPanel figcaption { font-size: 14px; line-height: 20px; }
+ .travel .gallery { gap: 20px; }
+ .travel .colorSample, .travel .colorDetails { border-radius: 12px; }
+}
+
+@media (width >= 1280px) {
+ .travel .palette { display: block; position: relative; height: calc(395 * var(--case-unit)); }
+ .travel .swatch { position: absolute; top: 0; height: 100%; aspect-ratio: auto; }
+ .travel .swatch:nth-child(1) { left: 0; width: 20.109%; }
+ .travel .swatch:nth-child(2) { left: 25.163%; width: 20.326%; }
+ .travel .swatch:nth-child(3) { left: 50.543%; width: 24.076%; }
+ .travel .swatch:nth-child(4) { right: 0; width: 20.38%; }
+ .travel .colorSample, .travel .colorDetails { width: calc(263 * var(--case-unit)); height: calc(263 * var(--case-unit)); aspect-ratio: auto; }
+ .travel .colorDetails dt { font-size: calc(24 * var(--case-unit)); }
+ .travel .colorDetails dd { font-size: calc(36 * var(--case-unit)); }
+ .travel .swatch:nth-child(1) .colorDetails { bottom: calc(8 * var(--case-unit)); }
+ .travel .swatch:nth-child(3) .colorDetails { bottom: calc(1 * var(--case-unit)); }
+ .travel .swatch:nth-child(4) .colorSample { left: auto; right: 0; bottom: calc(18 * var(--case-unit)); }
+ .travel .swatch:nth-child(4) .colorDetails { left: 0; right: auto; }
+}
+
+/* Separate markers keep every font weight on the same vertical center. */
+.weights { align-items: center; }
+.weights > span, .weights > strong { text-box-trim: trim-both; text-box-edge: cap alphabetic; white-space: nowrap; }
+.weights .weightSeparator { flex: 0 0 8px; width: 8px; height: 8px; align-self: center; }
+@media (width < 1280px) { .weights .weightSeparator { flex-basis: 5px; width: 5px; height: 5px; } }
+@media (width < 640px) { .weights .weightSeparator { flex-basis: 4px; width: 4px; height: 4px; } }

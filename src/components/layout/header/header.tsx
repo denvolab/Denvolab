@@ -14,6 +14,7 @@ import { getHeaderCta, getPrimaryNavigation } from "@/lib/data/navigation";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/seo/site-config";
 import { MobileNav } from "./mobile-nav";
+import { HeaderScroll } from "./header-scroll";
 import styles from "./header.module.css";
 
 export async function Header() {
@@ -54,6 +55,7 @@ export async function Header() {
 
         <div className={styles.mobile}><MobileNav links={links} cta={cta} /></div>
       </div>
+      <HeaderScroll />
     </header>
   );
 }

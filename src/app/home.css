@@ -81,7 +81,7 @@ main [data-homepage] .home-hero { min-height:100svh!important; background:#0d121
 .home-ai [aria-label="Case study brands"] img.parent { background:#192027; }
 .home-ai [aria-label="Case study brands"] img { filter:grayscale(1); }
 .home-ai [aria-label="Case study brands"] div:has(> img) { width:272px; height:96px; background:#192027; }
-[data-homepage] [data-home-part="process"] { padding:120px 40px; background:#fff; }
+[data-homepage] [data-home-part="process"] { padding:120px 40px; background:var(--color-surface-secondary); }
 [data-homepage] [data-home-part="process"] > div { max-width:1144px; padding:0; gap:48px; }
 [data-homepage] [data-home-part="process"] > div > div:first-child { gap:20px; }
 [data-homepage] [data-home-part="process"] > div > div:first-child > p { font:400 14px/20px var(--font-mono); letter-spacing:.02em; background:#e8ecf0; border-radius:8px; padding:8px 12px; }
@@ -94,7 +94,7 @@ main [data-homepage] .home-hero { min-height:100svh!important; background:#0d121
 [data-homepage] [data-home-part="process"] h3 { font-size:40px; line-height:48px; letter-spacing:-.03em; }
 [data-homepage] [data-home-part="process"] li p { font-size:16px; line-height:24px; color:#52616f; }
 [data-homepage] [data-home-part="process"] li span:not(.line, .line-inner) { font:500 12px/16px var(--font-mono); letter-spacing:.02em; padding:8px 12px; background:#f1f1f2; }
-.home-testimonials { padding:120px 0; background:#fff; }
+.home-testimonials { padding:120px 0; background:var(--color-surface-secondary); }
 .home-section-intro { display:flex; flex-direction:column; align-items:center; gap:20px; text-align:center; padding:0 24px; margin-bottom:48px; }
 .home-section-intro .home-eyebrow { background:#e8ecf0; }
 .home-section-intro h2 { font-size:60px; line-height:72px; letter-spacing:-.04em; margin:16px 0; }
@@ -251,7 +251,7 @@ main [data-homepage] .home-hero { min-height:100svh!important; background:#0d121
  [data-homepage] [data-home-part="process"] > div > div:first-child { gap:12px; }
  [data-homepage] [data-home-part="process"] h2 { font-size:36px; line-height:40px; letter-spacing:-.02em; margin:8px 0; }
  [data-homepage] [data-home-part="process"] ol { gap:24px; }
- [data-homepage] [data-home-part="process"] li { min-height:340px; padding:16px; gap:16px; border-radius:12px; flex-direction:column; }
+ [data-homepage] [data-home-part="process"] li { min-height:340px; padding:16px; gap:24px; border-radius:12px; flex-direction:column; } /* Figma 251:1809: 24px between the 40px icon and the text */
  [data-homepage] [data-home-part="process"] li > div:first-child { width:40px; height:40px; }
  [data-homepage] [data-home-part="process"] li > div:last-child { gap:16px; }
  [data-homepage] [data-home-part="process"] li > div:last-child > div:first-of-type { gap:16px; }
@@ -373,9 +373,9 @@ html.wash-ready [data-homepage] .home-portfolio-more a { color:var(--home-wash-i
 /* Reserve the full blur area inside each horizontal clipping viewport. */
 .home-testimonials [data-testimonial-row] { padding-block:40px; margin-block:-40px; }
 .home-testimonials [data-testimonial-row] [data-wash-fade] { display:none; }
-.home-testimonials [data-testimonial-row]::after { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(270deg,#fff 0%,rgba(244,246,248,0) 37.019%,rgba(244,246,248,0) 68.51%,#fff 100%); }
+.home-testimonials [data-testimonial-row]::after { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(270deg,var(--color-surface-secondary) 0%,transparent 37.019%,transparent 68.51%,var(--color-surface-secondary) 100%); }
 @media (width < 1024px) {
- .home-testimonials [data-testimonial-row]::after { background:linear-gradient(90deg,#fff,rgba(255,255,255,0) 24px,rgba(255,255,255,0) calc(100% - 24px),#fff); }
+ .home-testimonials [data-testimonial-row]::after { background:linear-gradient(90deg,var(--color-surface-secondary),transparent 24px,transparent calc(100% - 24px),var(--color-surface-secondary)); }
 }
 
 [data-homepage] [data-home-part="process"] .bg-surface-accent { background-color:#0d1216; }

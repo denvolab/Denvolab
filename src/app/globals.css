@@ -24,6 +24,8 @@
 @import "../components/motion/page-transition/page-transition.css";
 @import "../components/motion/image-reveal/image-reveal.css";
 @import "../components/motion/text-reveal/text-reveal.css";
+@import "../components/ui/loop-carousel.css";
+@import "../components/sections/industries-served/industries-served.css";
 @import "../components/motion/color-wash/color-wash.css";
 
 /* Lenis owns wheel interpolation. Native anchoring must not pull the page
@@ -38,6 +40,8 @@ html.lenis body {
    the cursor, so hover effects don't start and stop on every card that
    slides under it. The fixed header and chat button stay clickable. */
 html.is-wheeling :is(main, footer) {
+  /* Only while the wheel turns: not during Lenis's glide afterwards (the
+     user, Oct 7, 2026: the hover ripple waited for the glide to end). */
   pointer-events: none;
 }
 
@@ -409,8 +413,13 @@ html.is-wheeling :is(main, footer) {
   }
 }
 
+/* The page itself is the heroes' colour (#0d1216, gray-950): the navbar has
+   no background (header.module.css), so what shows behind it at the top of
+   every page must match the hero under it, with no seam (the user,
+   Oct 7, 2026). It was --color-surface-dark (#1a2128), a lighter grey that
+   showed as a band above every hero. */
 body {
-  background: var(--color-surface-dark);
+  background: #0d1216;
   color: var(--color-foreground-inverse);
   font-family: var(--font-sans);
 }

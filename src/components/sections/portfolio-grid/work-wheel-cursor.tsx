@@ -29,6 +29,7 @@ import { WorkWheel } from "@/components/ui/work-wheel";
 const subscribe = () => () => {};
 const DECAY = 0.88; // the Drag cursor's follow: 1 - 0.88 = 12% per frame
 const TARGET = "[data-wheel-cursor]";
+const SETTLE_MS = 350; // after a carousel drag: the "Drag" pill fades out first
 
 export function WorkWheelCursor() {
   const mounted = useSyncExternalStore(subscribe, () => true, () => false);
@@ -85,24 +86,60 @@ export function WorkWheelCursor() {
       }
       run();
     };
+    // Dragging a carousel (sections/more-crafts): the wheel steps aside once
+    // when the drag starts and comes back once it ends, if the pointer is
+    // then on a picture. Without this it shrank and grew every time the
+    // pointer crossed the gap between two cards, and its glass was redrawn
+    // over the moving pictures on every frame ("zoom in, hut kore zoom out"
+    // while dragging, Oct 7, 2026).
+    let dragging = false;
+    const down = (event: PointerEvent) => {
+      if (event.button !== 0 || !(event.target as Element | null)?.closest?.(".loop-carousel")) return;
+      dragging = true;
+      show(false);
+      window.addEventListener("pointerup", up, { once: true });
+      window.addEventListener("pointercancel", up, { once: true });
+    };
+    // Back after the cards' glide has settled (its glass over a still
+    // moving picture made that picture jerk), if the pointer is then on one.
+    let backTimer = 0;
+    const up = () => {
+      window.removeEventListener("pointerup", up);
+      window.removeEventListener("pointercancel", up);
+      window.clearTimeout(backTimer);
+      backTimer = window.setTimeout(() => {
+        dragging = false;
+        const under = document.elementFromPoint(s.mouseX, s.mouseY);
+        show(!!under?.closest(TARGET) && section.contains(under));
+      }, SETTLE_MS);
+    };
+
     // Boundary events also arrive when the page scrolls a picture out from
     // under a still mouse, so the wheel hides then too.
     const over = (event: PointerEvent) => {
       if (event.pointerType !== "mouse" || !fine.matches) return;
       track(event);
-      show(!!(event.target as Element | null)?.closest?.(TARGET));
+      if (!dragging) show(!!(event.target as Element | null)?.closest?.(TARGET));
     };
     const out = (event: PointerEvent) => {
+      if (dragging) return;
       const next = event.relatedTarget as Element | null;
       if (!next?.closest?.(TARGET)) show(false);
     };
-    const leave = () => show(false);
+    const leave = () => {
+      if (!dragging) show(false);
+    };
 
     section.addEventListener("pointermove", track, { passive: true });
     section.addEventListener("pointerover", over);
     section.addEventListener("pointerout", out);
     section.addEventListener("pointerleave", leave);
+    section.addEventListener("pointerdown", down);
     return () => {
+      section.removeEventListener("pointerdown", down);
+      window.removeEventListener("pointerup", up);
+      window.removeEventListener("pointercancel", up);
+      window.clearTimeout(backTimer);
       delete section.dataset.wheelCursorActive;
       section.removeEventListener("pointermove", track);
       section.removeEventListener("pointerover", over);

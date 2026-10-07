@@ -91,12 +91,12 @@ export function TestimonialRow({
       <div
         aria-hidden="true"
         data-wash-fade=""
-        className="pointer-events-none absolute inset-y-0 left-0 w-[250px] bg-gradient-to-r from-surface from-30% to-transparent"
+        className="pointer-events-none absolute inset-y-0 left-0 w-[250px] bg-gradient-to-r from-surface-secondary from-30% to-transparent"
       />
       <div
         aria-hidden="true"
         data-wash-fade=""
-        className="pointer-events-none absolute inset-y-0 right-0 w-[250px] bg-gradient-to-l from-surface from-30% to-transparent"
+        className="pointer-events-none absolute inset-y-0 right-0 w-[250px] bg-gradient-to-l from-surface-secondary from-30% to-transparent"
       />
     </div>
   );

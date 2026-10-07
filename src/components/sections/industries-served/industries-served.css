@@ -1,0 +1,122 @@
+/* IndustriesServed (industries-served.tsx), Figma 483:1256 (1920),
+ * 903:17483 (tablet 768) and 903:16728 (mobile 390). All values are Figma's.
+ * Imported from app/globals.css. */
+
+/* Same font setup wherever it is used (Services, Our Craft, under each case
+ * study): DM Sans with its optical-size axis at 14, as the Services page and
+ * home page set it, and headings trimmed to their letters (Figma's text
+ * boxes). */
+.industries {
+  width: 100%;
+  min-height: 0; /* the case-study pages give sections a min-height */
+  background: #f4f6f8;
+  color: #0d1216;
+  font-family: "DM Sans Opsz", var(--font-sans);
+  font-optical-sizing: none;
+  font-variation-settings: "opsz" 14;
+}
+.industries :is(h2, h3) { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
+.industries-inner {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 120px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+/* Header Row: text on the left, outline button on the right, centred. */
+.industries-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 0 40px;
+}
+.industries-header-text { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+.industries-title {
+  padding-block: 16px;
+  font-size: 60px;
+  line-height: 72px;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+.industries-subtext { max-width: 820px; font-size: 18px; line-height: 28px; color: #52616f; }
+/* Button / Outline: 1px #4c5662 border, 8px corners, 12/20 padding, DM Mono
+ * 14/20 label. */
+.industries-header > a {
+  flex-shrink: 0;
+  height: 46px;
+  padding: 12px 20px;
+  border: 1px solid #4c5662;
+  border-radius: 8px;
+  background: transparent;
+  box-shadow: none;
+  color: #0d1216;
+  font: 400 14px/20px var(--font-mono);
+  letter-spacing: 0.02em;
+}
+
+/* Reel Card Row: 24px between cards; the carousel starts at the page's 40px
+ * side padding. padding-right on each copy of the row keeps the 24px gap
+ * where the loop joins. */
+.industries-carousel .loop-carousel-track { padding-left: 40px; }
+.industries-carousel-items { display: flex; gap: 24px; padding-right: 24px; }
+.industries-card { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; flex-shrink: 0; width: 438px; }
+.industries-card:nth-child(1) { width: 470px; }
+.industries-card:nth-child(3),
+.industries-card:nth-child(5) { width: 439px; }
+.industries-card:nth-child(6) { width: 480px; }
+.industries-image {
+  position: relative;
+  width: 100%;
+  height: 580px;
+  overflow: hidden;
+  border: 1px solid #f4f6f8;
+  border-radius: 24px;
+  background: white;
+}
+.industries-name { font-size: 24px; line-height: 32px; font-weight: 600; letter-spacing: -0.015em; }
+.industries-description { width: 280px; font-size: 18px; line-height: 28px; color: #52616f; }
+
+/* Tablet (Figma 768): 64/24 padding, 32 gap, 48/56 title, 16/24 text,
+ * 16px between cards, 420px pictures. Figma's tablet frame has no button. */
+@media (width < 1024px) {
+  .industries-inner { padding: 64px 0; gap: 32px; }
+  .industries-header { padding: 0 24px; }
+  .industries-header-text { gap: 20px; }
+  .industries-title { padding-block: 12px; font-size: 48px; line-height: 56px; letter-spacing: -0.035em; }
+  .industries-subtext { max-width: none; font-size: 16px; line-height: 24px; }
+  .industries-header > a { display: none; }
+  .industries-carousel .loop-carousel-track { padding-left: 24px; }
+  .industries-carousel-items { gap: 16px; padding-right: 16px; }
+  .industries-card { width: 297px; }
+  .industries-card:nth-child(1) { width: 318px; }
+  .industries-card:nth-child(3),
+  .industries-card:nth-child(5) { width: 297px; }
+  .industries-card:nth-child(4) { width: 296px; }
+  .industries-card:nth-child(6) { width: 325px; }
+  .industries-image { height: 420px; }
+  .industries-description { font-size: 16px; line-height: 24px; }
+}
+
+/* Mobile (Figma 390): 48/16 padding, the header stacks (text, then the
+ * button, 24 apart), 36/40 title; cards as on tablet. */
+@media (width < 768px) {
+  .industries-inner { padding: 48px 0; }
+  .industries-header { flex-direction: column; align-items: flex-start; gap: 24px; padding: 0 16px; }
+  .industries-header-text { gap: 16px; }
+  .industries-title { padding-block: 8px; font-size: 36px; line-height: 40px; letter-spacing: -0.02em; }
+  .industries-header > a { display: inline-flex; }
+  .industries-carousel .loop-carousel-track { padding-left: 16px; }
+}
+
+/* MoreCrafts (sections/more-crafts) reuses this section's classes. Its cards
+ * are links; the descriptions stop at two lines, like Figma's cards. */
+.more-crafts .industries-card { color: inherit; text-decoration: none; }
+.more-crafts-description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}

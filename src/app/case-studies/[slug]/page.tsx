@@ -11,6 +11,7 @@ import "@fontsource/frank-ruhl-libre/700.css";
 import { getCaseStudy, getCaseStudySlugs } from "@/lib/data/case-study";
 import { getCaseStudyPresentation } from "@/lib/data/case-study/presentation";
 import { CaseStudyPresentation } from "@/components/sections/case-study-presentation/case-study-presentation";
+import { MoreCrafts } from "@/components/sections/more-crafts/more-crafts";
 
 export const dynamicParams = false;
 
@@ -33,5 +34,6 @@ export default async function CaseStudyPage(props: PageProps<"/case-studies/[slu
   if (!study || !presentation) notFound();
   return <div className="ds-v31 bg-background">
     <CaseStudyPresentation content={presentation} name={study.name} />
+    <MoreCrafts currentHref={`/case-studies/${slug}`} />
   </div>;
 }

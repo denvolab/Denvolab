@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { fxOff } from "@/lib/motion/fx-off";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -31,13 +32,16 @@ export function SmoothScroll() {
       lenis?.destroy();
       lenis = undefined;
       instance.current = null;
-      if (motion.matches) return;
+      if (motion.matches || fxOff("lenis")) return;
 
       lenis = new Lenis({
         // html is h-full; observe the growing body so streamed sections and
         // loaded media update the scroll limit without per-frame layout reads.
         content: document.body,
-        lerp: 0.12,
+        // Each frame covers 4% of the distance left: a heavy, smooth glide
+        // (the user's choice, Oct 7, 2026; was 0.12, duration 1.6, then 0.06).
+        // Lower is heavier, higher is quicker.
+        lerp: 0.04,
         smoothWheel: true,
         syncTouch: false,
         autoToggle: false,

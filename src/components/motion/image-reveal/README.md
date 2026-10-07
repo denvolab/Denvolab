@@ -53,3 +53,7 @@ Playwright on 12 pages at 1440px: every marked box below the first screen starts
 ## Smooth scrolling (Oct 7, 2026)
 
 Nothing writes styles on every frame while the page scrolls. The reveal is a Web Animation: `clip-path` on the frame and `scale` on its pictures, with power4.out as `cubic-bezier(0.22, 1, 0.36, 1)`. The browser runs it off the main thread, so it can't stall Lenis. The drift is a CSS scroll-driven animation (`view-timeline: --image-frame` on the frame, `animation-timeline` on the picture) in `image-reveal.css`. Only browsers without `animation-timeline` get the scrubbed ScrollTrigger and `--reveal-drift`. Drifting pictures have `will-change: translate`, so they move as layers instead of being repainted.
+
+## Drift turned off (Oct 7, 2026)
+
+The scroll drift is off (`DRIFT_ENABLED = false` in the controller). The user still saw the picture sections shake while scrolling. Moving a picture by fractions of a pixel inside its frame on every scroll frame makes fine detail (the UI screenshots' text and lines) shimmer. Pictures now move exactly with the page, and only the corner reveal remains. The code is kept, so setting `DRIFT_ENABLED` back to `true` restores it.

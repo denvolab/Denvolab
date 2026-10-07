@@ -2,6 +2,7 @@ import type { CaseStudyFactIcon, CaseStudyImage, CaseStudySolutionCard } from ".
 
 /** Every project uses the updated Job Sea layout; only this content varies. */
 export interface CaseStudyPresentation {
+  designVariant?: "travel";
   title: string;
   summary: string;
   facts: { icon: CaseStudyFactIcon; title: string; value: string }[];
@@ -16,13 +17,16 @@ export interface CaseStudyPresentation {
   collage: CaseStudyImage[];
   quote?: { text: string; phone: CaseStudyImage; screen: CaseStudyImage };
   brand: {
+    glyph?: CaseStudyImage;
+    logo?: CaseStudyImage;
+    gridBackground?: string;
     fontName: string;
     fontFamily: string;
     primary: string;
     surface: string;
     background: string;
     grid: CaseStudyImage;
-    swatches: { name: string; hex: string }[];
+    swatches: { name: string; hex: string; sampleColor?: string }[];
   };
-  gallery: CaseStudyImage[];
+  gallery: (CaseStudyImage & { caption?: string })[];
 }

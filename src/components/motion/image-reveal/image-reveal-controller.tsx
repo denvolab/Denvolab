@@ -1,8 +1,8 @@
 "use client";
 
 // ---------------------------------------------------------------------------
-// ImageRevealController: how every picture on the site comes in, and drifts
-// as the page scrolls. Since Oct 7, 2026 it is produx.design's work-picture
+// ImageRevealController: how every picture on the site comes in (the scroll
+// drift below is switched off, see DRIFT_ENABLED). Since Oct 7, 2026 it is produx.design's work-picture
 // motion, which the user asked for "exact same vabe" on every image. Values
 // read from that site's own script:
 //
@@ -49,6 +49,7 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { fxOff } from "@/lib/motion/fx-off";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -59,6 +60,7 @@ const EASE = "cubic-bezier(0.22, 1, 0.36, 1)"; // GSAP power4.out (produx.design
 const FROM_CLIP = "inset(100% 100% 0% 0%)";
 const TO_CLIP = "inset(0% 0% 0% 0%)";
 const FROM_SCALE = 1.3; // produx.design
+const DRIFT_ENABLED = false; // see registerFrames
 const DRIFT = 4.5; // % of the picture's height either way (produx: 10, see above)
 
 /** Cover-cropped pictures in this frame (not in a frame nested inside it)
@@ -77,32 +79,95 @@ function driftPictures(frame: HTMLElement) {
   });
 }
 
+/** Moves all of an element's child nodes into a fragment (same nodes). */
+function fragmentOf(element: HTMLElement) {
+  const fragment = document.createDocumentFragment();
+  fragment.append(...Array.from(element.childNodes));
+  return fragment;
+}
+
 export function ImageRevealController() {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || fxOff("reveal")) return;
 
     const triggers: ScrollTrigger[] = [];
     const animations: Animation[] = [];
     const cssDrift = CSS.supports("animation-timeline: view()");
 
+    /**
+     * The corner wipe without animating clip-path (Oct 7, 2026: Chrome and
+     * Brave repaint a clip-path animation on every frame, and with a picture
+     * revealing while the page scrolls Lenis lost frames and the screen
+     * shook; with the reveal off it was smooth). Instead the frame's content
+     * is wrapped, for the length of the reveal only, in a window that slides
+     * in from the bottom-left (-100%, 100%) while the content inside slides
+     * the opposite way, so the picture itself holds still. What shows is the
+     * window's overlap with the frame: a box growing from the bottom-left
+     * corner, the same as inset(100% 100% 0 0) -> inset(0). Both moves are
+     * transforms, which the browser runs without repainting. The content is
+     * unwrapped again when the reveal ends (React's nodes stay the same).
+     *
+     * Only for positioned frames whose size doesn't come from their content
+     * (a set height, next/image `fill`): the wrap is measured, and if the
+     * frame's size changed it is undone and the frame keeps the clip-path
+     * version.
+     */
+    const wrap = (frame: HTMLElement) => {
+      if (!frame.firstChild || getComputedStyle(frame).position === "static") return null;
+      const width = frame.offsetWidth;
+      const height = frame.offsetHeight;
+      const windowBox = document.createElement("div");
+      const content = document.createElement("div");
+      windowBox.style.cssText = "position:absolute;inset:0;overflow:hidden;pointer-events:none;";
+      content.style.cssText = "position:absolute;inset:0;pointer-events:auto;";
+      content.append(...Array.from(frame.childNodes));
+      windowBox.append(content);
+      frame.append(windowBox);
+      const unwrap = () => {
+        if (!windowBox.isConnected) return;
+        frame.insertBefore(fragmentOf(content), windowBox);
+        windowBox.remove();
+      };
+      if (frame.offsetWidth !== width || frame.offsetHeight !== height) {
+        unwrap();
+        return null;
+      }
+      return { windowBox, content, unwrap };
+    };
+
     const reveal = (frame: HTMLElement) => {
       const timing: KeyframeAnimationOptions = { duration: DURATION, easing: EASE, fill: "both" };
-      const running = [
-        frame.animate([{ clipPath: FROM_CLIP }, { clipPath: TO_CLIP }], timing),
-        ...Array.from(frame.querySelectorAll<HTMLElement>("img, video"))
-          .filter((media) => media.closest(SELECTOR) === frame)
-          .map((media) => media.animate([{ scale: String(FROM_SCALE) }, { scale: "1" }], timing)),
-      ];
+      const media = Array.from(frame.querySelectorAll<HTMLElement>("img, video")).filter(
+        (item) => item.closest(SELECTOR) === frame,
+      );
+      const running: Animation[] = [];
+      let unwrap = () => {};
+
+      const wrapped = wrap(frame);
+      if (wrapped) {
+        running.push(
+          wrapped.windowBox.animate([{ transform: "translate(-100%, 100%)" }, { transform: "translate(0, 0)" }], timing),
+          wrapped.content.animate([{ transform: "translate(100%, -100%)" }, { transform: "translate(0, 0)" }], timing),
+        );
+        // The window now hides what isn't revealed: drop the clip start state.
+        frame.dataset.imageReveal = "done";
+        unwrap = wrapped.unwrap;
+      } else {
+        running.push(frame.animate([{ clipPath: FROM_CLIP }, { clipPath: TO_CLIP }], timing));
+      }
+      running.push(...media.map((item) => item.animate([{ scale: String(FROM_SCALE) }, { scale: "1" }], timing)));
       animations.push(...running);
+
       running[0].finished
         .then(() => {
           // The start state's CSS stops applying, then the held end frames go.
           frame.dataset.imageReveal = "done";
+          unwrap();
           running.forEach((animation) => animation.cancel());
         })
-        .catch(() => {});
+        .catch(() => unwrap());
     };
 
     const registered = new WeakSet<HTMLElement>();
@@ -111,7 +176,12 @@ export function ImageRevealController() {
       registered.add(frame);
 
       // Scroll drift, for the frame's whole life (also after the reveal).
-      const pictures = driftPictures(frame);
+      // Off since Oct 7, 2026 (DRIFT_ENABLED): the user still saw the
+      // picture sections shake while scrolling. A picture moving by fractions
+      // of a pixel inside its frame on every scroll frame makes fine detail
+      // (the UI screenshots' text and lines) shimmer, so pictures now move
+      // exactly with the page. Set DRIFT_ENABLED to true to bring it back.
+      const pictures = DRIFT_ENABLED ? driftPictures(frame) : [];
       if (pictures.length) {
         pictures.forEach((img) => (img.dataset.imageDrift = ""));
         if (!cssDrift) triggers.push(

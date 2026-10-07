@@ -1,4 +1,5 @@
 import type { RippleEffect } from "./ripple-effect";
+import { fxOff } from "@/lib/motion/fx-off";
 
 /**
  * attach-ripple-hover.ts
@@ -156,6 +157,11 @@ function loadPicture(image: HTMLImageElement): Promise<HTMLImageElement> {
  */
 const SWAP_FRAMES = 3;
 
+/** Pressing in a drag carousel: the ripple cross-fades away this fast, and
+ *  its paused canvas is removed this long after the drag (momentum included). */
+const PRESS_FADE_MS = 250;
+const PARK_MS = 1200;
+
 function afterFrames(frames: number, fn: () => void) {
   if (frames <= 0) fn();
   else requestAnimationFrame(() => afterFrames(frames - 1, fn));
@@ -165,6 +171,7 @@ export function attachRippleHover(
   frame: HTMLElement,
   options?: { objectPosition?: "center" | "top"; image?: HTMLImageElement; imageBounds?: boolean },
 ): () => void {
+  if (fxOff("ripple")) return () => {};
   const image = options?.image ?? frame.querySelector("img");
   if (image && (isSvgImage(image) || image.closest("[data-no-ripple]"))) return () => {};
 
@@ -187,7 +194,6 @@ export function attachRippleHover(
   let removed = false;
   let lingerTimer = 0;
   let revealTimer = 0;
-  let retryTimer = 0;
   let last = { x: 0, y: 0 };              // last cursor position inside the frame (px)
 
   /** Cursor position in pixels from the frame's top-left corner. */
@@ -196,25 +202,71 @@ export function attachRippleHover(
     return { x: (event.clientX - rect.left) * (options?.imageBounds ? image!.offsetWidth / rect.width : 1), y: (event.clientY - rect.top) * (options?.imageBounds ? image!.offsetHeight / rect.height : 1) };
   }
 
-  /** Create the WebGL effect (the first time, this also downloads three.js). */
   /**
-   * Started while the page was moving: try again once it is still. Without
-   * this a picture the pointer rests on after a scroll stayed flat until the
-   * next mouse move or a click (Oct 7, 2026): the browser sends no new
-   * pointer event when the page stops under a still mouse.
+   * The effect only ever starts from a real mouse movement (Oct 7, 2026: the
+   * pictures "shook" while scrolling). A picture sliding under a still cursor
+   * used to count as the cursor arriving or leaving: the edge wobble (the
+   * jelly edge) fired as the page scrolled, and again when the ripple
+   * restarted by itself after the scroll. Now scrolling never starts,
+   * wobbles or restarts anything: moving the mouse does.
    */
-  function retryAfterScroll() {
-    window.clearTimeout(retryTimer);
-    retryTimer = window.setTimeout(() => {
-      if (cursorInside && !effect && !loading && !removed) void start();
-    }, Math.max(0, scrollingUntil - performance.now()) + 30);
+  const pageMoving = () =>
+    performance.now() < scrollingUntil || document.documentElement.classList.contains("is-wheeling");
+
+  /**
+   * Inside a drag carousel (sections/more-crafts), pressing starts a drag:
+   * the picture slides and the cards sink a little (press-controller), so
+   * the ripple fades out and doesn't start again until the button is
+   * released (Oct 7, 2026: the picture jerked while dragging).
+   */
+  let held = false;
+  function onDown(event: PointerEvent) {
+    if (event.button !== 0 || !frame.closest(".loop-carousel")) return;
+    held = true;
+    // A quick cross-fade to the plain picture, then the canvas goes, so the
+    // drag itself runs without WebGL redrawing every frame. Never a cut:
+    // removing the canvas at once snapped the slightly bulged picture back to
+    // size ("zoom in, then hut kore zoom out", Oct 7, 2026).
+    // The canvas is only hidden and paused here; it is removed after the
+    // drag, when the page is still (removing a WebGL context mid-drag
+    // stalled it: "fx-off=ripple" was smooth, Oct 7, 2026).
+    if (effect) {
+      window.clearTimeout(lingerTimer);
+      window.clearTimeout(revealTimer);
+      unsubscribeScroll(stopForScroll);
+      image!.style.visibility = "";
+      effect.fadeOut(PRESS_FADE_MS);
+      parked = effect;
+      effect = null;
+    }
+    window.addEventListener("pointerup", onUp, { once: true });
+    window.addEventListener("pointercancel", onUp, { once: true });
+  }
+  /** A faded, paused canvas waiting to be removed once nothing moves. */
+  let parked: RippleEffect | null = null;
+  let calmUntil = 0;
+  let parkTimer = 0;
+  function onUp() {
+    held = false;
+    // Not straight back on: the cards still glide after the release, and
+    // building a new WebGL canvas under the pointer then made the picture
+    // just let go of jerk (Oct 7, 2026). The next mouse move after the glide
+    // starts it.
+    calmUntil = performance.now() + PARK_MS;
+    window.clearTimeout(parkTimer);
+    parkTimer = window.setTimeout(disposeParked, PARK_MS);
+  }
+  function disposeParked() {
+    const old = parked;
+    parked = null;
+    if (!old) return;
+    const idle = window.requestIdleCallback ?? ((fn: () => void) => window.setTimeout(fn, 0));
+    idle(() => old.dispose());
   }
 
+  /** Create the WebGL effect (the first time, this also downloads three.js). */
   async function start(byHand = false) {
-    if (!byHand && performance.now() < scrollingUntil) {
-      retryAfterScroll();
-      return;
-    }
+    if (!byHand || held || performance.now() < calmUntil) return;
     if (isSvgImage(image!) || image!.closest("[data-no-ripple]")) return;
     if (effect || loading) return;
     if (!image!.complete || image!.naturalWidth === 0) {
@@ -229,11 +281,7 @@ export function attachRippleHover(
         loadEffect(),
         loadPicture(image!),
       ]);
-      if (removed || !cursorInside) return;
-      if (!byHand && performance.now() < scrollingUntil) {
-        retryAfterScroll();
-        return;
-      }
+      if (removed || !cursorInside || held) return;
 
       const created = new RippleEffect(frame, image!, picture, options?.objectPosition, options?.imageBounds);
       effect = created;
@@ -269,12 +317,17 @@ export function attachRippleHover(
     else afterFrames(SWAP_FRAMES, () => old.dispose());
   }
 
+  /**
+   * The wheel turned: let the ripples fade out softly, as when the cursor
+   * leaves, but without the edge wobble (Oct 7, 2026: removing the canvas at
+   * once made the effect feel hard). A real mouse movement keeps it going.
+   */
   function stopForScroll() {
+    if (!effect) return;
+    unsubscribeScroll(stopForScroll);
+    effect.leave(false);
     window.clearTimeout(lingerTimer);
-    window.clearTimeout(revealTimer);
-    stop(true);
-    // Back on, under the pointer, once the scroll stops.
-    if (cursorInside) retryAfterScroll();
+    lingerTimer = window.setTimeout(() => stop(), LINGER_MS);
   }
 
   // ---- The three mouse events ----
@@ -286,10 +339,13 @@ export function attachRippleHover(
     window.clearTimeout(lingerTimer); // came back before the fade finished: keep going
     window.clearTimeout(revealTimer);
 
+    // A still page: the cursor got here by hand. A moving page: only if the
+    // mouse itself moved.
+    const byHand = movedByHand(event) || !pageMoving();
     if (effect) {
       image!.style.visibility = "hidden"; // the canvas is on screen already, so this is safe
-      effect.enter(last.x, last.y);
-    } else void start(movedByHand(event));
+      if (byHand) effect.enter(last.x, last.y);
+    } else void start(byHand);
   }
 
   function insideImage(event: PointerEvent) {
@@ -298,20 +354,27 @@ export function attachRippleHover(
   }
 
   function onMove(event: PointerEvent) {
+    if (held) return; // dragging a carousel: let the ripple fade
     if (options?.imageBounds) {
       if (!insideImage(event)) { if (cursorInside) onLeave(); return; }
       if (!cursorInside) { onEnter(event); return; }
     }
     last = positionOf(event);
-    if (!effect && !loading && cursorInside) void start(movedByHand(event));
+    if (!effect && !loading && cursorInside) void start(movedByHand(event) || !pageMoving());
+    if (effect && movedByHand(event)) {
+      // Moving again after a scroll faded it: keep the effect.
+      window.clearTimeout(lingerTimer);
+      subscribeScroll(stopForScroll);
+    }
     effect?.move(last.x, last.y);
   }
 
   function onLeave() {
     if (!cursorInside) return;
     cursorInside = false;
-    window.clearTimeout(retryTimer);
-    effect?.leave();
+    // The page scrolled the picture away: the ripples fade as usual, but the
+    // edge doesn't wobble.
+    effect?.leave(!pageMoving());
     lingerTimer = window.setTimeout(() => stop(), LINGER_MS);
 
     // When the wobble is over, put the <img> back underneath the canvas (see WOBBLE_MS).
@@ -328,6 +391,7 @@ export function attachRippleHover(
   }
 
   frame.addEventListener("pointerenter", onFrameEnter);
+  frame.addEventListener("pointerdown", onDown);
   frame.addEventListener("pointermove", onMove);
   frame.addEventListener("pointerleave", onLeave);
 
@@ -338,11 +402,16 @@ export function attachRippleHover(
   // Cleanup: remove the listeners and the effect.
   return () => {
     removed = true;
-    window.clearTimeout(retryTimer);
+    window.clearTimeout(parkTimer);
+    parked?.dispose();
+    parked = null;
     image.removeEventListener("load", onLoad);
     window.clearTimeout(lingerTimer);
     window.clearTimeout(revealTimer);
     frame.removeEventListener("pointerenter", onFrameEnter);
+    frame.removeEventListener("pointerdown", onDown);
+    window.removeEventListener("pointerup", onUp);
+    window.removeEventListener("pointercancel", onUp);
     frame.removeEventListener("pointermove", onMove);
     frame.removeEventListener("pointerleave", onLeave);
     stop(true);

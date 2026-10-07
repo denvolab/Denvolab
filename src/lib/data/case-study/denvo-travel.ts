@@ -1,4 +1,4 @@
-// Denvo Travel (Figma frame 727:2653). Template page, see shared.ts.
+// Denvo Travel (Figma frame 826:2889). Template page, see shared.ts.
 import { buildTemplateCaseStudy, SPECIMEN_LINES } from "./shared";
 
 export const denvoTravel = buildTemplateCaseStudy({
