@@ -6,7 +6,7 @@ import { getServicesList } from "@/lib/data/services";
 export async function ServicesList() {
   const { items } = await getServicesList();
   return <section id="services-list" className="services-catalog" data-figma-node="468:1128">
-    <div className="services-catalog-inner">{items.map((item, i) => <article className="services-entry" key={item.number}>
+    <div className="services-catalog-inner">{items.map((item, i) => <article className="services-entry" key={item.number} data-press-card="">
       <div className="services-entry-copy">
         <p className="services-entry-number">{item.number}</p>
         <h2><Link href={item.href}>{item.title}</Link></h2>

@@ -147,6 +147,7 @@ function ProjectCard({ project, index }: { project: PortfolioProject; index: num
     return (
       <Link
         href={href}
+        data-press-card=""
         className="group flex flex-col gap-8 rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-brand-default"
       >
         {content}

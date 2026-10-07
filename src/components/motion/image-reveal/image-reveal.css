@@ -1,12 +1,53 @@
-/* Start state for ImageRevealController (image-reveal-controller.tsx): the
- * picture's frame is invisible and 4em lower (zypsy.com's `.fade-in` uses
- * 5em; softened on Oct 7, 2026) until GSAP brings it up. `="done"` frames are left alone, so a
- * frame that has already played stays put after the controller re-runs on
- * a page change. Only when JavaScript runs and the visitor hasn't asked for
- * less motion. Imported from app/globals.css. */
+/* Start state and scroll drift for ImageRevealController
+ * (image-reveal-controller.tsx), produx.design's work-picture motion:
+ *
+ *   - until it is revealed, a frame is clipped to its bottom-left corner and
+ *     the pictures in it are 1.3x from their bottom-left corner (GSAP opens
+ *     the clip and brings --reveal-scale to 1);
+ *   - a picture marked data-image-drift is 110% of its frame (top -5%) and
+ *     drifts with the scroll by --reveal-drift (the `translate` property, so
+ *     it adds to any transform the picture already has).
+ *
+ * `="done"` frames are left alone, so a frame that has already played stays
+ * put after the controller re-runs on a page change. Only when JavaScript
+ * runs and the visitor hasn't asked for less motion. Imported from
+ * app/globals.css. */
 @media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
   [data-image-reveal-ready][data-image-reveal]:not([data-image-reveal="done"]) {
-    opacity: 0;
-    transform: translate3d(0, 4em, 0);
+    clip-path: inset(100% 100% 0% 0%);
+    --reveal-scale: 1.3;
+  }
+  [data-image-reveal-ready][data-image-reveal]:not([data-image-reveal="done"]) :is(img, video) {
+    scale: var(--reveal-scale, 1);
+    transform-origin: left bottom;
+  }
+
+  /* next/image `fill` sets top/height inline, hence !important. Own layer,
+     so the drift only moves it and never repaints it. */
+  [data-image-reveal] img[data-image-drift] {
+    top: -5% !important;
+    bottom: auto !important;
+    height: 110% !important;
+    translate: 0 var(--reveal-drift, 0%);
+    will-change: translate;
+  }
+
+  /* Where the browser has scroll-driven animations, the drift follows the
+     frame crossing the screen ("top bottom" to "bottom top") without any
+     script, off the main thread. Elsewhere the controller scrubs
+     --reveal-drift. */
+  @supports (animation-timeline: view()) {
+    [data-image-reveal] {
+      view-timeline: --image-frame block;
+    }
+    [data-image-reveal] img[data-image-drift] {
+      animation: image-reveal-drift linear both;
+      animation-timeline: --image-frame;
+      animation-range: cover 0% cover 100%;
+    }
+    @keyframes image-reveal-drift {
+      from { translate: 0 -4.5%; }
+      to { translate: 0 4.5%; }
+    }
   }
 }

@@ -112,10 +112,17 @@ export function MovingVisual({ className, videoSrc = null }: MovingVisualProps) 
     let restingRect = wrapper.getBoundingClientRect();
     let containerRect = (wrapper.closest("section") ?? document.body).getBoundingClientRect();
 
+    // The resting box as an offset inside the hero, so it stays right after
+    // the page scrolls (the hero's own box is read fresh on every move).
+    let restDX = 0;
+    let restDY = 0;
+    const heroBox = () => (wrapper.closest("section") ?? document.body).getBoundingClientRect();
     const measure = () => {
       gsap.set(wrapper, { x: 0, y: 0 });
       restingRect = wrapper.getBoundingClientRect();
-      containerRect = (wrapper.closest("section") ?? document.body).getBoundingClientRect();
+      containerRect = heroBox();
+      restDX = restingRect.left - containerRect.left;
+      restDY = restingRect.top - containerRect.top;
     };
     measure();
 
@@ -143,11 +150,14 @@ export function MovingVisual({ className, videoSrc = null }: MovingVisualProps) 
         );
       });
     let overControl = false;
+    // How much of the card has sunk below the hero's bottom edge (0..1).
+    let sink = 0;
+    const applyOpacity = () => opacityTo(overControl ? 0 : 1 - sink);
     const setOverControl = (over: boolean) => {
       overControl = over;
       // Let clicks through to the link at once, not after the fade.
       wrapper.style.pointerEvents = over ? "none" : "";
-      opacityTo(over ? 0 : 1);
+      applyOpacity();
     };
 
     let lastX = 0;
@@ -156,12 +166,43 @@ export function MovingVisual({ className, videoSrc = null }: MovingVisualProps) 
     let idleTimer: ReturnType<typeof setTimeout>;
     let resizeTimer: ReturnType<typeof setTimeout>;
 
+    // Move the card so its centre is on the pointer. Left, right and top keep
+    // it inside the hero; the bottom doesn't: there the card goes down past
+    // the hero's bottom edge, which cuts it off (home.css, overflow-y: clip),
+    // and fades as it sinks, like the sun going down behind the horizon
+    // (Oct 7, 2026).
+    const follow = (x: number, y: number) => {
+      const targetLeft = gsap.utils.clamp(
+        containerRect.left,
+        containerRect.right - restingRect.width,
+        x - restingRect.width / 2,
+      );
+      const targetTop = Math.max(containerRect.top, y - restingRect.height / 2);
+      sink = gsap.utils.clamp(0, 1, (targetTop + restingRect.height - containerRect.bottom) / restingRect.height);
+      xTo(targetLeft - (containerRect.left + restDX));
+      yTo(targetTop - (containerRect.top + restDY));
+    };
+
     const onMouseMove = (e: MouseEvent) => {
+      containerRect = heroBox();
+      const withinX = e.clientX >= containerRect.left && e.clientX <= containerRect.right;
       const isInsideHero =
-        e.clientX >= containerRect.left &&
-        e.clientX <= containerRect.right &&
+        withinX &&
         e.clientY >= containerRect.top &&
         e.clientY <= containerRect.bottom;
+
+      // Left through the bottom edge: keep sinking with the pointer until the
+      // card is gone.
+      if (!isInsideHero && hasEntered && withinX && e.clientY > containerRect.bottom) {
+        overControl = false;
+        wrapper.style.pointerEvents = "none";
+        follow(e.clientX, e.clientY);
+        applyOpacity();
+        rotationXTo(0);
+        rotationYTo(0);
+        if (sink >= 1) hasEntered = false;
+        return;
+      }
 
       if (!isInsideHero) {
         if (hasEntered) {
@@ -188,24 +229,15 @@ export function MovingVisual({ className, videoSrc = null }: MovingVisualProps) 
       }
 
       // The card's center tracks the cursor 1:1 — the cursor sits in the
-      // middle of the card — clamped only so the card's edges never leave
-      // the hero section (it pins to the nearest edge there instead of
-      // spilling out of it).
-      const targetLeft = gsap.utils.clamp(
-        containerRect.left,
-        containerRect.right - restingRect.width,
-        e.clientX - restingRect.width / 2,
-      );
-      const targetTop = gsap.utils.clamp(
-        containerRect.top,
-        containerRect.bottom - restingRect.height,
-        e.clientY - restingRect.height / 2,
-      );
+      // middle of the card (see follow() for the edges).
+      follow(e.clientX, e.clientY);
+      if (!overControl) {
+        wrapper.style.pointerEvents = sink > 0.5 ? "none" : "";
+        applyOpacity();
+      }
 
       rotationYTo((e.clientX - lastX) * 2);
       rotationXTo(-(e.clientY - lastY) * 2);
-      xTo(targetLeft - restingRect.left);
-      yTo(targetTop - restingRect.top);
       scaleXTo(1);
       scaleYTo(1);
       lastX = e.clientX;

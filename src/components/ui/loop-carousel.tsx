@@ -82,7 +82,9 @@ export function LoopCarousel({ children, className = "", label, speed = 24 }: { 
             const left = geometry.left + card.offset - state.current;
             const ratio = Math.max(-1, Math.min(1, -(left + card.width / 2 - geometry.left - geometry.width / 2) / ((geometry.width + card.width) / 2 * .78)));
             const offset = Math.sign(ratio) * Math.pow(Math.abs(ratio), .84) * card.width * .16;
-            image.style.setProperty("--carousel-parallax", `${offset.toFixed(2)}px`);
+            // The transform itself, not a CSS variable: a variable change
+            // restyles the element every frame, a transform only moves it.
+            image.style.transform = `translate3d(${offset.toFixed(2)}px,0,0)`;
           }
         }
         if (cursor.current && state.cursorReady) {
@@ -99,7 +101,7 @@ export function LoopCarousel({ children, className = "", label, speed = 24 }: { 
     return () => {
       cancelAnimationFrame(frame); observer.disconnect(); visibility.disconnect();
       reduced.removeEventListener("change", preferences); fine.removeEventListener("change", preferences);
-      images.forEach(image => image.style.removeProperty("--carousel-parallax"));
+      images.forEach(image => image.style.removeProperty("transform"));
       track.style.removeProperty("transform");
     };
   }, [speed]);
@@ -125,6 +127,7 @@ export function LoopCarousel({ children, className = "", label, speed = 24 }: { 
 
   return <>
     <div ref={viewport} className={`loop-carousel ${className}`} role="region" aria-roledescription="carousel" aria-label={label} tabIndex={0}
+      data-press-card="" data-press-target=".loop-carousel-group > * > *"
       onPointerEnter={e => { const state = motion.current; state.hover = true; moveCursor(e); if (state.fine && e.pointerType !== "touch") cursor.current?.classList.add("is-visible"); }}
       onPointerLeave={() => { if (motion.current.pointer !== -1) return; motion.current.hover = false; cursor.current?.classList.remove("is-visible"); }}
       onFocus={() => { motion.current.focus = true; }} onBlur={() => { motion.current.focus = false; }}

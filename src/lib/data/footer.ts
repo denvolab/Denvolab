@@ -5,6 +5,8 @@
 //
 // SERVICES links go to the service detail pages (/services/<slug>, Oct
 // 2026). "Product Design" has no page of its own, so it goes to /services.
+// EXPERT DOMAIN items are plain text, not links (href ""), since Oct 7, 2026:
+// the industry pages don't exist.
 // ---------------------------------------------------------------------------
 import { siteConfig } from "@/lib/seo/site-config";
 import type { FooterColumn } from "@/types/navigation";
@@ -32,11 +34,11 @@ const FOOTER_COLUMNS: FooterColumn[] = [
   {
     title: "Expert Domain",
     links: [
-      { label: "Hotel Industry", href: "/industries/hotel" },
-      { label: "Health & Fitness", href: "/industries/health-fitness" },
-      { label: "EdTech Industry", href: "/industries/edtech" },
-      { label: "E-Commerce", href: "/industries/e-commerce" },
-      { label: "Social Community", href: "/industries/social-community" },
+      { label: "Hotel Industry", href: "" },
+      { label: "Health & Fitness", href: "" },
+      { label: "EdTech Industry", href: "" },
+      { label: "E-Commerce", href: "" },
+      { label: "Social Community", href: "" },
     ],
   },
   {

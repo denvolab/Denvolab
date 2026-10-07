@@ -1,0 +1,10 @@
+# `text-reveal/`: Every Text Rises In (Except Buttons)
+
+`TextRevealController` (mounted once in `app/layout.tsx`) gives every text in the header, `main` and footer the same line-by-line rise as `ui/animated-text` (zypsy.com's line animation). Added Oct 7, 2026; widened the same day when the user asked for "each and every text … (however dont animate button)".
+
+- **Motion:** same as `AnimatedText`: from 992px wide, not with "Reduce motion", after the fonts and 300ms, lines from `yPercent` 110 to 0 (1.25s `expo.out`, stagger 0.2), plays when the bottom comes into view, resets below the screen, re-split when the width changes.
+- **Which boxes:** every text node belongs to its nearest box that isn't inline. That box is cut into lines by `ui/animated-text/split-lines.ts`. A box holding a link, form field or block boxes isn't cut. Its own inline pieces (a stat number beside a heading) rise on their own as inline-blocks.
+- **Links:** their `ButtonText` labels are never cut, so the hover scramble keeps working. The `.button-text-live` span rises inside a `clip-path` on the label.
+- **Late text:** a MutationObserver rescans when new text appears (FAQ answers, streamed sections).
+- **No flash:** an inline script in `layout.tsx` adds `text-reveal-pending` to `<html>` before the first paint. `text-reveal.css` makes text transparent until the split, and it is removed after 3.5–4s at the latest. Constants live in `text-reveal-config.ts` (the layout is a server file).
+- **Not animated:** buttons (`button`, `.button-sweep`, `role="button"`); live text (`aria-live`, `role="status"`/`timer`, `<time>`); form fields and the contact form's choice chips (labels holding inputs); screen-reader-only text; SVG text; the lens bands; the scroll highlighters (`[data-word]` in `ui/scroll-text-reveal`, `[data-highlight-word]` in the case-study highlighter), which keep their word-by-word highlight; anything marked `data-no-text-reveal`.

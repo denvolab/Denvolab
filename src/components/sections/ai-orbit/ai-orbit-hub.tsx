@@ -369,7 +369,8 @@ export function AiOrbitHub() {
                 />
               </div>
             </div>
-            <div className="flex flex-col">
+            {/* Swapped by the badge animation above, so the site-wide line animation stays off it. */}
+            <div data-no-text-reveal="" className="flex flex-col">
               <p
                 ref={(el) => { slotNameRefs.current[slot] = el; }}
                 className="font-sans text-[20px] font-semibold leading-[28px] text-foreground-inverse"

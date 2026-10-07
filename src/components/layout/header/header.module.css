@@ -13,6 +13,8 @@
  .home, .nav, .cta { display: none; }
  .wordmark { display: block; font-family: "DM Sans Opsz", var(--font-sans); font-size: 20px; font-weight: 600; line-height: 24px; letter-spacing: -.01em; }
  .mobile { display: block; }
- .mobile button { width: 36px; height: 24px; gap: 8px; }
- .mobile button span { height: 2px; width: 36px; }
+ .mobile > div > button { width: 36px; height: 24px; }
+ /* 2px lines: -1px keeps each line's centre on the button's centre, and the
+    closed lines sit 5px above and below it (mobile-nav.tsx). */
+ .mobile > div > button span { height: 2px; width: 36px; margin-top: -1px; }
 }

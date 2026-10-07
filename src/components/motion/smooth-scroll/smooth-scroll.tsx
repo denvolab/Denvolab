@@ -8,6 +8,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const WHEEL_IDLE_MS = 160;
+
 /** One scroll engine, synchronized with the site's existing GSAP animations. */
 export function SmoothScroll() {
   const pathname = usePathname();
@@ -55,12 +57,33 @@ export function SmoothScroll() {
       gsap.ticker.lagSmoothing(0);
     };
 
+    // While the wheel turns, the page under a still cursor isn't hovered:
+    // every card sliding under it used to start its hover (the Work wheel's
+    // blur, picture zoom, ripple) and stop it a moment later, in the middle
+    // of the scroll (Oct 7, 2026, "image section a jhaki"). `is-wheeling`
+    // (globals.css) turns pointer events off in the page until the wheel
+    // has been still for WHEEL_IDLE_MS; clicks work again right after.
+    const root = document.documentElement;
+    let wheelTimer = 0;
+    const onWheel = (event: WheelEvent) => {
+      // Sideways swipes belong to a row that scrolls sideways (Industries):
+      // it must keep receiving them.
+      if (event.shiftKey || Math.abs(event.deltaX) >= Math.abs(event.deltaY)) return;
+      if (!root.classList.contains("is-wheeling")) root.classList.add("is-wheeling");
+      window.clearTimeout(wheelTimer);
+      wheelTimer = window.setTimeout(() => root.classList.remove("is-wheeling"), WHEEL_IDLE_MS);
+    };
+    window.addEventListener("wheel", onWheel, { passive: true });
+
     configure();
     document.addEventListener("keydown", onKeyDown);
     document.addEventListener("focusin", cancelInertia);
     motion.addEventListener("change", configure);
     return () => {
       motion.removeEventListener("change", configure);
+      window.removeEventListener("wheel", onWheel);
+      window.clearTimeout(wheelTimer);
+      root.classList.remove("is-wheeling");
       document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("focusin", cancelInertia);
       gsap.ticker.remove(tick);

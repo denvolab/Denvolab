@@ -353,11 +353,11 @@
     "deliverables": [
       {
         "format": "STRATEGY",
-        "deliverable": ""
+        "deliverable": "Product roadmap & role mapping"
       },
       {
         "format": "ARCHITECTURE",
-        "deliverable": ""
+        "deliverable": "Workflow & permission models"
       },
       {
         "format": "PROTOTYPE",
@@ -365,7 +365,7 @@
       },
       {
         "format": "DESIGN",
-        "deliverable": ""
+        "deliverable": "Dashboards, tables & data states"
       },
       {
         "format": "SYSTEM",
@@ -373,7 +373,7 @@
       },
       {
         "format": "HANDOFF",
-        "deliverable": ""
+        "deliverable": "Interaction specs & design QA"
       }
     ],
     "photos": [
@@ -458,11 +458,11 @@
     "deliverables": [
       {
         "format": "PLANNING",
-        "deliverable": ""
+        "deliverable": "Sitemap & page strategy"
       },
       {
         "format": "CONTENT",
-        "deliverable": ""
+        "deliverable": "Messaging & content hierarchy"
       },
       {
         "format": "DESIGN",
@@ -478,7 +478,7 @@
       },
       {
         "format": "LAUNCH",
-        "deliverable": ""
+        "deliverable": "Quality & launch checklist"
       }
     ],
     "photos": [
@@ -669,27 +669,27 @@
     "deliverables": [
       {
         "format": "ARCHITECTURE",
-        "deliverable": ""
+        "deliverable": "Content models & relationships"
       },
       {
         "format": "GOVERNANCE",
-        "deliverable": ""
+        "deliverable": "Roles & permission matrix"
       },
       {
         "format": "AUTOMATION",
-        "deliverable": ""
+        "deliverable": "AI workflows & review controls"
       },
       {
         "format": "DESIGN",
-        "deliverable": ""
+        "deliverable": "Admin screens & UI system"
       },
       {
         "format": "INTEGRATION",
-        "deliverable": ""
+        "deliverable": "API & system integration specs"
       },
       {
         "format": "OPERATIONS",
-        "deliverable": ""
+        "deliverable": "Guides, logs & QA checklist"
       }
     ],
     "photos": [],

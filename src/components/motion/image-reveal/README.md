@@ -1,21 +1,23 @@
-# `image-reveal/`: Pictures Rise Into Place on Scroll
+# `image-reveal/`: Pictures Open From the Corner and Drift on Scroll
 
-`ImageRevealController` (mounted once in `app/layout.tsx`) gives every box marked `data-image-reveal` the work-card reveal from the two reference sites the user pointed at on Oct 4, 2026:
+`ImageRevealController` (mounted once in `app/layout.tsx`) gives every box marked `data-image-reveal` the work-picture motion of produx.design, which the user asked for on every image on Oct 7, 2026 ("exact same vabe"). The values come from that site's own script:
 
-| Site | What it does | Taken from it |
+| | produx.design | Here |
 |---|---|---|
-| juice.agency | Each work card has `data-card-reveal`. When the card's top reaches 70% of the screen, once: `gsap.to(card, { opacity: 1, y: 0, duration: .8, ease: "circ.out" })`. | trigger point, duration, easing, plays once |
-| zypsy.com | The work cards (`.fade-in`) start at `translate3d(0, 5em, 0)` with opacity 0. | the start position |
+| Start | picture clipped to its bottom-left corner, `clip-path: inset(100% 100% 0% 0%)`, and 1.3x from its bottom-left corner | same: the clip on the frame, the 1.3x on the pictures in it (`--reveal-scale` + the `scale` property) |
+| Trigger | once, when the picture's top passes 85% of the screen; already that high when the page opens: shown as is | 95% (sooner, Oct 7, 2026) |
+| Reveal | clip opens to `inset(0)`, scale to 1, 1.7s `power4.out` | 1.1s `power4.out` (quicker, Oct 7, 2026) |
+| Scroll drift | picture 110% of its frame (top -5%), `yPercent` -10 to +10 from "top bottom" to "bottom top", scrubbed | picture 110% (top -5%), drift ±4.5% (`translate` property): ±10% would open an empty strip on this site's shorter frames |
 
-So a picture's frame starts lower and invisible, and the first time it comes onto the screen it fades and rises into place. A picture that is already on screen when the page opens (a hero image) plays straight away.
+The drift is only on cover-cropped pictures whose frame clips them. The Work cards' ripple pictures (`data-ripple-image`) get the reveal but not the drift, because their frame deliberately doesn't clip (the hover bulge spills out).
 
-**Smoothed on Oct 7, 2026.** The user found the rise abrupt ("hut kore upore uthe asteche") and the page seemed to shake while scrolling. Measured with a real wheel scroll at 1440px: with juice.agency's values (start at 70%, 0.8s `circ.out`, 5em) a picture stayed invisible until its top was 70% down the screen and then moved ~15px ahead of the page in its first frame, because `circ.out` starts almost vertically. Now: start as the picture's top passes 92% of the screen, rise 4em, 1.1s `power2.out`, kept on the GPU (`force3D`) for the whole rise. The most a picture moves beyond the page in one frame dropped from 15.4px to 2.4px, easing out over about 35 frames, and frames stay at 13-14ms.
+Earlier versions: Oct 4, 2026 a juice.agency fade-and-rise (start at 70%, 0.8s `circ.out`, 5em), softened on Oct 7 to start at 92%, 1.1s `power2.out`, 4em, then replaced by the above.
 
 ## Files
 
 | File | Job |
 |---|---|
-| `image-reveal-controller.tsx` | The controller. One `ScrollTrigger` per box (`start: "clamp(top 92%)"`, `once: true`). When a box has arrived it gets `data-image-reveal="done"` and its inline styles are cleared, so it is back to plain CSS. A `ResizeObserver` on the page re-measures the trigger points when late pictures or fonts change the page height. Runs again after each page change. |
+| `image-reveal-controller.tsx` | The controller. Per box: one `ScrollTrigger` for the reveal (`start: "top 85%"`, `once: true`) and one scrubbed one for the drift. When a box has arrived it gets `data-image-reveal="done"` and its inline styles are cleared, so it is back to plain CSS. A `ResizeObserver` on the page re-measures the trigger points when late pictures or fonts change the page height. Runs again after each page change. |
 | `image-reveal.css` | The hidden start state, imported from `app/globals.css`. Only inside `@media (scripting: enabled) and (prefers-reduced-motion: no-preference)`, so with JavaScript off or "Reduce motion" on every picture is simply there. |
 | `index.ts` | `export { ImageRevealController }` |
 
@@ -47,3 +49,7 @@ Nothing else is needed: no import, no wrapper, and the box keeps its own classes
 ## Checked (Oct 4, 2026)
 
 Playwright on 12 pages at 1440px: every marked box below the first screen starts at opacity 0, every one ends at opacity 1 with no transform and `data-image-reveal="done"` after scrolling to the bottom, and no page errors. Screenshots during the reveal show the pictures fading up together, as on juice.agency.
+
+## Smooth scrolling (Oct 7, 2026)
+
+Nothing writes styles on every frame while the page scrolls. The reveal is a Web Animation: `clip-path` on the frame and `scale` on its pictures, with power4.out as `cubic-bezier(0.22, 1, 0.36, 1)`. The browser runs it off the main thread, so it can't stall Lenis. The drift is a CSS scroll-driven animation (`view-timeline: --image-frame` on the frame, `animation-timeline` on the picture) in `image-reveal.css`. Only browsers without `animation-timeline` get the scrubbed ScrollTrigger and `--reveal-drift`. Drifting pictures have `will-change: translate`, so they move as layers instead of being repainted.

@@ -7,7 +7,8 @@
 //
 // Figma numbers: 40px page padding, 120px top and bottom, 128px between the
 // heading block and the list. Heading (60/68) and the 22/34 paragraph sit on
-// one row and are centered against each other. Each list row has a 1px top
+// one row and are centered against each other. The heading's text box is
+// 520px wide on desktop, as in Figma (431:6368), so it runs on three lines. Each list row has a 1px top
 // border, 48px top and bottom padding, the 100px icon in a 509px column, then
 // a title (24/32, semibold) and a paragraph (24/38) as two equal columns with
 // a 48px gap, the title centered against the paragraph.
@@ -37,7 +38,7 @@ export async function AboutBenefits() {
       <div className="mx-auto flex w-full max-w-[1920px] flex-col gap-12 px-5 py-16 md:gap-16 md:px-10 md:py-24 xl:gap-32 xl:py-[120px]">
         <div className="flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between xl:gap-20 xl:pr-10">
           <Reveal distance={46} className="xl:max-w-[1220px]">
-            <h2 className="whitespace-pre-line font-heading text-display-xl text-brand-50">
+            <h2 className="whitespace-pre-line font-heading text-display-xl text-brand-50 xl:max-w-[520px]">
               {benefits.heading}
             </h2>
           </Reveal>

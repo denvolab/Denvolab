@@ -33,20 +33,52 @@ const LINGER_MS = 2200;
 // that slid under the cursor built a WebGL canvas, uploaded its texture and
 // swapped out its <img> mid-scroll, and the pictures jerked.) Active canvases
 // also subscribe so a scroll removes them at once.
-const SCROLL_QUIET_MS = 250;
+//
+// Hover must start the ripple AT ONCE, though (the user, Oct 7, 2026: it only
+// came on after moving the mouse many times). Lenis keeps easing the page for
+// a second or so after the wheel stops, and every one of those scroll events
+// used to block the effect and kill a running one. Now:
+//   - a REAL mouse movement (movementX/Y not 0) starts the effect right away,
+//     even during that easing tail. Only a picture sliding under a still
+//     cursor waits for the page to settle;
+//   - a running effect is removed only when the visitor scrolls again (wheel),
+//     not by the easing tail;
+//   - three.js is fetched while the browser is idle, and the decoded copy of
+//     each picture is kept, so the first hover doesn't wait for downloads.
+const SCROLL_QUIET_MS = 150;
 const activeScrollStops = new Set<() => void>();
 let scrollingUntil = 0;
 let watchingScroll = false;
 function onPageScroll() {
   scrollingUntil = performance.now() + SCROLL_QUIET_MS;
+}
+function onWheel() {
+  onPageScroll();
   activeScrollStops.forEach(stop => stop());
 }
 function watchScroll() {
   if (watchingScroll) return;
   watchingScroll = true;
   window.addEventListener("scroll", onPageScroll, { passive: true });
-  window.addEventListener("wheel", onPageScroll, { passive: true });
+  window.addEventListener("wheel", onWheel, { passive: true });
 }
+
+/** three.js and the effect, downloaded once, while the browser is idle. */
+let effectModule: Promise<typeof import("./ripple-effect")> | null = null;
+function loadEffect() {
+  effectModule ??= import("./ripple-effect");
+  return effectModule;
+}
+let prewarmed = false;
+function prewarm() {
+  if (prewarmed) return;
+  prewarmed = true;
+  const idle = window.requestIdleCallback ?? ((fn: () => void) => window.setTimeout(fn, 1500));
+  idle(() => void loadEffect().catch(() => { effectModule = null; }));
+}
+
+/** A real mouse movement, not the page sliding under a still cursor. */
+const movedByHand = (event: PointerEvent) => event.movementX !== 0 || event.movementY !== 0;
 function subscribeScroll(stop: () => void) {
   activeScrollStops.add(stop);
 }
@@ -98,11 +130,18 @@ function explain(reason: string, error?: unknown) {
  * refuses to upload the picture. A plain copy always reports its real size.
  * The address is the same one the <img> already loaded, so the browser reuses the download.
  */
+const decoded = new WeakMap<HTMLImageElement, { src: string; copy: Promise<HTMLImageElement> }>();
 function loadPicture(image: HTMLImageElement): Promise<HTMLImageElement> {
+  const src = image.currentSrc || image.src;
+  const cached = decoded.get(image);
+  if (cached?.src === src) return cached.copy;
   const copy = new Image();
   if (image.crossOrigin) copy.crossOrigin = image.crossOrigin;
-  copy.src = image.currentSrc || image.src;
-  return copy.decode().then(() => copy);
+  copy.src = src;
+  const ready = copy.decode().then(() => copy);
+  ready.catch(() => decoded.delete(image));
+  decoded.set(image, { src, copy: ready });
+  return ready;
 }
 
 /**
@@ -140,6 +179,7 @@ export function attachRippleHover(
   }
 
   watchScroll();
+  prewarm();
 
   let effect: RippleEffect | null = null; // the WebGL effect, only while hovering
   let loading = false;                    // true while three.js is being downloaded
@@ -147,6 +187,7 @@ export function attachRippleHover(
   let removed = false;
   let lingerTimer = 0;
   let revealTimer = 0;
+  let retryTimer = 0;
   let last = { x: 0, y: 0 };              // last cursor position inside the frame (px)
 
   /** Cursor position in pixels from the frame's top-left corner. */
@@ -156,12 +197,28 @@ export function attachRippleHover(
   }
 
   /** Create the WebGL effect (the first time, this also downloads three.js). */
-  async function start() {
-    if (performance.now() < scrollingUntil) return;
+  /**
+   * Started while the page was moving: try again once it is still. Without
+   * this a picture the pointer rests on after a scroll stayed flat until the
+   * next mouse move or a click (Oct 7, 2026): the browser sends no new
+   * pointer event when the page stops under a still mouse.
+   */
+  function retryAfterScroll() {
+    window.clearTimeout(retryTimer);
+    retryTimer = window.setTimeout(() => {
+      if (cursorInside && !effect && !loading && !removed) void start();
+    }, Math.max(0, scrollingUntil - performance.now()) + 30);
+  }
+
+  async function start(byHand = false) {
+    if (!byHand && performance.now() < scrollingUntil) {
+      retryAfterScroll();
+      return;
+    }
     if (isSvgImage(image!) || image!.closest("[data-no-ripple]")) return;
     if (effect || loading) return;
     if (!image!.complete || image!.naturalWidth === 0) {
-      explain("the picture has not finished loading yet. Hover again in a moment.");
+      explain("the picture has not finished loading yet; it starts when it has.");
       return;
     }
 
@@ -169,10 +226,14 @@ export function attachRippleHover(
     try {
       // Both are fetched only now, side by side, so three.js is not part of the first page load.
       const [{ RippleEffect }, picture] = await Promise.all([
-        import("./ripple-effect"),
+        loadEffect(),
         loadPicture(image!),
       ]);
-      if (removed || !cursorInside || performance.now() < scrollingUntil) return;
+      if (removed || !cursorInside) return;
+      if (!byHand && performance.now() < scrollingUntil) {
+        retryAfterScroll();
+        return;
+      }
 
       const created = new RippleEffect(frame, image!, picture, options?.objectPosition, options?.imageBounds);
       effect = created;
@@ -212,6 +273,8 @@ export function attachRippleHover(
     window.clearTimeout(lingerTimer);
     window.clearTimeout(revealTimer);
     stop(true);
+    // Back on, under the pointer, once the scroll stops.
+    if (cursorInside) retryAfterScroll();
   }
 
   // ---- The three mouse events ----
@@ -226,7 +289,7 @@ export function attachRippleHover(
     if (effect) {
       image!.style.visibility = "hidden"; // the canvas is on screen already, so this is safe
       effect.enter(last.x, last.y);
-    } else start();
+    } else void start(movedByHand(event));
   }
 
   function insideImage(event: PointerEvent) {
@@ -240,13 +303,14 @@ export function attachRippleHover(
       if (!cursorInside) { onEnter(event); return; }
     }
     last = positionOf(event);
-    if (!effect && !loading && cursorInside) void start();
+    if (!effect && !loading && cursorInside) void start(movedByHand(event));
     effect?.move(last.x, last.y);
   }
 
   function onLeave() {
     if (!cursorInside) return;
     cursorInside = false;
+    window.clearTimeout(retryTimer);
     effect?.leave();
     lingerTimer = window.setTimeout(() => stop(), LINGER_MS);
 
@@ -257,7 +321,13 @@ export function attachRippleHover(
     }, WOBBLE_MS);
   }
 
-  frame.addEventListener("pointerenter", onEnter);
+  // Get the picture ready as soon as the cursor reaches its box.
+  function onFrameEnter(event: PointerEvent) {
+    if (image!.complete && image!.naturalWidth) void loadPicture(image!).catch(() => {});
+    onEnter(event);
+  }
+
+  frame.addEventListener("pointerenter", onFrameEnter);
   frame.addEventListener("pointermove", onMove);
   frame.addEventListener("pointerleave", onLeave);
 
@@ -268,10 +338,11 @@ export function attachRippleHover(
   // Cleanup: remove the listeners and the effect.
   return () => {
     removed = true;
+    window.clearTimeout(retryTimer);
     image.removeEventListener("load", onLoad);
     window.clearTimeout(lingerTimer);
     window.clearTimeout(revealTimer);
-    frame.removeEventListener("pointerenter", onEnter);
+    frame.removeEventListener("pointerenter", onFrameEnter);
     frame.removeEventListener("pointermove", onMove);
     frame.removeEventListener("pointerleave", onLeave);
     stop(true);

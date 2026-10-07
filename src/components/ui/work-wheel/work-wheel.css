@@ -102,15 +102,21 @@
  * always on touch screens. */
 .work-wheel > * {
   opacity: 0;
-  transition: opacity 0.5s ease-out;
+  /* Hidden layers leave the render tree once faded out, so a page full of
+     Work cards doesn't keep a backdrop blur per card while it scrolls. */
+  visibility: hidden;
+  transition: opacity 0.5s ease-out, visibility 0s linear 0.5s;
 }
 .group:hover .work-wheel > *,
 .group:focus-visible .work-wheel > * {
   opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease-out, visibility 0s;
 }
 @media (hover: none) {
   .work-wheel > * {
     opacity: 1;
+    visibility: visible;
   }
 }
 
@@ -153,6 +159,7 @@
 @media (hover: hover) and (pointer: fine) {
   [data-wheel-cursor-active] .group:hover:not(:focus-visible) .work-wheel > * {
     opacity: 0;
+    visibility: hidden;
   }
   [data-wheel-cursor-active] .group:hover:not(:focus-visible) .work-wheel-ring,
   [data-wheel-cursor-active] .group:hover:not(:focus-visible) .work-wheel-arrow img {
@@ -181,13 +188,15 @@
   transition: transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 .work-wheel-cursor .work-wheel > * {
-  transition: opacity 0.35s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: opacity 0.35s cubic-bezier(0.645, 0.045, 0.355, 1), visibility 0s linear 0.35s;
 }
 .work-wheel-cursor.is-visible .work-wheel-cursor-scale {
   transform: translate(18px, -60px) scale(1);
 }
 .work-wheel-cursor.is-visible .work-wheel > * {
   opacity: 1;
+  visibility: visible;
+  transition: opacity 0.35s cubic-bezier(0.645, 0.045, 0.355, 1), visibility 0s;
 }
 .work-wheel-cursor.is-visible .work-wheel-ring,
 .work-wheel-cursor.is-visible .work-wheel-arrow img {
@@ -202,5 +211,14 @@
   .work-wheel-cursor-scale,
   .work-wheel-cursor .work-wheel > * {
     transition: none;
+  }
+}
+
+/* Phones: the wheel shown in the middle of each Work picture is 60px
+ * (half size, the user asked for about 56-64px on Oct 7, 2026). `zoom`
+ * shrinks every layer together, text included, and keeps it sharp. */
+@media (width < 768px) {
+  [data-project-image] .work-wheel {
+    zoom: 0.5;
   }
 }

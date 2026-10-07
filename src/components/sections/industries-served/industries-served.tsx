@@ -64,7 +64,8 @@ export async function IndustriesServed() {
         <LoopCarousel className="industries-carousel" label="Industries we serve"><div className="industries-carousel-items">
           {industries.items.map((industry) => (
             <div key={industry.name} className="flex w-[280px] shrink-0 flex-col items-start gap-3">
-              <div data-image-reveal="" className="relative flex h-[200px] w-[280px] shrink-0 items-center justify-center overflow-hidden rounded-lg border border-border-primary bg-surface-secondary">
+              {/* No corner reveal here (the user, Oct 7, 2026): the pictures are simply shown. */}
+              <div className="relative flex h-[200px] w-[280px] shrink-0 items-center justify-center overflow-hidden rounded-lg border border-border-primary bg-surface-secondary">
                 {industry.imageSrc ? (
                   <Image
                     src={industry.imageSrc}

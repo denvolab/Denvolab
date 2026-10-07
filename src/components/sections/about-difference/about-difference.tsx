@@ -51,7 +51,7 @@ export async function AboutDifference() {
   return (
     <section className="bg-gray-950" data-figma-node="431:6247">
       <div className="mx-auto flex w-full max-w-[1920px] flex-col gap-10 px-5 py-16 md:gap-14 md:px-10 md:py-24 2xl:flex-row 2xl:justify-between 2xl:gap-10 2xl:py-[120px]">
-        <h2 className="max-w-[666px] font-heading text-display-xl text-foreground-inverse 2xl:w-[36%] 2xl:shrink-0">
+        <h2 className="max-w-[520px] font-heading text-display-xl text-foreground-inverse 2xl:w-[36%] 2xl:shrink-0">
           <AnimatedText>
             {difference.heading}
           </AnimatedText>

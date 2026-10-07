@@ -13,7 +13,7 @@ main [data-homepage] section { min-height:0!important; }
 .home-nav { display:flex; gap:32px; position:absolute; left:50%; transform:translateX(-50%); }
 [data-homepage] .home-nav-cta { height:52px; padding:16px 20px; }
 .home-nav-wordmark,.home-mobile-nav { display:none; }
-main [data-homepage] .home-hero { min-height:100svh!important; background:#0d1216; color:white; display:flex; }
+main [data-homepage] .home-hero { min-height:100svh!important; background:#0d1216; color:white; display:flex; overflow-y:clip; /* the showreel card sinks behind the bottom edge (hero/moving-visual.tsx) */ }
 .home-hero-inner { width:100%; max-width:1920px; margin:auto; padding:120px 40px; display:flex; flex-direction:column; gap:80px; }
 .home-hero-wordmark { color:#dfe94c; font-size:clamp(170px,17.70833vw,340px); font-weight:700; line-height:1; letter-spacing:-.04em; text-align:center; text-box-trim:trim-both; text-box-edge:cap alphabetic; white-space:nowrap; }
 .home-hero-stage { display:flex; justify-content:space-between; align-items:flex-end; position:relative; gap:40px; }
@@ -38,7 +38,7 @@ main [data-homepage] .home-hero { min-height:100svh!important; background:#0d121
 [data-homepage] [data-project-copy] h3 { font-size:28px; line-height:36px; letter-spacing:-.02em; }
 [data-homepage] [data-project-copy] p { font-size:16px; line-height:24px; color:#52616f; }
 [data-homepage] [data-project-copy] > div:last-child { gap:12px; }
-[data-homepage] [data-project-copy] span { background:#f1f1f2; color:#52616f; font-size:12px; line-height:16px; letter-spacing:.02em; font-weight:500; }
+[data-homepage] [data-project-copy] span:not(.line, .line-inner) { background:#f1f1f2; color:#52616f; font-size:12px; line-height:16px; letter-spacing:.02em; font-weight:500; }
 .home-portfolio-more { display:flex; justify-content:center; margin-top:48px; }
 .home-portfolio-more a,.home-outline { border:1px solid #4c5662; border-radius:8px; padding:12px 20px; font:400 14px/20px var(--font-mono); letter-spacing:.02em; }
 .home-services { padding:120px 40px; background:white; }
@@ -93,7 +93,7 @@ main [data-homepage] .home-hero { min-height:100svh!important; background:#0d121
 [data-homepage] [data-home-part="process"] li > div:last-child > div:first-of-type { gap:24px; }
 [data-homepage] [data-home-part="process"] h3 { font-size:40px; line-height:48px; letter-spacing:-.03em; }
 [data-homepage] [data-home-part="process"] li p { font-size:16px; line-height:24px; color:#52616f; }
-[data-homepage] [data-home-part="process"] li span { font:500 12px/16px var(--font-mono); letter-spacing:.02em; padding:8px 12px; background:#f1f1f2; }
+[data-homepage] [data-home-part="process"] li span:not(.line, .line-inner) { font:500 12px/16px var(--font-mono); letter-spacing:.02em; padding:8px 12px; background:#f1f1f2; }
 .home-testimonials { padding:120px 0; background:#fff; }
 .home-section-intro { display:flex; flex-direction:column; align-items:center; gap:20px; text-align:center; padding:0 24px; margin-bottom:48px; }
 .home-section-intro .home-eyebrow { background:#e8ecf0; }
@@ -124,7 +124,7 @@ main [data-homepage] .home-hero { min-height:100svh!important; background:#0d121
 .home-footer-column h3 { font-size:24px; line-height:32px; letter-spacing:-.015em; }
 .home-footer-column ul { display:flex; flex-direction:column; gap:24px; }
 .home-footer-column li { display:flex; line-height:16px; }
-.home-footer-column a { font:500 12px/16px var(--font-mono); letter-spacing:.02em; }
+.home-footer-column :is(a, li > span) { font:500 12px/16px var(--font-mono); letter-spacing:.02em; }
 .home-footer-signature { margin-top:120px; width:100%; height:auto; display:block; }
 @media (768px <= width < 1024px) {
  .home-header-inner { height:84px; padding:20px 24px; }
@@ -228,7 +228,7 @@ main [data-homepage] .home-hero { min-height:100svh!important; background:#0d121
  [data-homepage] [data-project-image] img { border-radius:12px; }
  [data-homepage] [data-home-part="portfolio"] > div > :first-child { gap:16px; }
  [data-homepage] [data-project-copy] > div:last-child { gap:8px; }
- [data-homepage] [data-project-copy] span { padding:8px; }
+ [data-homepage] [data-project-copy] span:not(.line, .line-inner) { padding:8px; }
  .home-portfolio-more { margin-top:32px; }
  .home-services { padding:48px 16px; }
  .home-services-intro { flex-direction:column; align-items:center; gap:12px; text-align:center; }
@@ -257,7 +257,7 @@ main [data-homepage] .home-hero { min-height:100svh!important; background:#0d121
  [data-homepage] [data-home-part="process"] li > div:last-child > div:first-of-type { gap:16px; }
  [data-homepage] [data-home-part="process"] h3 { font-size:28px; line-height:36px; letter-spacing:-.02em; }
  [data-homepage] [data-home-part="process"] li p { font-size:14px; line-height:20px; }
- [data-homepage] [data-home-part="process"] li span { padding:8px; }
+ [data-homepage] [data-home-part="process"] li span:not(.line, .line-inner) { padding:8px; }
  .home-testimonials { padding:48px 0; }
  .home-section-intro { gap:12px; margin-bottom:24px; padding:0 16px; }
  .home-section-intro h2 { font-size:36px; line-height:40px; letter-spacing:-.02em; margin:8px 0; }
@@ -329,7 +329,7 @@ main [data-homepage][data-homepage] .home-hero { min-height:100svh!important; }
  [data-homepage] [data-home-part="process"] > div > div:last-child > div:first-child img { width:24px; height:24px; }
  [data-homepage] [data-home-part="process"] li { min-height:196.571px; padding:32px; gap:16px; }
  [data-homepage] [data-home-part="process"] li > div:first-child { width:34.4px; height:34.4px; }
- [data-homepage] [data-home-part="process"] li span { padding:4px 8px; border-radius:4px; }
+ [data-homepage] [data-home-part="process"] li span:not(.line, .line-inner) { padding:4px 8px; border-radius:4px; }
  [data-homepage] [data-home-part="process"] li > div:last-child > div:first-of-type { gap:4px; }
  [data-homepage] [data-home-part="process"] li > div:last-child > div:last-child { gap:8px; }
 }
@@ -340,7 +340,7 @@ main [data-homepage][data-homepage] .home-hero { min-height:100svh!important; }
  [data-homepage] [data-home-part="process"] > div > div:last-child > div:first-child img { width:32px; height:32px; }
  [data-homepage] [data-home-part="process"] ol { gap:16px; min-width:0; }
  [data-homepage] [data-home-part="process"] li { min-height:320px; }
- [data-homepage] [data-home-part="process"] li span { padding:4px 8px; }
+ [data-homepage] [data-home-part="process"] li span:not(.line, .line-inner) { padding:4px 8px; }
  [data-homepage] [data-home-part="process"] > div > div:first-child > p { font-size:12px; line-height:16px; }
 }
 

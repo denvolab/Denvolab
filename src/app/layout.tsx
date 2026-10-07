@@ -6,6 +6,9 @@ import { Footer } from "@/components/layout/footer";
 import { OrganizationJsonLd } from "@/components/seo/organization-jsonld";
 import { siteConfig } from "@/lib/seo/site-config";
 import { ImageRevealController } from "@/components/motion/image-reveal";
+import { TextRevealController } from "@/components/motion/text-reveal/text-reveal-controller";
+import { TEXT_REVEAL_PENDING, TEXT_REVEAL_QUERY } from "@/components/motion/text-reveal/text-reveal-config";
+import { PressController } from "@/components/motion/press/press-controller";
 import { SmoothScroll } from "@/components/motion/smooth-scroll/smooth-scroll";
 import { WhatsAppChat } from "@/components/ui/whatsapp-chat/whatsapp-chat";
 
@@ -56,9 +59,17 @@ export const metadata: Metadata = {
   },
 };
 
+// Hides the text until TextRevealController has split it (no flash of the
+// first screen's text before it rises). Runs before the first paint; never
+// leaves text hidden for more than 3.5s.
+const textRevealScript = `(function(){try{if(matchMedia(${JSON.stringify(TEXT_REVEAL_QUERY)}).matches){var r=document.documentElement;r.classList.add("${TEXT_REVEAL_PENDING}");setTimeout(function(){r.classList.remove("${TEXT_REVEAL_PENDING}")},3500)}}catch(e){}})()`;
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="en" className="h-full antialiased" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: textRevealScript }} />
+      </head>
       <body className="flex min-h-full flex-col">
         <OrganizationJsonLd />
         <Header />
@@ -68,6 +79,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {/* Keep image reveals active. ColorWashController is intentionally
             not mounted: section colors stay fixed across all routes. */}
         <ImageRevealController />
+        <TextRevealController />
+        <PressController />
         <ImageRippleController />
         <PageTransition />
         <SmoothScroll />

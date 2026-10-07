@@ -142,11 +142,17 @@
  .site-editorial-hero h1,.about-final-hero h1 { font-size:40px; line-height:48px; letter-spacing:-.03em; }
  .site-editorial-hero>div>div { width:100%; gap:24px; }
  .site-editorial-hero p { font-size:14px; line-height:20px; }
- .about-final-inner { padding:48px 16px; min-height:606px; }
+ /* 10px under the photo row, as in the Figma mobile frame (the hero ends
+    662px down, 10px below the tallest photo). */
+ .about-final-inner { padding:48px 16px 10px; min-height:606px; }
  .about-final-hero-copy { flex-direction:column; align-items:flex-start; gap:32px; }
  .about-final-hero-copy>div { width:100%; }
  .about-final-hero p { font-size:14px; line-height:20px; }
- .about-final-photos { width:447px; height:98px; margin-top:32px; aspect-ratio:auto; }
+ /* Figma "About us / Final responsive / Mobile 390" (903:14552), Visual 02:
+    an 800 x 195 row of five photos, so about two and a half show on a phone
+    and the loop brings in the rest (Oct 7, 2026; it was a 447px row of
+    thumbnails that all fit on screen). */
+ .about-final-photos { width:800px; height:204px; margin-top:32px; aspect-ratio:auto; }
  .about-final-hero { overflow:hidden; }
  .about-final-story { padding:48px 16px; }
  .about-final-story h2 { font-size:36px; line-height:40px; letter-spacing:-.02em; margin:8px 0 32px; }
@@ -214,12 +220,12 @@
  [data-site-page] [data-figma-node="483:1256"] [data-image-reveal] { height:420px; }
 }
 @media (width < 768px) {
- .about-final-photos li:nth-child(1) { left:0!important; top:0!important; width:71px!important; height:86px!important; }
- .about-final-photos li:nth-child(2) { left:79px!important; top:0!important; width:71px!important; height:60px!important; }
- .about-final-photos li:nth-child(3) { left:157px!important; top:20px!important; width:93px!important; height:73px!important; }
- .about-final-photos li:nth-child(4) { left:258px!important; top:0!important; width:100px!important; height:70px!important; }
- .about-final-photos li:nth-child(5) { left:379px!important; top:8px!important; width:68px!important; height:98px!important; }
- .about-final-photos li { border-radius:4px; }
+ .about-final-photos li:nth-child(1) { left:0!important; top:9px!important; width:130.6px!important; height:158.2px!important; }
+ .about-final-photos li:nth-child(2) { left:145.3px!important; top:9px!important; width:130.6px!important; height:110.4px!important; }
+ .about-final-photos li:nth-child(3) { left:290.7px!important; top:45.8px!important; width:171.1px!important; height:134.3px!important; }
+ .about-final-photos li:nth-child(4) { left:476.5px!important; top:9px!important; width:184px!important; height:128.8px!important; }
+ .about-final-photos li:nth-child(5) { left:675.1px!important; top:23.7px!important; width:125.1px!important; height:180.3px!important; }
+ .about-final-photos li { border-radius:7.36px; }
  .about-final-story-photo { height:auto; aspect-ratio:350/339.166; }
  .about-final-story-copy p { font-size:14px; line-height:20px; }
  .about-final-story-copy li { flex-direction:column; gap:16px; }
@@ -249,7 +255,7 @@
 
 /* Preserve readable contrast throughout the original scroll colour wash. */
 html.wash-ready [data-site-page] [data-project-copy] p { color:var(--home-wash-muted,#52616f); }
-html.wash-ready [data-site-page] [data-project-copy] span { color:var(--color-secondary); background:var(--color-surface-secondary); }
+html.wash-ready [data-site-page] [data-project-copy] span:not(.line, .line-inner) { color:var(--color-secondary); background:var(--color-surface-secondary); }
 .site-contact-card form [aria-invalid="true"]:not(.sr-only) { border-color:#ff8b8b; }
 .site-contact-card form p[id$="-hint"],.site-contact-card form p[id$="-error"] { color:#ff8b8b; }
 
@@ -276,9 +282,10 @@ html.wash-ready [data-site-page] [data-project-copy] span { color:var(--color-se
 @media (width < 1024px) { .about-photos-carousel { margin-top:48px; } }
 @media (width < 768px) {
  .about-photos-carousel { margin-top:32px; }
- .about-photos-carousel .loop-carousel-track { width:1437px; }
- .about-photos-carousel .loop-carousel-group { width:479px; }
- .about-final-photos li { border-radius:4px; }
+ /* One 800px row plus the 14.6px gap the photos have between them. */
+ .about-photos-carousel .loop-carousel-track { width:2444px; }
+ .about-photos-carousel .loop-carousel-group { width:814.6px; }
+ .about-final-photos li { border-radius:7.36px; }
 }
 
 /* Current About card palette, shared across breakpoints. */
@@ -429,3 +436,11 @@ html.wash-ready [data-site-page] [data-project-copy] span { color:var(--color-se
 .carousel-cursor-diamond { width:7px; height:7px; flex:none; border-radius:1px; background:currentColor; transform:rotate(45deg); }
 @media (hover:none),(pointer:coarse) { .carousel-cursor { display:none; } }
 @media (prefers-reduced-motion:reduce) { .carousel-cursor-pill { transition:none; } .loop-carousel img.object-cover { width:100%!important; left:0!important; transform:none; will-change:auto; } }
+
+/* About team (431:6464): the Figma tablet (768) and mobile (390) frames show
+   only the list of names, no portrait. The portrait swaps on hover, which
+   phones and tablets don't have, so below 1024px it is left out and the
+   list takes the full width (Oct 7, 2026). */
+@media (width < 1024px) {
+ [data-site-page] [data-figma-node="431:6464"] [data-image-reveal] { display:none; }
+}

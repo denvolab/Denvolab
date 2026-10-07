@@ -23,6 +23,7 @@
 @import "../components/ui/button/button-sweep.css";
 @import "../components/motion/page-transition/page-transition.css";
 @import "../components/motion/image-reveal/image-reveal.css";
+@import "../components/motion/text-reveal/text-reveal.css";
 @import "../components/motion/color-wash/color-wash.css";
 
 /* Lenis owns wheel interpolation. Native anchoring must not pull the page
@@ -31,6 +32,13 @@ html.lenis,
 html.lenis body {
   overflow-anchor: none;
   scroll-behavior: auto !important;
+}
+
+/* While the wheel turns (smooth-scroll.tsx), nothing in the page reacts to
+   the cursor, so hover effects don't start and stop on every card that
+   slides under it. The fixed header and chat button stay clickable. */
+html.is-wheeling :is(main, footer) {
+  pointer-events: none;
 }
 
 /* DM Sans WITH its optical-size ("opsz") axis, registered under its own
@@ -473,3 +481,7 @@ main section:not(section section):not([data-section-height="content"]),
 main [data-page-section] {
   min-height: 100vh !important;
 }
+
+/* Press feedback for interactive cards: data-press-card. The sink and
+ * spring back are driven by components/motion/press (a Lenis-style lerp on
+ * the `scale` property), not by a CSS transition. */
