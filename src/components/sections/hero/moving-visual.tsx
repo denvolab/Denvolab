@@ -39,7 +39,7 @@
 // stays visible at its Figma spot and a tap opens the player. Keyboard focus
 // also shows the card (the button is a normal tab stop).
 // ---------------------------------------------------------------------------
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ShowreelDialog, type ShowreelDialogHandle } from "./showreel-dialog";
@@ -75,6 +75,28 @@ export function MovingVisual({ className, videoSrc = null }: MovingVisualProps) 
   const mediaRef = useRef<HTMLButtonElement>(null);
   const previewRef = useRef<HTMLVideoElement>(null);
   const dialogRef = useRef<ShowreelDialogHandle>(null);
+
+  // Phones and tablets have no mouse to wake the preview, so there it starts
+  // when the card scrolls into view and pauses again when it leaves (saves
+  // battery). Skipped for "Reduce motion" and for data-saver connections.
+  useEffect(() => {
+    const media = mediaRef.current;
+    if (!videoSrc || !media) return;
+    if (!window.matchMedia("(hover: none), (width < 1024px)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if ((navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      const video = previewRef.current;
+      if (entry.isIntersecting) {
+        setPreviewActive(true);
+        void video?.play().catch(() => {});
+      } else {
+        video?.pause();
+      }
+    }, { threshold: 0.25 });
+    observer.observe(media);
+    return () => observer.disconnect();
+  }, [videoSrc]);
 
   useGSAP(() => {
     const wrapper = wrapperRef.current;
