@@ -220,8 +220,12 @@ export function TextRevealController() {
         const observer = new IntersectionObserver(([entry]) => {
           if (!entry.isIntersecting) return;
           observer.disconnect();
-          unit.kill = null;
-          build(unit);
+          // Give each block its own task instead of one long hydration task.
+          const task = window.setTimeout(() => {
+            unit.kill = null;
+            if (unit.el.isConnected) build(unit);
+          }, 0);
+          unit.kill = () => window.clearTimeout(task);
         }, { rootMargin: "200px 0px" });
         unit.kill = () => observer.disconnect();
         observer.observe(unit.el);

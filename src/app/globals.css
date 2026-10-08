@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "tailwindcss" source("../");
 
 /* ---------------------------------------------------------------------------
  * Design tokens. The actual values live in the Color library and Font
@@ -26,8 +26,8 @@
 @import "../components/motion/text-reveal/text-reveal.css";
 @import "../components/motion/hero-entrance/hero-entrance.css";
 @import "../components/ui/loop-carousel.css";
-@import "../components/sections/industries-served/industries-served.css";
-@import "../components/motion/color-wash/color-wash.css";
+/* Color transitions are disabled. Preserve explicit ink colors only. */
+.wash-ink { color: var(--ink); }
 
 /* Lenis owns wheel interpolation. Native anchoring must not pull the page
    back while lazy media and text reveals update its layout. */

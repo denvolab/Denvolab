@@ -1,3 +1,4 @@
+import "@/components/sections/industries-served/industries-served.css";
 // ---------------------------------------------------------------------------
 // IndustriesServed: "Different fields. Everyday needs." (Figma 483:1256 on
 // the Services page; tablet and mobile in 903:17483 / 903:16728). A heading,

@@ -133,5 +133,12 @@
   "/images/services/current/industry-3.webp": "/images/services/current/industry-3.mobile.webp",
   "/images/services/current/industry-finance.webp": "/images/services/current/industry-finance.mobile.webp",
   "/images/services/current/industry-online-store.webp": "/images/services/current/industry-online-store.mobile.webp",
-  "/images/services/current/industry-travel.webp": "/images/services/current/industry-travel.mobile.webp"
+  "/images/services/current/industry-travel.webp": "/images/services/current/industry-travel.mobile.webp",
+  "/images/portfolio/automation-manager.png": "/images/portfolio/automation-manager.mobile.webp",
+  "/images/portfolio/budget-pro-tracker.png": "/images/portfolio/budget-pro-tracker.mobile.webp",
+  "/images/portfolio/denvo-hotel.png": "/images/portfolio/denvo-hotel.mobile.webp",
+  "/images/portfolio/hr-management.png": "/images/portfolio/hr-management.mobile.webp",
+  "/images/portfolio/jobsea.png": "/images/portfolio/jobsea.mobile.webp",
+  "/images/portfolio/quotable.png": "/images/portfolio/quotable.mobile.webp",
+  "/images/portfolio/sanime.png": "/images/portfolio/sanime.mobile.webp"
 }

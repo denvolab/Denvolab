@@ -77,7 +77,7 @@ function ProjectCard({ project, index }: { project: PortfolioProject; index: num
           <RippleImage
             src={project.imageSrc}
             alt={project.title}
-            sizes="(min-width: 768px) 50vw, 100vw"
+            sizes="(min-width: 1920px) 900px, (min-width: 1280px) calc((100vw - 120px) / 2), (min-width: 768px) calc((100vw - 68px) / 2), calc(100vw - 32px)"
             className="h-[700px] w-full"
             imageClassName="rounded-2xl"
           />

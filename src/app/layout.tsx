@@ -28,9 +28,7 @@ import { WhatsAppChat } from "@/components/ui/whatsapp-chat/whatsapp-chat";
 // a different heading font later: add its font files and an `@font-face` in
 // globals.css and point `--font-heading` at it. Every heading already reads
 // the token, so nothing else in the app changes.
-import "@fontsource-variable/dm-sans";
-import "@fontsource/dm-mono/latin-400.css";
-import "@fontsource/dm-mono/latin-500.css";
+import "@/styles/site-fonts.css";
 import "./globals.css";
 import "lenis/dist/lenis.css";
 
@@ -65,6 +63,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className="h-full antialiased" suppressHydrationWarning>
+      <head>
+        <link rel="preload" href="/fonts/site/dm-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/site/dm-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+      </head>
       <body className="flex min-h-full flex-col">
         <OrganizationJsonLd />
         <a href="#main-content" className="skip-link">Skip to content</a>

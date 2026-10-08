@@ -61,7 +61,7 @@ export function WorkWheelCursor() {
       }
       el.style.transform = `translate3d(${s.x}px,${s.y}px,0)`;
       // Keep going while shown, and until it has caught up after hiding.
-      raf = s.visible || !settled ? requestAnimationFrame(tick) : 0;
+      raf = !settled ? requestAnimationFrame(tick) : 0;
     };
     const run = () => {
       if (raf) return;

@@ -1,3 +1,4 @@
+import "@/components/sections/industries-served/industries-served.css";
 // ---------------------------------------------------------------------------
 // MoreCrafts: "Explore more crafts" under every case study (the user,
 // Oct 7, 2026: "exactly same as" the Services page's "Different fields.
