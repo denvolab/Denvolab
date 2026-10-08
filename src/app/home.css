@@ -21,6 +21,7 @@ main [data-homepage] .home-hero { min-height:100svh!important; background:#0d121
 .home-hero-services a:hover { color:#dfe94c; }
 .home-hero-video { width:352px; height:420px; flex-shrink:0; position:relative; }
 .home-hero-copy { width:520px; display:flex; flex-direction:column; gap:24px; align-items:flex-start; }
+.home-hero-heading { width:100%; }
 .home-hero-copy h1 { font-size:40px; line-height:48px; letter-spacing:-.03em; }
 .home-marquee { height:240px; background:white; display:flex; align-items:center; overflow:hidden; }
 .home-marquee-track { display:flex; width:max-content; animation-duration:76s; }
@@ -327,6 +328,9 @@ main [data-homepage][data-homepage] .home-hero { min-height:100svh!important; }
 @media (width < 768px) {
  .home-hero-tablet-wordmark { display:none; }
  .home-hero-stage { gap:24px; }
+ /* Figma 906:7040 / 1101:20907: heading inset + 24px content gap. */
+ .home-hero-heading { padding-block:16px; }
+ [data-homepage] .home-hero-cta { height:60px; padding:20px 24px; }
  .home-ai-inner > [aria-hidden="true"] > div:first-child { height:499px!important; }
  .home-ai-inner > [aria-hidden="true"] > div:first-child > div { --c-s: .733824px!important; }
  .home-ai-inner > [aria-hidden="true"] > div:last-child { margin-top:24px; }

@@ -15,7 +15,7 @@ export async function Hero() {
       <div className="home-hero-stage">
         <ul className="home-hero-services">{services.map(service => <li key={service.label}><Link href={service.href}>{service.label}</Link></li>)}</ul>
         <MovingVisual className="home-hero-video" videoSrc="/videos/hero-showreel.mp4" />
-        <div className="home-hero-copy"><h1>{hero.headline}</h1><Button href={hero.cta.href} className="home-button home-hero-cta">LET’S CRAFT YOUR IDEA</Button></div>
+        <div className="home-hero-copy"><div className="home-hero-heading"><h1>{hero.headline}</h1></div><Button href={hero.cta.href} className="home-button home-hero-cta">LET’S CRAFT YOUR IDEA</Button></div>
       </div>
     </div>
   </section>;
