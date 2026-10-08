@@ -26,19 +26,19 @@ export default {
       "text": "A responsive hotel booking experience that brings room discovery, stay details and checkout into one clear journey, helping guests compare options and plan a comfortable stay."
     },
     "hero": {
-      "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel0Home.jpg",
+      "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel0Home.webp",
       "alt": "denvo-hotel / 0 / Home",
       "width": 7680,
       "height": 4320
     },
     "overview": {
-      "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel1PopularRooms.jpg",
+      "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel1PopularRooms.webp",
       "alt": "denvo-hotel / 1 / Popular rooms",
       "width": 7680,
       "height": 4320
     },
     "banner": {
-      "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel5MobileHome.jpg",
+      "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel5MobileHome.webp",
       "alt": "denvo-hotel / 5 / Mobile home",
       "width": 7680,
       "height": 4320
@@ -51,7 +51,7 @@ export default {
           "title": "Room discovery",
           "description": "Browse room photography, amenities and nightly prices in a consistent card layout.",
           "image": {
-            "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel2RoomDetails.jpg",
+            "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel2RoomDetails.webp",
             "alt": "denvo-hotel / 2 / Room details",
             "width": 7680,
             "height": 4320
@@ -61,7 +61,7 @@ export default {
           "title": "Stay details",
           "description": "Keep room information and booking decisions together in a focused detail page.",
           "image": {
-            "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel3Checkout.jpg",
+            "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel3Checkout.webp",
             "alt": "denvo-hotel / 3 / Checkout",
             "width": 7680,
             "height": 4320
@@ -71,7 +71,7 @@ export default {
           "title": "Booking flow",
           "description": "Connect room selection to checkout, with responsive layouts for booking on mobile.",
           "image": {
-            "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel4RoomListing.jpg",
+            "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel4RoomListing.webp",
             "alt": "denvo-hotel / 4 / Room listing",
             "width": 7680,
             "height": 4320
@@ -81,37 +81,37 @@ export default {
     },
     "collage": [
       {
-        "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel2RoomDetails1.jpg",
+        "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel2RoomDetails1.webp",
         "alt": "denvo-hotel / 2 / Room details",
         "width": 7078,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel4RoomListing1.jpg",
+        "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel4RoomListing1.webp",
         "alt": "denvo-hotel / 4 / Room listing",
         "width": 7680,
         "height": 7322
       },
       {
-        "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel0Home1.jpg",
+        "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel0Home1.webp",
         "alt": "denvo-hotel / 0 / Home",
         "width": 7680,
         "height": 5030
       },
       {
-        "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel3Checkout1.jpg",
+        "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel3Checkout1.webp",
         "alt": "denvo-hotel / 3 / Checkout",
         "width": 5552,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel5MobileHome1.jpg",
+        "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel5MobileHome1.webp",
         "alt": "denvo-hotel / 5 / Mobile home",
         "width": 5804,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel1PopularRooms1.jpg",
+        "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel1PopularRooms1.webp",
         "alt": "denvo-hotel / 1 / Popular rooms",
         "width": 7680,
         "height": 5491
@@ -150,37 +150,37 @@ export default {
     },
     "gallery": [
       {
-        "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel0Home.jpg",
+        "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel0Home.webp",
         "alt": "denvo-hotel / 0 / Home",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel1PopularRooms.jpg",
+        "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel1PopularRooms.webp",
         "alt": "denvo-hotel / 1 / Popular rooms",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel2RoomDetails.jpg",
+        "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel2RoomDetails.webp",
         "alt": "denvo-hotel / 2 / Room details",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel3Checkout.jpg",
+        "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel3Checkout.webp",
         "alt": "denvo-hotel / 3 / Checkout",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel4RoomListing.jpg",
+        "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel4RoomListing.webp",
         "alt": "denvo-hotel / 4 / Room listing",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel5MobileHome.jpg",
+        "src": "/images/case-studies/denvo-hotel/current/img8KDenvoHotel5MobileHome.webp",
         "alt": "denvo-hotel / 5 / Mobile home",
         "width": 7680,
         "height": 4320
@@ -211,19 +211,19 @@ export default {
       "text": "A responsive travel website that pairs immersive destinations with clear retreat, coach and contact journeys, helping visitors explore meaningful travel at their own pace."
     },
     "hero": {
-      "src": "/images/case-studies/denvo-travel/updated/hero.jpg",
+      "src": "/images/case-studies/denvo-travel/updated/hero.webp",
       "alt": "Denvo Travel desktop website in a mountain retreat setting",
       "width": 7680,
       "height": 4320
     },
     "overview": {
-      "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel1CoachesDesktop.jpg",
+      "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel1CoachesDesktop.webp",
       "alt": "Denvo Travel coaches desktop mockup",
       "width": 7680,
       "height": 4320
     },
     "banner": {
-      "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel5ContactTablet.jpg",
+      "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel5ContactTablet.webp",
       "alt": "Denvo Travel contact tablet mockup",
       "width": 7680,
       "height": 4320
@@ -236,7 +236,7 @@ export default {
           "title": "Destination discovery",
           "description": "Lead with expressive travel imagery and a direct path to exploring retreats.",
           "image": {
-            "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel2ContactDesktop.jpg",
+            "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel2ContactDesktop.webp",
             "alt": "Destination discovery — Denvo Travel mockup",
             "width": 7680,
             "height": 4320
@@ -246,7 +246,7 @@ export default {
           "title": "Coach profiles",
           "description": "Make it easy to find the people behind the experience through a dedicated coach page.",
           "image": {
-            "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel3HomeTablet.jpg",
+            "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel3HomeTablet.webp",
             "alt": "Coach profiles — Denvo Travel mockup",
             "width": 7680,
             "height": 4320
@@ -256,7 +256,7 @@ export default {
           "title": "Easy enquiries",
           "description": "Keep contact information and enquiry forms clear across responsive layouts.",
           "image": {
-            "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel4CoachesTablet.jpg",
+            "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel4CoachesTablet.webp",
             "alt": "Easy enquiries — Denvo Travel mockup",
             "width": 7680,
             "height": 4320
@@ -266,37 +266,37 @@ export default {
     },
     "collage": [
       {
-        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel2ContactDesktop1.jpg",
+        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel2ContactDesktop1.webp",
         "alt": "Denvo Travel branding application",
         "width": 7069,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel4CoachesTablet1.jpg",
+        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel4CoachesTablet1.webp",
         "alt": "Denvo Travel branding application",
         "width": 7680,
         "height": 7315
       },
       {
-        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel0HomeDesktop.jpg",
+        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel0HomeDesktop.webp",
         "alt": "Denvo Travel branding application",
         "width": 7680,
         "height": 5021
       },
       {
-        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel3HomeTablet1.jpg",
+        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel3HomeTablet1.webp",
         "alt": "Denvo Travel branding application",
         "width": 5550,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel5ContactTablet1.jpg",
+        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel5ContactTablet1.webp",
         "alt": "Denvo Travel branding application",
         "width": 5792,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel1CoachesDesktop1.jpg",
+        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel1CoachesDesktop1.webp",
         "alt": "Denvo Travel branding application",
         "width": 7680,
         "height": 5485
@@ -352,37 +352,37 @@ export default {
     },
     "gallery": [
       {
-        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel0HomeDesktop1.jpg",
+        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel0HomeDesktop1.webp",
         "alt": "01 — Denvo Travel in context",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel1CoachesDesktop2.jpg",
+        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel1CoachesDesktop2.webp",
         "alt": "02 — The connected journey",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel4CoachesTablet.jpg",
+        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel4CoachesTablet.webp",
         "alt": "03 — Coaches desktop",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel2ContactDesktop.jpg",
+        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel2ContactDesktop.webp",
         "alt": "04 — Contact desktop",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel3HomeTablet.jpg",
+        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel3HomeTablet.webp",
         "alt": "05 — Home tablet",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel5ContactTablet.jpg",
+        "src": "/images/case-studies/denvo-travel/updated/img8KDenvoTravel5ContactTablet.webp",
         "alt": "06 — Bringing the experience together",
         "width": 7680,
         "height": 4320
@@ -414,19 +414,19 @@ export default {
       "text": "A mobile parts-shopping experience that connects vehicle context, product discovery, part requests, cart and order tracking in one practical interface for car owners."
     },
     "hero": {
-      "src": "/images/case-studies/part-pilot/current/img8KPartPilot1Categories.jpg",
+      "src": "/images/case-studies/part-pilot/current/img8KPartPilot1Categories.webp",
       "alt": "part-pilot / 1 / Categories",
       "width": 7680,
       "height": 4320
     },
     "overview": {
-      "src": "/images/case-studies/part-pilot/current/img8KPartPilot1Categories.jpg",
+      "src": "/images/case-studies/part-pilot/current/img8KPartPilot1Categories.webp",
       "alt": "part-pilot / 1 / Categories",
       "width": 7680,
       "height": 4320
     },
     "banner": {
-      "src": "/images/case-studies/part-pilot/current/img8KPartPilot5PartRequest.jpg",
+      "src": "/images/case-studies/part-pilot/current/img8KPartPilot5PartRequest.webp",
       "alt": "part-pilot / 5 / Part request",
       "width": 7680,
       "height": 4320
@@ -439,7 +439,7 @@ export default {
           "title": "Vehicle context",
           "description": "Start with the selected car and relevant parts categories on the home screen.",
           "image": {
-            "src": "/images/case-studies/part-pilot/current/img8KPartPilot2ProductDetails.jpg",
+            "src": "/images/case-studies/part-pilot/current/img8KPartPilot2ProductDetails.webp",
             "alt": "part-pilot / 2 / Product details",
             "width": 7680,
             "height": 4320
@@ -449,7 +449,7 @@ export default {
           "title": "Parts & requests",
           "description": "Connect product information to shopping and a dedicated part-request flow.",
           "image": {
-            "src": "/images/case-studies/part-pilot/current/img8KPartPilot3Cart.jpg",
+            "src": "/images/case-studies/part-pilot/current/img8KPartPilot3Cart.webp",
             "alt": "part-pilot / 3 / Cart",
             "width": 7680,
             "height": 4320
@@ -459,7 +459,7 @@ export default {
           "title": "Order visibility",
           "description": "Use consistent cart and order screens to carry the purchase journey forward.",
           "image": {
-            "src": "/images/case-studies/part-pilot/current/img8KPartPilot4Orders.jpg",
+            "src": "/images/case-studies/part-pilot/current/img8KPartPilot4Orders.webp",
             "alt": "part-pilot / 4 / Orders",
             "width": 7680,
             "height": 4320
@@ -469,37 +469,37 @@ export default {
     },
     "collage": [
       {
-        "src": "/images/case-studies/part-pilot/current/img8KPartPilot2ProductDetails1.jpg",
+        "src": "/images/case-studies/part-pilot/current/img8KPartPilot2ProductDetails1.webp",
         "alt": "part-pilot / 2 / Product details",
         "width": 7078,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/part-pilot/current/img8KPartPilot4Orders1.jpg",
+        "src": "/images/case-studies/part-pilot/current/img8KPartPilot4Orders1.webp",
         "alt": "part-pilot / 4 / Orders",
         "width": 7680,
         "height": 7322
       },
       {
-        "src": "/images/case-studies/part-pilot/current/img8KPartPilot0Home.jpg",
+        "src": "/images/case-studies/part-pilot/current/img8KPartPilot0Home.webp",
         "alt": "part-pilot / 0 / Home",
         "width": 7680,
         "height": 5030
       },
       {
-        "src": "/images/case-studies/part-pilot/current/img8KPartPilot3Cart1.jpg",
+        "src": "/images/case-studies/part-pilot/current/img8KPartPilot3Cart1.webp",
         "alt": "part-pilot / 3 / Cart",
         "width": 5552,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/part-pilot/current/img8KPartPilot5PartRequest1.jpg",
+        "src": "/images/case-studies/part-pilot/current/img8KPartPilot5PartRequest1.webp",
         "alt": "part-pilot / 5 / Part request",
         "width": 5804,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/part-pilot/current/img8KPartPilot1Categories1.jpg",
+        "src": "/images/case-studies/part-pilot/current/img8KPartPilot1Categories1.webp",
         "alt": "part-pilot / 1 / Categories",
         "width": 7680,
         "height": 5491
@@ -538,37 +538,37 @@ export default {
     },
     "gallery": [
       {
-        "src": "/images/case-studies/part-pilot/current/img8KPartPilot0Home1.jpg",
+        "src": "/images/case-studies/part-pilot/current/img8KPartPilot0Home1.webp",
         "alt": "part-pilot / 0 / Home",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/part-pilot/current/img8KPartPilot1Categories.jpg",
+        "src": "/images/case-studies/part-pilot/current/img8KPartPilot1Categories.webp",
         "alt": "part-pilot / 1 / Categories",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/part-pilot/current/img8KPartPilot2ProductDetails.jpg",
+        "src": "/images/case-studies/part-pilot/current/img8KPartPilot2ProductDetails.webp",
         "alt": "part-pilot / 2 / Product details",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/part-pilot/current/img8KPartPilot3Cart.jpg",
+        "src": "/images/case-studies/part-pilot/current/img8KPartPilot3Cart.webp",
         "alt": "part-pilot / 3 / Cart",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/part-pilot/current/img8KPartPilot4Orders.jpg",
+        "src": "/images/case-studies/part-pilot/current/img8KPartPilot4Orders.webp",
         "alt": "part-pilot / 4 / Orders",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/part-pilot/current/img8KPartPilot5PartRequest.jpg",
+        "src": "/images/case-studies/part-pilot/current/img8KPartPilot5PartRequest.webp",
         "alt": "part-pilot / 5 / Part request",
         "width": 7680,
         "height": 4320
@@ -599,19 +599,19 @@ export default {
       "text": "A personal-finance app that brings available cash, budgets, savings, bills and debt into a structured mobile overview, with dedicated flows for each everyday money task."
     },
     "hero": {
-      "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker1BudgetPlan.jpg",
+      "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker1BudgetPlan.webp",
       "alt": "pro-budget-tracker / 1 / Budget plan",
       "width": 7680,
       "height": 4320
     },
     "overview": {
-      "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker1BudgetPlan.jpg",
+      "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker1BudgetPlan.webp",
       "alt": "pro-budget-tracker / 1 / Budget plan",
       "width": 7680,
       "height": 4320
     },
     "banner": {
-      "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker5Debt.jpg",
+      "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker5Debt.webp",
       "alt": "pro-budget-tracker / 5 / Debt",
       "width": 7680,
       "height": 4320
@@ -624,7 +624,7 @@ export default {
           "title": "At-a-glance overview",
           "description": "Bring available cash and remaining budget into a focused home dashboard.",
           "image": {
-            "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker2SavingsGoals.jpg",
+            "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker2SavingsGoals.webp",
             "alt": "pro-budget-tracker / 2 / Savings goals",
             "width": 7680,
             "height": 4320
@@ -634,7 +634,7 @@ export default {
           "title": "Goals & plans",
           "description": "Give budget plans and savings goals their own clear progress views.",
           "image": {
-            "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker3FinancialHealth.jpg",
+            "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker3FinancialHealth.webp",
             "alt": "pro-budget-tracker / 3 / Financial health",
             "width": 7680,
             "height": 4320
@@ -644,7 +644,7 @@ export default {
           "title": "Bills & debt",
           "description": "Separate payment commitments into dedicated flows with readable summaries.",
           "image": {
-            "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker4Bills.jpg",
+            "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker4Bills.webp",
             "alt": "pro-budget-tracker / 4 / Bills",
             "width": 7680,
             "height": 4320
@@ -654,37 +654,37 @@ export default {
     },
     "collage": [
       {
-        "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker2SavingsGoals1.jpg",
+        "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker2SavingsGoals1.webp",
         "alt": "pro-budget-tracker / 2 / Savings goals",
         "width": 7078,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker4Bills1.jpg",
+        "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker4Bills1.webp",
         "alt": "pro-budget-tracker / 4 / Bills",
         "width": 7680,
         "height": 7322
       },
       {
-        "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker0Dashboard.jpg",
+        "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker0Dashboard.webp",
         "alt": "pro-budget-tracker / 0 / Dashboard",
         "width": 7680,
         "height": 5030
       },
       {
-        "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker3FinancialHealth1.jpg",
+        "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker3FinancialHealth1.webp",
         "alt": "pro-budget-tracker / 3 / Financial health",
         "width": 5552,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker5Debt1.jpg",
+        "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker5Debt1.webp",
         "alt": "pro-budget-tracker / 5 / Debt",
         "width": 5804,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker1BudgetPlan1.jpg",
+        "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker1BudgetPlan1.webp",
         "alt": "pro-budget-tracker / 1 / Budget plan",
         "width": 7680,
         "height": 5491
@@ -723,37 +723,37 @@ export default {
     },
     "gallery": [
       {
-        "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker0Dashboard1.jpg",
+        "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker0Dashboard1.webp",
         "alt": "pro-budget-tracker / 0 / Dashboard",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker1BudgetPlan.jpg",
+        "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker1BudgetPlan.webp",
         "alt": "pro-budget-tracker / 1 / Budget plan",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker2SavingsGoals.jpg",
+        "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker2SavingsGoals.webp",
         "alt": "pro-budget-tracker / 2 / Savings goals",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker3FinancialHealth.jpg",
+        "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker3FinancialHealth.webp",
         "alt": "pro-budget-tracker / 3 / Financial health",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker4Bills.jpg",
+        "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker4Bills.webp",
         "alt": "pro-budget-tracker / 4 / Bills",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker5Debt.jpg",
+        "src": "/images/case-studies/pro-budget-tracker/current/img8KProBudgetTracker5Debt.webp",
         "alt": "pro-budget-tracker / 5 / Debt",
         "width": 7680,
         "height": 4320
@@ -784,19 +784,19 @@ export default {
       "text": "A service website that presents locksmith expertise, service details and completed projects, with a visible emergency request path and a dedicated contact experience."
     },
     "hero": {
-      "src": "/images/case-studies/locksmith/current/img8KLocksmith0Home.jpg",
+      "src": "/images/case-studies/locksmith/current/img8KLocksmith0Home.webp",
       "alt": "locksmith / 0 / Home",
       "width": 7680,
       "height": 4320
     },
     "overview": {
-      "src": "/images/case-studies/locksmith/current/img8KLocksmith1Services.jpg",
+      "src": "/images/case-studies/locksmith/current/img8KLocksmith1Services.webp",
       "alt": "locksmith / 1 / Services",
       "width": 7680,
       "height": 4320
     },
     "banner": {
-      "src": "/images/case-studies/locksmith/current/img8KLocksmith5Contact.jpg",
+      "src": "/images/case-studies/locksmith/current/img8KLocksmith5Contact.webp",
       "alt": "locksmith / 5 / Contact",
       "width": 7680,
       "height": 4320
@@ -809,7 +809,7 @@ export default {
           "title": "Urgent contact",
           "description": "Keep the emergency request action prominent alongside the service information.",
           "image": {
-            "src": "/images/case-studies/locksmith/current/img8KLocksmith2ServiceDetails.jpg",
+            "src": "/images/case-studies/locksmith/current/img8KLocksmith2ServiceDetails.webp",
             "alt": "locksmith / 2 / Service details",
             "width": 7680,
             "height": 4320
@@ -819,7 +819,7 @@ export default {
           "title": "Service clarity",
           "description": "Use dedicated service and detail pages to explain the available work.",
           "image": {
-            "src": "/images/case-studies/locksmith/current/img8KLocksmith3Projects.jpg",
+            "src": "/images/case-studies/locksmith/current/img8KLocksmith3Projects.webp",
             "alt": "locksmith / 3 / Projects",
             "width": 7680,
             "height": 4320
@@ -829,7 +829,7 @@ export default {
           "title": "Project evidence",
           "description": "Give completed projects their own overview and detail-page structure.",
           "image": {
-            "src": "/images/case-studies/locksmith/current/img8KLocksmith4ProjectDetails.jpg",
+            "src": "/images/case-studies/locksmith/current/img8KLocksmith4ProjectDetails.webp",
             "alt": "locksmith / 4 / Project details",
             "width": 7680,
             "height": 4320
@@ -839,37 +839,37 @@ export default {
     },
     "collage": [
       {
-        "src": "/images/case-studies/locksmith/current/img8KLocksmith2ServiceDetails1.jpg",
+        "src": "/images/case-studies/locksmith/current/img8KLocksmith2ServiceDetails1.webp",
         "alt": "locksmith / 2 / Service details",
         "width": 7078,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/locksmith/current/img8KLocksmith4ProjectDetails1.jpg",
+        "src": "/images/case-studies/locksmith/current/img8KLocksmith4ProjectDetails1.webp",
         "alt": "locksmith / 4 / Project details",
         "width": 7680,
         "height": 7322
       },
       {
-        "src": "/images/case-studies/locksmith/current/img8KLocksmith0Home1.jpg",
+        "src": "/images/case-studies/locksmith/current/img8KLocksmith0Home1.webp",
         "alt": "locksmith / 0 / Home",
         "width": 7680,
         "height": 5030
       },
       {
-        "src": "/images/case-studies/locksmith/current/img8KLocksmith3Projects1.jpg",
+        "src": "/images/case-studies/locksmith/current/img8KLocksmith3Projects1.webp",
         "alt": "locksmith / 3 / Projects",
         "width": 5552,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/locksmith/current/img8KLocksmith5Contact1.jpg",
+        "src": "/images/case-studies/locksmith/current/img8KLocksmith5Contact1.webp",
         "alt": "locksmith / 5 / Contact",
         "width": 5804,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/locksmith/current/img8KLocksmith1Services1.jpg",
+        "src": "/images/case-studies/locksmith/current/img8KLocksmith1Services1.webp",
         "alt": "locksmith / 1 / Services",
         "width": 7680,
         "height": 5491
@@ -908,37 +908,37 @@ export default {
     },
     "gallery": [
       {
-        "src": "/images/case-studies/locksmith/current/img8KLocksmith0Home.jpg",
+        "src": "/images/case-studies/locksmith/current/img8KLocksmith0Home.webp",
         "alt": "locksmith / 0 / Home",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/locksmith/current/img8KLocksmith1Services.jpg",
+        "src": "/images/case-studies/locksmith/current/img8KLocksmith1Services.webp",
         "alt": "locksmith / 1 / Services",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/locksmith/current/img8KLocksmith2ServiceDetails.jpg",
+        "src": "/images/case-studies/locksmith/current/img8KLocksmith2ServiceDetails.webp",
         "alt": "locksmith / 2 / Service details",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/locksmith/current/img8KLocksmith3Projects.jpg",
+        "src": "/images/case-studies/locksmith/current/img8KLocksmith3Projects.webp",
         "alt": "locksmith / 3 / Projects",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/locksmith/current/img8KLocksmith4ProjectDetails.jpg",
+        "src": "/images/case-studies/locksmith/current/img8KLocksmith4ProjectDetails.webp",
         "alt": "locksmith / 4 / Project details",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/locksmith/current/img8KLocksmith5Contact.jpg",
+        "src": "/images/case-studies/locksmith/current/img8KLocksmith5Contact.webp",
         "alt": "locksmith / 5 / Contact",
         "width": 7680,
         "height": 4320
@@ -969,19 +969,19 @@ export default {
       "text": "A mobile HR workspace for hospitality teams, bringing people, hiring, payroll, attendance and leave into connected screens with clear operational summaries and actions."
     },
     "hero": {
-      "src": "/images/case-studies/metro-hr/current/img8KMetroHr1People.jpg",
+      "src": "/images/case-studies/metro-hr/current/img8KMetroHr1People.webp",
       "alt": "Denvo HR / 1 / People",
       "width": 7680,
       "height": 4320
     },
     "overview": {
-      "src": "/images/case-studies/metro-hr/current/img8KMetroHr1People.jpg",
+      "src": "/images/case-studies/metro-hr/current/img8KMetroHr1People.webp",
       "alt": "Denvo HR / 1 / People",
       "width": 7680,
       "height": 4320
     },
     "banner": {
-      "src": "/images/case-studies/metro-hr/current/img8KMetroHr5LeaveManagement.jpg",
+      "src": "/images/case-studies/metro-hr/current/img8KMetroHr5LeaveManagement.webp",
       "alt": "Denvo HR / 5 / Leave management",
       "width": 7680,
       "height": 4320
@@ -994,7 +994,7 @@ export default {
           "title": "People & hiring",
           "description": "Connect employee information and job openings through focused mobile screens.",
           "image": {
-            "src": "/images/case-studies/metro-hr/current/img8KMetroHr2JobOpenings.jpg",
+            "src": "/images/case-studies/metro-hr/current/img8KMetroHr2JobOpenings.webp",
             "alt": "Denvo HR / 2 / Job openings",
             "width": 7680,
             "height": 4320
@@ -1004,7 +1004,7 @@ export default {
           "title": "Payroll overview",
           "description": "Present payroll status and related actions in a dedicated operational view.",
           "image": {
-            "src": "/images/case-studies/metro-hr/current/img8KMetroHr3Payroll.jpg",
+            "src": "/images/case-studies/metro-hr/current/img8KMetroHr3Payroll.webp",
             "alt": "Denvo HR / 3 / Payroll",
             "width": 7680,
             "height": 4320
@@ -1014,7 +1014,7 @@ export default {
           "title": "Attendance & leave",
           "description": "Keep attendance and leave management accessible within the same workspace.",
           "image": {
-            "src": "/images/case-studies/metro-hr/current/img8KMetroHr4Attendance.jpg",
+            "src": "/images/case-studies/metro-hr/current/img8KMetroHr4Attendance.webp",
             "alt": "Denvo HR / 4 / Attendance",
             "width": 7680,
             "height": 4320
@@ -1024,37 +1024,37 @@ export default {
     },
     "collage": [
       {
-        "src": "/images/case-studies/metro-hr/current/img8KMetroHr2JobOpenings1.jpg",
+        "src": "/images/case-studies/metro-hr/current/img8KMetroHr2JobOpenings1.webp",
         "alt": "Denvo HR / 2 / Job openings",
         "width": 7078,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/metro-hr/current/img8KMetroHr4Attendance1.jpg",
+        "src": "/images/case-studies/metro-hr/current/img8KMetroHr4Attendance1.webp",
         "alt": "Denvo HR / 4 / Attendance",
         "width": 7680,
         "height": 7322
       },
       {
-        "src": "/images/case-studies/metro-hr/current/img8KMetroHr0Home.jpg",
+        "src": "/images/case-studies/metro-hr/current/img8KMetroHr0Home.webp",
         "alt": "Denvo HR / 0 / Home",
         "width": 7680,
         "height": 5030
       },
       {
-        "src": "/images/case-studies/metro-hr/current/img8KMetroHr3Payroll1.jpg",
+        "src": "/images/case-studies/metro-hr/current/img8KMetroHr3Payroll1.webp",
         "alt": "Denvo HR / 3 / Payroll",
         "width": 5552,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/metro-hr/current/img8KMetroHr5LeaveManagement1.jpg",
+        "src": "/images/case-studies/metro-hr/current/img8KMetroHr5LeaveManagement1.webp",
         "alt": "Denvo HR / 5 / Leave management",
         "width": 5804,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/metro-hr/current/img8KMetroHr1People1.jpg",
+        "src": "/images/case-studies/metro-hr/current/img8KMetroHr1People1.webp",
         "alt": "Denvo HR / 1 / People",
         "width": 7680,
         "height": 5491
@@ -1093,37 +1093,37 @@ export default {
     },
     "gallery": [
       {
-        "src": "/images/case-studies/metro-hr/current/img8KMetroHr0Home1.jpg",
+        "src": "/images/case-studies/metro-hr/current/img8KMetroHr0Home1.webp",
         "alt": "Denvo HR / 0 / Home",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/metro-hr/current/img8KMetroHr1People.jpg",
+        "src": "/images/case-studies/metro-hr/current/img8KMetroHr1People.webp",
         "alt": "Denvo HR / 1 / People",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/metro-hr/current/img8KMetroHr2JobOpenings.jpg",
+        "src": "/images/case-studies/metro-hr/current/img8KMetroHr2JobOpenings.webp",
         "alt": "Denvo HR / 2 / Job openings",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/metro-hr/current/img8KMetroHr3Payroll.jpg",
+        "src": "/images/case-studies/metro-hr/current/img8KMetroHr3Payroll.webp",
         "alt": "Denvo HR / 3 / Payroll",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/metro-hr/current/img8KMetroHr4Attendance.jpg",
+        "src": "/images/case-studies/metro-hr/current/img8KMetroHr4Attendance.webp",
         "alt": "Denvo HR / 4 / Attendance",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/metro-hr/current/img8KMetroHr5LeaveManagement.jpg",
+        "src": "/images/case-studies/metro-hr/current/img8KMetroHr5LeaveManagement.webp",
         "alt": "Denvo HR / 5 / Leave management",
         "width": 7680,
         "height": 4320
@@ -1154,19 +1154,19 @@ export default {
       "text": "A property-focused website that introduces Casana's AI valuation proposition and connects home-value discovery, savings, chat and tailored journeys for buyers and sellers."
     },
     "hero": {
-      "src": "/images/case-studies/casana-ai/current/img8KCasanaAi0Home.jpg",
+      "src": "/images/case-studies/casana-ai/current/img8KCasanaAi0Home.webp",
       "alt": "casana-ai / 0 / Home",
       "width": 7680,
       "height": 4320
     },
     "overview": {
-      "src": "/images/case-studies/casana-ai/current/img8KCasanaAi1Savings.jpg",
+      "src": "/images/case-studies/casana-ai/current/img8KCasanaAi1Savings.webp",
       "alt": "casana-ai / 1 / Savings",
       "width": 7680,
       "height": 4320
     },
     "banner": {
-      "src": "/images/case-studies/casana-ai/current/img8KCasanaAi5ForBuyers.jpg",
+      "src": "/images/case-studies/casana-ai/current/img8KCasanaAi5ForBuyers.webp",
       "alt": "casana-ai / 5 / For buyers",
       "width": 7680,
       "height": 4320
@@ -1179,7 +1179,7 @@ export default {
           "title": "Home-value entry",
           "description": "Give visitors a clear introduction to the property's value proposition.",
           "image": {
-            "src": "/images/case-studies/casana-ai/current/img8KCasanaAi2Chat.jpg",
+            "src": "/images/case-studies/casana-ai/current/img8KCasanaAi2Chat.webp",
             "alt": "casana-ai / 2 / Chat",
             "width": 7680,
             "height": 4320
@@ -1189,7 +1189,7 @@ export default {
           "title": "Guided discovery",
           "description": "Use chat and explanatory pages to support questions during the journey.",
           "image": {
-            "src": "/images/case-studies/casana-ai/current/img8KCasanaAi3HowItWorks.jpg",
+            "src": "/images/case-studies/casana-ai/current/img8KCasanaAi3HowItWorks.webp",
             "alt": "casana-ai / 3 / How it works",
             "width": 7680,
             "height": 4320
@@ -1199,7 +1199,7 @@ export default {
           "title": "Buyer & seller paths",
           "description": "Provide dedicated page structures for different property goals.",
           "image": {
-            "src": "/images/case-studies/casana-ai/current/img8KCasanaAi4ForSellers.jpg",
+            "src": "/images/case-studies/casana-ai/current/img8KCasanaAi4ForSellers.webp",
             "alt": "casana-ai / 4 / For sellers",
             "width": 7680,
             "height": 4320
@@ -1209,37 +1209,37 @@ export default {
     },
     "collage": [
       {
-        "src": "/images/case-studies/casana-ai/current/img8KCasanaAi2Chat1.jpg",
+        "src": "/images/case-studies/casana-ai/current/img8KCasanaAi2Chat1.webp",
         "alt": "casana-ai / 2 / Chat",
         "width": 7078,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/casana-ai/current/img8KCasanaAi4ForSellers1.jpg",
+        "src": "/images/case-studies/casana-ai/current/img8KCasanaAi4ForSellers1.webp",
         "alt": "casana-ai / 4 / For sellers",
         "width": 7680,
         "height": 7322
       },
       {
-        "src": "/images/case-studies/casana-ai/current/img8KCasanaAi0Home1.jpg",
+        "src": "/images/case-studies/casana-ai/current/img8KCasanaAi0Home1.webp",
         "alt": "casana-ai / 0 / Home",
         "width": 7680,
         "height": 5030
       },
       {
-        "src": "/images/case-studies/casana-ai/current/img8KCasanaAi3HowItWorks1.jpg",
+        "src": "/images/case-studies/casana-ai/current/img8KCasanaAi3HowItWorks1.webp",
         "alt": "casana-ai / 3 / How it works",
         "width": 5552,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/casana-ai/current/img8KCasanaAi5ForBuyers1.jpg",
+        "src": "/images/case-studies/casana-ai/current/img8KCasanaAi5ForBuyers1.webp",
         "alt": "casana-ai / 5 / For buyers",
         "width": 5804,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/casana-ai/current/img8KCasanaAi1Savings1.jpg",
+        "src": "/images/case-studies/casana-ai/current/img8KCasanaAi1Savings1.webp",
         "alt": "casana-ai / 1 / Savings",
         "width": 7680,
         "height": 5491
@@ -1278,37 +1278,37 @@ export default {
     },
     "gallery": [
       {
-        "src": "/images/case-studies/casana-ai/current/img8KCasanaAi0Home.jpg",
+        "src": "/images/case-studies/casana-ai/current/img8KCasanaAi0Home.webp",
         "alt": "casana-ai / 0 / Home",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/casana-ai/current/img8KCasanaAi1Savings.jpg",
+        "src": "/images/case-studies/casana-ai/current/img8KCasanaAi1Savings.webp",
         "alt": "casana-ai / 1 / Savings",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/casana-ai/current/img8KCasanaAi2Chat.jpg",
+        "src": "/images/case-studies/casana-ai/current/img8KCasanaAi2Chat.webp",
         "alt": "casana-ai / 2 / Chat",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/casana-ai/current/img8KCasanaAi3HowItWorks.jpg",
+        "src": "/images/case-studies/casana-ai/current/img8KCasanaAi3HowItWorks.webp",
         "alt": "casana-ai / 3 / How it works",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/casana-ai/current/img8KCasanaAi4ForSellers.jpg",
+        "src": "/images/case-studies/casana-ai/current/img8KCasanaAi4ForSellers.webp",
         "alt": "casana-ai / 4 / For sellers",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/casana-ai/current/img8KCasanaAi5ForBuyers.jpg",
+        "src": "/images/case-studies/casana-ai/current/img8KCasanaAi5ForBuyers.webp",
         "alt": "casana-ai / 5 / For buyers",
         "width": 7680,
         "height": 4320
@@ -1339,19 +1339,19 @@ export default {
       "text": "An aquaculture management dashboard that connects pond status, fish stock, feeding, mortality and water operations in one structured workspace for farm teams."
     },
     "hero": {
-      "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua0Dashboard.jpg",
+      "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua0Dashboard.webp",
       "alt": "smart-aqua / 0 / Dashboard",
       "width": 7680,
       "height": 4320
     },
     "overview": {
-      "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua1ActivePonds.jpg",
+      "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua1ActivePonds.webp",
       "alt": "smart-aqua / 1 / Active ponds",
       "width": 7680,
       "height": 4320
     },
     "banner": {
-      "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua5WaterPump.jpg",
+      "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua5WaterPump.webp",
       "alt": "smart-aqua / 5 / Water pump",
       "width": 7680,
       "height": 4320
@@ -1364,7 +1364,7 @@ export default {
           "title": "Farm overview",
           "description": "Bring pond, stock and health indicators into one scannable dashboard.",
           "image": {
-            "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua2StockOverview.jpg",
+            "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua2StockOverview.webp",
             "alt": "smart-aqua / 2 / Stock overview",
             "width": 7680,
             "height": 4320
@@ -1374,7 +1374,7 @@ export default {
           "title": "Feeding & stock",
           "description": "Use dedicated views for feed schedules and fish-stock information.",
           "image": {
-            "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua3FeedingSchedule.jpg",
+            "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua3FeedingSchedule.webp",
             "alt": "smart-aqua / 3 / Feeding schedule",
             "width": 7680,
             "height": 4320
@@ -1384,7 +1384,7 @@ export default {
           "title": "Operational monitoring",
           "description": "Connect mortality and water-pump views to the wider farm workspace.",
           "image": {
-            "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua4Mortality.jpg",
+            "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua4Mortality.webp",
             "alt": "smart-aqua / 4 / Mortality",
             "width": 7680,
             "height": 4320
@@ -1394,37 +1394,37 @@ export default {
     },
     "collage": [
       {
-        "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua2StockOverview1.jpg",
+        "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua2StockOverview1.webp",
         "alt": "smart-aqua / 2 / Stock overview",
         "width": 7078,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua4Mortality1.jpg",
+        "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua4Mortality1.webp",
         "alt": "smart-aqua / 4 / Mortality",
         "width": 7680,
         "height": 7322
       },
       {
-        "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua0Dashboard1.jpg",
+        "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua0Dashboard1.webp",
         "alt": "smart-aqua / 0 / Dashboard",
         "width": 7680,
         "height": 5030
       },
       {
-        "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua3FeedingSchedule1.jpg",
+        "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua3FeedingSchedule1.webp",
         "alt": "smart-aqua / 3 / Feeding schedule",
         "width": 5552,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua5WaterPump1.jpg",
+        "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua5WaterPump1.webp",
         "alt": "smart-aqua / 5 / Water pump",
         "width": 5804,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua1ActivePonds1.jpg",
+        "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua1ActivePonds1.webp",
         "alt": "smart-aqua / 1 / Active ponds",
         "width": 7680,
         "height": 5491
@@ -1463,37 +1463,37 @@ export default {
     },
     "gallery": [
       {
-        "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua0Dashboard.jpg",
+        "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua0Dashboard.webp",
         "alt": "smart-aqua / 0 / Dashboard",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua1ActivePonds.jpg",
+        "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua1ActivePonds.webp",
         "alt": "smart-aqua / 1 / Active ponds",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua2StockOverview.jpg",
+        "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua2StockOverview.webp",
         "alt": "smart-aqua / 2 / Stock overview",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua3FeedingSchedule.jpg",
+        "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua3FeedingSchedule.webp",
         "alt": "smart-aqua / 3 / Feeding schedule",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua4Mortality.jpg",
+        "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua4Mortality.webp",
         "alt": "smart-aqua / 4 / Mortality",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua5WaterPump.jpg",
+        "src": "/images/case-studies/smart-aqua-farm-360/current/img8KSmartAqua5WaterPump.webp",
         "alt": "smart-aqua / 5 / Water pump",
         "width": 7680,
         "height": 4320
@@ -1524,19 +1524,19 @@ export default {
       "text": "A daily workspace for freelancers and small teams that connects client messages, approvals, meetings and tasks with an AI assistant named Otto."
     },
     "hero": {
-      "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi0Today.jpg",
+      "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi0Today.webp",
       "alt": "denvo-ai / 0 / Today",
       "width": 7680,
       "height": 4320
     },
     "overview": {
-      "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi1OttoExecution.jpg",
+      "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi1OttoExecution.webp",
       "alt": "denvo-ai / 1 / Otto execution",
       "width": 7680,
       "height": 4320
     },
     "banner": {
-      "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi1OttoExecution.jpg",
+      "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi1OttoExecution.webp",
       "alt": "denvo-ai / 1 / Otto execution",
       "width": 7680,
       "height": 4320
@@ -1549,7 +1549,7 @@ export default {
           "title": "A useful daily overview",
           "description": "Bring meetings, messages and priorities into one workspace.",
           "image": {
-            "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi2Approvals.jpg",
+            "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi2Approvals.webp",
             "alt": "denvo-ai / 2 / Approvals",
             "width": 7680,
             "height": 4320
@@ -1559,7 +1559,7 @@ export default {
           "title": "Approval before action",
           "description": "Review prepared replies and tasks before they proceed.",
           "image": {
-            "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi3InboxDigest.jpg",
+            "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi3InboxDigest.webp",
             "alt": "denvo-ai / 3 / Inbox digest",
             "width": 7680,
             "height": 4320
@@ -1569,7 +1569,7 @@ export default {
           "title": "AI in context",
           "description": "Connect Otto suggestions with the work that needs attention.",
           "image": {
-            "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi4DailyPlan.jpg",
+            "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi4DailyPlan.webp",
             "alt": "denvo-ai / 4 / Daily plan",
             "width": 7680,
             "height": 4320
@@ -1579,37 +1579,37 @@ export default {
     },
     "collage": [
       {
-        "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi2Approvals1.jpg",
+        "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi2Approvals1.webp",
         "alt": "denvo-ai / 2 / Approvals",
         "width": 7078,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi4DailyPlan1.jpg",
+        "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi4DailyPlan1.webp",
         "alt": "denvo-ai / 4 / Daily plan",
         "width": 7680,
         "height": 7322
       },
       {
-        "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi0Today1.jpg",
+        "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi0Today1.webp",
         "alt": "denvo-ai / 0 / Today",
         "width": 7680,
         "height": 5030
       },
       {
-        "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi3InboxDigest1.jpg",
+        "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi3InboxDigest1.webp",
         "alt": "denvo-ai / 3 / Inbox digest",
         "width": 5552,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi5Marketplace.jpg",
+        "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi5Marketplace.webp",
         "alt": "denvo-ai / 5 / Marketplace",
         "width": 5804,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi1OttoExecution1.jpg",
+        "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi1OttoExecution1.webp",
         "alt": "denvo-ai / 1 / Otto execution",
         "width": 7680,
         "height": 5491
@@ -1648,37 +1648,37 @@ export default {
     },
     "gallery": [
       {
-        "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi0Today.jpg",
+        "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi0Today.webp",
         "alt": "denvo-ai / 0 / Today",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi1OttoExecution.jpg",
+        "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi1OttoExecution.webp",
         "alt": "denvo-ai / 1 / Otto execution",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi2Approvals.jpg",
+        "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi2Approvals.webp",
         "alt": "denvo-ai / 2 / Approvals",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi3InboxDigest.jpg",
+        "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi3InboxDigest.webp",
         "alt": "denvo-ai / 3 / Inbox digest",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi4DailyPlan.jpg",
+        "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi4DailyPlan.webp",
         "alt": "denvo-ai / 4 / Daily plan",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi1OttoExecution.jpg",
+        "src": "/images/case-studies/ai-assistant/current/img8KDenvoAi1OttoExecution.webp",
         "alt": "denvo-ai / 1 / Otto execution",
         "width": 7680,
         "height": 4320
@@ -1709,19 +1709,19 @@ export default {
       "text": "A community application that brings people, shared events and crew connections into one personal mobile experience."
     },
     "hero": {
-      "src": "/images/case-studies/my-crew/current/img8KMyCrew1EventDetails.jpg",
+      "src": "/images/case-studies/my-crew/current/img8KMyCrew1EventDetails.webp",
       "alt": "my-crew / 1 / Event details",
       "width": 7680,
       "height": 4320
     },
     "overview": {
-      "src": "/images/case-studies/my-crew/current/img8KMyCrew1EventDetails.jpg",
+      "src": "/images/case-studies/my-crew/current/img8KMyCrew1EventDetails.webp",
       "alt": "my-crew / 1 / Event details",
       "width": 7680,
       "height": 4320
     },
     "banner": {
-      "src": "/images/case-studies/my-crew/current/img8KMyCrew5BrandWelcome.jpg",
+      "src": "/images/case-studies/my-crew/current/img8KMyCrew5BrandWelcome.webp",
       "alt": "my-crew / 5 / Brand welcome",
       "width": 7680,
       "height": 4320
@@ -1734,7 +1734,7 @@ export default {
           "title": "Shared events",
           "description": "Explore gatherings and open the details that matter.",
           "image": {
-            "src": "/images/case-studies/my-crew/current/img8KMyCrew2Profile.jpg",
+            "src": "/images/case-studies/my-crew/current/img8KMyCrew2Profile.webp",
             "alt": "my-crew / 2 / Profile",
             "width": 7680,
             "height": 4320
@@ -1744,7 +1744,7 @@ export default {
           "title": "People & crews",
           "description": "Find profiles and bring selected people into a crew.",
           "image": {
-            "src": "/images/case-studies/my-crew/current/img8KMyCrew3AddCrew.jpg",
+            "src": "/images/case-studies/my-crew/current/img8KMyCrew3AddCrew.webp",
             "alt": "my-crew / 3 / Add crew",
             "width": 7680,
             "height": 4320
@@ -1754,7 +1754,7 @@ export default {
           "title": "From interest to arrival",
           "description": "Keep event information and directions connected.",
           "image": {
-            "src": "/images/case-studies/my-crew/current/img8KMyCrew4Directions.jpg",
+            "src": "/images/case-studies/my-crew/current/img8KMyCrew4Directions.webp",
             "alt": "my-crew / 4 / Directions",
             "width": 7680,
             "height": 4320
@@ -1764,37 +1764,37 @@ export default {
     },
     "collage": [
       {
-        "src": "/images/case-studies/my-crew/current/img8KMyCrew2Profile1.jpg",
+        "src": "/images/case-studies/my-crew/current/img8KMyCrew2Profile1.webp",
         "alt": "my-crew / 2 / Profile",
         "width": 7078,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/my-crew/current/img8KMyCrew4Directions1.jpg",
+        "src": "/images/case-studies/my-crew/current/img8KMyCrew4Directions1.webp",
         "alt": "my-crew / 4 / Directions",
         "width": 7680,
         "height": 7322
       },
       {
-        "src": "/images/case-studies/my-crew/current/img8KMyCrew0Events.jpg",
+        "src": "/images/case-studies/my-crew/current/img8KMyCrew0Events.webp",
         "alt": "my-crew / 0 / Events",
         "width": 7680,
         "height": 5030
       },
       {
-        "src": "/images/case-studies/my-crew/current/img8KMyCrew3AddCrew1.jpg",
+        "src": "/images/case-studies/my-crew/current/img8KMyCrew3AddCrew1.webp",
         "alt": "my-crew / 3 / Add crew",
         "width": 5552,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/my-crew/current/img8KMyCrew5BrandWelcome1.jpg",
+        "src": "/images/case-studies/my-crew/current/img8KMyCrew5BrandWelcome1.webp",
         "alt": "my-crew / 5 / Brand welcome",
         "width": 5804,
         "height": 7680
       },
       {
-        "src": "/images/case-studies/my-crew/current/img8KMyCrew1EventDetails1.jpg",
+        "src": "/images/case-studies/my-crew/current/img8KMyCrew1EventDetails1.webp",
         "alt": "my-crew / 1 / Event details",
         "width": 7680,
         "height": 5491
@@ -1833,37 +1833,37 @@ export default {
     },
     "gallery": [
       {
-        "src": "/images/case-studies/my-crew/current/img8KMyCrew0Events1.jpg",
+        "src": "/images/case-studies/my-crew/current/img8KMyCrew0Events1.webp",
         "alt": "my-crew / 0 / Events",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/my-crew/current/img8KMyCrew1EventDetails.jpg",
+        "src": "/images/case-studies/my-crew/current/img8KMyCrew1EventDetails.webp",
         "alt": "my-crew / 1 / Event details",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/my-crew/current/img8KMyCrew2Profile.jpg",
+        "src": "/images/case-studies/my-crew/current/img8KMyCrew2Profile.webp",
         "alt": "my-crew / 2 / Profile",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/my-crew/current/img8KMyCrew3AddCrew.jpg",
+        "src": "/images/case-studies/my-crew/current/img8KMyCrew3AddCrew.webp",
         "alt": "my-crew / 3 / Add crew",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/my-crew/current/img8KMyCrew4Directions.jpg",
+        "src": "/images/case-studies/my-crew/current/img8KMyCrew4Directions.webp",
         "alt": "my-crew / 4 / Directions",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/my-crew/current/img8KMyCrew5BrandWelcome.jpg",
+        "src": "/images/case-studies/my-crew/current/img8KMyCrew5BrandWelcome.webp",
         "alt": "my-crew / 5 / Brand welcome",
         "width": 7680,
         "height": 4320
@@ -1895,7 +1895,7 @@ export default {
       "text": "recruitment platform designed to help job seekers find employment within their immediate community and empower local businesses to find the right staff quickly."
     },
     "hero": {
-      "src": "/images/case-studies/job-sea/current/img8KJobsea0.jpg",
+      "src": "/images/case-studies/job-sea/current/img8KJobsea0.webp",
       "alt": "Job Sea 8KJobsea0",
       "width": 7680,
       "height": 4320
@@ -1907,7 +1907,7 @@ export default {
       "height": 3072
     },
     "banner": {
-      "src": "/images/case-studies/job-sea/current/imgProductShowcase1.jpg",
+      "src": "/images/case-studies/job-sea/current/imgProductShowcase1.webp",
       "alt": "Job Sea Product Showcase1",
       "width": 7680,
       "height": 3548
@@ -2034,37 +2034,37 @@ export default {
     },
     "gallery": [
       {
-        "src": "/images/case-studies/job-sea/current/imgDesktopHomeDaylightWorkspace.jpg",
+        "src": "/images/case-studies/job-sea/current/imgDesktopHomeDaylightWorkspace.webp",
         "alt": "Job Sea Desktop Home Daylight Workspace",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/job-sea/current/imgMobileMessagesHandheldAtDesk.jpg",
+        "src": "/images/case-studies/job-sea/current/imgMobileMessagesHandheldAtDesk.webp",
         "alt": "Job Sea Mobile Messages Handheld At Desk",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/job-sea/current/imgLaptopJobSearchCoworkingWorkspace.jpg",
+        "src": "/images/case-studies/job-sea/current/imgLaptopJobSearchCoworkingWorkspace.webp",
         "alt": "Job Sea Laptop Job Search Coworking Workspace",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/job-sea/current/imgTabletMobileJobDetailAndSavedJobsRecruitmentOffice.jpg",
+        "src": "/images/case-studies/job-sea/current/imgTabletMobileJobDetailAndSavedJobsRecruitmentOffice.webp",
         "alt": "Job Sea Tablet Mobile Job Detail And Saved Jobs Recruitment Office",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/job-sea/current/imgResponsiveProfileConsultationWorkspace.jpg",
+        "src": "/images/case-studies/job-sea/current/imgResponsiveProfileConsultationWorkspace.webp",
         "alt": "Job Sea Responsive Profile Consultation Workspace",
         "width": 7680,
         "height": 4320
       },
       {
-        "src": "/images/case-studies/job-sea/current/imgMobilePagesRecruitmentReception.jpg",
+        "src": "/images/case-studies/job-sea/current/imgMobilePagesRecruitmentReception.webp",
         "alt": "Job Sea Mobile Pages Recruitment Reception",
         "width": 7680,
         "height": 4320

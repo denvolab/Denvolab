@@ -154,36 +154,36 @@ const INDUSTRIES_SERVED: IndustriesServedContent = {
       name: "Hotels & Travel",
       description:
         "Help guests explore, book, and plan their stay.",
-      imageSrc: "/images/services/current/industry-travel.jpg",
+      imageSrc: "/images/services/current/industry-travel.webp",
     },
     {
       name: "Healthcare",
       description:
         "Help people find care and take the next step with confidence.",
-      imageSrc: "/images/services/current/industry-1.png",
+      imageSrc: "/images/services/current/industry-1.webp",
     },
     {
       name: "Money & Finance",
       description:
         "Make spending, payments, and financial information easier to follow.",
-      imageSrc: "/images/services/current/industry-finance.jpg",
+      imageSrc: "/images/services/current/industry-finance.webp",
     },
     {
       name: "Software & Apps",
       description:
         "Help people learn a product and use its tools with less confusion.",
-      imageSrc: "/images/services/current/industry-2.png",
+      imageSrc: "/images/services/current/industry-2.webp",
     },
     {
       name: "Online Stores",
       description: "Make it easier to find a product, choose it, and check out.",
-      imageSrc: "/images/services/current/industry-online-store.jpg",
+      imageSrc: "/images/services/current/industry-online-store.webp",
     },
     {
       name: "AI Tools",
       description:
         "Give people clear ways to use AI, review its results, and stay in control.",
-      imageSrc: "/images/services/current/industry-3.png",
+      imageSrc: "/images/services/current/industry-3.webp",
     },
   ],
 };

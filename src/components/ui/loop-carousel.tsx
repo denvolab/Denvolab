@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import { fxOff } from "@/lib/motion/fx-off";
 
 const subscribeToClient = () => () => {};
+const DRAG_START_PX = 6; // pointer travel before a press becomes a drag
 const clientSnapshot = () => true;
 const serverSnapshot = () => false;
 
@@ -17,6 +18,13 @@ export function LoopCarousel({ children, className = "", label, speed = 24, drag
   const cursor = useRef<HTMLDivElement>(null);
   const mounted = useSyncExternalStore(subscribeToClient, clientSnapshot, serverSnapshot);
   const motion = useRef({ current: 0, target: 0, momentum: 0, width: 0, pointer: -1, startX: 0, startScroll: 0, lastX: 0, lastTime: 0, velocity: 0, distance: 0, suppressClick: false, hover: false, focus: false, cursorX: 0, cursorY: 0, mouseX: 0, mouseY: 0, cursorReady: false, fine: false, reduced: false });
+
+  // Links and buttons in the looping copies stay clickable but are skipped
+  // by Tab (they repeat the real row, which keeps keyboard access).
+  useEffect(() => {
+    viewport.current?.querySelectorAll<HTMLElement>("[data-loop-copy] :is(a, button, input, select, textarea, [tabindex])")
+      .forEach(el => el.setAttribute("tabindex", "-1"));
+  });
 
   useEffect(() => {
     const el = viewport.current!;
@@ -148,7 +156,9 @@ export function LoopCarousel({ children, className = "", label, speed = 24, drag
         const state = motion.current;
         state.pointer = e.pointerId; state.startX = state.lastX = e.clientX; state.startScroll = state.target;
         state.lastTime = e.timeStamp; state.distance = state.velocity = state.momentum = 0; state.suppressClick = false;
-        e.currentTarget.classList.add("is-dragging"); e.currentTarget.setPointerCapture(e.pointerId);
+        // The pointer is only captured once it has moved (onPointerMove):
+        // capturing on press sent the click to the carousel instead of the
+        // card's link, so cards that link somewhere didn't open (Oct 8, 2026).
         if (dragCursor === "press" && state.fine && e.pointerType !== "touch") { moveCursor(e); cursor.current?.classList.add("is-visible"); }
       }}
       onPointerMove={e => {
@@ -159,12 +169,19 @@ export function LoopCarousel({ children, className = "", label, speed = 24, drag
         state.velocity = state.velocity * .76 + velocity * .24;
         state.lastX = e.clientX; state.lastTime = e.timeStamp;
         state.distance = Math.max(state.distance, Math.abs(e.clientX - state.startX));
+        if (state.distance > DRAG_START_PX && !e.currentTarget.hasPointerCapture(e.pointerId)) {
+          e.currentTarget.classList.add("is-dragging"); e.currentTarget.setPointerCapture(e.pointerId);
+        }
         state.target = state.startScroll - (e.clientX - state.startX);
       }}
       onPointerUp={e => finish(e)} onPointerCancel={e => finish(e, true)} onLostPointerCapture={e => finish(e, true)}
       onClickCapture={e => { if (motion.current.suppressClick) { e.preventDefault(); e.stopPropagation(); motion.current.suppressClick = false; } }}
       onDragStart={e => e.preventDefault()}>
-      <div className="loop-carousel-track">{[0, 1, 2].map(i => <div className="loop-carousel-group" key={i} aria-hidden={i !== 1 || undefined} inert={i !== 1 || undefined}>{children}</div>)}</div>
+      {/* The copies either side of the real row (for the endless loop) are
+          hidden from screen readers and taken out of the tab order (effect
+          above), but not inert: most cards on screen are copies, and inert
+          made their links unclickable (Oct 8, 2026). */}
+      <div className="loop-carousel-track">{[0, 1, 2].map(i => <div className="loop-carousel-group" key={i} aria-hidden={i !== 1 || undefined} data-loop-copy={i !== 1 || undefined}>{children}</div>)}</div>
     </div>
     {mounted && dragCursor && createPortal(<div ref={cursor} className="carousel-cursor" aria-hidden="true"><div className="carousel-cursor-pill"><span className="carousel-cursor-diamond" /><span>Drag</span></div></div>, document.body)}
   </>;
