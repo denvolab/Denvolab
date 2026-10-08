@@ -4,7 +4,7 @@ import type { ServiceHeroBlock } from "@/types/service-detail";
 
 /** Current service hero: headline and introduction share one editorial row. */
 export function ServiceHero({ block }: { block: ServiceHeroBlock }) {
-  return <section className="service-hero hero-with-lines">
+  return <section className="service-hero hero-with-lines" data-hero="">
     <HeroLines />
     <div className="service-section-inner service-hero-inner">
       <div className="service-hero-row">

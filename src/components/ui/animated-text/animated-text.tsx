@@ -54,6 +54,7 @@ import { useGSAP } from "@gsap/react";
 import { cn } from "@/lib/utils/cn";
 import { splitLines, type LineSplit } from "./split-lines";
 import { lineTrigger } from "./line-trigger";
+import { onFirstScreen } from "./first-screen";
 import { PHONE_QUERY, PHONE_STILL } from "@/lib/motion/phone-still";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -152,6 +153,14 @@ export function AnimatedText({ children, className, delay = DEFAULT_DELAY }: Ani
           if (ours) build();
         };
 
+        // On the first screen when the page opens: shown as it is, not
+        // split or animated (first-screen.ts).
+        if (onFirstScreen(root)) {
+          root.dataset.lineAnimation = "off";
+          return () => {
+            root.dataset.lineAnimation = "";
+          };
+        }
         document.fonts.ready.then(() => {
           if (cancelled) return;
           timer = window.setTimeout(build, delay);

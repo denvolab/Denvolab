@@ -22,7 +22,7 @@ export function CaseStudyPresentation({ content, name }: { content: Presentation
   const { brand, solution } = content;
   const theme = { "--project-primary": brand.primary, "--project-surface": brand.surface, "--project-font": brand.fontFamily } as CSSProperties;
   return <article className={`${styles.presentation} ${content.designVariant === "travel" ? styles.travel : ""}`} style={theme} aria-label={`${name} case study`}>
-    <section data-section-height="content" data-wash="off" className={`${styles.band} ${styles.hero}`} aria-labelledby="case-title">
+    <section data-section-height="content" data-wash="off" data-hero="" className={`${styles.band} ${styles.hero}`} aria-labelledby="case-title">
       <div className={styles.editorial}>
         <h1 id="case-title">{content.title}</h1>
         <div className={styles.heroSummary}><p>{content.summary}</p><Button href="/contact" size="lg" className={styles.talk}>LET’S TALK</Button></div>

@@ -44,6 +44,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { splitLines, type LineSplit } from "@/components/ui/animated-text/split-lines";
 import { TEXT_REVEAL_PENDING, TEXT_REVEAL_QUERY } from "./text-reveal-config";
 import { lineTrigger } from "@/components/ui/animated-text/line-trigger";
+import { onFirstScreen } from "@/components/ui/animated-text/first-screen";
 import { phoneStill } from "@/lib/motion/phone-still";
 import { fxOff } from "@/lib/motion/fx-off";
 
@@ -166,12 +167,11 @@ export function TextRevealController() {
     const mm = gsap.matchMedia();
 
     mm.add(TEXT_REVEAL_QUERY, () => {
-      // A client-side page change: hide the new page's text until it is split.
-      root.classList.add(TEXT_REVEAL_PENDING);
       const units: Unit[] = [];
       const done = new WeakSet<Element>();
       let timer = 0;
       let rescanTimer = 0;
+      let scanned = false;
       let cancelled = false;
       let width = window.innerWidth;
 
@@ -220,14 +220,19 @@ export function TextRevealController() {
           units.splice(i, 1);
         }
         const { splits, labels } = collect(done);
+        // The first screen of the page stays as it is (first-screen.ts).
+        const firstPass = !scanned;
+        scanned = true;
         for (const el of splits) {
           done.add(el);
+          if (firstPass && onFirstScreen(el)) continue;
           const unit: Unit = { el, kind: "split", split: null, kill: null, animations: [] };
           units.push(unit);
           build(unit);
         }
         for (const el of labels) {
           done.add(el);
+          if (firstPass && onFirstScreen(el)) continue;
           const unit: Unit = { el, kind: "label", split: null, kill: null, animations: [] };
           units.push(unit);
           build(unit);

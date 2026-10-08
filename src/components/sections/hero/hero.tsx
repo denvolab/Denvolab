@@ -9,7 +9,7 @@ import { MovingVisual } from "./moving-visual";
 export async function Hero() {
   const hero = await getHeroContent();
   const services = [...hero.services, { label: "AI Integration", href: "/services/ai-agent-custom-cms" }];
-  return <section className="home-hero" data-figma-node="906:7023">
+  return <section className="home-hero" data-figma-node="906:7023" data-hero="">
     <HeroLines/><div className="home-hero-inner">
       <p className="home-hero-wordmark" aria-hidden="true">{hero.wordmark}</p><Image className="home-hero-tablet-wordmark" src="/images/home/tablet-wordmark.svg" alt="" width={715} height={110} />
       <div className="home-hero-stage">

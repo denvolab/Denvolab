@@ -1,0 +1,28 @@
+/* Hero entrance (Oct 8, 2026): the text of each page's hero (the section
+ * marked data-hero) rises and fades in with the very first paint. Pure CSS,
+ * so it starts the moment the page is drawn, without waiting for JavaScript
+ * or fonts (the user: "load in real time, no delay"). It replaces the
+ * line-by-line rise there (ui/animated-text/first-screen.ts), which had to
+ * wait for both.
+ *
+ * Staggered: heading, then paragraphs, lists, buttons. `:where()` keeps the
+ * base rule as light as the delay rules, so the delays apply. Uses the
+ * separate `translate` property, so it never fights an element's own
+ * transform. Imported from app/globals.css. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-hero] :where(h1, p, ul, .button-sweep) {
+    animation: hero-entrance 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  [data-hero] :where(p) { animation-delay: 120ms; }
+  [data-hero] :where(ul) { animation-delay: 180ms; }
+  [data-hero] :where(.button-sweep) { animation-delay: 240ms; }
+  /* Inside an element that already rises: don't rise twice. */
+  [data-hero] :where(h1, p, ul, .button-sweep) :where(h1, p, ul, .button-sweep) {
+    animation: none;
+  }
+}
+
+@keyframes hero-entrance {
+  from { opacity: 0; translate: 0 28px; }
+  to { opacity: 1; translate: 0 0; }
+}
