@@ -71,6 +71,7 @@ const SKIP = [
   ".sr-only",
   "[contenteditable]",
   "[data-no-text-reveal]",
+  "[data-hero]",
   "[data-line-animation]",
   ".group\\/lens",
   // Scroll highlighters (ui/scroll-text-reveal, case-study-highlighter):

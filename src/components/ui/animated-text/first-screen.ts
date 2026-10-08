@@ -7,5 +7,6 @@
 // AnimatedText and motion/text-reveal.
 // ---------------------------------------------------------------------------
 export function onFirstScreen(el: Element): boolean {
+  if (el.closest("[data-hero], [data-no-text-reveal]")) return true;
   return el.getBoundingClientRect().top + window.scrollY < window.innerHeight;
 }

@@ -9,7 +9,7 @@
  * Imported from app/globals.css. */
 @media (prefers-reduced-motion: no-preference) {
   html.text-reveal-pending :is(body > header, main, footer)
-    :not(button, button *, .button-sweep, .button-sweep *, [role="button"], [role="button"] *, svg, svg *, input, textarea, select) {
+    :not([data-hero], [data-hero] *, [data-no-text-reveal], [data-no-text-reveal] *, button, button *, .button-sweep, .button-sweep *, [role="button"], [role="button"] *, svg, svg *, input, textarea, select) {
     color: transparent !important;
     text-shadow: none !important;
   }

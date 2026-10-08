@@ -65,6 +65,8 @@ export function PressController() {
 
     const down = (event: PointerEvent) => {
       if (event.button !== 0) return;
+      const insideCarousel = (event.target as Element | null)?.closest('.loop-carousel, [aria-roledescription="carousel"]');
+      if (insideCarousel && (event.pointerType === "touch" || window.matchMedia("(max-width: 767px), (pointer: coarse)").matches)) return;
       const el = (event.target as Element | null)?.closest<HTMLElement>(SELECTOR);
       if (!el) return;
       const selector = el.dataset.pressTarget;

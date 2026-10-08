@@ -17,7 +17,7 @@ export function LoopCarousel({ children, className = "", label, speed = 24, drag
   const viewport = useRef<HTMLDivElement>(null);
   const cursor = useRef<HTMLDivElement>(null);
   const mounted = useSyncExternalStore(subscribeToClient, clientSnapshot, serverSnapshot);
-  const motion = useRef({ current: 0, target: 0, momentum: 0, width: 0, pointer: -1, startX: 0, startScroll: 0, lastX: 0, lastTime: 0, velocity: 0, distance: 0, suppressClick: false, hover: false, focus: false, cursorX: 0, cursorY: 0, mouseX: 0, mouseY: 0, cursorReady: false, fine: false, reduced: false, touch: false });
+  const motion = useRef({ current: 0, target: 0, momentum: 0, width: 0, pointer: -1, startX: 0, startY: 0, startScroll: 0, lastX: 0, lastTime: 0, velocity: 0, distance: 0, suppressClick: false, hover: false, focus: false, cursorX: 0, cursorY: 0, mouseX: 0, mouseY: 0, cursorReady: false, fine: false, reduced: false, touch: false });
 
   // Links and buttons in the looping copies stay clickable but are skipped
   // by Tab (they repeat the real row, which keeps keyboard access).
@@ -139,6 +139,7 @@ export function LoopCarousel({ children, className = "", label, speed = 24, drag
     const state = motion.current;
     if (state.pointer !== e.pointerId) return;
     state.pointer = -1;
+    if (state.touch) { state.hover = false; state.focus = false; }
     state.momentum = cancel || state.reduced ? 0 : -state.velocity * 16;
     state.suppressClick = state.distance > 8;
     e.currentTarget.classList.remove("is-dragging");
@@ -160,7 +161,7 @@ export function LoopCarousel({ children, className = "", label, speed = 24, drag
       onPointerDown={e => {
         if (e.button !== 0 || !e.isPrimary) return;
         const state = motion.current;
-        state.pointer = e.pointerId; state.startX = state.lastX = e.clientX; state.startScroll = state.target;
+        state.pointer = e.pointerId; state.startX = state.lastX = e.clientX; state.startY = e.clientY; state.startScroll = state.current; state.target = state.current;
         state.touch = e.pointerType === "touch";
         state.lastTime = e.timeStamp; state.distance = state.velocity = state.momentum = 0; state.suppressClick = false;
         // The pointer is only captured once it has moved (onPointerMove):
@@ -172,6 +173,12 @@ export function LoopCarousel({ children, className = "", label, speed = 24, drag
         moveCursor(e);
         const state = motion.current;
         if (state.pointer !== e.pointerId) return;
+        const dx = e.clientX - state.startX;
+        const dy = e.clientY - state.startY;
+        if (state.touch && state.distance <= DRAG_START_PX && Math.abs(dy) > DRAG_START_PX && Math.abs(dy) > Math.abs(dx)) {
+          finish(e, true);
+          return; // Native vertical page scrolling stays available.
+        }
         const velocity = (e.clientX - state.lastX) / Math.max(1, e.timeStamp - state.lastTime);
         state.velocity = state.velocity * .76 + velocity * .24;
         state.lastX = e.clientX; state.lastTime = e.timeStamp;
@@ -179,9 +186,12 @@ export function LoopCarousel({ children, className = "", label, speed = 24, drag
         if (state.distance > DRAG_START_PX && !e.currentTarget.hasPointerCapture(e.pointerId)) {
           e.currentTarget.classList.add("is-dragging"); e.currentTarget.setPointerCapture(e.pointerId);
         }
-        state.target = state.startScroll - (e.clientX - state.startX);
+        if (state.distance > DRAG_START_PX) {
+          if (e.cancelable) e.preventDefault();
+          state.target = state.startScroll - dx;
+        }
       }}
-      onPointerUp={e => finish(e)} onPointerCancel={e => finish(e, true)} onLostPointerCapture={e => finish(e, true)}
+      onPointerUp={e => finish(e)} onPointerCancel={e => finish(e, true)} onLostPointerCapture={e => { if (e.target === e.currentTarget) finish(e, true); }}
       onClickCapture={e => { if (motion.current.suppressClick) { e.preventDefault(); e.stopPropagation(); motion.current.suppressClick = false; } }}
       onDragStart={e => e.preventDefault()}>
       {/* The copies either side of the real row (for the endless loop) are
