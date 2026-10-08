@@ -343,84 +343,84 @@ const TESTIMONIALS: Testimonial[] = [
     "name": "Maya Rahman",
     "role": "Product Founder",
     "quote": "The design process made a complex product feel clear and approachable. The dashboard, mobile screens and key user flows now feel like one consistent experience.",
-    "imageSrc": "/images/testimonials/demo-maya.png",
+    "imageSrc": "/images/testimonials/demo-maya.webp",
     "isSample": true
   },
   {
     "name": "Daniel Brooks",
     "role": "Operations Lead",
     "quote": "The team translated our workflows into an interface that is easy to follow. Thoughtful layouts and a clear visual hierarchy made the final handoff much easier for our development team.",
-    "imageSrc": "/images/testimonials/demo-daniel.png",
+    "imageSrc": "/images/testimonials/demo-daniel.webp",
     "isSample": true
   },
   {
     "name": "Sophie Bennett",
     "role": "Brand Founder",
     "quote": "The website and brand system feel cohesive across desktop, tablet and mobile. The attention to typography, spacing and presentation gave the project the polished direction we were looking for.",
-    "imageSrc": "/images/testimonials/demo-sophie.png",
+    "imageSrc": "/images/testimonials/demo-sophie.webp",
     "isSample": true
   },
   {
     "name": "Ethan Park",
     "role": "SaaS Product Lead",
     "quote": "The onboarding flow now feels straightforward, with clear decisions at each step. The design gives our product a consistent visual language from the first screen to the dashboard.",
-    "imageSrc": "/images/testimonials/demo-ethan.png",
+    "imageSrc": "/images/testimonials/demo-ethan.webp",
     "isSample": true
   },
   {
     "name": "Amina Hassan",
     "role": "E-commerce Founder",
     "quote": "The new storefront balances a strong brand presence with a simple shopping experience. Product pages, navigation and checkout feel connected across every screen size.",
-    "imageSrc": "/images/testimonials/demo-amina.png",
+    "imageSrc": "/images/testimonials/demo-amina.webp",
     "isSample": true
   },
   {
     "name": "Lucas Rivera",
     "role": "Service Business Owner",
     "quote": "The website makes our services easier to understand and puts the next action in the right place. The mobile layouts received the same attention as the desktop experience.",
-    "imageSrc": "/images/testimonials/demo-lucas.png",
+    "imageSrc": "/images/testimonials/demo-lucas.webp",
     "isSample": true
   },
   {
     "name": "Elena Rossi",
     "role": "Hospitality Marketing Lead",
     "quote": "The booking journey brings the property experience into the website. Room discovery, details and availability are presented clearly without losing the warmth of the brand.",
-    "imageSrc": "/images/testimonials/demo-elena.png",
+    "imageSrc": "/images/testimonials/demo-elena.webp",
     "isSample": true
   },
   {
     "name": "Noah Williams",
     "role": "HR Platform Founder",
     "quote": "The dashboard brings the important information together in a clean, focused way. The team gave structure to complex workflows while keeping the interface approachable.",
-    "imageSrc": "/images/testimonials/demo-noah.png",
+    "imageSrc": "/images/testimonials/demo-noah.webp",
     "isSample": true
   },
   {
     "name": "Priya Shah",
     "role": "Fintech Product Manager",
     "quote": "The information hierarchy makes financial data easier to scan and compare. Charts, tables and everyday actions share a consistent design system that feels considered.",
-    "imageSrc": "/images/testimonials/demo-priya.png",
+    "imageSrc": "/images/testimonials/demo-priya.webp",
     "isSample": true
   },
   {
     "name": "Oliver Reed",
     "role": "Technology Founder",
     "quote": "The design handoff was organised around reusable components and clear interaction states. It gave us a practical foundation for building the product with confidence.",
-    "imageSrc": "/images/testimonials/demo-oliver.png",
+    "imageSrc": "/images/testimonials/demo-oliver.webp",
     "isSample": true
   },
   {
     "name": "Grace Lin",
     "role": "Mobile Product Lead",
     "quote": "The mobile screens feel cohesive rather than a collection of separate pages. Navigation, spacing and key actions are consistent throughout the experience.",
-    "imageSrc": "/images/testimonials/demo-grace.png",
+    "imageSrc": "/images/testimonials/demo-grace.webp",
     "isSample": true
   },
   {
     "name": "Marcus Cole",
     "role": "Marketplace Founder",
     "quote": "The marketplace experience connects discovery and decision-making in a clear sequence. The final screens keep the content accessible while giving the brand its own personality.",
-    "imageSrc": "/images/testimonials/demo-marcus.png",
+    "imageSrc": "/images/testimonials/demo-marcus.webp",
     "isSample": true
   }
 ];

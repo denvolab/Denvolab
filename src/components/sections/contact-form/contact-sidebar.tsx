@@ -7,7 +7,7 @@ import { AnimatedAnchor } from "@/components/ui/animated-link/animated-link";
 // The address and phone are blue (text/info) in Figma; here they are links
 // too: the address opens Google Maps, the phone number dials.
 // ---------------------------------------------------------------------------
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import type { ContactSidebarContent } from "@/types/contact";
 import { BookCallButton } from "./book-call-button";
 import { LiveClock } from "./live-clock";

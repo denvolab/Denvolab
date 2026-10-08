@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import { HeroLines } from "@/components/ui/hero-lines";
 import type { ServiceHeroBlock } from "@/types/service-detail";
 

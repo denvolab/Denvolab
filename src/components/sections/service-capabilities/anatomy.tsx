@@ -3,7 +3,7 @@
 // capabilities "before the tap" (460), the interaction picture with its
 // lime note (840), three "after the tap" (460). Side columns are centered
 // against the picture.
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import { ServiceIconTile } from "@/components/ui/service-icon";
 import type { CapabilitiesAnatomy, ServiceCapability } from "@/types/service-detail";
 import { AnimatedText } from "@/components/ui/animated-text";

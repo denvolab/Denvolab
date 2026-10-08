@@ -215,7 +215,7 @@
   --color-ai-orbit-badge: #26354a; /* tool badge circles (96px + the small one in the card) */
   --color-ai-orbit-card: var(--secondary-800); /* brand badge card #192434 */
   --color-ai-orbit-eyebrow: #a6adbd; /* "FULL AI WORKFLOW ..." label */
-  --color-ai-orbit-muted: var(--gray-500); /* brand badge description #6b7a89 */
+  --color-ai-orbit-muted: #7b8a99; /* brand badge description; Figma #6b7a89 lifted to pass 4.5:1 contrast on the #192434 card */
   --color-ai-orbit-funnel-deep: #1e2d42; /* funnel fill at the neck (mobile hub ring uses it) */
 
   --color-border: var(--color-border-primary);

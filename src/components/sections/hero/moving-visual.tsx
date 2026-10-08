@@ -39,7 +39,7 @@
 // stays visible at its Figma spot and a tap opens the player. Keyboard focus
 // also shows the card (the button is a normal tab stop).
 // ---------------------------------------------------------------------------
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ShowreelDialog, type ShowreelDialogHandle } from "./showreel-dialog";
@@ -70,6 +70,7 @@ interface MovingVisualProps {
 }
 
 export function MovingVisual({ className, videoSrc = null }: MovingVisualProps) {
+  const [previewActive, setPreviewActive] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const mediaRef = useRef<HTMLButtonElement>(null);
   const previewRef = useRef<HTMLVideoElement>(null);
@@ -191,6 +192,8 @@ export function MovingVisual({ className, videoSrc = null }: MovingVisualProps) 
         e.clientY >= containerRect.top &&
         e.clientY <= containerRect.bottom;
 
+      if (isInsideHero && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) setPreviewActive(true);
+
       // Left through the bottom edge: keep sinking with the pointer until the
       // card is gone.
       if (!isInsideHero && hasEntered && withinX && e.clientY > containerRect.bottom) {
@@ -289,6 +292,7 @@ export function MovingVisual({ className, videoSrc = null }: MovingVisualProps) 
           ref={mediaRef}
           type="button"
           onClick={videoSrc ? openPlayer : undefined}
+          onFocus={() => { if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) setPreviewActive(true); }}
           disabled={!videoSrc}
           aria-haspopup="dialog"
           aria-label="Play the Denvo Lab showreel (with sound)"
@@ -297,8 +301,10 @@ export function MovingVisual({ className, videoSrc = null }: MovingVisualProps) 
           {videoSrc ? (
             <video
               ref={previewRef}
-              src={videoSrc}
-              autoPlay
+              src={previewActive ? videoSrc : undefined}
+              preload="none"
+              poster="/videos/hero-showreel-poster.webp"
+              autoPlay={previewActive}
               loop
               muted
               playsInline

@@ -17,7 +17,7 @@
 // as one piece. Below xl the glyph sits above, the panel stacks its text over
 // its picture, and the swatches go two per row on phones.
 // ---------------------------------------------------------------------------
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import type { CSSProperties } from "react";
 import { pctOf } from "@/lib/utils/fluid";
 import type { CaseStudyTypographyBlock } from "@/types/case-study";

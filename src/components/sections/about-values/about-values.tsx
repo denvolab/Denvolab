@@ -34,7 +34,7 @@
 // The label uses DM Sans Label/MD in capitals. Figma sets it in a mono font,
 // but the site keeps mono for captions only.
 // ---------------------------------------------------------------------------
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import { LoopCarousel } from "@/components/ui/loop-carousel";
 import { getAboutValues } from "@/lib/data/about";
 import { cn } from "@/lib/utils/cn";

@@ -20,7 +20,7 @@
 // Card text is sized in container units (cqw) so the card keeps its Figma
 // composition at every width.
 // ---------------------------------------------------------------------------
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import { cn } from "@/lib/utils/cn";
 import type { CaseStudyCollageBlock, CaseStudyCollageCard, CaseStudyImage } from "@/types/case-study";
 

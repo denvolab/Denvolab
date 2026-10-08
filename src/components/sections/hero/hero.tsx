@@ -1,6 +1,6 @@
 import { HeroLines } from "@/components/ui/hero-lines";
 import Link from "@/components/ui/animated-link/animated-link";
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import { getHeroContent } from "@/lib/data/homepage";
 import { Button } from "@/components/ui/button";
 import { MovingVisual } from "./moving-visual";

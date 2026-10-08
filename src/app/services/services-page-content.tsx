@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
 import { LensDistortion } from "@/components/ui/lens-distortion";

@@ -4,7 +4,7 @@
 // Server Component. White section, 96px top/bottom; the picture is 1840 wide,
 // radius 12, and 850 or 800 tall depending on the page (`height`).
 // ---------------------------------------------------------------------------
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import type { ServiceShowcaseBlock } from "@/types/service-detail";
 
 export function ServiceShowcase({ block }: { block: ServiceShowcaseBlock }) {

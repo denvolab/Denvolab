@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import { useSyncExternalStore } from "react";
 function subscribe(tick:()=>void){const timer=setInterval(tick,1000);return ()=>clearInterval(timer);}
 const snapshot=()=>Math.floor(Date.now()/1000);

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 
 // The Figma SVG layers of each icon, measured in a 64px frame. Every layer is
 // placed and sized in % of the frame, so the icon scales as one piece to

@@ -11,7 +11,7 @@
 // Client Component only because it needs hover state; AboutTeam itself stays
 // a Server Component and passes the already-fetched members down as props.
 // ---------------------------------------------------------------------------
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import { useState } from "react";
 
 import type { AboutTeamMember } from "@/types/about";

@@ -1,5 +1,5 @@
 import Link from "@/components/ui/animated-link/animated-link";
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import { getFooterColumns } from "@/lib/data/footer";
 import { Button } from "@/components/ui/button";
 import { LensDistortion } from "@/components/ui/lens-distortion";

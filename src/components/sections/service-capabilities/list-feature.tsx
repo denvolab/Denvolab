@@ -2,7 +2,7 @@
 // node 701:15331. Left half: title + six icon rows, each followed by a
 // hairline. Right half: grey card with the CMS picture and a "human
 // checkpoint" note. The halves are 48px apart and share the width.
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import { ServiceIconTile } from "@/components/ui/service-icon";
 import type { CapabilitiesListFeature } from "@/types/service-detail";
 import { AnimatedText } from "@/components/ui/animated-text";

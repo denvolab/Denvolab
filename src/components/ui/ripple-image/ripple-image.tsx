@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import { useEffect, useRef } from "react";
 
 import { cn } from "@/lib/utils/cn";

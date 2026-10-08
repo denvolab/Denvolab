@@ -6,7 +6,7 @@
 // 48px apart. The column is as tall as the picture with the title at the
 // top and the description at the bottom (Figma "space between").
 // ---------------------------------------------------------------------------
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import type { ServiceCraftSplitBlock } from "@/types/service-detail";
 import { AnimatedText } from "@/components/ui/animated-text";
 

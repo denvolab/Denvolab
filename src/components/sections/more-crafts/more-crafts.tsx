@@ -20,7 +20,7 @@ import { getCaseStudyGridProjects } from "@/lib/data/case-study";
 import { LoopCarousel } from "@/components/ui/loop-carousel";
 import { AnimatedText } from "@/components/ui/animated-text";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import { WorkWheel } from "@/components/ui/work-wheel";
 import { WorkWheelCursor } from "@/components/sections/portfolio-grid/work-wheel-cursor";
 
@@ -50,10 +50,10 @@ export async function MoreCrafts({ currentHref }: { currentHref: string }) {
 
         <LoopCarousel className="industries-carousel" label="More case studies" dragCursor="press"><div className="industries-carousel-items">
           {projects.map((project, index) => (
-            <Link key={project.href} href={project.href} className="group industries-card">
+            <Link key={project.href} href={project.href} className="group industries-card" draggable={false}>
               <div className="industries-image" data-project-image="" data-wheel-cursor="">
                 {project.imageSrc ? (
-                  <Image src={project.imageSrc} alt="" fill sizes="(max-width: 1023px) 325px, 480px" className="object-cover" data-no-ripple="" />
+                  <Image src={project.imageSrc} alt="" fill sizes="(max-width: 1023px) 325px, 480px" className="object-cover" data-no-ripple="" draggable={false} />
                 ) : null}
                 <span aria-hidden="true" className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center">
                   <span className="block translate-y-2 scale-90 transition-transform duration-500 ease-out group-hover:translate-y-0 group-hover:scale-100 group-focus-visible:translate-y-0 group-focus-visible:scale-100 [@media(hover:none)]:translate-y-0 [@media(hover:none)]:scale-100">

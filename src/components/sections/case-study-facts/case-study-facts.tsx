@@ -9,7 +9,7 @@
 // 8px taller (240 vs 232); kept as designed.
 // Tablet: three columns from md. Mobile: stacked.
 // ---------------------------------------------------------------------------
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import { cn } from "@/lib/utils/cn";
 import type { CaseStudyFactsBlock } from "@/types/case-study";
 

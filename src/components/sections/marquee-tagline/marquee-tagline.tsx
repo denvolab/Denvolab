@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 const phrases = ["WE DON’T DESIGN", "WE CRAFT FOR PEOPLE", "WE BUILD FOR EVERYDAY LIFE", "EVERY DETAIL HAS A PURPOSE"];
 export function MarqueeTagline({about = false}: {about?: boolean} = {}) {
   const items = about ? phrases.slice(1) : phrases;

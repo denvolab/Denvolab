@@ -24,7 +24,7 @@
 // Colors: the paragraph gray (#aab4be) and the border are Figma one-offs that
 // sit between two gray steps; the border uses gray-600, the text keeps its hex.
 // ---------------------------------------------------------------------------
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import { getAboutBenefits } from "@/lib/data/about";
 import { Reveal } from "@/components/ui/reveal";
 import { cn } from "@/lib/utils/cn";

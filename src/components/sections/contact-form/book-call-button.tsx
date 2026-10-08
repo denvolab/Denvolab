@@ -18,7 +18,7 @@
 // Any other link (e.g. the old mailto:) renders the plain Button.
 // ---------------------------------------------------------------------------
 import { useRef, type MouseEvent } from "react";
-import { getCalApi } from "@calcom/embed-react";
+import type { getCalApi } from "@calcom/embed-react";
 import { Button } from "@/components/ui/button";
 
 const NAMESPACE = "book-a-call";
@@ -28,7 +28,7 @@ type CalApi = Awaited<ReturnType<typeof getCalApi>>;
 
 /** Loads the embed once and sets the widget's look to the site's. */
 function loadCal(): Promise<CalApi> {
-  return getCalApi({ namespace: NAMESPACE }).then((cal) => {
+  return import("@calcom/embed-react").then(({ getCalApi }) => getCalApi({ namespace: NAMESPACE })).then((cal) => {
     cal("ui", {
       // Dark with the brand lime, like the founder card the button sits in
       // (Gray/950 and Brand/600). Set here so the widget always looks the

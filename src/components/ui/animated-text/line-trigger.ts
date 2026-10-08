@@ -2,9 +2,8 @@
 // lineTrigger: when a text's line animation plays (AnimatedText and the
 // site-wide motion/text-reveal). Two conditions, both needed:
 //
-//   1. the text is fully on screen (its bottom has passed the bottom of the
-//      screen), as zypsy.com's line animation does;
-//   2. its section has come in: the section's top is above 75% of the screen.
+//   1. the text has come onto the screen: its top is above 92% of it;
+//   2. its section has come in: the section's top is above 85% of the screen.
 //      The user, Oct 7, 2026: only the section being scrolled animates; text
 //      of the next section peeking in at the bottom of the screen waits.
 //
@@ -13,7 +12,11 @@
 // ---------------------------------------------------------------------------
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const SECTION_START = 0.75; // of the screen's height
+const SECTION_START = 0.85; // of the screen's height (0.75 until Oct 8, 2026)
+// The text plays once its TOP is this far up the screen (Oct 8, 2026: it used
+// to wait for its bottom, so on a phone a tall paragraph stayed hidden while
+// its first lines were already on screen, and the text felt late).
+const TEXT_START = "top 92%";
 
 /** One trigger per section, shared by every text in it (each text used to
  *  add its own: hundreds of triggers on a page, all checked on every scroll
@@ -74,10 +77,13 @@ export function lineTrigger(text: HTMLElement, play: () => void, reset: () => vo
   };
   const sectionWatch = watchSection(section, update);
 
+  // One trigger: from "top bottom" (just below the screen) to TEXT_START.
+  // Past its end going down: play. Back above its start going up (the text
+  // is below the screen again): reset.
   const textTrigger = ScrollTrigger.create({
     trigger: text,
     start: "top bottom",
-    end: "bottom bottom",
+    end: TEXT_START,
     onLeave: () => {
       textIn = true;
       update();
@@ -90,7 +96,7 @@ export function lineTrigger(text: HTMLElement, play: () => void, reset: () => vo
   });
 
   // Already there when the page opens (or after a re-split).
-  textIn = textTrigger.progress >= 1 || text.getBoundingClientRect().bottom <= window.innerHeight;
+  textIn = textTrigger.progress >= 1 || text.getBoundingClientRect().top <= window.innerHeight * 0.92;
   update();
 
   return () => {

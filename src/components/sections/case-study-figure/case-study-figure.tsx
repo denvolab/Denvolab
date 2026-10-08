@@ -11,7 +11,7 @@
 // Figma frame crops the picture (the overview shot is a 1035px screen in a
 // 1024px frame); the picture then fills the box like Figma's "Fill".
 // ---------------------------------------------------------------------------
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import type { CSSProperties } from "react";
 import { cn } from "@/lib/utils/cn";
 import { fluid, pctOf } from "@/lib/utils/fluid";

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import type { PartnerLogo } from "@/types/homepage";
 import { cn } from "@/lib/utils/cn";
 import styles from "./partner-logos.module.css";

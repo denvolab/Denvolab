@@ -69,7 +69,7 @@ const STAGGER = 200; // ms; zypsy.com: stagger { amount: 0.2, ease: "expo.out" }
 // frames (the page shook while scrolling). ScrollTrigger only says when.
 const EASE_CSS = "cubic-bezier(0.16, 1, 0.3, 1)"; // expo.out
 const expoOut = (t: number) => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
-const DEFAULT_DELAY = 300; // zypsy.com: js-line-animation="300" on the referenced heading
+const DEFAULT_DELAY = 0; // ms after the fonts (zypsy.com used 300; dropped Oct 8, 2026, it only made text late)
 
 interface AnimatedTextProps {
   children: ReactNode;

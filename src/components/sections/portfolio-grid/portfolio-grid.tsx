@@ -42,6 +42,9 @@ export async function PortfolioGrid({ projects: given }: PortfolioGridProps = {}
 
   return (
     <section id="projects" data-home-part="portfolio" className="w-full bg-background py-24" data-figma-node="230:4066">
+      {/* No visible title in Figma; this keeps the heading order h1 → h2 → h3
+          (card titles) for screen readers and Lighthouse. */}
+      <h2 className="sr-only">Our craft</h2>
       {/* Breakpoint: `md:` (768px), matching the Figma tablet frame's own
           2-column portfolio grid exactly (mobile stays 1-column). */}
       <div className="mx-auto grid w-full max-w-[1920px] grid-cols-1 gap-x-6 gap-y-16 px-5 md:gap-x-10 md:gap-y-20 md:px-10 md:grid-cols-2">

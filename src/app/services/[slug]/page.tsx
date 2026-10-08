@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo/page-metadata";
 import { notFound } from "next/navigation";
 import { getServiceDetail, getServiceDetailSlugs } from "@/lib/data/service-detail";
 import type { ServiceDetailBlock } from "@/types/service-detail";
@@ -16,6 +17,7 @@ import { ServiceHandover } from "@/components/sections/service-handover";
 import { ServiceProcessSteps } from "@/components/sections/service-process-steps";
 import { ServiceChecklist } from "@/components/sections/service-checklist";
 import { ServicePerspective } from "@/components/sections/service-perspective";
+import { JsonLd, breadcrumbs, organizationRef, absoluteUrl } from "@/components/seo/json-ld";
 
 // -----------------------------------------------------------------------------
 // Service detail pages (/services/<slug>), one per service, built from the
@@ -43,7 +45,7 @@ export async function generateMetadata(props: PageProps<"/services/[slug]">): Pr
   const { slug } = await props.params;
   const page = await getServiceDetail(slug);
   if (!page) return {};
-  return { title: page.name, description: page.description };
+  return pageMetadata({ title: page.name, description: page.description, path: `/services/${slug}` });
 }
 
 function Block({ block }: { block: ServiceDetailBlock }) {
@@ -84,6 +86,8 @@ export default async function ServiceDetailPage(props: PageProps<"/services/[slu
 
   return (
     <div className="ds-v31 service-detail" data-service-detail={slug}>
+      <JsonLd data={{ "@type": "Service", name: page.name, description: page.description, url: absoluteUrl(`/services/${slug}`), provider: organizationRef, areaServed: "Worldwide" }} />
+      <JsonLd data={breadcrumbs([["Services", "/services"], [page.name, `/services/${slug}`]])} />
       {page.blocks.map((block, i) => (
         <div key={`${block.type}-${i}`} data-service-block={block.type}><Block block={block} /></div>
       ))}

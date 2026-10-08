@@ -10,7 +10,7 @@
 // title + intro, then two numbered "design decisions" between faint rules
 // (text/primary at 12%).
 // ---------------------------------------------------------------------------
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import type { ServicePracticeBlock } from "@/types/service-detail";
 import { AnimatedText } from "@/components/ui/animated-text";
 

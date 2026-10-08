@@ -12,7 +12,7 @@
 // so screen readers and search engines always get real text; the artwork
 // itself is decorative.
 // ---------------------------------------------------------------------------
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import { cn } from "@/lib/utils/cn";
 import type { CaseStudyTextRun, CaseStudyVisualBlock, CaseStudyVisualContent } from "@/types/case-study";
 

@@ -11,7 +11,7 @@
 // higher than the others (its logo is taller); here all columns start level.
 // Four columns from xl, two from md, one on phones.
 // ---------------------------------------------------------------------------
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import { cn } from "@/lib/utils/cn";
 import type { CaseStudyCompetitorsBlock } from "@/types/case-study";
 import { AnimatedText } from "@/components/ui/animated-text";

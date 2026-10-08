@@ -1,16 +1,19 @@
 import { SitePage, SiteHero, SiteConversation } from "@/components/sections/site-page/site-page";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo/page-metadata";
 import { PortfolioGrid } from "@/components/sections/portfolio-grid";
 import { IndustriesServed } from "@/components/sections/industries-served";
 import { getCaseStudyGridProjects } from "@/lib/data/case-study";
+import { JsonLd, breadcrumbs } from "@/components/seo/json-ld";
 
 // The root layout's `title.template` ("%s | Denvo Lab") applies here, because
 // this page is in a different route segment from the layout that defines it.
-export const metadata: Metadata = {
-  title: "Case Studies",
+export const metadata: Metadata = pageMetadata({
+  title: "Our Craft",
   description:
     "See the products Denvo Lab has designed and built: SaaS apps, web apps, and full-stack projects across booking, fintech, health, HR, and more.",
-};
+  path: "/case-studies",
+});
 
 // -----------------------------------------------------------------------------
 // Case Studies page (/case-studies) — assembled from the Figma "Work" frame
@@ -33,6 +36,7 @@ export default async function CaseStudiesPage() {
 
   return (
     <SitePage path="/case-studies">
+      <JsonLd data={breadcrumbs([["Our Craft", "/case-studies"]])} />
       <SiteHero title={"Crafted by\nDenvolab."} intro="Explore the brands, websites, and apps we’ve shaped—and the everyday problems behind them." action="SCROLL TO EXPLORE" href="#projects" node="950:3731" />
       <PortfolioGrid projects={projects} />
       <IndustriesServed />

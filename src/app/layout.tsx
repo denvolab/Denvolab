@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { OrganizationJsonLd } from "@/components/seo/organization-jsonld";
 import { siteConfig } from "@/lib/seo/site-config";
+import { SHARE_IMAGE } from "@/lib/seo/page-metadata";
 import { ImageRevealController } from "@/components/motion/image-reveal";
 import { TextRevealController } from "@/components/motion/text-reveal/text-reveal-controller";
 import { PressController } from "@/components/motion/press/press-controller";
@@ -28,8 +29,8 @@ import { WhatsAppChat } from "@/components/ui/whatsapp-chat/whatsapp-chat";
 // globals.css and point `--font-heading` at it. Every heading already reads
 // the token, so nothing else in the app changes.
 import "@fontsource-variable/dm-sans";
-import "@fontsource/dm-mono/400.css";
-import "@fontsource/dm-mono/500.css";
+import "@fontsource/dm-mono/latin-400.css";
+import "@fontsource/dm-mono/latin-500.css";
 import "./globals.css";
 import "lenis/dist/lenis.css";
 
@@ -50,11 +51,13 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: siteConfig.name,
     description: siteConfig.description,
+    images: [SHARE_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
+    images: [SHARE_IMAGE.url],
   },
 };
 
@@ -64,8 +67,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className="h-full antialiased" suppressHydrationWarning>
       <body className="flex min-h-full flex-col">
         <OrganizationJsonLd />
+        <a href="#main-content" className="skip-link">Skip to content</a>
         <Header />
-        <main className="min-w-0 flex-1">{children}</main>
+        <main id="main-content" tabIndex={-1} className="min-w-0 flex-1">{children}</main>
         <Footer />
         <WhatsAppChat />
         {/* Keep image reveals active. ColorWashController is intentionally

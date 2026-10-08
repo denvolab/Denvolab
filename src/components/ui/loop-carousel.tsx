@@ -17,7 +17,7 @@ export function LoopCarousel({ children, className = "", label, speed = 24, drag
   const viewport = useRef<HTMLDivElement>(null);
   const cursor = useRef<HTMLDivElement>(null);
   const mounted = useSyncExternalStore(subscribeToClient, clientSnapshot, serverSnapshot);
-  const motion = useRef({ current: 0, target: 0, momentum: 0, width: 0, pointer: -1, startX: 0, startScroll: 0, lastX: 0, lastTime: 0, velocity: 0, distance: 0, suppressClick: false, hover: false, focus: false, cursorX: 0, cursorY: 0, mouseX: 0, mouseY: 0, cursorReady: false, fine: false, reduced: false });
+  const motion = useRef({ current: 0, target: 0, momentum: 0, width: 0, pointer: -1, startX: 0, startScroll: 0, lastX: 0, lastTime: 0, velocity: 0, distance: 0, suppressClick: false, hover: false, focus: false, cursorX: 0, cursorY: 0, mouseX: 0, mouseY: 0, cursorReady: false, fine: false, reduced: false, touch: false });
 
   // Links and buttons in the looping copies stay clickable but are skipped
   // by Tab (they repeat the real row, which keeps keyboard access).
@@ -82,7 +82,10 @@ export function LoopCarousel({ children, className = "", label, speed = 24, drag
         } else if (state.pointer === -1 && !state.hover && !state.focus && !state.reduced) {
           state.target += speed * dt / 1000;
         }
-        state.current += (state.target - state.current) * (state.reduced ? 1 : 1 - Math.pow(.95, step));
+        // A finger drags the cards 1:1 (a smoothed follow felt unresponsive on
+        // phones, Oct 8, 2026); a mouse keeps the 5% eased follow.
+        const follow = state.reduced || (state.touch && state.pointer !== -1) ? 1 : 1 - Math.pow(.95, step);
+        state.current += (state.target - state.current) * follow;
         if (Math.abs(state.target - state.current) < .4 && !state.momentum) state.current = state.target;
         // Rebase all drag coordinates together so long drags never hit a scroll edge.
         if (state.width) {
@@ -113,11 +116,14 @@ export function LoopCarousel({ children, className = "", label, speed = 24, drag
         }
       }
       previous = time;
-      frame = visible || document.hidden ? requestAnimationFrame(tick) : 0;
+      frame = visible && !document.hidden ? requestAnimationFrame(tick) : 0;
     };
+    const resume = () => { if (!document.hidden && visible && !frame) { previous = 0; frame = requestAnimationFrame(tick); } };
+    document.addEventListener("visibilitychange", resume);
     visibility.observe(el);
     return () => {
       cancelAnimationFrame(frame); observer.disconnect(); visibility.disconnect();
+      document.removeEventListener("visibilitychange", resume);
       reduced.removeEventListener("change", preferences); fine.removeEventListener("change", preferences);
       images.forEach(image => image.style.removeProperty("transform"));
       track.style.removeProperty("transform");
@@ -155,6 +161,7 @@ export function LoopCarousel({ children, className = "", label, speed = 24, drag
         if (e.button !== 0 || !e.isPrimary) return;
         const state = motion.current;
         state.pointer = e.pointerId; state.startX = state.lastX = e.clientX; state.startScroll = state.target;
+        state.touch = e.pointerType === "touch";
         state.lastTime = e.timeStamp; state.distance = state.velocity = state.momentum = 0; state.suppressClick = false;
         // The pointer is only captured once it has moved (onPointerMove):
         // capturing on press sent the click to the carousel instead of the

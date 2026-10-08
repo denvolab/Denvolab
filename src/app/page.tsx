@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo/page-metadata";
 import Link from "@/components/ui/animated-link/animated-link";
 import { siteConfig } from "@/lib/seo/site-config";
 import { Hero } from "@/components/sections/hero";
@@ -11,15 +12,19 @@ import { ProcessSteps } from "@/components/sections/process-steps";
 import { Testimonials } from "@/components/sections/testimonials";
 import { HomeConversation } from "@/components/sections/home-chrome/home-chrome";
 import "./home.css";
+import { JsonLd, organizationRef, absoluteUrl } from "@/components/seo/json-ld";
 
 // Note: `title.template` from the root layout does NOT apply here — a page
 // in the same route segment as the layout that defines it is exempt (see
 // Next.js metadata docs). So the homepage sets its own full, keyword-rich
 // title directly rather than relying on the "%s | Denvo Lab" template.
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Denvo Lab | UI/UX Design & Development Agency",
-  description: siteConfig.description,
-};
+  description:
+    siteConfig.description,
+  path: "/",
+  absolute: true,
+});
 
 // -----------------------------------------------------------------------------
 // Home page — assembled from components/sections/*, each mapping 1:1 to a
@@ -31,6 +36,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <div data-homepage="">
+      <JsonLd data={{ "@type": "WebSite", name: siteConfig.name, url: absoluteUrl("/"), description: siteConfig.description, publisher: organizationRef }} />
       <Hero />
       <MarqueeTagline />
       <div className="home-portfolio"><PortfolioGrid /><div className="home-portfolio-more"><Link href="/case-studies">VIEW OUR ALL CRAFTS</Link></div></div>

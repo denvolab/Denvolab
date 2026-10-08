@@ -23,7 +23,7 @@ import { HeroLines } from "@/components/ui/hero-lines";
 // "MyCrew" wordmark is part of the artwork), with the page title for screen
 // readers.
 // ---------------------------------------------------------------------------
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import type { CSSProperties } from "react";
 import { Fragment } from "react";
 import { Button } from "@/components/ui/button";

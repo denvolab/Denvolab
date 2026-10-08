@@ -1,5 +1,5 @@
 import { AnimatedAnchor } from "@/components/ui/animated-link/animated-link";
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import type { Testimonial } from "@/types/homepage";
 import { cn } from "@/lib/utils/cn";
 
@@ -27,10 +27,10 @@ export function TestimonialCard({
       )}
     >
       <div className="flex w-full items-center gap-4">
-        {testimonial.imageSrc ? <Image src={testimonial.imageSrc} alt={testimonial.name} width={56} height={56} className="size-14 shrink-0 rounded-full object-cover" /> : <span className="flex size-14 shrink-0 items-center justify-center rounded-full bg-surface font-sans text-heading-5 text-foreground" aria-hidden="true">{testimonial.name.split(" ").map(part => part[0]).slice(0, 2).join("")}</span>}
+        {testimonial.imageSrc ? <Image src={testimonial.imageSrc} alt={testimonial.name} width={56} height={56} sizes="56px" className="size-14 shrink-0 rounded-full object-cover" /> : <span className="flex size-14 shrink-0 items-center justify-center rounded-full bg-surface font-sans text-heading-5 text-foreground" aria-hidden="true">{testimonial.name.split(" ").map(part => part[0]).slice(0, 2).join("")}</span>}
         <div className="flex min-w-0 flex-col items-start gap-1">
           <p className="font-sans text-heading-5 text-foreground">{testimonial.name}</p>
-          <p className="font-sans text-body-sm text-foreground-subtle">{testimonial.role}</p>
+          <p className="font-sans text-body-sm text-secondary">{testimonial.role}</p>
         </div>
       </div>
 

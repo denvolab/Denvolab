@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import { ServiceIconTile } from "@/components/ui/service-icon";
 import { AnimatedText } from "@/components/ui/animated-text";
 import type { CapabilitiesEditorialList } from "@/types/service-detail";

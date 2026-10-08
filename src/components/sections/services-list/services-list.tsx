@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import Link from "@/components/ui/animated-link/animated-link";
 import { getServicesList } from "@/lib/data/services";
 

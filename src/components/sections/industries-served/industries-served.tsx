@@ -12,7 +12,7 @@
 // The pictures have no entrance animation and the card text isn't
 // line-animated: the cards already slide sideways.
 // ---------------------------------------------------------------------------
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import { getIndustriesServed } from "@/lib/data/services";
 import { LoopCarousel } from "@/components/ui/loop-carousel";
 import { AnimatedText } from "@/components/ui/animated-text";

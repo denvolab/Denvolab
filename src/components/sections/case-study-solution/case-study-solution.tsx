@@ -16,7 +16,7 @@
 // Below xl the challenge has no reserved slot, so this section adds its own
 // 48 / 64px gap above.
 // ---------------------------------------------------------------------------
-import Image from "next/image";
+import Image from "@/components/ui/responsive-image/responsive-image";
 import type { CSSProperties } from "react";
 import { cn } from "@/lib/utils/cn";
 import { fluid, pctOf } from "@/lib/utils/fluid";

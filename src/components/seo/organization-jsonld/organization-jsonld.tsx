@@ -4,22 +4,20 @@
 // logo, name and social profiles to the Denvo Lab brand entity.
 // ---------------------------------------------------------------------------
 import { siteConfig } from "@/lib/seo/site-config";
+import { JsonLd } from "@/components/seo/json-ld";
 
 export function OrganizationJsonLd() {
-  const data = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: siteConfig.legalName,
-    url: siteConfig.url,
-    description: siteConfig.description,
-    email: siteConfig.email,
-    sameAs: Object.values(siteConfig.socials),
-  };
-
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    <JsonLd
+      data={{
+        "@type": "Organization",
+        name: siteConfig.legalName,
+        url: siteConfig.url,
+        logo: new URL("/images/home/lockup.svg", siteConfig.url).toString(),
+        description: siteConfig.description,
+        email: siteConfig.email,
+        sameAs: Object.values(siteConfig.socials),
+      }}
     />
   );
 }

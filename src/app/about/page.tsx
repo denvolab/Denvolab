@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo/page-metadata";
 import { AboutHero } from "@/components/sections/about-hero";
 import { MarqueeTagline } from "@/components/sections/marquee-tagline";
 import { AboutStory } from "@/components/sections/about-story";
@@ -8,14 +9,16 @@ import { AboutBenefits } from "@/components/sections/about-benefits";
 import { AboutTeam } from "@/components/sections/about-team";
 import { SitePage, SiteConversation } from "@/components/sections/site-page/site-page";
 import { ProcessSteps } from "@/components/sections/process-steps";
+import { JsonLd, breadcrumbs } from "@/components/seo/json-ld";
 
 // The root layout's `title.template` ("%s | Denvo Lab") applies here, because
 // this page is in a different route segment from the layout that defines it.
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About Us",
   description:
     "Denvo Lab is a UI/UX design and development agency. Meet the team, see what makes us different, and learn how we work with clients around the world.",
-};
+  path: "/about",
+});
 
 // -----------------------------------------------------------------------------
 // About page — assembled from components/sections/*, top to bottom in the same
@@ -26,6 +29,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <SitePage path="/about">
+      <JsonLd data={breadcrumbs([["About Us", "/about"]])} />
       <AboutHero />
       <MarqueeTagline about />
       <AboutStory />

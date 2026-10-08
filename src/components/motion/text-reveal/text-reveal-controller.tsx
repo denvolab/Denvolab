@@ -65,6 +65,7 @@ const SKIP = [
   "svg",
   "time",
   "[aria-live]",
+  "[aria-hidden='true']",
   "[role='status']",
   "[role='timer']",
   ".sr-only",
@@ -82,7 +83,7 @@ const SKIP = [
   ".loop-carousel",
 ].join(",");
 const NOT_SPLITTABLE_INSIDE = "[data-word], [data-highlight-word], a, button, input, select, textarea, time, svg, img, video, canvas, iframe, .button-text, [aria-live]";
-const DELAY = 300; // ms, as AnimatedText
+const DELAY = 0; // ms after the fonts (was 300 until Oct 8, 2026: it only made text late)
 const HYDRATION_RETRY_MS = 400;
 const HYDRATION_RETRIES = 25;
 // The lines move with Web Animations, which the browser runs off the main
@@ -214,6 +215,18 @@ export function TextRevealController() {
         unit.kill = lineTrigger(unit.el, play, reset);
       };
 
+      // Defer word measurement and DOM splitting until a text block is near view.
+      const prepare = (unit: Unit) => {
+        const observer = new IntersectionObserver(([entry]) => {
+          if (!entry.isIntersecting) return;
+          observer.disconnect();
+          unit.kill = null;
+          build(unit);
+        }, { rootMargin: "200px 0px" });
+        unit.kill = () => observer.disconnect();
+        observer.observe(unit.el);
+      };
+
       const scan = () => {
         // Text React (or a script) removed: drop its trigger, so the list of
         // scroll triggers doesn't keep growing while the visitor scrolls.
@@ -241,7 +254,7 @@ export function TextRevealController() {
           done.add(el);
           const unit: Unit = { el, kind: "split", split: null, kill: null, animations: [] };
           units.push(unit);
-          build(unit);
+          prepare(unit);
         }
         for (const el of labels) {
           if (firstPass && onFirstScreen(el)) {
@@ -255,7 +268,7 @@ export function TextRevealController() {
           done.add(el);
           const unit: Unit = { el, kind: "label", split: null, kill: null, animations: [] };
           units.push(unit);
-          build(unit);
+          prepare(unit);
         }
         // Retried for up to ~10s; text React never manages stays as it is.
         if (waiting && !cancelled && retries++ < HYDRATION_RETRIES) {

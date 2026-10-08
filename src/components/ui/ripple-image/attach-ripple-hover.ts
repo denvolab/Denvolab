@@ -70,14 +70,6 @@ function loadEffect() {
   effectModule ??= import("./ripple-effect");
   return effectModule;
 }
-let prewarmed = false;
-function prewarm() {
-  if (prewarmed) return;
-  prewarmed = true;
-  const idle = window.requestIdleCallback ?? ((fn: () => void) => window.setTimeout(fn, 1500));
-  idle(() => void loadEffect().catch(() => { effectModule = null; }));
-}
-
 /** A real mouse movement, not the page sliding under a still cursor. */
 const movedByHand = (event: PointerEvent) => event.movementX !== 0 || event.movementY !== 0;
 function subscribeScroll(stop: () => void) {
@@ -186,7 +178,6 @@ export function attachRippleHover(
   }
 
   watchScroll();
-  prewarm();
 
   let effect: RippleEffect | null = null; // the WebGL effect, only while hovering
   let loading = false;                    // true while three.js is being downloaded
