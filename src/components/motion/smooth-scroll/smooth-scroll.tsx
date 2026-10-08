@@ -21,6 +21,10 @@ export function SmoothScroll() {
   useEffect(() => {
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const phone = window.matchMedia("(width < 768px)");
+    const touch = window.matchMedia("(hover: none) and (pointer: coarse)");
+    // The phone's address bar showing and hiding changes the window height
+    // while scrolling; ScrollTrigger needn't re-measure for that.
+    ScrollTrigger.config({ ignoreMobileResize: true });
     const setLerp = () => {
       if (lenis) lenis.options.lerp = phone.matches ? LERP_PHONE : LERP_DESKTOP;
     };
@@ -38,7 +42,11 @@ export function SmoothScroll() {
       lenis?.destroy();
       lenis = undefined;
       instance.current = null;
-      if (motion.matches || fxOff("lenis")) return;
+      // Touch screens scroll natively, with no Lenis at all (Oct 8, 2026:
+      // on Android and iOS a finger flick only went a short way). Even with
+      // touch smoothing off, Lenis listened to every touch move, so the
+      // phone waited for JavaScript before each bit of scrolling.
+      if (motion.matches || touch.matches || fxOff("lenis")) return;
 
       lenis = new Lenis({
         // html is h-full; observe the growing body so streamed sections and
@@ -93,9 +101,11 @@ export function SmoothScroll() {
     document.addEventListener("keydown", onKeyDown);
     document.addEventListener("focusin", cancelInertia);
     motion.addEventListener("change", configure);
+    touch.addEventListener("change", configure);
     phone.addEventListener("change", setLerp);
     return () => {
       motion.removeEventListener("change", configure);
+      touch.removeEventListener("change", configure);
       phone.removeEventListener("change", setLerp);
       window.removeEventListener("wheel", onWheel);
       window.clearTimeout(wheelTimer);

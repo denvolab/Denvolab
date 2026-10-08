@@ -119,6 +119,8 @@ main [data-homepage] .home-hero { min-height:100svh!important; background:#0d121
 .home-footer-brand { display:flex; flex-direction:column; gap:24px; }
 .home-footer-copyright { color:#b4c0cc; font:400 12px/20px var(--font-mono); }
 .home-footer-logo { width:330.309px; height:120px; }
+/* A short line about the studio under the logo (Oct 8, 2026): 2-3 lines. */
+.home-footer-about { max-width:360px; font-size:16px; line-height:24px; color:#b4c0cc; }
 .home-footer nav { display:flex; gap:96px; }
 .home-footer-column { display:flex; flex-direction:column; gap:24px; }
 .home-footer-column h3 { font-size:24px; line-height:32px; letter-spacing:-.015em; }
@@ -286,7 +288,15 @@ main [data-homepage] .home-hero { min-height:100svh!important; background:#0d121
  .home-footer-column h3 { font-size:20px; line-height:28px; letter-spacing:-.01em; }
  .home-footer-column { gap:24px; }
  .home-footer-column ul { gap:16px; }
- .home-footer-signature { margin-top:48px; }
+ /* Phones (Oct 8, 2026): the copyright line moves below the link columns,
+    just above the DENVOLAB signature, and the space before the signature
+    is smaller. The brand block's own children join the column so the
+    copyright can be reordered. */
+ .home-footer-top { gap:24px; }
+ .home-footer-brand { display:contents; }
+ .home-footer nav { order:1; margin-top:16px; }
+ .home-footer-copyright { order:2; margin-top:8px; }
+ .home-footer-signature { margin-top:20px; }
 }
 /* The site's older viewport rule is more specific than a simple section selector. */
 main [data-homepage][data-homepage] section { min-height:0!important; }
@@ -296,8 +306,9 @@ main [data-homepage][data-homepage] .home-hero { min-height:100svh!important; }
 @media (width < 768px) {
  .home-closing { background:#0d1216; }
  .home-footer-logo { width:180px; }
+ .home-footer-about { font-size:14px; line-height:20px; }
  .home-closing-invitation p { font-size:14px; line-height:20px; }
- .home-footer-top { gap:32px; }
+ .home-footer-top { gap:24px; } /* see the phone footer order above */
  [data-homepage] [data-testimonial-card] { width:320px; padding:16px; }
 }
 .home-hero-tablet-wordmark { display:none; }

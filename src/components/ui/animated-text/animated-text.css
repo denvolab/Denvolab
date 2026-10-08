@@ -18,6 +18,19 @@
   padding-bottom: 0.1em;
   margin-bottom: -0.1em;
 }
+/* Each .line is one line the browser already drew, so it never wraps again
+ * (Oct 8, 2026: on Android "SaaS App" chips broke onto two lines after the
+ * split; text measured a fraction of a pixel differently). A 2px clip margin
+ * keeps such a fraction from cutting off the last letter; the hidden line
+ * below (110% down) stays hidden. Browsers without overflow-clip-margin keep
+ * the plain hidden above. */
+@supports (overflow-clip-margin: 2px) {
+  [data-line-animation] .line {
+    overflow: clip;
+    overflow-clip-margin: 2px;
+  }
+}
 [data-line-animation] .line-inner {
   display: block;
+  white-space: nowrap;
 }

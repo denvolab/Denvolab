@@ -45,6 +45,7 @@ import { splitLines, type LineSplit } from "@/components/ui/animated-text/split-
 import { TEXT_REVEAL_PENDING, TEXT_REVEAL_QUERY } from "./text-reveal-config";
 import { lineTrigger } from "@/components/ui/animated-text/line-trigger";
 import { onFirstScreen } from "@/components/ui/animated-text/first-screen";
+import { isHydrated } from "@/lib/motion/hydrated";
 import { phoneStill } from "@/lib/motion/phone-still";
 import { fxOff } from "@/lib/motion/fx-off";
 
@@ -82,6 +83,8 @@ const SKIP = [
 ].join(",");
 const NOT_SPLITTABLE_INSIDE = "[data-word], [data-highlight-word], a, button, input, select, textarea, time, svg, img, video, canvas, iframe, .button-text, [aria-live]";
 const DELAY = 300; // ms, as AnimatedText
+const HYDRATION_RETRY_MS = 400;
+const HYDRATION_RETRIES = 25;
 // The lines move with Web Animations, which the browser runs off the main
 // thread (Oct 7, 2026: with GSAP moving dozens of lines at once, Lenis lost
 // frames and the page shook; with these turned off it was smooth). GSAP's
@@ -172,6 +175,7 @@ export function TextRevealController() {
       let timer = 0;
       let rescanTimer = 0;
       let scanned = false;
+      let retries = 0;
       let cancelled = false;
       let width = window.innerWidth;
 
@@ -223,19 +227,40 @@ export function TextRevealController() {
         // The first screen of the page stays as it is (first-screen.ts).
         const firstPass = !scanned;
         scanned = true;
+        let waiting = false;
         for (const el of splits) {
+          if (firstPass && onFirstScreen(el)) {
+            done.add(el);
+            continue;
+          }
+          // Not hydrated by React yet: leave it, try again (lib/motion/hydrated).
+          if (!isHydrated(el)) {
+            waiting = true;
+            continue;
+          }
           done.add(el);
-          if (firstPass && onFirstScreen(el)) continue;
           const unit: Unit = { el, kind: "split", split: null, kill: null, animations: [] };
           units.push(unit);
           build(unit);
         }
         for (const el of labels) {
+          if (firstPass && onFirstScreen(el)) {
+            done.add(el);
+            continue;
+          }
+          if (!isHydrated(el)) {
+            waiting = true;
+            continue;
+          }
           done.add(el);
-          if (firstPass && onFirstScreen(el)) continue;
           const unit: Unit = { el, kind: "label", split: null, kill: null, animations: [] };
           units.push(unit);
           build(unit);
+        }
+        // Retried for up to ~10s; text React never manages stays as it is.
+        if (waiting && !cancelled && retries++ < HYDRATION_RETRIES) {
+          window.clearTimeout(rescanTimer);
+          rescanTimer = window.setTimeout(scan, HYDRATION_RETRY_MS);
         }
       };
 

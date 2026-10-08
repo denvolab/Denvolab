@@ -25,8 +25,8 @@
 // The studio's email also says where the form was sent from (approximate
 // location and IP), read from the request headers in visitorOrigin() below.
 //
-// Not done here: rate limiting. If spam gets past the honeypot, add one
-// (e.g. per-IP with Upstash) at the top of this function. Gmail also caps
+// RATE LIMITS (rate-limit.ts, Oct 8, 2026): 3 sends per 10 minutes per IP,
+// and at most 40 automatic confirmation emails an hour. Gmail also caps
 // sending at about 500 emails a day.
 // ---------------------------------------------------------------------------
 import { headers } from "next/headers";
@@ -36,11 +36,13 @@ import { inquiryEmail } from "@/lib/email/inquiry-email";
 import { confirmationEmail } from "@/lib/email/confirmation-email";
 import type { InquiryState } from "@/types/contact";
 import { HONEYPOT_FIELD, labelsFor, readInquiry, validateInquiry } from "./validation";
+import { allowConfirmation, allowSend } from "./rate-limit";
 
 const SUCCESS_MESSAGE = "Your message is on its way. We’ll get back to you shortly by email.";
 const INVALID_MESSAGE = "A few fields need a look.";
 const INQUIRY_EMAIL = "denvolab@gmail.com";
 const FAILURE_MESSAGE = `Something went wrong on our side. Please email ${INQUIRY_EMAIL} instead.`;
+const TOO_MANY_MESSAGE = `You’ve sent a few messages in a row. Please wait a few minutes, or email ${INQUIRY_EMAIL}.`;
 
 /** The visitor's IP and approximate location from the host's request headers.
  *  Vercel adds the x-vercel-ip-* geolocation headers; the city is URL-encoded.
@@ -78,6 +80,11 @@ export async function sendInquiry(_previous: InquiryState, formData: FormData): 
     return { status: "error", message: INVALID_MESSAGE, fieldErrors };
   }
 
+  const origin = await visitorOrigin();
+  if (!allowSend(origin.ip)) {
+    return { status: "error", message: TOO_MANY_MESSAGE };
+  }
+
   const services = labelsFor(values.services, "services");
   const budget = values.budget ? labelsFor([values.budget], "budget")[0] : "";
 
@@ -90,7 +97,7 @@ export async function sendInquiry(_previous: InquiryState, formData: FormData): 
     budget,
     details: values.details,
     submittedAt: new Date(),
-    ...(await visitorOrigin()),
+    ...origin,
   });
 
   const result = await sendEmail({ to: INQUIRY_EMAIL, replyTo: values.email, ...email });
@@ -100,6 +107,9 @@ export async function sendInquiry(_previous: InquiryState, formData: FormData): 
 
   // Replies to the confirmation come to the studio's inbox.
   const confirmation = confirmationEmail({ name: values.name, services, budget });
+  // Skipped once the hourly cap is reached (rate-limit.ts); the inquiry
+  // itself has already reached the studio.
+  if (!allowConfirmation()) return { status: "success", message: SUCCESS_MESSAGE };
   after(async () => {
     const sent = await sendEmail({ to: values.email, replyTo: INQUIRY_EMAIL, ...confirmation });
     if (!sent.ok) console.error("[contact] The inquiry was delivered, but the visitor's confirmation email was not.");

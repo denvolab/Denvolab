@@ -51,6 +51,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { fxOff } from "@/lib/motion/fx-off";
 import { phoneStill } from "@/lib/motion/phone-still";
+import { isHydrated } from "@/lib/motion/hydrated";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -80,13 +81,6 @@ function driftPictures(frame: HTMLElement) {
   });
 }
 
-/** Moves all of an element's child nodes into a fragment (same nodes). */
-function fragmentOf(element: HTMLElement) {
-  const fragment = document.createDocumentFragment();
-  fragment.append(...Array.from(element.childNodes));
-  return fragment;
-}
-
 export function ImageRevealController() {
   const pathname = usePathname();
 
@@ -101,44 +95,49 @@ export function ImageRevealController() {
      * The corner wipe without animating clip-path (Oct 7, 2026: Chrome and
      * Brave repaint a clip-path animation on every frame, and with a picture
      * revealing while the page scrolls Lenis lost frames and the screen
-     * shook; with the reveal off it was smooth). Instead the frame's content
-     * is wrapped, for the length of the reveal only, in a window that slides
-     * in from the bottom-left (-100%, 100%) while the content inside slides
-     * the opposite way, so the picture itself holds still. What shows is the
-     * window's overlap with the frame: a box growing from the bottom-left
-     * corner, the same as inset(100% 100% 0 0) -> inset(0). Both moves are
-     * transforms, which the browser runs without repainting. The content is
-     * unwrapped again when the reveal ends (React's nodes stay the same).
+     * shook).
      *
-     * Only for positioned frames whose size doesn't come from their content
-     * (a set height, next/image `fill`): the wrap is measured, and if the
-     * frame's size changed it is undone and the frame keeps the clip-path
-     * version.
+     * Two covers in the colour behind the frame lie over it and slide away:
+     * one to the right (translateX 0 -> 100%), one upwards (translateY 0 ->
+     * -100%). What shows is what neither covers: a box growing from the
+     * bottom-left corner, the same as inset(100% 100% 0 0) -> inset(0). Both
+     * are transforms, which the browser runs without repainting.
+     *
+     * The covers are only added next to the frame's content, never around
+     * it: an earlier version moved the content into a wrapper for the
+     * reveal, and when React changed that content meanwhile (the About team
+     * portrait swapping on a tap) it could not find its nodes and the page
+     * crashed (Oct 8, 2026). The frame clips while revealing; static frames
+     * keep the clip-path version.
      */
-    const wrap = (frame: HTMLElement) => {
-      if (!frame.firstChild || getComputedStyle(frame).position === "static") return null;
-      const width = frame.offsetWidth;
-      const height = frame.offsetHeight;
-      const windowBox = document.createElement("div");
-      const content = document.createElement("div");
-      windowBox.style.cssText = "position:absolute;inset:0;overflow:hidden;pointer-events:none;";
-      // The frame's own padding carries over, so content laid out inside it
-      // (a card's text) stays where it was (Oct 8, 2026).
-      const pad = getComputedStyle(frame);
-      content.style.cssText = `position:absolute;inset:0;pointer-events:auto;padding:${pad.paddingTop} ${pad.paddingRight} ${pad.paddingBottom} ${pad.paddingLeft};`;
-      content.append(...Array.from(frame.childNodes));
-      windowBox.append(content);
-      frame.append(windowBox);
-      const unwrap = () => {
-        if (!windowBox.isConnected) return;
-        frame.insertBefore(fragmentOf(content), windowBox);
-        windowBox.remove();
-      };
-      if (frame.offsetWidth !== width || frame.offsetHeight !== height) {
-        unwrap();
-        return null;
+    const backdropOf = (frame: HTMLElement) => {
+      for (let el = frame.parentElement; el; el = el.parentElement) {
+        const color = getComputedStyle(el).backgroundColor;
+        if (color && color !== "transparent" && !/rgba\(.*,\s*0\)$/.test(color)) return color;
       }
-      return { windowBox, content, unwrap };
+      return getComputedStyle(document.body).backgroundColor;
+    };
+    const cover = (frame: HTMLElement) => {
+      // Never add nodes inside a part React hasn't hydrated (lib/motion/hydrated).
+      if (getComputedStyle(frame).position === "static" || !isHydrated(frame)) return null;
+      const color = backdropOf(frame);
+      const make = () => {
+        const el = document.createElement("div");
+        el.setAttribute("aria-hidden", "true");
+        el.style.cssText = `position:absolute;inset:-1px;z-index:50;pointer-events:none;background:${color};`;
+        frame.appendChild(el);
+        return el;
+      };
+      const right = make();
+      const top = make();
+      const overflow = frame.style.overflow;
+      frame.style.overflow = "hidden";
+      const remove = () => {
+        right.remove();
+        top.remove();
+        frame.style.overflow = overflow;
+      };
+      return { right, top, remove };
     };
 
     const reveal = (frame: HTMLElement) => {
@@ -149,15 +148,15 @@ export function ImageRevealController() {
       const running: Animation[] = [];
       let unwrap = () => {};
 
-      const wrapped = wrap(frame);
-      if (wrapped) {
+      const covers = cover(frame);
+      if (covers) {
         running.push(
-          wrapped.windowBox.animate([{ transform: "translate(-100%, 100%)" }, { transform: "translate(0, 0)" }], timing),
-          wrapped.content.animate([{ transform: "translate(100%, -100%)" }, { transform: "translate(0, 0)" }], timing),
+          covers.right.animate([{ transform: "translateX(0)" }, { transform: "translateX(101%)" }], timing),
+          covers.top.animate([{ transform: "translateY(0)" }, { transform: "translateY(-101%)" }], timing),
         );
-        // The window now hides what isn't revealed: drop the clip start state.
+        // The covers now hide what isn't revealed: drop the clip start state.
         frame.dataset.imageReveal = "done";
-        unwrap = wrapped.unwrap;
+        unwrap = covers.remove;
       } else {
         running.push(frame.animate([{ clipPath: FROM_CLIP }, { clipPath: TO_CLIP }], timing));
       }
